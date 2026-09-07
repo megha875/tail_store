@@ -122,6 +122,59 @@ const swiper = new Swiper('.brandsSwiper', {
 //       }
 //     });
 //   });
+// const popularSwiper = new Swiper('.popularSwiper', {
+//   slidesPerView: 1,
+//   spaceBetween: 20,
+//   loop: true,
+//   navigation: {
+//     nextEl: '.popular-next',
+//     prevEl: '.popular-prev',
+//   },
+//   breakpoints: {
+//     480: { slidesPerView: 2, spaceBetween: 16 },
+//     768: { slidesPerView: 3, spaceBetween: 20 },
+//     1024: { slidesPerView: 4, spaceBetween: 24 }
+//   }
+// });
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   // Brands Swiper
+//   const swiper = new Swiper('.brandsSwiper', {
+//     slidesPerView: 2,
+//     spaceBetween: 20,
+//     loop: true,
+//     autoplay: {
+//       delay: 2500,
+//       disableOnInteraction: false,
+//       reverseDirection: true,
+//     },
+//     navigation: {
+//       nextEl: '.brands-swiper-next',
+//       prevEl: '.brands-swiper-prev',
+//     },
+//     breakpoints: {
+//       640: { slidesPerView: 3, spaceBetween: 30 },
+//       768: { slidesPerView: 4, spaceBetween: 40 },
+//       1024: { slidesPerView: 6, spaceBetween: 30 },
+//     },
+//   });
+
+//   // Popular Products Swiper
+//   const popularSwiper = new Swiper('.popularSwiper', {
+//     slidesPerView: 1,
+//     spaceBetween: 20,
+//     loop: true,
+//     navigation: {
+//       nextEl: '.popular-next',
+//       prevEl: '.popular-prev',
+//     },
+//     breakpoints: {
+//       480: { slidesPerView: 2, spaceBetween: 16 },
+//       768: { slidesPerView: 3, spaceBetween: 20 },
+//       1024: { slidesPerView: 4, spaceBetween: 24 }
+//     }
+//   });
+// });
 const popularSwiper = new Swiper('.popularSwiper', {
   slidesPerView: 1,
   spaceBetween: 20,
@@ -129,6 +182,7 @@ const popularSwiper = new Swiper('.popularSwiper', {
   navigation: {
     nextEl: '.popular-next',
     prevEl: '.popular-prev',
+    lockClass: 'swiper-button-lock' // Extra locking classes disable karega
   },
   breakpoints: {
     480: { slidesPerView: 2, spaceBetween: 16 },
@@ -137,18 +191,36 @@ const popularSwiper = new Swiper('.popularSwiper', {
   }
 });
 // Latest Product
-
+document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.image-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
       const frontImg = wrapper.querySelector('.front-img');
       const backImg = wrapper.querySelector('.back-img');
 
-      if (frontImg.classList.contains('opacity-100')) {
-        frontImg.classList.replace('opacity-100', 'opacity-0');
-        backImg.classList.replace('opacity-0', 'opacity-100');
-      } else {
-        frontImg.classList.replace('opacity-0', 'opacity-100');
-        backImg.classList.replace('opacity-100', 'opacity-0');
+      if (frontImg && backImg) {
+        // Toggle Opacity with Smooth Fade
+        if (frontImg.classList.contains('opacity-100')) {
+          frontImg.classList.replace('opacity-100', 'opacity-0');
+          backImg.classList.replace('opacity-0', 'opacity-100');
+        } else {
+          frontImg.classList.replace('opacity-0', 'opacity-100');
+          backImg.classList.replace('opacity-100', 'opacity-0');
+        }
       }
     });
   });
+});
+  // document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+  //   wrapper.addEventListener('click', () => {
+  //     const frontImg = wrapper.querySelector('.front-img');
+  //     const backImg = wrapper.querySelector('.back-img');
+
+  //     if (frontImg.classList.contains('opacity-100')) {
+  //       frontImg.classList.replace('opacity-100', 'opacity-0');
+  //       backImg.classList.replace('opacity-0', 'opacity-100');
+  //     } else {
+  //       frontImg.classList.replace('opacity-0', 'opacity-100');
+  //       backImg.classList.replace('opacity-100', 'opacity-0');
+  //     }
+  //   });
+  // });
