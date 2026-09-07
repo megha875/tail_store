@@ -102,4 +102,53 @@ const swiper = new Swiper('.brandsSwiper', {
   },
 });
 
+  // Product Slider
+// document.addEventListener('DOMContentLoaded', () => {
+//     new Swiper('.popularSwiper', {
+//       slidesPerView: 1,
+//       spaceBetween: 24,
+//       loop: true,
+//       navigation: {
+//         nextEl: '.popular-next',
+//         prevEl: '.popular-prev',
+//       },
+//       pagination: {
+//         el: '.swiper-pagination',
+//         clickable: true,
+//       },
+//       breakpoints: {
+//         640: { slidesPerView: 2 },
+//         1024: { slidesPerView: 4 }
+//       }
+//     });
+//   });
+const popularSwiper = new Swiper('.popularSwiper', {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  navigation: {
+    nextEl: '.popular-next',
+    prevEl: '.popular-prev',
+  },
+  breakpoints: {
+    480: { slidesPerView: 2, spaceBetween: 16 },
+    768: { slidesPerView: 3, spaceBetween: 20 },
+    1024: { slidesPerView: 4, spaceBetween: 24 }
+  }
+});
+// Latest Product
 
+  document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      const frontImg = wrapper.querySelector('.front-img');
+      const backImg = wrapper.querySelector('.back-img');
+
+      if (frontImg.classList.contains('opacity-100')) {
+        frontImg.classList.replace('opacity-100', 'opacity-0');
+        backImg.classList.replace('opacity-0', 'opacity-100');
+      } else {
+        frontImg.classList.replace('opacity-0', 'opacity-100');
+        backImg.classList.replace('opacity-100', 'opacity-0');
+      }
+    });
+  });

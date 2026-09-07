@@ -348,149 +348,233 @@
 <!-- Category Cards Section End-->
    <!--Popular products Section Start-->
 
-<section class="popular max-w-7xl mx-auto px-4 pt-9">
-  <!-- Section Title -->
+<section class="popular max-w-7xl mx-auto px-4 pt-9 relative">
+  
+  <!-- Header with Title & Navigation Arrows -->
+  <div class="flex items-center justify-between mb-8">
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+      Popular products
+    </h2>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center space-x-3">
+      <button class="popular-prev w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 hover:bg-[#ff0055] hover:text-white hover:border-[#ff0055] transition-all cursor-pointer shadow-sm active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <button class="popular-next w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 hover:bg-[#ff0055] hover:text-white hover:border-[#ff0055] transition-all cursor-pointer shadow-sm active:scale-95">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="relative group">
+    <!-- Swiper Container -->
+    <div class="swiper popularSwiper pb-8 pt-2 px-1">
+      <div class="swiper-wrapper">
+
+        <!-- Card 1 -->
+        <div class="swiper-slide h-auto">
+          <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+            <div>
+              <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                <img src="./assets/img/1.jpg" alt="Summer black dress" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+              <h3 class="font-bold text-gray-900 text-base mb-1">Summer black dress</h3>
+              <p class="text-xs text-gray-500 mb-3">Women</p>
+              <div class="flex items-center space-x-2 mb-4">
+                <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
+                <span class="text-xs text-gray-400 line-through">$24.99</span>
+              </div>
+            </div>
+            <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="swiper-slide h-auto">
+          <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+            <div>
+              <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                <img src="./assets/img/2.jpg" alt="Black suit" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+              <h3 class="font-bold text-gray-900 text-base mb-1">Black suit</h3>
+              <p class="text-xs text-gray-500 mb-3">Women</p>
+              <div class="flex items-center space-x-2 mb-4">
+                <span class="text-lg font-extrabold text-gray-900">$29.99</span>
+              </div>
+            </div>
+            <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="swiper-slide h-auto">
+          <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+            <div>
+              <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336]">
+                <img src="./assets/img/3.jpg" alt="Black long dress" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+              <h3 class="font-bold text-gray-900 text-base mb-1">Black long dress</h3>
+              <p class="text-xs text-gray-500 mb-3">Women, Accessories</p>
+              <div class="flex items-center space-x-2 mb-4">
+                <span class="text-lg font-extrabold text-gray-900">$15.99</span>
+                <span class="text-xs text-gray-400 line-through">$19.99</span>
+              </div>
+            </div>
+            <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="swiper-slide h-auto">
+          <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+            <div>
+              <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                <img src="./assets/img/4.jpg" alt="Black leather jacket" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+              </div>
+              <h3 class="font-bold text-gray-900 text-base mb-1">Black leather jacket</h3>
+              <p class="text-xs text-gray-500 mb-3">Women</p>
+              <div class="flex items-center space-x-2 mb-4">
+                <span class="text-lg font-extrabold text-[#ff0055]">$39.99</span>
+                <span class="text-xs text-gray-400 line-through">$49.99</span>
+              </div>
+            </div>
+            <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+   <!--Popular products Card Section End-->
+<!--Latest Products Section Start-->
+<section class="latest_products max-w-7xl mx-auto px-4 py-9">
+  
   <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
-    Popular products
+    Latest products
   </h2>
 
-  <!-- Products Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
     <!-- Product Card 1 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+    <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
-        <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+        <div class="image-wrapper relative w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
           <img 
-            src="./assets/img/1.jpg" 
-            alt="Summer black dress" 
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            src="./assets/img/latest1.png" 
+            alt="Summer black dress front" 
+            class="front-img w-full h-full object-cover transition-opacity duration-500 opacity-100 absolute inset-0"
+          >
+          <img 
+            src="./assets/img/photo1.jpg" 
+            alt="Summer black dress back" 
+            class="back-img w-full h-full object-cover transition-opacity duration-500 opacity-0 absolute inset-0"
           >
         </div>
 
-        <!-- Product Title -->
-        <h3 class="font-bold text-gray-900 text-base mb-1">
-          Summer black dress
-        </h3>
-
-        <!-- Category -->
-        <p class="text-xs text-gray-500 mb-3">
-          Women
-        </p>
-
-        <!-- Price -->
+        <h3 class="font-bold text-gray-900 text-base mb-1">Summer black dress</h3>
+        <p class="text-xs text-gray-500 mb-3">Women</p>
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
           <span class="text-xs text-gray-400 line-through">$24.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
     <!-- Product Card 2 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+    <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
-        <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+        <div class="image-wrapper relative w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
+          <img 
+            src="./assets/img/latest2.png" 
+            alt="Black suit front" 
+            class="front-img w-full h-full object-cover transition-opacity duration-500 opacity-100 absolute inset-0"
+          >
           <img 
             src="./assets/img/2.jpg" 
-            alt="Black suit" 
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            alt="Black suit back" 
+            class="back-img w-full h-full object-cover transition-opacity duration-500 opacity-0 absolute inset-0"
           >
         </div>
 
-        <!-- Product Title -->
-        <h3 class="font-bold text-gray-900 text-base mb-1">
-          Black suit
-        </h3>
-
-        <!-- Category -->
-        <p class="text-xs text-gray-500 mb-3">
-          Women
-        </p>
-
-        <!-- Price -->
+        <h3 class="font-bold text-gray-900 text-base mb-1">Black suit</h3>
+        <p class="text-xs text-gray-500 mb-3">Women</p>
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-gray-900">$29.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
     <!-- Product Card 3 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+    <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
-        <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336]">
+        <div class="image-wrapper relative w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336] cursor-pointer">
           <img 
-            src="./assets/img/3.jpg" 
-            alt="Black long dress" 
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            src="./assets/img/latest3.png" 
+            alt="Black long dress front" 
+            class="front-img w-full h-full object-cover transition-opacity duration-500 opacity-100 absolute inset-0"
+          >
+          <img 
+            src="./assets/img/4.jpg" 
+            alt="Black long dress back" 
+            class="back-img w-full h-full object-cover transition-opacity duration-500 opacity-0 absolute inset-0"
           >
         </div>
 
-        <!-- Product Title -->
-        <h3 class="font-bold text-gray-900 text-base mb-1">
-          Black long dress
-        </h3>
-
-        <!-- Category -->
-        <p class="text-xs text-gray-500 mb-3">
-          Women, Accessories
-        </p>
-
-        <!-- Price -->
+        <h3 class="font-bold text-gray-900 text-base mb-1">Black long dress</h3>
+        <p class="text-xs text-gray-500 mb-3">Women, Accessories</p>
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-gray-900">$15.99</span>
           <span class="text-xs text-gray-400 line-through">$19.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
     <!-- Product Card 4 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+    <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
-        <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+        <div class="image-wrapper relative w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
           <img 
-            src="./assets/img/4.jpg" 
-            alt="Black leather jacket" 
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            src="./assets/img/latest4.png" 
+            alt="Black leather jacket front" 
+            class="front-img w-full h-full object-cover transition-opacity duration-500 opacity-100 absolute inset-0"
+          >
+          <img 
+            src="./assets/img/2.jpg" 
+            alt="Black leather jacket back" 
+            class="back-img w-full h-full object-cover transition-opacity duration-500 opacity-0 absolute inset-0"
           >
         </div>
 
-        <!-- Product Title -->
-        <h3 class="font-bold text-gray-900 text-base mb-1">
-          Black leather jacket
-        </h3>
-
-        <!-- Category -->
-        <p class="text-xs text-gray-500 mb-3">
-          Women
-        </p>
-
-        <!-- Price -->
+        <h3 class="font-bold text-gray-900 text-base mb-1">Black leather jacket</h3>
+        <p class="text-xs text-gray-500 mb-3">Women</p>
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-[#ff0055]">$39.99</span>
           <span class="text-xs text-gray-400 line-through">$49.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
@@ -498,56 +582,56 @@
 
   </div>
 </section>
-   <!--Popular products Card Section End-->
-<!--Latest Products Section Start-->
-<section class="max-w-7xl mx-auto px-4 py-9">
-  <!-- Section Title -->
+
+
+<!-- <section class="latest_products max-w-7xl mx-auto px-4 py-9">
+ 
   <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
     Latest products
   </h2>
 
-  <!-- Products Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-    <!-- Product Card 1 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
-      <div>
-        <!-- Image Container -->
-        <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
-          <img 
-            src="./assets/img/latest1.png" 
-            alt="Summer black dress" 
-            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-          >
-        </div>
+  
+    
+    <div class="product-card  bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between ">
+  <div>
+    
+    <div class="image-wrapper relative w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
+      
+  
+      <img 
+        src="./assets/img/latest1.png" 
+        alt="Summer black dress front" 
+        class="front-img w-full h-full object-cover transition-opacity duration-500 opacity-100 absolute inset-0"
+      >
 
-        <!-- Product Title -->
-        <h3 class="font-bold text-gray-900 text-base mb-1">
-          Summer black dress
-        </h3>
-
-        <!-- Category -->
-        <p class="text-xs text-gray-500 mb-3">
-          Women
-        </p>
-
-        <!-- Price -->
-        <div class="flex items-center space-x-2 mb-4">
-          <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
-          <span class="text-xs text-gray-400 line-through">$24.99</span>
-        </div>
-      </div>
-
-      <!-- Add to Cart Button -->
-      <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
-        Add to Cart
-      </button>
+     
+      <img 
+        src="./assets/img/photo1.jpg" 
+        alt="Summer black dress back" 
+        class="back-img w-full h-full object-cover transition-opacity duration-500 opacity-0 absolute inset-0"
+      >
+      
     </div>
 
-    <!-- Product Card 2 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+
+    <h3 class="font-bold text-gray-900 text-base mb-1">Summer black dress</h3>
+    <p class="text-xs text-gray-500 mb-3">Women</p>
+    <div class="flex items-center space-x-2 mb-4">
+      <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
+      <span class="text-xs text-gray-400 line-through">$24.99</span>
+    </div>
+  </div>
+
+  <button class="w-full bg-[#ff0055] hover:bg-[#d90048] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200">
+    Add to Cart
+  </button>
+</div>
+  
+    <div class="product-card  bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
+      
         <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
           <img 
             src="./assets/img/latest2.png" 
@@ -556,32 +640,32 @@
           >
         </div>
 
-        <!-- Product Title -->
+   
         <h3 class="font-bold text-gray-900 text-base mb-1">
           Black suit
         </h3>
 
-        <!-- Category -->
+      
         <p class="text-xs text-gray-500 mb-3">
           Women
         </p>
 
-        <!-- Price -->
+      
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-gray-900">$29.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
+     
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
-    <!-- Product Card 3 -->
-    <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+  
+    <div class="product-card  bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
+      
         <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336]">
           <img 
             src="./assets/img/latest3.png" 
@@ -590,33 +674,32 @@
           >
         </div>
 
-        <!-- Product Title -->
+       
         <h3 class="font-bold text-gray-900 text-base mb-1">
           Black long dress
         </h3>
 
-        <!-- Category -->
+     
         <p class="text-xs text-gray-500 mb-3">
           Women, Accessories
         </p>
 
-        <!-- Price -->
+ 
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-gray-900">$15.99</span>
           <span class="text-xs text-gray-400 line-through">$19.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
-    <!-- Product Card 4 -->
+
     <div class="bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
       <div>
-        <!-- Image Container -->
+        
         <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
           <img 
             src="./assets/img/latest4.png" 
@@ -625,79 +708,77 @@
           >
         </div>
 
-        <!-- Product Title -->
         <h3 class="font-bold text-gray-900 text-base mb-1">
           Black leather jacket
         </h3>
 
-        <!-- Category -->
+   
         <p class="text-xs text-gray-500 mb-3">
           Women
         </p>
 
-        <!-- Price -->
+    
         <div class="flex items-center space-x-2 mb-4">
           <span class="text-lg font-extrabold text-[#ff0055]">$39.99</span>
           <span class="text-xs text-gray-400 line-through">$49.99</span>
         </div>
       </div>
 
-      <!-- Add to Cart Button -->
       <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
         Add to Cart
       </button>
     </div>
 
   </div>
-</section>
+</section> -->
 <!--Latest Products Section End-->
 
 <!-- Brands Carousel Section -->
-  <section class="max-w-6xl w-full mx-auto py-12 px-4 text-center">
+  <section class=" brands_section  max-w-6xl w-full mx-auto py-8 px-4 text-center">
     
-    <!-- Section Heading -->
+   
     <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-2 tracking-tight">
       Discover <span class="text-[#ff0055]">Our Brands</span>
     </h2>
     
-    <!-- Sub-heading -->
-    <p class="text-gray-500 text-sm sm:text-base mb-10">
+    
+    <p class="text-gray-500 text-sm sm:text-base mb-5 mt-5">
       Explore the top brands we feature in our store
     </p>
 
-    <!-- Swiper Container with Custom Arrows Overlay -->
+   
     <div class="relative px-10 sm:px-14">
       
       <div class="swiper brandsSwiper">
         <div class="swiper-wrapper flex items-center">
           
-          <!-- Brand 1: TypeScript -->
+       
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="./assets/img/html.svg" alt="TypeScript" class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
           </div>
 
-          <!-- Brand 2: HTML5 -->
+       
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="./assets/img/react.svg" alt="HTML5" class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
           </div>
 
-          <!-- Brand 3: JavaScript -->
+         
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
           </div>
 
-          <!-- Brand 4: Laravel -->
+       
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="assets/img/react.svg" alt="Laravel" class="h-20 w-auto">
           </div>
 
-          <!-- Brand 5: PHP -->
+        
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="./assets/img/laravel.svg" alt="PHP" class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
           </div>
 
-          <!-- Brand 6: React -->
-         <!-- Brand 2: HTML5 -->
+      
+         
           <div class="swiper-slide flex justify-center items-center py-4">
             <img src="./assets/img/react.svg" alt="HTML5" class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300">
           </div>
@@ -739,7 +820,7 @@
 <!-- Brands Carousel Section  End-->
 
 <!-- NewsLetter Section Start-->
-<section class="w-full bg-white py-16 px-4 border-y border-gray-100">
+<section class="newsletter-section  w-full bg-white py-8 px-4 border-y border-gray-100">
   <div class="max-w-4xl mx-auto text-center space-y-6">
     
     <!-- Heading -->
@@ -802,15 +883,15 @@
 
 <!--Banner Section End-->
 <!--Card Section Start-->
-<section class="w-full bg-white py-16 px-4 sm:px-6 lg:px-8 font-['Manrope']">
-  <div class="max-w-7xl mx-auto">
+<section class="card_section w-full bg-white py-0 px-4 sm:px-6 lg:px-8 font-['Manrope']">
+  <div class="max-w-7xl mx-auto mb-10">
     
     <!-- Section Header -->
     <div class="text-center mb-12 space-y-2">
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+      <h2 class="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
         Discover <span class="text-[#ff0048]">Our</span> Blog
       </h2>
-      <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto pb-6">
+      <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto pb-0 pt-4">
         Stay updated with the latest trends, tips, and stories in the world of fashion
       </p>
     </div>
@@ -920,14 +1001,123 @@
 </section>
 <!--Card Section End-->
 <!--Footer Section Start-->
-<footer class="w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
-  <!-- Font Awesome CDN for Social Icons -->
+<!-- <footer class="w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+
 
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
-    <!-- Top Footer Grid -->
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12">
+      
+  
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+  
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+   
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+  
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center"></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter  text-center"></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram  text-center"></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center"></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center"></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        
+        <div class="mb-5">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+           <img src="./assets/img/template-logobottom.png" alt="logo"/>
+             
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-1 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</footer> -->
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+
+  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
       
       <!-- Column 1: Shop -->
       <div>
@@ -967,32 +1157,32 @@
         <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
           <li>
-            <a href="#" class="flex items-center gap-3 hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-facebook-f w-4 text-center"></i>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center "></i>
               <span>Facebook</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center gap-3 hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-twitter w-4 text-center"></i>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center "></i>
               <span>Twitter</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center gap-3 hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-instagram w-4 text-center"></i>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center "></i>
               <span>Instagram</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center gap-3 hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-pinterest-p w-4 text-center"></i>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center "></i>
               <span>Pinterest</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center gap-3 hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-youtube w-4 text-center"></i>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center "></i>
               <span>YouTube</span>
             </a>
           </li>
@@ -1000,16 +1190,14 @@
       </div>
 
       <!-- Column 5: Contact Us & Logo -->
-      <div>
+      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
         <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
         
-        <!-- Logo -->
-        <div class="mb-5">
+        <div class="mb-5 flex flex-col items-start">
           <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
-           <img src="./assets/img/template-logobottom.png" alt="logo"/>
-             
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
           </div>
-          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-1 flex items-center gap-1">
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
             TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
           </p>
         </div>
@@ -1039,26 +1227,28 @@
       
       <!-- Copyright, Links & Description -->
       <div class="space-y-3 text-gray-800">
-        <!-- Main Copyright Line -->
-        <p class="text-base font-bold tracking-tight">
-          © 2024 Your Company. All rights reserved by 
-          <a href="#" class="text-[#00a854] hover:underline font-bold">Maksim M</a> • 
-          Distributed by 
-          <a href="#" class="text-[#00a854] hover:underline font-bold">ThemeWagon</a>
-        </p>
-        
-        <!-- Policy Links -->
-        <div class="flex flex-wrap items-center gap-6 text-base font-semibold text-gray-700">
-          <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
-          <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
-        </div>
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
 
-        <!-- Description Paragraph -->
-        <p class="text-sm font-medium text-gray-600 pt-1">
-          Your shop's description goes here. This is a brief introduction to your shop and what you offer.
-        </p>
-      </div>
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
 
       <!-- Payment Icons -->
       <div class="flex items-center gap-2 shrink-0 pt-1">

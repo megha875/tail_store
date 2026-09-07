@@ -5,3 +5,29 @@
   box-sizing: border-box;
   font-family: Manrope', 'sans-serif';
 }
+/* .swiper-pagination-bullet {
+      background: rgba(255, 255, 255, 0.5) !important;
+      opacity: 1 !important;
+      width: 8px;
+      height: 8px;
+      transition: all 0.3s ease;
+    }
+    .swiper-pagination-bullet-active {
+      background: #ffffff !important;
+      width: 24px !important;
+      border-radius: 9999px !important;
+    } */
+@media screen and (max-width: 425px) {
+  /* Mobile / Tablet styles here */
+  .custom-class {
+    display: block;
+  }
+  .card_section h2{
+    font-size:28px;
+    padding-top:20px;
+
+  } 
+}
+
+
+
