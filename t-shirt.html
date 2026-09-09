@@ -16,7 +16,7 @@
 <body >
 
 <!--Navbar Section Start-->
- <header class="error w-full bg-[#050B14]">
+ <header class="w-full bg-[#050B14]">
   <!-- Container Fluid (Full width with horizontal padding) -->
   <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
     
@@ -93,8 +93,8 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product-gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
       </div>
@@ -189,44 +189,327 @@
 </header>
 
 <!--Navbar Section End-->
-<!--Checkout Section Start-->
-<section class="min-h-[80vh] flex items-center justify-center px-4 py-12 bg-white">
-  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-    
-    <!-- Left Text Content -->
-    <div class="flex flex-col items-start justify-center text-left space-y-4 max-w-md mx-auto md:mx-0">
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-[#ff0055]">
-        404 - Page Not Found
-      </h1>
-      <p class="text-gray-500 text-sm sm:text-base leading-relaxed">
-        The page you are looking for might have been removed, renamed, or is temporarily unavailable.
-      </p>
-      <div class="pt-2">
-        <a 
-          href="/" 
-          class="inline-block bg-[#ff0055] hover:bg-[#d90048] text-white font-medium text-sm px-7 py-2.5 rounded-full transition-all duration-200 shadow-sm active:scale-95"
-        >
-          Go back
-        </a>
+<!--  Category Section Start-->
+  <main class=" t-shirt max-w-7xl mx-auto px-4 py-8">
+
+  
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+      
+      
+      <div class="flex items-center space-x-3">
+  <button class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] focus:bg-white focus:text-[#ff0055] focus:border-[#ff0055] border border-transparent text-white text-xs font-semibold px-4 py-2 rounded-full transition-all cursor-pointer shadow-sm outline-none">
+    Show On Sale
+  </button>
+  <button class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] focus:bg-white focus:text-[#ff0055] focus:border-[#ff0055] border border-transparent text-white text-xs font-semibold px-4 py-2 rounded-full transition-all cursor-pointer shadow-sm outline-none">
+    List View
+  </button>
+  <button class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] focus:bg-white focus:text-[#ff0055] focus:border-[#ff0055] border border-transparent text-white text-xs font-semibold px-4 py-2 rounded-full transition-all cursor-pointer shadow-sm outline-none">
+    Grid View
+  </button>
+</div>
+
+      <!-- Sort Dropdown -->
+      <div class="relative">
+        <select class="appearance-none border border-gray-300 rounded-full px-5 py-1.5 pr-8 text-xs font-medium text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-[#ff0055] cursor-pointer">
+          <option>Sort by Latest</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Popularity</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-gray-500">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
+
     </div>
 
-    <!-- Right Image Section -->
-    <div class="flex justify-center items-center">
-      <div class="w-full max-w-md h-[500px] sm:h-[550px] rounded-2xl overflow-hidden shadow-lg border border-gray-100">
-        <img 
-          src="./assets/img/4.jpg" 
-          alt="404 Page Not Found" 
-          class="w-full h-full object-cover"
-        />
+  
+   
+
+
+
+    <!-- Main Content Layout (Sidebar + Grid) -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+    <aside class="lg:col-span-1 space-y-0 divide-y divide-gray-100">
+      <!-- Category Filters -->
+      <!-- <div class="py-5">
+        <h3 class="font-bold text-gray-900 mb-3 text-sm">Category</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="men" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Men</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="women" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Women</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="accessories" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Accessories</span>
+          </label>
+        </div>
+      </div> -->
+        <div class="py-5">
+  <h3 class="font-bold text-gray-900 mb-3 text-sm">Category</h3>
+  <div class="space-y-2">
+    <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+      <input type="checkbox" value="men" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+      <span>Men</span>
+    </label>
+    <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+      <input type="checkbox" value="women" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+      <span>Women</span>
+    </label>
+    <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+      <input type="checkbox" value="accessories" class="category-filter rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+      <span>Accessories</span>
+    </label>
+  </div>
+</div>
+      <!-- Size Filter -->
+      <div class="py-5">
+        <h3 class="font-bold text-gray-900 mb-3 text-sm">Size</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>S (30)</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>M (44)</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>L (22)</span>
+          </label>
+        </div>
       </div>
+
+      <!-- Color Filter -->
+      <div class="py-5">
+        <h3 class="font-bold text-gray-900 mb-3 text-sm">Color</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Red</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Blue</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Green</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Brand Filter -->
+      <div class="py-5">
+        <h3 class="font-bold text-gray-900 mb-3 text-sm">Brand</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Nike</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Adidas</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span>Puma</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Rating Filter -->
+      <div class="py-5">
+        <h3 class="font-bold text-gray-900 mb-3 text-sm">Rating</h3>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="5" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span class="text-sm tracking-widest text-black">★★★★★</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="4" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span class="text-sm tracking-widest text-black">★★★★☆</span>
+          </label>
+          <label class="flex items-center space-x-2 text-xs text-gray-600 cursor-pointer hover:text-[#ff0055]">
+            <input type="checkbox" value="3" class="rounded border-gray-300 text-[#ff0055] focus:ring-[#ff0055] w-4 h-4 cursor-pointer">
+            <span class="text-sm tracking-widest text-black">★★★☆☆</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+  <section class="lg:col-span-3">
+  <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+    <!-- MEN CARD -->
+    <div class="product-card flex flex-col justify-between" data-category="men">
+      <div>
+        <div class="w-full h-[380px] rounded-2xl overflow-hidden bg-gray-100 mb-3 cursor-pointer">
+          <img src="./assets/img/latest3.png" alt="Yellow Men's Suit" class="product-img w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <h4 class="font-bold text-gray-900 text-sm mb-0.5">Yellow Men's Suit</h4>
+        <p class="text-xs text-gray-400 mb-2">Men</p>
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-sm font-bold text-gray-900">$15.99</span>
+          <span class="text-xs text-gray-400 line-through">$19.99</span>
+        </div>
+      </div>
+      <!-- <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">Add to Cart</button> -->
+       <button class="w-full bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+  Add to Cart
+</button>
+    </div>
+
+    <!-- WOMEN CARD -->
+    <div class="product-card flex flex-col justify-between" data-category="women">
+      <div>
+        <div class="w-full h-[380px] rounded-2xl overflow-hidden bg-gray-100 mb-3 cursor-pointer">
+          <img src="./assets/img/latest4.png" alt="Red Women's Dress" class="product-img w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <h4 class="font-bold text-gray-900 text-sm mb-0.5">Red Women's Dress</h4>
+        <p class="text-xs text-gray-400 mb-2">Women</p>
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-sm font-bold text-[#ff0055]">$19.99</span>
+          <span class="text-xs text-gray-400 line-through">$24.99</span>
+        </div>
+      </div>
+      <!-- <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">Add to Cart</button> -->
+       <button class="w-full bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+  Add to Cart
+</button>
+    </div>
+
+    <!-- ACCESSORIES CARD -->
+    <div class="product-card flex flex-col justify-between" data-category="accessories">
+      <div>
+        <div class="w-full h-[380px] rounded-2xl overflow-hidden bg-gray-100 mb-3 cursor-pointer">
+          <img src="./assets/img/2.jpg" alt="Leather Sunglasses Case" class="product-img w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+        </div>
+        <h4 class="font-bold text-gray-900 text-sm mb-0.5">Leather Sunglasses Case</h4>
+        <p class="text-xs text-gray-400 mb-2">Accessories</p>
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="text-sm font-bold text-gray-900">$12.99</span>
+        </div>
+      </div>
+      <!-- <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">Add to Cart</button> -->
+     <button class="w-full bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+  Add to Cart
+</button>
     </div>
 
   </div>
 </section>
-<!--Checkout Section End-->
 
-<!--Form Section Start-->
+       
+       
+
+      
+     
+       
+
+        
+       
+
+       
+        
+
+  
+
+  </div>
+
+  <!-- Pagination -->
+  <div class="flex items-center justify-center space-x-6 py-6 text-sm font-medium">
+    <a href="#" class="w-8 h-8 rounded-full bg-[#ff0055] text-white flex items-center justify-center shadow-sm">1</a>
+    <a href="#" class="text-gray-700 hover:text-[#ff0055] transition-colors">2</a>
+    <a href="#" class="text-gray-700 hover:text-[#ff0055] transition-colors">3</a>
+    <a href="#" class="text-gray-700 hover:text-[#ff0055] transition-colors">Next</a>
+  </div>
+</main>
+
+<section class="shirts max-w-7xl mx-auto px-4 pb-9">
+  <div class="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-gray-100/50 space-y-4">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+      Shirts Category
+    </h2>
+    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+      Discover our wide range of shirts, perfect for any occasion. Whether you're looking for something casual or formal, we have the perfect shirt for you. Our collection includes a variety of styles, colors, and sizes to suit everyone's taste.
+    </p>
+    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+      Browse through our selection and find your new favorite shirt today. All our shirts are made from high-quality materials and are designed to provide both comfort and style. Shop now and elevate your wardrobe with our premium shirts.
+    </p>
+  </div>
+</section>
+      <div class="flex items-center justify-center space-x-6 py-6 text-sm font-medium">
+  <!-- Active Page (1) -->
+  <a 
+    href="#" 
+    class="w-8 h-8 rounded-full bg-[#ff0055] text-white flex items-center justify-center shadow-sm"
+  >
+    1
+  </a>
+
+  <!-- Page 2 -->
+  <a 
+    href="#" 
+    class="text-gray-700 hover:text-[#ff0055] transition-colors"
+  >
+    2
+  </a>
+
+  <!-- Page 3 -->
+  <a 
+    href="#" 
+    class="text-gray-700 hover:text-[#ff0055] transition-colors"
+  >
+    3
+  </a>
+
+  <!-- Next Link -->
+  <a 
+    href="#" 
+    class="text-gray-700 hover:text-[#ff0055] transition-colors"
+  >
+    Next
+  </a>
+</div>
+  </main>
+
+
+  <!-- <section class="shirts max-w-7xl mx-auto px-4 pb-9">
+  <div class="bg-white rounded-xl p-6 sm:p-8 shadow-md border border-gray-100/50 space-y-4">
+   
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight">
+      Shirts Category
+    </h2>
+
+  
+    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+      Discover our wide range of shirts, perfect for any occasion. Whether you're looking for something casual or formal, we have the perfect shirt for you. Our collection includes a variety of styles, colors, and sizes to suit everyone's taste.
+    </p>
+
+
+    <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
+      Browse through our selection and find your new favorite shirt today. All our shirts are made from high-quality materials and are designed to provide both comfort and style. Shop now and elevate your wardrobe with our premium shirts.
+    </p>
+  </div>
+</section> -->
+
+
+
+
+  <!--Category Section End-->
+
+
+
+  
 <!--Footer Section Start-->
 <!-- <footer class="w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
 
@@ -340,13 +623,12 @@
 </footer> -->
 <footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
 
-  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
+
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
-    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
+ 
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
       
-      <!-- Column 1: Shop -->
       <div>
         <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
@@ -514,6 +796,33 @@
   </div>
 </div>
 <!--Bottom Section End-->
+<!-- ===== CATEGORY FILTER & DYNAMIC IMAGE JS ===== -->
+<script>
+//   document.addEventListener('DOMContentLoaded', () => {
+//   const categoryCheckboxes = document.querySelectorAll('.category-filter');
+//   const productCards = document.querySelectorAll('.product-card');
+
+//   function filterProducts() {
+   
+//     const selectedCategories = Array.from(categoryCheckboxes)
+//       .filter(cb => cb.checked)
+//       .map(cb => cb.value);
+
+//     productCards.forEach(card => {
+//       const cardCategory = card.getAttribute('data-category');
+
+    
+//       const shouldShow = selectedCategories.length === 0 || selectedCategories.includes(cardCategory);
+//       card.style.display = shouldShow ? 'flex' : 'none';
+//     });
+//   }
+
+//   categoryCheckboxes.forEach(checkbox => {
+//     checkbox.addEventListener('change', filterProducts);
+//   });
+// });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
 </body>

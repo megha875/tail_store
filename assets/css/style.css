@@ -17,6 +17,23 @@
       width: 24px !important;
       border-radius: 9999px !important;
     } */
+
+
+    /* 1. Modern View Transition Enable Karein */
+@view-transition {
+  navigation: auto;
+}
+/* 
+
+.product-img-1 { view-transition-name: product-img-1; }
+.product-img-2 { view-transition-name: product-img-2; }
+.product-img-3 { view-transition-name: product-img-3; }
+.product-img-4 { view-transition-name: product-img-4; }
+
+
+.detail-main-img {
+  view-transition-name: active-product-img;
+} */
 @media screen and (max-width: 425px) {
   /* Mobile / Tablet styles here */
   .custom-class {
