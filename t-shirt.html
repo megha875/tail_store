@@ -29,7 +29,7 @@
 
 
     <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
-      <a href="#" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      <a href="home.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
       
 
       <div class="relative group py-2">
@@ -94,7 +94,7 @@
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
             <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
-            <a href="product-gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
       </div>
@@ -797,6 +797,36 @@
 </div>
 <!--Bottom Section End-->
 <!-- ===== CATEGORY FILTER & DYNAMIC IMAGE JS ===== -->
+ <script>
+  // API se products fetch karne ka function
+  async function loadProducts() {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      const products = await response.json();
+      
+      console.log('Fetched Products:', products);
+
+      // Container element jahan products show karne hain
+      const productsContainer = document.getElementById('product-list'); 
+      
+      if (productsContainer) {
+        productsContainer.innerHTML = products.map(product => `
+          <div class="product-card">
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p>Category: ${product.category}</p>
+            <p>Price: $${product.price} <del>$${product.oldPrice}</del></p>
+          </div>
+        `).join('');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
+
+  // Page load hote hi run karein
+  document.addEventListener('DOMContentLoaded', loadProducts);
+</script>
 <script>
 //   document.addEventListener('DOMContentLoaded', () => {
 //   const categoryCheckboxes = document.querySelectorAll('.category-filter');

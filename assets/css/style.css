@@ -5,35 +5,34 @@
   box-sizing: border-box;
   font-family: Manrope', 'sans-serif';
 }
-/* .swiper-pagination-bullet {
-      background: rgba(255, 255, 255, 0.5) !important;
-      opacity: 1 !important;
-      width: 8px;
-      height: 8px;
+
+.font-serif-custom {
+      font-family: 'Playfair Display', serif;
+    }
+  
+     .polaroid-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+ .productSlider .slider-pagination {
+      position: relative !important;
+      margin-top: 20px !important;
+    }
+    .productSlider .swiper-pagination-bullet {
+      background-color: #d1d5db;
+      opacity: 1;
+      width: 12px;
+      height: 12px;
+      margin: 0 6px !important;
+      cursor: pointer !important;
       transition: all 0.3s ease;
     }
-    .swiper-pagination-bullet-active {
-      background: #ffffff !important;
-      width: 24px !important;
-      border-radius: 9999px !important;
-    } */
-
-
-    /* 1. Modern View Transition Enable Karein */
-@view-transition {
-  navigation: auto;
-}
-/* 
-
-.product-img-1 { view-transition-name: product-img-1; }
-.product-img-2 { view-transition-name: product-img-2; }
-.product-img-3 { view-transition-name: product-img-3; }
-.product-img-4 { view-transition-name: product-img-4; }
-
-
-.detail-main-img {
-  view-transition-name: active-product-img;
-} */
+    .productSlider .swiper-pagination-bullet-active {
+      background-color: #ff0055 !important;
+      width: 28px;
+      border-radius: 6px;
+    }
 @media screen and (max-width: 425px) {
   /* Mobile / Tablet styles here */
   .custom-class {

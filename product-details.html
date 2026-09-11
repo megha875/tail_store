@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body >
+
+<!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="home.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+      <a href="checkout.html" class="hover:text-gray-300 transition-colors py-2">Checkout</a>
+    </div>
+
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+      <!-- Outlined Register Button (Image Style) -->
+      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Register
+      </a>
+
+
+      <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Login
+      </a>
+
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+      </button>
+
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <!-- Mobile Accordion Item: Men -->
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+  
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+
+<!--Navbar Section End-->
+<!--Product Section Start-->
+<!-- <section class="product_card max-w-7xl mx-auto px-4 py-8 font-sans">
+
+  <nav class="text-xs text-gray-500 mb-6 space-x-1">
+    <a href="#" class="hover:underline">Home</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">Shop</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">T-shirts</a>
+    <span>&gt;</span>
+    <span class="text-gray-900 font-medium">Preppy T-shirt</span>
+  </nav>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    
+   
+    <div class="space-y-4">
+     
+      <div class="w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
+        <img id="main-product-img" src="./assets/img/latest3.png" alt="Preppy T-shirt" class="w-full h-full object-cover transition-opacity duration-300">
+      </div>
+
+    
+      <div class="grid grid-cols-5 gap-3">
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border-2 border-[#ff0055] focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest3.png" alt="Thumbnail 1" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest4.png" alt="Thumbnail 2" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/2.jpg" alt="Thumbnail 3" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest1.png" alt="Thumbnail 4" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest2.png" alt="Thumbnail 5" class="w-full h-full object-cover">
+        </button>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col">
+   
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Preppy T-shirt</h1>
+
+    
+      <div class="flex items-center space-x-2 text-xs mb-6">
+        <div class="flex text-black text-sm">
+          ★★★★★
+        </div>
+        <span class="text-gray-500">(0 Reviews)</span>
+        <span class="text-gray-300">|</span>
+        <button class="text-[#ff0055] hover:underline cursor-pointer">Write a review</button>
+      </div>
+
+     
+      <div class="space-y-1.5 text-xs text-gray-600 mb-6">
+        <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
+        <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
+        <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
+      </div>
+
+    
+      <hr class="border-gray-200 mb-6">
+
+  
+      <div class="text-2xl font-bold text-gray-900 mb-6">
+        $40.00
+      </div>
+
+    
+      <div class="flex items-center space-x-3 mb-6">
+        <button id="decrement-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">-</button>
+        <span id="qty-count" class="text-sm font-semibold text-gray-900 w-6 text-center">1</span>
+        <button id="increment-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">+</button>
+      </div>
+
+     
+      <div class="mb-6">
+        <button class="w-36 bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+    
+      <hr class="border-gray-200 mb-6">
+
+     
+      <div class="flex items-center space-x-4 text-gray-700 mb-8">
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-pinterest-p text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-twitter text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
+      </div>
+
+      
+      <div>
+        <h3 class="font-bold text-gray-900 text-sm mb-2">Product Description</h3>
+        <p class="text-xs text-gray-500 leading-relaxed max-w-lg">
+          This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section> -->
+<!--Product Section Start-->
+<section class="product_card max-w-7xl mx-auto px-4 py-8 font-sans">
+  <!-- BREADCRUMB NAVIGATION -->
+  <nav class="text-xs text-gray-500 mb-6 space-x-1">
+    <a href="#" class="hover:underline">Home</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">Shop</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">T-shirts</a>
+    <span>&gt;</span>
+    <span class="text-gray-900 font-medium">Preppy T-shirt</span>
+  </nav>
+
+  <!-- PRODUCT DETAIL CONTAINER -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    
+    <!-- LEFT SIDE: IMAGE GALLERY -->
+    <div class="space-y-4">
+      <!-- Main Featured Image -->
+      <div class="w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
+        <img id="main-product-img" src="./assets/img/1.jpg" alt="Preppy T-shirt" class="w-full h-full object-cover transition-opacity duration-300">
+      </div>
+
+      <!-- Thumbnail Images Grid -->
+      <div class="grid grid-cols-5 gap-3" id="thumbnail-container">
+        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-[#ff0055] focus:outline-none cursor-pointer transition-all">
+          <img src="./assets/img/latest3.png" alt="Thumbnail 1" class="w-full h-full object-cover">
+        </button>
+        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
+          <img src="./assets/img/latest2.png" alt="Thumbnail 2" class="w-full h-full object-cover">
+        </button>
+        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
+          <img src="./assets/img/latest4.png" alt="Thumbnail 3" class="w-full h-full object-cover">
+        </button>
+        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
+          <img src="./assets/img/3.jpg" alt="Thumbnail 4" class="w-full h-full object-cover">
+        </button>
+        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
+          <img src="./assets/img/latest2.png" alt="Thumbnail 5" class="w-full h-full object-cover">
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: PRODUCT DETAILS -->
+    <div class="flex flex-col">
+      <!-- Title -->
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Preppy T-shirt</h1>
+
+      <!-- Rating & Reviews -->
+      <div class="flex items-center space-x-2 text-xs mb-6">
+        <div class="flex text-black text-sm">
+          ★★★★★
+        </div>
+        <span class="text-gray-500">(0 Reviews)</span>
+        <span class="text-gray-300">|</span>
+        <button class="text-[#ff0055] hover:underline cursor-pointer">Write a review</button>
+      </div>
+
+      <!-- Meta Info -->
+      <!-- <div class="space-y-1.5 text-xs text-gray-600 mb-6">
+        <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
+        <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
+        <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
+      </div> -->
+     <div class="space-y-2.5 text-base text-gray-600 mb-6">
+  <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
+  <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
+  <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
+</div>
+      <!-- Border Separator -->
+      <hr class="border-gray-200 mb-6">
+
+      <!-- Price -->
+      <div class="text-2xl font-bold text-gray-900 mb-6">
+        $40.00
+      </div>
+
+      <!-- Quantity Selector -->
+      <div class="flex items-center space-x-3 mb-6">
+        <button id="decrement-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">-</button>
+        <span id="qty-count" class="text-sm font-semibold text-gray-900 w-6 text-center">1</span>
+        <button id="increment-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">+</button>
+      </div>
+
+      <!-- Add to Cart Button -->
+      <div class="mb-6">
+        <button class="w-36 bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Border Separator -->
+      <hr class="border-gray-200 mb-6">
+
+      <!-- Social Share Links -->
+      <div class="flex items-center space-x-4 text-gray-700 mb-8">
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-pinterest-p text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-twitter text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
+      </div>
+
+
+      <!-- SOCIAL SHARE LINKS WITH SVG ICONS -->
+      <div class="flex items-center space-x-4 text-gray-800 mb-8">
+        <!-- Facebook -->
+        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Facebook">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+
+        <!-- Instagram -->
+        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Instagram">
+          <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+
+        <!-- Pinterest -->
+        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Pinterest">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+          </svg>
+        </a>
+
+        <!-- Twitter / X -->
+        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Twitter">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="WhatsApp">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+        </a>
+      </div>
+      <!-- Product Description -->
+      <div>
+        <h3 class="font-bold text-gray-900 text-sm mb-2 text-xl">Product Description</h3>
+        <!-- <p class="text-xs text-gray-500 leading-relaxed max-w-lg">
+          This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
+        </p> -->
+        <p class="text-base text-gray-500 leading-relaxed max-w-lg">
+  This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
+</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<!--Product Section End-->
+
+<!--Product Section Start-->
+<!-- TAB SECTION START -->
+<section class="max-w-7xl mx-auto px-4 py-12 font-sans">
+  
+  <!-- TAB NAVIGATION BUTTONS -->
+  <div class="border-b border-gray-200 mb-8">
+    <nav class="flex space-x-8 text-sm sm:text-base font-medium" aria-label="Tabs">
+      <button onclick="switchTab('description')" id="tab-description" class="tab-btn pb-3 text-[#ff0055] border-b-2 border-[#ff0055] font-semibold transition-all cursor-pointer">
+        Description
+      </button>
+      <button onclick="switchTab('additional')" id="tab-additional" class="tab-btn pb-3 text-gray-700 hover:text-[#ff0055] border-b-2 border-transparent transition-all cursor-pointer">
+        Additional information
+      </button>
+      <button onclick="switchTab('sizeshape')" id="tab-sizeshape" class="tab-btn pb-3 text-gray-700 hover:text-[#ff0055] border-b-2 border-transparent transition-all cursor-pointer">
+        Size &amp; Shape
+      </button>
+      <button onclick="switchTab('reviews')" id="tab-reviews" class="tab-btn pb-3 text-gray-700 hover:text-[#ff0055] border-b-2 border-transparent transition-all cursor-pointer">
+        Reviews (3)
+      </button>
+    </nav>
+  </div>
+
+  <!-- TAB CONTENT CONTAINERS -->
+  <div id="tab-content">
+    
+    <!-- 1. DESCRIPTION TAB CONTENT -->
+    <div id="content-description" class="tab-pane grid grid-cols-1 lg:grid-cols-12 gap-8 text-sm">
+      
+      <!-- Left Column: Main Description Text -->
+      <div class="lg:col-span-5 space-y-4">
+        <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-snug">
+          With the new fashion trends and all the available shopping options, you can order your clothes online and make money without even leaving your house.
+        </h3>
+        <p class="text-gray-600 leading-relaxed text-xs sm:text-sm">
+          These days, you can take your own inspiration and create something new for yourself. All you need to do is read books and magazines about fashion, watch videos on YouTube, keep yourself updated on social media, and, of course, shop online!
+        </p>
+      </div>
+
+      <!-- Middle Column: Material & Washing -->
+      <div class="lg:col-span-3 space-y-4">
+        <h4 class="text-base font-bold text-gray-900 mb-2">Material &amp; Washing</h4>
+        
+        <div class="border-b border-gray-100 pb-3">
+          <p class="text-gray-600">Material: <span class="text-gray-900 font-bold">100% cotton</span></p>
+        </div>
+
+        <div class="border-b border-gray-100 pb-3">
+          <p class="text-gray-600">Fabric: <span class="text-gray-900 font-bold">Soft jersey</span></p>
+        </div>
+
+        <div>
+          <p class="text-gray-600">
+            Care instructions: <span class="text-gray-900 font-bold">Machine wash at 30°C, do not tumble dry, iron on low heat, do not bleach</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Size & Shape Specs -->
+      <div class="lg:col-span-4 space-y-3">
+        <h4 class="text-base font-bold text-gray-900 mb-2">Size &amp; Shape</h4>
+        
+        <div class="border-b border-gray-100 pb-2.5">
+          <p class="text-gray-600">Model height: <span class="text-gray-900 font-bold">Our model is 180 cm tall and is wearing size M</span></p>
+        </div>
+
+        <div class="border-b border-gray-100 pb-2.5">
+          <p class="text-gray-600">Fit: <span class="text-gray-900 font-bold">Regular</span></p>
+        </div>
+
+        <div class="border-b border-gray-100 pb-2.5">
+          <p class="text-gray-600">Length: <span class="text-gray-900 font-bold">Standard</span></p>
+        </div>
+
+        <div>
+          <p class="text-gray-600">Sleeve length: <span class="text-gray-900 font-bold">Short sleeves</span></p>
+        </div>
+      </div>
+
+    </div>
+
+  
+  
+    <!-- 2. ADDITIONAL INFORMATION TAB CONTENT -->
+<div id="content-additional" class="tab-pane hidden text-sm space-y-6">
+  
+  <p class="text-gray-600">Additional information about the product.</p>
+
+  <!-- Colors Section -->
+  <div class="space-y-1">
+    <h4 class="text-base font-bold text-gray-900">Colors</h4>
+    <p class="text-gray-600">
+      Available colors: <span class="text-[#ff0055]">Red</span>, <span class="text-[#ff0055]">Blue</span>, <span class="text-[#ff0055]">Green</span>, <span class="text-[#ff0055]">Black</span>, <span class="text-[#ff0055]">White</span>.
+    </p>
+  </div>
+
+  <!-- Brand Section -->
+  <div class="space-y-1">
+    <h4 class="text-base font-bold text-gray-900">Brand</h4>
+    <p class="text-gray-600">
+      This t-shirt is made by <span class="text-[#ff0055]">Nike</span>.
+    </p>
+  </div>
+
+  <!-- Material & Care Section -->
+  <div class="space-y-1">
+    <h4 class="text-base font-bold text-gray-900">Material &amp; Care</h4>
+    <p class="text-gray-600">Material: 100% Cotton</p>
+    <p class="text-gray-600">
+      Care instructions: Machine wash at 40 °C, do not tumble dry, iron at medium temperature, do not bleach.
+    </p>
+  </div>
+
+</div>
+
+    <!-- 3. SIZE & SHAPE TAB CONTENT -->
+    <div id="content-sizeshape" class="tab-pane hidden text-sm text-gray-600">
+      <p class="mb-4">Standard clothing size guide for men's apparel:</p>
+      <ul class="list-disc pl-5 space-y-1">
+        <li>Chest: 96-101 cm (Size M)</li>
+        <li>Waist: 81-86 cm</li>
+        <li>Hips: 96-101 cm</li>
+      </ul>
+    </div>
+
+   
+  <!-- 4. REVIEWS TAB CONTENT -->
+<div id="content-reviews" class="tab-pane hidden text-sm space-y-8">
+  
+ 
+  <div class="space-y-4">
+    <h3 class="text-base font-bold text-gray-900 mb-2">Customer Reviews</h3>
+
+    <div class="border-b border-gray-100 pb-3">
+      <div class="flex items-center space-x-2 mb-1">
+        <span class="font-bold text-gray-900">John Doe</span>
+        <span class="text-black text-xs">★★★★★</span>
+      </div>
+      <p class="text-gray-600">Great fitting t-shirt, quality is top notch!</p>
+    </div>
+
+    <div class="border-b border-gray-100 pb-3">
+      <div class="flex items-center space-x-2 mb-1">
+        <span class="font-bold text-gray-900">Alex M.</span>
+        <span class="text-black text-xs">★★★★☆</span>
+      </div>
+      <p class="text-gray-600">Comfortable fabric, looks very stylish.</p>
+    </div>
+  </div>
+
+  <!-- WRITE A REVIEW FORM (Exact Design Match) -->
+ <div class="pt-4">
+  <h3 class="text-base font-bold text-gray-900 mb-6">Write a Review</h3>
+<!--   
+  <form onsubmit="event.preventDefault();" class="space-y-6">
+    
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+     
+      <div class="relative">
+        <input 
+          type="text" 
+          id="review-name" 
+          required 
+          placeholder=" "
+          class="peer w-full border border-gray-300 rounded-md px-3 pt-3 pb-2 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all"
+        />
+        <label 
+          for="review-name" 
+          class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[11px] peer-focus:text-[#ff0055] peer-focus:font-medium"
+        >
+          Name
+        </label>
+      </div>
+
+      
+      <div class="relative">
+        <input 
+          type="email" 
+          id="review-email" 
+          required 
+          placeholder=" "
+          class="peer w-full border border-gray-300 rounded-md px-3 pt-3 pb-2 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all"
+        />
+        <label 
+          for="review-email" 
+          class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[11px] peer-focus:text-[#ff0055] peer-focus:font-medium"
+        >
+          Email
+        </label>
+      </div>
+
+     
+      <div class="relative">
+        <select 
+          id="review-rating" 
+          class="peer w-full border border-gray-300 rounded-md px-3 pt-2.5 pb-2 text-xs text-gray-900 bg-white focus:outline-none focus:border-[#ff0055] transition-all cursor-pointer appearance-none"
+        >
+          <option value="5">★★★★★ (5 Stars)</option>
+          <option value="4">★★★★☆ (4 Stars)</option>
+          <option value="3">★★★☆☆ (3 Stars)</option>
+          <option value="2">★★☆☆☆ (2 Stars)</option>
+          <option value="1">★☆☆☆☆ (1 Star)</option>
+        </select>
+        <label 
+          for="review-rating" 
+          class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-[#ff0055] font-medium pointer-events-none"
+        >
+          Rating
+        </label>
+       
+        <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-xs">
+          ▼
+        </div>
+      </div>
+
+    </div>
+
+  
+    <div class="relative">
+      <textarea 
+        id="review-text" 
+        rows="4" 
+        required 
+        placeholder=" "
+        class="peer w-full border border-gray-300 rounded-md p-3 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all resize-y"
+      ></textarea>
+      <label 
+        for="review-text" 
+        class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[11px] peer-focus:text-[#ff0055] peer-focus:font-medium"
+      >
+        Review
+      </label>
+    </div>
+
+  
+    <div>
+      <button type="submit" class="bg-[#ff0055] hover:bg-[#e0004c] text-white font-medium text-xs px-6 py-2.5 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer">
+        Submit Review
+      </button>
+    </div>
+
+  </form> -->
+  <form id="review-form" class="space-y-6">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Name Input -->
+        <div class="relative">
+          <input 
+            type="text" 
+            id="review-name" 
+            required 
+            placeholder=" "
+            class="peer w-full border border-gray-300 rounded-md px-3 pt-3 pb-2 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all"
+          />
+          <label 
+            for="review-name" 
+            class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[#ff0055] peer-focus:font-medium"
+          >
+            Name
+          </label>
+        </div>
+
+        <!-- Email Input -->
+        <div class="relative">
+          <input 
+            type="email" 
+            id="review-email" 
+            required 
+            placeholder=" "
+            class="peer w-full border border-gray-300 rounded-md px-3 pt-3 pb-2 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all"
+          />
+          <label 
+            for="review-email" 
+            class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[#ff0055] peer-focus:font-medium"
+          >
+            Email
+          </label>
+        </div>
+
+        <!-- Rating Dropdown -->
+        <div class="relative">
+          <select 
+            id="review-rating" 
+            class="peer w-full border border-gray-300 rounded-md px-3 pt-2.5 pb-2 text-xs text-gray-900 bg-white focus:outline-none focus:border-[#ff0055] transition-all cursor-pointer appearance-none"
+          >
+            <option value="5">★★★★★ (5 Stars)</option>
+            <option value="4" selected>★★★★☆ (4 Stars)</option>
+            <option value="3">★★★☆☆ (3 Stars)</option>
+            <option value="2">★★☆☆☆ (2 Stars)</option>
+            <option value="1">★☆☆☆☆ (1 Star)</option>
+          </select>
+          <label 
+            for="review-rating" 
+            class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-[#ff0055] font-medium pointer-events-none"
+          >
+            Rating
+          </label>
+          <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-[10px]">
+            ▼
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Review Textarea -->
+      <div class="relative">
+        <textarea 
+          id="review-text" 
+          rows="4" 
+          required 
+          placeholder=" "
+          class="peer w-full border border-gray-300 rounded-md p-3 text-xs text-gray-900 bg-transparent focus:outline-none focus:border-[#ff0055] transition-all resize-y"
+        ></textarea>
+        <label 
+          for="review-text" 
+          class="absolute left-2.5 top-0 -translate-y-1/2 bg-white px-1 text-[11px] text-gray-500 transition-all pointer-events-none peer-placeholder-shown:top-5 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-xs peer-placeholder-shown:text-gray-400 peer-focus:top-0 peer-focus:-translate-y-1/2 peer-focus:text-[#ff0055] peer-focus:font-medium"
+        >
+          Review
+        </label>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button 
+          type="submit" 
+          class="bg-[#ff0055] hover:bg-[#e0004c] text-white font-medium text-xs px-6 py-2.5 rounded-full transition-all active:scale-95 shadow-sm cursor-pointer"
+        >
+          Submit Review
+        </button>
+      </div>
+
+    </form>
+</div>
+</div>
+</section>
+<!-- TAB SECTION END -->
+<!--Slider Section Start-->
+
+<section id="featured-products" class="featured-section max-w-7xl mx-auto px-4 pt-9 pb-9 relative">
+
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">
+        Popular products
+      </h2>
+
+      <div class="flex items-center space-x-3">
+       
+      </div>
+    </div>
+
+    <div class="relative group">
+      <!-- Swiper Main Container -->
+      <div id="main-product-carousel" class="swiper productSlider pb-4 pt-2 px-1">
+        <div class="swiper-wrapper  pb-19">
+
+          <!-- Slide 1 -->
+          <div class="swiper-slide h-auto">
+            <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+              <div>
+                <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                  <img src="./assets/img/1.jpg" alt="Summer black dress" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1">Summer black dress</h3>
+                <p class="text-xs text-gray-500 mb-3">Women</p>
+                <div class="flex items-center space-x-2 mb-4">
+                  <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
+                  <span class="text-xs text-gray-400 line-through">$24.99</span>
+                </div>
+              </div>
+              <button class="cart-btn w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="swiper-slide h-auto">
+            <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+              <div>
+                <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                  <img src="./assets/img/2.jpg" alt="Black suit" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1">Black suit</h3>
+                <p class="text-xs text-gray-500 mb-3">Women</p>
+                <div class="flex items-center space-x-2 mb-4">
+                  <span class="text-lg font-extrabold text-gray-900">$29.99</span>
+                </div>
+              </div>
+              <button class="cart-btn w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="swiper-slide h-auto">
+            <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+              <div>
+                <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336]">
+                  <img src="./assets/img/3.jpg" alt="Black long dress" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1">Black long dress</h3>
+                <p class="text-xs text-gray-500 mb-3">Women, Accessories</p>
+                <div class="flex items-center space-x-2 mb-4">
+                  <span class="text-lg font-extrabold text-gray-900">$15.99</span>
+                  <span class="text-xs text-gray-400 line-through">$19.99</span>
+                </div>
+              </div>
+              <button class="cart-btn w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="swiper-slide h-auto">
+            <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+              <div>
+                <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                  <img src="./assets/img/4.jpg" alt="Black leather jacket" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1">Black leather jacket</h3>
+                <p class="text-xs text-gray-500 mb-3">Women</p>
+                <div class="flex items-center space-x-2 mb-4">
+                  <span class="text-lg font-extrabold text-[#ff0055]">$39.99</span>
+                  <span class="text-xs text-gray-400 line-through">$49.99</span>
+                </div>
+              </div>
+              <button class="cart-btn w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Slide 5 -->
+          <div class="swiper-slide h-auto">
+            <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
+              <div>
+                <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336]">
+                  <img src="./assets/img/3.jpg" alt="Black long dress" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <h3 class="font-bold text-gray-900 text-base mb-1">Black long dress</h3>
+                <p class="text-xs text-gray-500 mb-3">Women, Accessories</p>
+                <div class="flex items-center space-x-2 mb-4">
+                  <span class="text-lg font-extrabold text-gray-900">$15.99</span>
+                  <span class="text-xs text-gray-400 line-through">$19.99</span>
+                </div>
+              </div>
+              <button class="cart-btn w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pagination Container -->
+        <div class="swiper-pagination slider-pagination pt-19  "></div>
+      </div>
+    </div>
+  </section>
+<!--Slier Section End-->
+<!--Latest Products Section Start-->
+<section class="latest max-w-7xl mx-auto px-4 py-9">
+    <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
+      Latest products
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- Card 1 -->
+      <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+        <div>
+          <a href="#" class="image-wrapper group relative block w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
+            <img 
+              src="./assets/img/latest1.png" 
+              alt="Summer black dress front" 
+              style="view-transition-name: product-img-1;"
+              class="product-card-img front-img w-full h-full object-cover transition-all duration-500 opacity-100 group-hover:scale-105 absolute inset-0"
+            >
+          </a>
+
+          <h3 class="font-bold text-gray-900 text-base mb-1 cursor-pointer">Summer black dress</h3>
+          <p class="text-xs text-gray-500 mb-3">Women</p>
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-lg font-extrabold text-[#ff0055]">$19.99</span>
+            <span class="text-xs text-gray-400 line-through">$24.99</span>
+          </div>
+        </div>
+
+        <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+        <div>
+          <a href="#" class="image-wrapper group relative block w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
+            <img 
+              src="./assets/img/latest2.png" 
+              alt="Black suit front" 
+              style="view-transition-name: product-img-2;"
+              class="product-card-img front-img w-full h-full object-cover transition-all duration-500 opacity-100 group-hover:scale-105 absolute inset-0"
+            >
+          </a>
+
+          <h3 class="font-bold text-gray-900 text-base mb-1 cursor-pointer">Black suit</h3>
+          <p class="text-xs text-gray-500 mb-3">Women</p>
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-lg font-extrabold text-gray-900">$29.99</span>
+          </div>
+        </div>
+
+        <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+        <div>
+          <a href="#" class="image-wrapper group relative block w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-[#801336] cursor-pointer">
+            <img 
+              src="./assets/img/latest3.png" 
+              alt="Black long dress front" 
+              style="view-transition-name: product-img-3;"
+              class="product-card-img front-img w-full h-full object-cover transition-all duration-500 opacity-100 group-hover:scale-105 absolute inset-0"
+            >
+          </a>
+
+          <h3 class="font-bold text-gray-900 text-base mb-1 cursor-pointer">Black long dress</h3>
+          <p class="text-xs text-gray-500 mb-3">Women, Accessories</p>
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-lg font-extrabold text-gray-900">$15.99</span>
+            <span class="text-xs text-gray-400 line-through">$19.99</span>
+          </div>
+        </div>
+
+        <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between">
+        <div>
+          <a href="#" class="image-wrapper group relative block w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100 cursor-pointer">
+            <img 
+              src="./assets/img/latest4.png" 
+              alt="Black leather jacket front" 
+              style="view-transition-name: product-img-4;"
+              class="product-card-img front-img w-full h-full object-cover transition-all duration-500 opacity-100 group-hover:scale-105 absolute inset-0"
+            >
+          </a>
+
+          <h3 class="font-bold text-gray-900 text-base mb-1 cursor-pointer">Black leather jacket</h3>
+          <p class="text-xs text-gray-500 mb-3">Women</p>
+          <div class="flex items-center space-x-2 mb-4">
+            <span class="text-lg font-extrabold text-[#ff0055]">$39.99</span>
+            <span class="text-xs text-gray-400 line-through">$49.99</span>
+          </div>
+        </div>
+
+        <button class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Product Modal -->
+  <div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative transform scale-95 transition-transform duration-300" id="modalContainer">
+      <!-- Close Button -->
+      <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer">&times;</button>
+      
+      <!-- Modal Content -->
+      <div class="flex flex-col sm:flex-row gap-6">
+        <div class="w-full sm:w-1/2 h-64 rounded-xl overflow-hidden bg-gray-100">
+          <img id="modalImg" src="" alt="Product Image" class="w-full h-full object-cover">
+        </div>
+        <div class="w-full sm:w-1/2 flex flex-col justify-between">
+          <div>
+            <span id="modalCategory" class="text-xs text-gray-500 font-medium">Category</span>
+            <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mt-1 mb-2">Product Title</h3>
+            <div class="flex items-center space-x-2 mb-4">
+              <span id="modalPrice" class="text-xl font-extrabold text-[#ff0055]">$0.00</span>
+              <span id="modalOldPrice" class="text-xs text-gray-400 line-through"></span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">Ye product premium quality fabrics aur modern design se tayyar kiya gaya hai.</p>
+          </div>
+          
+          <button class="w-full bg-[#ff0055] hover:bg-[#d90048] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-sm">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+
+  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
+      
+      <!-- Column 1: Shop -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Pages -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Account -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Follow Us -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center "></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center "></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center "></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center "></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center "></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Contact Us & Logo -->
+      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+<!--Footer Section End-->
+<!--Bottom Section Start-->
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      
+      <!-- Copyright, Links & Description -->
+      <div class="space-y-3 text-gray-800">
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
+
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
+
+      <!-- Payment Icons -->
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <!-- PayPal -->
+        <!-- <div class="h-6 px-2.5 bg-[#2c2e2f] text-white font-bold italic text-[11px] rounded flex items-center justify-center tracking-tight">
+          <img src="./assets/img/paypal (1).svg" alt="payal"/>
+        </div> -->
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/paypal (1).svg" 
+    alt="PayPal" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+        <!-- Stripe -->
+           <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/stripe.svg" 
+    alt="Stripe" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+        <!-- VISA -->
+         <div class="h-6 px-2.5  rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/visa.svg" 
+    alt="VISA" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Bottom Section End-->
+<script>
+  // Form Submission Logic
+const reviewForm = document.getElementById('review-form');
+const reviewsList = document.getElementById('reviews-list');
+
+if (reviewForm && reviewsList) {
+  reviewForm.addEventListener('submit', function(e) {
+    // 1. Page refresh hone se rokein
+    e.preventDefault();
+
+    // 2. Form values read karein
+    const name = document.getElementById('review-name').value;
+    const ratingVal = document.getElementById('review-rating').value;
+    const reviewText = document.getElementById('review-text').value;
+
+    // Stars format karein
+    const stars = '★'.repeat(ratingVal) + '☆'.repeat(5 - ratingVal);
+
+    // 3. New Review HTML Card banayein
+    const newReview = document.createElement('div');
+    newReview.className = 'border-b border-gray-100 pb-3';
+    newReview.innerHTML = `
+      <div class="flex items-center space-x-2 mb-1">
+        <span class="font-bold text-gray-900">${name}</span>
+        <span class="text-black text-xs">${stars}</span>
+      </div>
+      <p class="text-gray-600">${reviewText}</p>
+    `;
+
+    // 4. New review ko list ke sabse upar add karein
+    reviewsList.prepend(newReview);
+
+    // 5. Form inputs clear karein
+    reviewForm.reset();
+
+    alert('Review submitted successfully!');
+  });
+}
+
+
+
+ 
+
+ document.addEventListener("DOMContentLoaded", function () {
+      var featuredSwiper = new Swiper(".productSlider", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".slider-next",
+          prevEl: ".slider-prev",
+        },
+        pagination: {
+          el: ".slider-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+</body>
+</html>

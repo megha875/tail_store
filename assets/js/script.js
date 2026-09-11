@@ -1,3 +1,81 @@
+// Backend API se products fetch karne ka function
+// async function loadProducts() {
+//     try {
+//         const response = await fetch('http://localhost:5000/api/products');
+//         const products = await response.json();
+//         console.log("Backend se aaye products:", products);
+
+//         // Yahan aap apne HTML UI mein products render karein
+//     } catch (error) {
+//         console.error("Products load karne mein error aayi:", error);
+//     }
+// }
+
+// // Function call karein
+// loadProducts();
+
+
+  async function loadProducts() {
+    try {
+      // Backend API se data fetch karein
+      const response = await fetch('http://localhost:5000/api/products');
+      const products = await response.json();
+
+      // HTML container ko select karein
+      const container = document.getElementById('products-container'); // ya jo bhi aapka grid ID ho
+
+      if (container) {
+        // 👇 Yeh raha aapka updated render code
+        container.innerHTML = products.map(product => `
+          <div class="bg-white p-4 rounded-2xl shadow-md border flex flex-col items-center text-center">
+            <img src="${product.image}" alt="${product.title}" class="w-full h-64 object-cover rounded-xl mb-4">
+            <h3 class="font-bold text-gray-800 text-lg mb-1">${product.title}</h3>
+            <p class="text-gray-500 font-semibold mb-3">$${product.price}</p>
+            <button class="w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 rounded-xl transition">Add to Cart</button>
+          </div>
+        `).join('');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
+
+  // Page load hone par function call karein
+  document.addEventListener('DOMContentLoaded', loadProducts);
+
+// 
+
+
+  // API se products fetch karne ka function
+  async function loadProducts() {
+    try {
+      const response = await fetch('http://localhost:5000/api/products');
+      const products = await response.json();
+      
+      console.log('Fetched Products:', products);
+
+      // Container element jahan products show karne hain
+      const productsContainer = document.getElementById('product-list'); 
+      
+      if (productsContainer) {
+        productsContainer.innerHTML = products.map(product => `
+          <div class="product-card">
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p>Category: ${product.category}</p>
+            <p>Price: $${product.price} <del>$${product.oldPrice}</del></p>
+          </div>
+        `).join('');
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
+
+  // Page load hote hi run karein
+  document.addEventListener('DOMContentLoaded', loadProducts);
+
+
 // Navbar Section  
  // Mobile Main Menu Toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -558,3 +636,200 @@ document.addEventListener('DOMContentLoaded', function () {
         hideModal();
       }
     });
+
+    // Product Gallery
+
+ document.addEventListener("DOMContentLoaded", function () {
+      var featuredSwiper = new Swiper(".productSlider", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".slider-next",
+          prevEl: ".slider-prev",
+        },
+        pagination: {
+          el: ".slider-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+
+    
+
+ document.addEventListener("DOMContentLoaded", function () {
+      var featuredSwiper = new Swiper(".productSlider", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: ".slider-next",
+          prevEl: ".slider-prev",
+        },
+        pagination: {
+          el: ".slider-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 24,
+          },
+        },
+      });
+    });
+
+
+
+    // Product Gallery Slider 
+    // Multiple unique images data for each product
+    const productsData = [
+      {
+        id: 0,
+        images: [
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 1,
+        images: [
+          'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1554568218-0f1715e72254?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 2,
+        images: [
+          'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 3,
+        images: [
+          'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 4,
+        images: [
+          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop'
+        ]
+      }
+    ];
+
+    let currentProductIndex = 0;
+    let currentImageIndex = 0;
+
+    function openSliderModal(productIndex) {
+      currentProductIndex = productIndex;
+      currentImageIndex = 0;
+      updateSlider();
+      document.getElementById('sliderModal').classList.remove('hidden');
+    }
+
+    function closeSliderModal() {
+      document.getElementById('sliderModal').classList.add('hidden');
+      resetZoom();
+    }
+
+    function updateSlider() {
+      resetZoom();
+      const images = productsData[currentProductIndex].images;
+      const imgElement = document.getElementById('currentSliderImg');
+      const counterElement = document.getElementById('imageCounter');
+
+      // Smooth opacity effect
+      imgElement.style.opacity = '0.3';
+      setTimeout(() => {
+        imgElement.src = images[currentImageIndex];
+        imgElement.style.opacity = '1';
+      }, 120);
+
+      counterElement.innerText = `${currentImageIndex + 1} / ${images.length}`;
+    }
+
+    function nextImage() {
+      const images = productsData[currentProductIndex].images;
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateSlider();
+    }
+
+    function prevImage() {
+      const images = productsData[currentProductIndex].images;
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateSlider();
+    }
+
+    function toggleZoom() {
+      const imgElement = document.getElementById('currentSliderImg');
+      imgElement.classList.toggle('zoomed');
+    }
+
+    function resetZoom() {
+      const imgElement = document.getElementById('currentSliderImg');
+      if (imgElement) {
+        imgElement.classList.remove('zoomed');
+      }
+    }
+
+    function addToCart(name) {
+      alert(`${name} added to cart!`);
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      const modal = document.getElementById('sliderModal');
+      if (!modal.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape') closeSliderModal();
+      }
+    });
+
+    // Close modal on outer click
+    document.getElementById('sliderModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSliderModal();
+      }
+    });
+
+
