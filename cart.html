@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="font-['Manrope'] bg-gray-50">
+
+  <!--Navbar Section Start-->
+  <header class="w-full bg-[#050B14]">
+    <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white relative">
+      
+      <div class="flex items-center">
+        <a href="#" class="block">
+          <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+        </a>
+      </div>
+
+      <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+        <a href="home.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+        
+        <div class="relative group py-2">
+          <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+            Men
+            <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+            <div class="py-2">
+              <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+        <a href="checkout.html" class="hover:text-gray-300 transition-colors py-2">Checkout</a>
+      </div>
+
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+          Register
+        </a>
+
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+          Login
+        </a>
+
+        <!-- Cart Icon Button -->
+        <button type="button" id="nav-cart-btn" onclick="openCartDrawer(event)" class="p-1 hover:text-gray-300 transition-colors relative flex items-center focus:outline-none" aria-label="Cart">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+          <!-- Dynamic Cart Badge Starts with 0 -->
+          <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+        </button>
+
+      </div>
+    </nav>
+  </header>
+  <!--Navbar Section End-->
+ 
+<!-- Cart Section Start -->
+<section class="max-w-7xl mx-auto px-4 py-10">
+
+    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+        Shopping Cart
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Cart Products -->
+        <div class="lg:col-span-2">
+
+            <div
+                id="cartItems"
+                class="space-y-4"
+            >
+                <!-- Products MongoDB se yahan aayenge -->
+            </div>
+
+        </div>
+
+
+        <!-- Order Summary -->
+        <div class="lg:col-span-1">
+
+            <div class="bg-white rounded-xl shadow-sm border p-6">
+
+                <h2 class="text-xl font-bold text-gray-900 mb-6">
+                    Order Summary
+                </h2>
+
+                <div class="flex justify-between mb-4 text-gray-600">
+                    <span>Subtotal</span>
+                    <span id="subtotal" class="font-semibold text-gray-900">
+                        ₹0
+                    </span>
+                </div>
+
+                <div class="flex justify-between mb-4 text-gray-600">
+                    <span>Shipping</span>
+                    <span class="font-semibold text-green-600">
+                        Free
+                    </span>
+                </div>
+
+                <div class="border-t pt-4 flex justify-between">
+                    <span class="text-lg font-bold">
+                        Total
+                    </span>
+
+                    <span
+                        id="grandTotal"
+                        class="text-lg font-bold text-[#FF0043]"
+                    >
+                        ₹0
+                    </span>
+                </div>
+
+                <a
+                    href="checkout.html"
+                    class="block text-center mt-6 w-full bg-[#FF0043] hover:bg-[#d90039] text-white font-semibold py-3 rounded-lg transition"
+                >
+                    Proceed to Checkout
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- Cart Section End --> 
+ <script src="./assets/js/cart.js"></script>
+</body>
+</html>

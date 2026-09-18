@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Add Product</title>
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="bg-gray-100 font-['Manrope']">
+
+    <!-- Header -->
+    <header class="bg-[#050B14] text-white px-6 py-5">
+
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+
+            <h1 class="text-xl md:text-2xl font-bold">
+                Product Admin
+            </h1>
+
+            <a
+                href="home.html"
+                class="bg-[#FF0043] px-5 py-2 rounded-lg text-sm font-semibold hover:bg-[#d90039]"
+            >
+                View Store
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main -->
+    <main class="max-w-4xl mx-auto px-4 py-10">
+
+        <div class="bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+
+            <h2 class="text-2xl font-bold text-gray-900">
+                Add New Product
+            </h2>
+
+            <p class="text-gray-500 mt-1 mb-8">
+                Product add karo aur wo automatically MongoDB ke products collection mein save hoga.
+            </p>
+
+
+            <!-- Product Form -->
+            <form id="productForm" class="space-y-6">
+
+                <!-- Product Name -->
+                <div>
+
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Product Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="productName"
+                        placeholder="Nike Air Max Shoes"
+                        required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"
+                    >
+
+                </div>
+
+
+                <!-- Price + Category -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                    <div>
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            placeholder="20999"
+                            min="0"
+                            required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productCategory"
+                            placeholder="Shoes"
+                            required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Image URL -->
+                <div>
+
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Image URL
+                    </label>
+
+                    <input
+                        type="url"
+                        id="productImage"
+                        placeholder="https://example.com/product.jpg"
+                        required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+                <div>
+
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="productDescription"
+                        rows="5"
+                        placeholder="Enter product description..."
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Image Preview -->
+                <div id="imagePreviewBox" class="hidden">
+
+                    <p class="text-sm font-semibold text-gray-700 mb-2">
+                        Image Preview
+                    </p>
+
+                    <img
+                        id="imagePreview"
+                        src=""
+                        alt="Product Preview"
+                        class="w-40 h-40 object-cover rounded-xl border"
+                    >
+
+                </div>
+
+
+                <!-- Message -->
+                <div
+                    id="formMessage"
+                    class="hidden rounded-lg px-4 py-3 text-sm font-semibold"
+                ></div>
+
+
+                <!-- Submit -->
+                <button
+                    type="submit"
+                    id="submitBtn"
+                    class="w-full bg-[#FF0043] hover:bg-[#d90039] text-white font-bold py-3.5 rounded-lg transition"
+                >
+                    Add Product
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const productForm = document.getElementById('productForm');
+
+        const productImage = document.getElementById('productImage');
+
+        const imagePreview = document.getElementById('imagePreview');
+
+        const imagePreviewBox = document.getElementById('imagePreviewBox');
+
+        const formMessage = document.getElementById('formMessage');
+
+        const submitBtn = document.getElementById('submitBtn');
+
+
+        // Image Preview
+        productImage.addEventListener('input', function () {
+
+            const imageUrl = this.value.trim();
+
+            if (imageUrl) {
+
+                imagePreview.src = imageUrl;
+
+                imagePreviewBox.classList.remove('hidden');
+
+            } else {
+
+                imagePreviewBox.classList.add('hidden');
+
+            }
+
+        });
+
+
+        // Submit Product 
+productForm.addEventListener('submit', async function (event) {
+
+    event.preventDefault();
+
+    const productData = {
+
+        name: document.getElementById('productName').value.trim(),
+
+        price: Number(
+            document.getElementById('productPrice').value
+        ),
+
+        category: document.getElementById('productCategory').value.trim(),
+
+        image: document.getElementById('productImage').value.trim(),
+
+        description: document.getElementById('productDescription').value.trim(),
+
+        stock: 10
+
+    };
+
+
+    console.log("Sending Product:", productData);
+
+
+    try {
+
+        const response = await fetch(
+            'http://localhost:5500/api/products/add',
+            {
+                method: 'POST',
+
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+
+                body: JSON.stringify(productData)
+            }
+        );
+
+
+        const data = await response.json();
+
+        console.log("SERVER STATUS:", response.status);
+        console.log("SERVER RESPONSE:", data);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                data.message ||
+                `Server Error: ${response.status}`
+            );
+
+        }
+
+
+        formMessage.className =
+            'rounded-lg px-4 py-3 text-sm font-semibold bg-green-100 text-green-700';
+
+        formMessage.innerText =
+            data.message || 'Product successfully added!';
+
+        formMessage.classList.remove('hidden');
+
+
+        productForm.reset();
+
+        imagePreviewBox.classList.add('hidden');
+
+
+    } catch (error) {
+
+        console.error("FULL PRODUCT ERROR:", error);
+
+        formMessage.className =
+            'rounded-lg px-4 py-3 text-sm font-semibold bg-red-100 text-red-700';
+
+        formMessage.innerText =
+            error.message;
+
+        formMessage.classList.remove('hidden');
+
+    }
+
+}); 
+
+    </script>
+
+</body>
+
+</html> 
