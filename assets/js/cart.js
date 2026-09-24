@@ -1,3 +1,6 @@
+
+
+
 async function renderDynamicCart() {
 
     const cartContainer = document.getElementById('cartItems');
@@ -41,7 +44,7 @@ async function renderDynamicCart() {
                     </p>
 
                     <a
-                        href="home.html"
+                        href="index.html"
                         class="inline-block mt-6 bg-[#FF0043] text-white px-6 py-3 rounded-lg font-semibold"
                     >
                         Continue Shopping
@@ -275,3 +278,105 @@ document.addEventListener('DOMContentLoaded', () => {
     renderDynamicCart();
 
 }); 
+
+
+
+
+
+
+    // // 1. Navbar Badge Update Function
+    // async function updateNavbarCartBadge() {
+    //     const badge = document.getElementById('cart-badge-count');
+    //     if (!badge) return;
+
+    //     try {
+    //         const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+            
+    //         if (!response.ok) {
+    //             badge.innerText = '0';
+    //             return;
+    //         }
+
+    //         const cart = await response.json();
+
+    //         if (cart && cart.items && cart.items.length > 0) {
+    //             const totalCount = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+    //             badge.innerText = totalCount;
+    //         } else {
+    //             badge.innerText = '0';
+    //         }
+    //     } catch (error) {
+    //         console.error("Navbar badge update error:", error);
+    //         badge.innerText = '0';
+    //     }
+    // }
+
+    // // 2. Add To Cart Function (Real-Time Live Sync)
+    // async function addToCart(productId, event) {
+    //     if (event) event.preventDefault(); // Form submit refresh roke
+
+    //     try {
+    //         const response = await fetch('http://localhost:5500/api/cart/add', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({
+    //                 userId: 'guest_user',
+    //                 productId: productId,
+    //                 quantity: 1
+    //             })
+    //         });
+
+    //         const data = await response.json();
+
+    //         if (!response.ok) {
+    //             throw new Error(data.message || 'Product add nahi hua');
+    //         }
+
+    //         // 🌟 REAL-TIME SYNC: Click karte hi bina refresh kiye badge count instantly badhega
+    //         await updateNavbarCartBadge();
+
+    //         alert(data.message || 'Product Cart me add ho gaya!');
+
+    //     } catch (error) {
+    //         console.error("Add to Cart Error:", error);
+    //         alert("Product add karne me issue aaya.");
+    //     }
+    // }
+
+    // // 3. Remove Item Function
+    // async function removeFromCart(productId, event) {
+    //     if (event) event.preventDefault();
+
+    //     try {
+    //         const response = await fetch('http://localhost:5500/api/cart/remove', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({
+    //                 userId: 'guest_user',
+    //                 productId: productId
+    //             })
+    //         });
+
+    //         if (response.ok) {
+    //             // Delete hote hi instant badge sync
+    //             await updateNavbarCartBadge();
+                
+    //             if (typeof loadCartPage === 'function') {
+    //                 loadCartPage();
+    //             }
+    //         }
+    //     } catch (error) {
+    //         console.error("Remove error:", error);
+    //     }
+    // }
+
+    // // 4. Page Load Sync
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     if (typeof loadProducts === 'function') {
+    //         loadProducts();
+    //     }
+    //     updateNavbarCartBadge();
+    // });
+
+
+    // 1. Cart Page Data Fetch & Render Function

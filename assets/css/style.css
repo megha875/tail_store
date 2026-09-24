@@ -5,7 +5,9 @@
   box-sizing: border-box;
   font-family: Manrope', 'sans-serif';
 }
-
+.brandsSwiper .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
 .font-serif-custom {
       font-family: 'Playfair Display', serif;
     }

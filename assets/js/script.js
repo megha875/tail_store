@@ -1067,12 +1067,498 @@ async function removeFromCart(productId) {
   }
 }
 
-// Global UI Tab/Submenu Helpers
-function toggleSubMenu(submenuId, arrowId) {
-  const submenu = document.getElementById(submenuId);
-  const arrow = document.getElementById(arrowId);
-  if (submenu) submenu.classList.toggle('hidden');
-  if (arrow) arrow.classList.toggle('rotate-180');
+
+
+
+// 1. Navbar Badge Update (Pure AJAX - No Page Refresh)
+function updateNavbarCartBadge() {
+    const badge = document.getElementById('cart-badge-count');
+    if (!badge) return;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:5500/api/cart?userId=guest_user', true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                const cart = JSON.parse(xhr.responseText);
+                if (cart && cart.items && cart.items.length > 0) {
+                    const totalCount = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+                    badge.innerText = totalCount;
+                } else {
+                    badge.innerText = '0'; // Empty cart par strictly 0
+                }
+            } catch (e) {
+                badge.innerText = '0';
+            }
+        } else {
+            badge.innerText = '0';
+        }
+    };
+
+    xhr.onerror = function () {
+        badge.innerText = '0';
+    };
+
+    xhr.send();
 }
 
+// 2. Add To Cart (Pure AJAX - Direct Dynamic Sync)
+function addToCart(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Instant Local Badge Increment (+1 Without Reload)
+    const badge = document.getElementById('cart-badge-count');
+    if (badge) {
+        const currentCount = parseInt(badge.innerText) || 0;
+        badge.innerText = currentCount + 1;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:5500/api/cart/add', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            updateNavbarCartBadge(); // Database sync
+        } else {
+            alert("Product add nahi ho paya!");
+            updateNavbarCartBadge();
+        }
+    };
+
+    xhr.onerror = function () {
+        updateNavbarCartBadge();
+    };
+
+    const data = JSON.stringify({
+        userId: 'guest_user',
+        productId: productId,
+        quantity: 1
+    });
+
+    xhr.send(data);
+    return false;
+}
+
+// 3. Remove From Cart (Pure AJAX - Instant '0' Badge Sync Without Refresh)
+function removeFromCart(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:5500/api/cart/remove', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Live badge count update
+            updateNavbarCartBadge();
+
+            // Direct Cart Page re-render agar cart page par maujood hain
+            if (typeof loadCartPage === 'function') {
+                loadCartPage();
+            }
+        } else {
+            alert("Product delete nahi ho saka!");
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error("Remove AJAX error");
+    };
+
+    const data = JSON.stringify({
+        userId: 'guest_user',
+        productId: productId
+    });
+
+    xhr.send(data);
+    return false;
+}
+
+// 4. Initial Page Load Event
+document.addEventListener('DOMContentLoaded', () => {
+    updateNavbarCartBadge();
+});
+
+
+// ---------------------------------------------------------------
+// ==========================================
+// 1. API & BADGE INTEGRATION (Global)
+// ==========================================
+const API_BASE_URL = 'http://localhost:5500/api';
+const GUEST_USER_ID = 'guest_user';
+
+// --- NAVBAR BADGE UPDATE ---
+async function updateCartBadge(cartData = null) {
+    const badge = document.getElementById('cart-badge-count');
+    
+    if (!badge) return;
+
+    try {
+        let cart = cartData;
+
+        // Agar cart data missing hai toh backend se fetch karein
+        if (!cart) {
+            const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+            if (response.ok) {
+                cart = await response.json();
+            }
+        }
+
+        // Items count set karein
+        if (cart && cart.items && cart.items.length > 0) {
+            const totalItems = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+            badge.innerText = totalItems;
+        } else {
+            badge.innerText = '0';
+        }
+    } catch (error) {
+        console.error("Badge Update Error:", error);
+        badge.innerText = '0';
+    }
+}
+
+// --- ADD TO CART (Instant Badge Sync Without Reload) ---
+async function addToCart(productId, quantity = 1, event = null) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: GUEST_USER_ID,
+                productId: productId,
+                quantity: quantity
+            })
+        });
+
+        if (!response.ok) throw new Error("Product add nahi ho saka");
+
+        // Instant Badge Sync without page refresh
+        await updateCartBadge();
+
+        // Custom Event Trigger
+        window.dispatchEvent(new CustomEvent('cartUpdated'));
+
+    } catch (error) {
+        console.error("Add to Cart Error:", error);
+        alert("Product add karne mein dikkat aayi.");
+    }
+}
+
+// ==========================================
+// 2. DYNAMIC CART PAGE RENDER (Cart Page Only)
+// ==========================================
+async function renderDynamicCart() {
+    const cartContainer = document.getElementById('cartItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    // Agar cartContainer nahi hai (Matlab hum Cart Page par nahi hain)
+    if (!cartContainer) {
+        // Sirf Navbar Badge update karke return ho jayein
+        await updateCartBadge();
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart?userId=${GUEST_USER_ID}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const cart = await response.json();
+
+        // Update Badge
+        updateCartBadge(cart);
+
+        // Cart Khali Hone Par Handling
+        if (!cart.items || cart.items.length === 0) {
+            cartContainer.innerHTML = `
+                <div class="bg-white rounded-xl border p-10 text-center">
+                    <div class="text-5xl mb-4">🛒</div>
+                    <h2 class="text-xl font-bold text-gray-800">Your Cart is Empty</h2>
+                    <p class="text-gray-500 mt-2">Add some products to your cart.</p>
+                    <a href="index.html" class="inline-block mt-6 bg-[#FF0043] text-white px-6 py-3 rounded-lg font-semibold">
+                        Continue Shopping
+                    </a>
+                </div>
+            `;
+
+            if (subtotalEl) subtotalEl.innerText = '₹0';
+            if (grandTotalEl) grandTotalEl.innerText = '₹0';
+            return;
+        }
+
+        let subtotal = 0;
+
+        cartContainer.innerHTML = cart.items.map(item => {
+            const product = item.productId;
+            if (!product) return '';
+
+            const itemTotal = product.price * item.quantity;
+            subtotal += itemTotal;
+
+            return `
+                <div class="bg-white border rounded-xl p-4 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                        
+                        <!-- Product Info -->
+                        <div class="flex items-center gap-4">
+                            <img src="${product.image || 'https://via.placeholder.com/100'}" alt="${product.name || product.title}" class="w-24 h-24 object-cover rounded-lg">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900">${product.name || product.title}</h3>
+                                <p class="text-gray-500 text-sm mt-1">${product.category || 'General'}</p>
+                                <p class="text-[#FF0043] font-bold mt-2">₹${product.price}</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity + Action Controls -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center border rounded-lg overflow-hidden">
+                                <button type="button" onclick="updateQuantity('${product._id}', 'decrease')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 font-bold">−</button>
+                                <span class="px-4 py-2 font-semibold">${item.quantity}</span>
+                                <button type="button" onclick="updateQuantity('${product._id}', 'increase')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 font-bold">+</button>
+                            </div>
+
+                            <span class="font-bold text-gray-900 min-w-[80px] text-right">₹${itemTotal}</span>
+
+                            <button type="button" onclick="removeFromCart('${product._id}')" class="text-red-500 hover:text-red-700 text-xl" title="Remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+        if (grandTotalEl) grandTotalEl.innerText = `₹${subtotal}`;
+
+    } catch (error) {
+        console.error("Cart Error:", error);
+        if (cartContainer) {
+            cartContainer.innerHTML = `
+                <div class="text-center py-10 text-red-500">
+                    Cart load nahi ho pa raha hai.
+                </div>
+            `;
+        }
+    }
+}
+
+// --- QUANTITY UPDATE ---
+async function updateQuantity(productId, action) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/update`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: GUEST_USER_ID,
+                productId: productId,
+                action: action
+            })
+        });
+
+        if (!response.ok) throw new Error('Quantity update failed');
+
+        await renderDynamicCart();
+
+    } catch (error) {
+        console.error("Quantity Update Error:", error);
+    }
+}
+
+// --- REMOVE FROM CART ---
+async function removeFromCart(productId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/remove`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: GUEST_USER_ID,
+                productId: productId
+            })
+        });
+
+        if (!response.ok) throw new Error('Remove failed');
+
+        await renderDynamicCart();
+
+    } catch (error) {
+        console.error("Remove Item Error:", error);
+    }
+}
+
+// ==========================================
+// 3. INITIALIZATION & EVENT LISTENERS
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial Run for Badge and/or Cart UI
+    renderDynamicCart();
+});
+
+// Broadcaster sync for dynamic changes
+window.addEventListener('cartUpdated', () => {
+    renderDynamicCart();
+});
+
+
+
+
+const popularSwiper = new Swiper('.popularSwiper', {
+  slidesPerView: 1,      // Mobile Screen Par 1 Card
+  spaceBetween: 20,       // Cards ke beech ka gap
+  loop: true,
+  
+  // Navigation Arrows
+  navigation: {
+    nextEl: '.popular-next',
+    prevEl: '.popular-prev',
+  },
+
+  // Responsive Breakpoints
+  breakpoints: {
+    640: {
+      slidesPerView: 2,  // Small Screens (Tablet Portrait)
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 3,  // Medium Screens (Tablet Landscape)
+      spaceBetween: 24,
+    },
+    1024: {
+      slidesPerView: 4,  // Desktop (1 Line me 4 Cards)
+      spaceBetween: 24,
+    },
+  },
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const brandsSwiper = new Swiper('.brandsSwiper', {
+    // Ek time par kitne logos dikhane hain
+    slidesPerView: 2,
+    spaceBetween: 30,
+    loop: true, // Continuous loop
+    speed: 3000, // Smooth transition speed (milliseconds me)
+
+    // Left-to-Right autoplay configuration
+    autoplay: {
+      delay: 0, // Zero delay for continuous smooth motion
+      disableOnInteraction: false,
+      reverseDirection: true, // Left-to-Right scroll karne ke liye
+    },
+
+    // Custom Navigation Arrows
+    navigation: {
+      nextEl: '.brands-swiper-next',
+      prevEl: '.brands-swiper-prev',
+    },
+
+    // Responsive Breakpoints
+    breakpoints: {
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 50,
+      },
+    },
+  });
+});
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const latestProductsSection = document.querySelector('.latest_products');
+
+//   if (latestProductsSection) {
+//     latestProductsSection.addEventListener('click', (event) => {
+//       // Check karte hain ki click image-wrapper par ya uske andar kisi image par hua hai
+//       const wrapper = event.target.closest('.image-wrapper');
+      
+//       if (!wrapper) return; // Agar click wrapper par nahi hua toh return ho jao
+
+//       const frontImg = wrapper.querySelector('.front-img');
+//       const backImg = wrapper.querySelector('.back-img');
+
+//       if (frontImg && backImg) {
+//         // Toggle opacity classes
+//         frontImg.classList.toggle('opacity-100');
+//         frontImg.classList.toggle('opacity-0');
+        
+//         backImg.classList.toggle('opacity-0');
+//         backImg.classList.toggle('opacity-100');
+//       }
+//     });
+//   }
+// })
+
+
+function changeMainImage(clickedThumb) {
+    const mainImg = document.getElementById('main-product-img');
+    const thumbImg = clickedThumb.querySelector('img');
+
+    if (mainImg && thumbImg) {
+        // Main image ka src change karo
+        mainImg.src = thumbImg.src;
+
+        // Sabhi thumbnail buttons se active pink border hatao
+        const allThumbs = document.querySelectorAll('.thumb-btn');
+        allThumbs.forEach(btn => {
+            btn.classList.remove('border-[#ff0055]');
+            btn.classList.add('border-transparent');
+        });
+
+        // Current clicked thumbnail par active pink border lagao
+        clickedThumb.classList.remove('border-transparent');
+        clickedThumb.classList.add('border-[#ff0055]');
+    }
+}
+
+
+
+function switchTab(tabName) {
+  // 1. Sabhi content panes ko hide karo
+  const panes = document.querySelectorAll('.tab-pane');
+  panes.forEach(pane => pane.classList.add('hidden'));
+
+  // 2. Active tab content ko show karo
+  const activePane = document.getElementById(`content-${tabName}`);
+  if (activePane) {
+    activePane.classList.remove('hidden');
+  }
+
+  // 3. Sabhi tab buttons se active styles hatao
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
+    btn.classList.remove('text-[#ff0055]', 'border-[#ff0055]', 'font-semibold');
+    btn.classList.add('text-gray-700', 'border-transparent');
+  });
+
+  // 4. Clicked tab button par active pink styles apply karo
+  const activeBtn = document.getElementById(`tab-${tabName}`);
+  if (activeBtn) {
+    activeBtn.classList.remove('text-gray-700', 'border-transparent');
+    activeBtn.classList.add('text-[#ff0055]', 'border-[#ff0055]', 'font-semibold');
+  }
+}
 
