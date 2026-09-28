@@ -12,7 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body >
 
@@ -100,8 +99,8 @@
         </div>
       </div>
 
-      
-      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
+     
+      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">shop</a>
     </div>
 
 
@@ -206,7 +205,7 @@
 <!--Navbar Section End-->
 
 
-
+<!-- 
 
 <section class=" chekout_section max-w-7xl mx-auto px-4 py-8 sm:py-12">
     <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 pt-8 pb-8">Checkout Page</h1>
@@ -217,158 +216,75 @@
      
       <div class="left_section lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
         <h2 class="text-lg font-bold text-gray-900 mb-6 border-b pb-3">Shipping Details</h2>
-<div class="max-w-xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-sm p-6 md:p-8 my-6">
-  
 
-  <div class="border-b border-gray-200 pb-4 mb-6">
-    <h2 class="text-xl font-bold text-gray-900 tracking-tight">
-      Shipping Details
-    </h2>
-    <p class="text-xs text-gray-500 mt-1">
-      Order delivery ke liye apni details fill karein.
-    </p>
-  </div>
-
- <form id="shippingForm" class="space-y-4">
-
-
-  <div>
-    <label for="fullName" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-      Full Name *
-    </label>
-    <input
-      type="text"
-      id="fullName"
-      name="fullName"
-      placeholder="Enter your full name"
-      required
-      class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-    />
-  </div>
-
+        <form id="checkout-form" class="space-y-5">
  
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div>
-      <label for="shippingEmail" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-        Email Address *
-      </label>
-      <input
-        type="email"
-        id="shippingEmail"
-        name="shippingEmail"
-        placeholder="example@mail.com"
-        required
-        class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-      />
-    </div>
-    <div>
-      <label for="shippingPhone" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-        Phone Number *
-      </label>
-      <input
-        type="tel"
-        id="shippingPhone"
-        name="shippingPhone"
-        placeholder="+91 9876543210"
-        required
-        class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-      />
-    </div>
-  </div>
+          <div>
+            <label for="name" class="block text-xs font-semibold text-gray-600 mb-1">FULL NAME *</label>
+            <input type="text" id="name" required placeholder="John Doe" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+          </div>
 
+        
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="email" class="block text-xs font-semibold text-gray-600 mb-1">EMAIL ADDRESS *</label>
+              <input type="email" id="email" required placeholder="example@mail.com" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="phone" class="block text-xs font-semibold text-gray-600 mb-1">PHONE NUMBER *</label>
+              <input type="tel" id="phone" required placeholder="+91 9876543210" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+          </div>
 
-  <div>
-    <label for="shippingAddress" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-      Street Address *
-    </label>
-    <input
-      type="text"
-      id="shippingAddress"
-      name="shippingAddress"
-      placeholder="House No., Building Name, Area"
-      required
-      class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-    />
-  </div>
+   
+          <div>
+            <label for="address" class="block text-xs font-semibold text-gray-600 mb-1">STREET ADDRESS *</label>
+            <textarea id="address" rows="3" required placeholder="House No., Building Name, Street" class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:border-[#ff0055] transition-all resize-none"></textarea>
+          </div>
+
+   
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="city" class="block text-xs font-semibold text-gray-600 mb-1">CITY *</label>
+              <input type="text" id="city" required placeholder="Delhi" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="state" class="block text-xs font-semibold text-gray-600 mb-1">STATE *</label>
+              <input type="text" id="state" required placeholder="Delhi" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="pincode" class="block text-xs font-semibold text-gray-600 mb-1">PINCODE *</label>
+              <input type="text" id="pincode" required placeholder="110001" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+          </div>
+
+      
+          <div class="pt-4">
+            <h3 class="text-sm font-bold text-gray-900 mb-3">Payment Method</h3>
+            <div class="space-y-2">
+              <label class="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:border-[#ff0055] transition-all">
+                <input type="radio" name="payment" value="COD" checked class="accent-[#ff0055]">
+                <span class="text-sm font-medium text-gray-700">Cash on Delivery (COD)</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:border-[#ff0055] transition-all">
+                <input type="radio" name="payment" value="Online" class="accent-[#ff0055]">
+                <span class="text-sm font-medium text-gray-700">Online Payment / UPI / Card</span>
+              </label>
+            </div>
+          </div>
 
   
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div>
-      <label for="shippingCity" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-        City *
-      </label>
-      <input
-        type="text"
-        id="shippingCity"
-        name="shippingCity"
-        placeholder="City"
-        required
-        class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-      />
-    </div>
-    <div>
-      <label for="shippingState" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-        State *
-      </label>
-      <input
-        type="text"
-        id="shippingState"
-        name="shippingState"
-        placeholder="State"
-        required
-        class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-      />
-    </div>
-    <div>
-      <label for="shippingZip" class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-1.5">
-        Pincode *
-      </label>
-      <input
-        type="text"
-        id="shippingZip"
-        name="shippingZip"
-        placeholder="110001"
-        required
-        class="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#FF0043] focus:border-transparent transition bg-gray-50/50"
-      />
-    </div>
-  </div>
-
- 
-  <div class="pt-4">
-    <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">
-      Payment Method
-    </label>
-    <div class="space-y-2">
-      <label for="paymentCod" class="flex items-center p-3 border rounded-xl cursor-pointer hover:border-[#FF0043] transition bg-gray-50/30">
-        <input type="radio" id="paymentCod" name="payment" value="COD" checked class="accent-[#FF0043]">
-        <span class="ml-3 text-sm font-semibold text-gray-800">Cash on Delivery (COD)</span>
-      </label>
-      <label for="paymentOnline" class="flex items-center p-3 border rounded-xl cursor-pointer hover:border-[#FF0043] transition bg-gray-50/30">
-        <input type="radio" id="paymentOnline" name="payment" value="ONLINE" class="accent-[#FF0043]">
-        <span class="ml-3 text-sm font-semibold text-gray-800">Online Payment / UPI / Card</span>
-      </label>
-    </div>
-  </div>
-
-
-  <button
-    type="submit"
-    id="placeOrderBtn"
-    class="w-full mt-6 bg-[#FF0043] hover:bg-[#d90039] text-white font-bold py-3.5 rounded-xl shadow-md transition duration-200"
-  >
-    Place Order
-  </button>
-
-</form>
-</div>
-
-
+          <div class="pt-4">
+            <button type="submit" class="w-full bg-[#ff0055] hover:bg-[#e0004c] text-white font-bold py-3.5 rounded-xl transition-all shadow-md active:scale-98 cursor-pointer">
+              Place Order
+            </button>
+          </div>
+        </form>
       </div>
 
 
     
-      <!-- <div class="right_section lg:col-span-5">
+      <div class="right_section lg:col-span-5">
         <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-6">
           <h2 class="text-lg font-bold text-gray-900 mb-6 border-b pb-3">Order Summary</h2>
 
@@ -377,100 +293,38 @@
            
             <div class="flex items-center justify-between border-b pb-3">
               <div class="flex items-center space-x-3">
-                <!-- <img src="./assets/img/latest3.png" alt="Product" class="w-14 h-14 object-cover rounded-lg border"> -->
-                <!-- <div>
+                <img src="./assets/img/latest3.png" alt="Product" class="w-14 h-14 object-cover rounded-lg border">
+                <div>
                 
                 </div>
               </div>
-              <!-- <span class="text-sm font-bold text-gray-900">$29.99</span> -->
-          <!--   </div>
+              <span class="text-sm font-bold text-gray-900">$29.99</span>
+            </div>
           </div>
 
           
           <div class="space-y-3 pt-6 border-t mt-4 text-sm">
             <div class="flex justify-between text-gray-600">
               <span>Subtotal</span>
-              <!-- <span id="checkout-subtotal" class="font-semibold text-gray-800">$29.99</span> -->
-           <!--  </div>
+              <span id="checkout-subtotal" class="font-semibold text-gray-800">$29.99</span>
+            </div>
             <div class="flex justify-between text-gray-600">
-              <!-- <span>Shipping Charge</span>
-              <span class="font-semibold text-green-600">Free</span> -->
-        <!--     </div>
+              <span>Shipping Charge</span>
+              <span class="font-semibold text-green-600">Free</span>
+            </div>
             <div class="flex justify-between text-base font-bold text-gray-900 pt-3 border-t">
-              <!-- <span>Total Amount</span>
-              <span id="checkout-total" class="text-[#ff0055]">$29.99</span> -->
-          <!--   </div>
+              <span>Total Amount</span>
+              <span id="checkout-total" class="text-[#ff0055]">$29.99</span>
+            </div>
           </div>
 
         </div>
-      </div> -->
-
-
-
-
-
-<div class="right_section lg:col-span-5">
-  <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-6">
-    <h2 class="text-lg font-bold text-gray-900 mb-6 border-b pb-3">Order Summary</h2>
-
-    <!-- Dynamic Cart Items Container -->
-    <div id="checkout-cart-items" class="space-y-4 max-h-[320px] overflow-y-auto pr-1">
-      <!-- JavaScript se dynamic items yahan aayenge -->
-    </div>
-
-    <!-- Totals Section -->
-    <div class="space-y-3 pt-6 border-t mt-4 text-sm">
-      <div class="flex justify-between text-gray-600">
-        <span>Subtotal</span>
-        <span id="checkout-subtotal" class="font-semibold text-gray-800">₹0</span>
       </div>
-      <div class="flex justify-between text-gray-600">
-        <span>Shipping Charge</span>
-        <span class="font-semibold text-green-600">Free</span>
-      </div>
-      <div class="flex justify-between text-base font-bold text-gray-900 pt-3 border-t">
-        <span>Total Amount</span>
-        <span id="checkout-total" class="text-[#ff0055]">₹0</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
     </div>
   </section>
- 
-<div id="checkout-container" class="max-w-xl mx-auto my-10">
+ -->
 
-    <!-- STEP 1: CART / ADDRESS FORM -->
-    <div id="step-1">
-      <!-- Address & Customer Details Form -->
-    </div>
-
-    <!-- STEP 2: PAYMENT METHOD SELECTION -->
-    <div id="step-2" class="hidden">
-      <!-- COD ya Online Payment options -->
-    </div>
-
-    <!-- 👇 YAHAN PAR STEP 3 (SUCCESS SCREEN) ADD KAREIN 👇 -->
-    <div id="step-3" class="border p-5 rounded-lg shadow-md bg-gray-50 hidden">
-      <div class="text-center mb-4">
-        <h2 class="text-2xl font-bold text-green-600">Order Placed Successfully!</h2>
-        <!-- Order ID yahan display hogi -->
-        <p id="display-order-id" class="text-sm font-semibold text-gray-700 mt-1"></p>
-        <p class="text-xs text-gray-500">Aapka order receive ho gaya hai.</p>
-      </div>
-
-      <!-- Customer Details Summary -->
-      <div class="text-left mt-4 border-t pt-3">
-        <p class="text-sm"><strong>Name:</strong> <span id="summary-name"></span></p>
-        <p class="text-sm"><strong>Address:</strong> <span id="summary-address"></span></p>
-      </div>
-    </div>
-    <!-- 👆 👆 👆 -->
-
-  </div>
   <footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
 
   <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
@@ -647,7 +501,24 @@
   </div>
 </div>
 <!--Bottom Section End-->
+<!-- 
 
+<script>
+  async function loadDataFromDB() {
+    try {
+      const response = await fetch('http://localhost:5500/api/products'); // API endpoint ko apne backend ke hisaab se update karein
+      const data = await response.json();
+      
+      console.log("Database Data:", data); // Browser Console (F12) me data check karein
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  // Page load hone par call karein
+  loadDataFromDB();
+</script>
+<!-- ============================================== -->
   
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>

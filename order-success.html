@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Placed Successfully</title>
+
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6">
+
+  <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 max-w-lg w-full text-center">
+    
+    <!-- Success Icon -->
+    <div class="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-bold">
+      ✓
+    </div>
+
+    <h1 class="text-2xl font-bold text-gray-900 mb-1">Order Confirmed!</h1>
+    <p class="text-gray-600 text-sm mb-6">Aapka order successfully place ho gaya hai.</p>
+
+    <!-- Order ID Box -->
+    <div class="bg-gray-50 p-4 rounded-xl text-left text-sm mb-6 border border-gray-200/80">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">Order ID</p>
+          <p id="display-order-id" class="font-mono font-bold text-gray-800 break-all text-base mt-0.5">N/A</p>
+        </div>
+        <span id="payment-badge" class="px-2.5 py-1 text-xs font-bold bg-green-100 text-green-700 rounded-full">
+          COD
+        </span>
+      </div>
+    </div>
+
+    <!-- Shipping Details (If available) -->
+    <div id="shipping-details-box" class="hidden text-left bg-gray-50 p-4 rounded-xl border border-gray-200/80 text-xs text-gray-600 space-y-1 mb-6">
+      <p class="font-bold text-gray-800 text-sm mb-1">Shipping To:</p>
+      <p id="customer-name" class="font-medium text-gray-900"></p>
+      <p id="customer-address"></p>
+      <p id="customer-contact"></p>
+    </div>
+
+    <!-- Ordered Products List -->
+    <div class="text-left mb-6">
+      <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Order Details</h3>
+      <div id="order-items-container" class="space-y-3 max-h-60 overflow-y-auto pr-1 border-y border-gray-100 py-3">
+        <!-- Products JS se render honge -->
+      </div>
+    </div>
+
+    <!-- Total Breakdown -->
+    <div class="space-y-2 text-sm text-gray-600 border-b pb-6 mb-6">
+      <div class="flex justify-between">
+        <span>Subtotal</span>
+        <span id="summary-subtotal" class="font-semibold text-gray-800">₹0</span>
+      </div>
+      <div class="flex justify-between">
+        <span>Shipping</span>
+        <span class="font-semibold text-green-600">Free</span>
+      </div>
+      <div class="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-gray-100">
+        <span>Total Amount</span>
+        <span id="summary-total" class="text-[#ff0055]">₹0</span>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <a href="checkout.html" class="block w-full py-3.5 bg-[#ff0055] hover:bg-[#e0004c] text-white font-bold rounded-xl transition duration-200 text-center shadow-md">
+      Continue Shopping
+    </a>
+
+  </div>
+
+  <script>
+    // 1. Get Order ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderIdParam = urlParams.get('orderId');
+
+    // 2. Fetch Order Data from localStorage
+    const savedOrder = JSON.parse(localStorage.getItem('latestOrder')) || {};
+
+    // Display Order ID
+    const finalOrderId = orderIdParam || savedOrder.orderId || 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('display-order-id').textContent = finalOrderId;
+
+    // Display Payment Method Badge
+    if (savedOrder.paymentMethod) {
+      document.getElementById('payment-badge').textContent = savedOrder.paymentMethod;
+    }
+
+    // Display Customer Shipping Details
+    if (savedOrder.shipping) {
+      document.getElementById('shipping-details-box').classList.remove('hidden');
+      document.getElementById('customer-name').textContent = savedOrder.shipping.fullName || '';
+      document.getElementById('customer-address').textContent = `${savedOrder.shipping.address}, ${savedOrder.shipping.city}, ${savedOrder.shipping.state} - ${savedOrder.shipping.zip}`;
+      document.getElementById('customer-contact').textContent = `Phone: ${savedOrder.shipping.phone} | Email: ${savedOrder.shipping.email}`;
+    }
+
+    // Render Product Items
+    const itemsContainer = document.getElementById('order-items-container');
+    const items = savedOrder.items || JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (items.length > 0) {
+      itemsContainer.innerHTML = items.map(item => `
+        <div class="flex items-center justify-between gap-3 py-1">
+          <div class="flex items-center space-x-3 min-w-0">
+            <img src="${item.image || item.img || './assets/img/placeholder.png'}" alt="${item.title || item.name}" class="w-12 h-12 object-cover rounded-lg border border-gray-200 shrink-0">
+            <div class="min-w-0">
+              <h4 class="text-xs sm:text-sm font-semibold text-gray-800 truncate">${item.title || item.name}</h4>
+              <p class="text-xs text-gray-500">Qty: ${item.quantity || item.qty || 1}</p>
+            </div>
+          </div>
+          <span class="text-xs sm:text-sm font-bold text-gray-900 shrink-0">₹${((item.price || 0) * (item.quantity || item.qty || 1)).toLocaleString()}</span>
+        </div>
+      `).join('');
+
+      // Calculate or show Total
+      const subtotal = savedOrder.subtotal || items.reduce((sum, item) => sum + (item.price * (item.quantity || item.qty || 1)), 0);
+      document.getElementById('summary-subtotal').textContent = `₹${subtotal.toLocaleString()}`;
+      document.getElementById('summary-total').textContent = `₹${(savedOrder.total || subtotal).toLocaleString()}`;
+    } else {
+      itemsContainer.innerHTML = `<p class="text-xs text-gray-400 py-2 text-center">No item details found.</p>`;
+    }
+  </script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+</body>
+</html>
