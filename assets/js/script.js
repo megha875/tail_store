@@ -1571,63 +1571,6 @@ if (checkoutForm) {
 }
 
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const form = document.getElementById("shippingForm");
-
-//   if (!form) {
-//     console.error("shippingForm nahi mila! Check karein ki form id='shippingForm' sahi hai.");
-//     return;
-//   }
-
-//   form.addEventListener("submit", function (e) {
-//     e.preventDefault(); // Standard page reload ko rokne ke liye
-
-//     // 1. Input Values retrieve karein
-//     const fullName = document.getElementById("fullName") ? document.getElementById("fullName").value.trim() : "";
-//     const email = document.getElementById("shippingEmail") ? document.getElementById("shippingEmail").value.trim() : "";
-//     const phone = document.getElementById("shippingPhone") ? document.getElementById("shippingPhone").value.trim() : "";
-//     const address = document.getElementById("shippingAddress") ? document.getElementById("shippingAddress").value.trim() : "";
-//     const city = document.getElementById("shippingCity") ? document.getElementById("shippingCity").value.trim() : "";
-//     const state = document.getElementById("shippingState") ? document.getElementById("shippingState").value.trim() : "";
-//     const zip = document.getElementById("shippingZip") ? document.getElementById("shippingZip").value.trim() : "";
-
-//     // Payment Method Selected
-//     const paymentElement = document.querySelector('input[name="payment"]:checked');
-//     const paymentMethod = paymentElement ? paymentElement.value : "COD";
-
-//     // 2. LocalStorage se Cart items aur Total fetch karein
-//     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-
-//     // 3. Unique Order ID generate karein
-//     const generatedOrderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
-
-//     // 4. Full Order Data Object
-//     const orderDetails = {
-//       orderId: generatedOrderId,
-//       items: savedCart,
-//       shipping: {
-//         fullName: fullName,
-//         email: email,
-//         phone: phone,
-//         address: address,
-//         city: city,
-//         state: state,
-//         zip: zip
-//       },
-//       paymentMethod: paymentMethod,
-//       orderDate: new Date().toLocaleString()
-//     };
-
-//     // 5. Order Data ko LocalStorage me save karein
-//     localStorage.setItem("latestOrder", JSON.stringify(orderDetails));
-
-//     // 6. Cart Clear karein
-//     localStorage.removeItem("cart");
-
-//     // 7. Order Success Page par Redirect karein
-//     window.location.href = "order-success.html?orderId=" + generatedOrderId;
-//   });
-// });
 // Function to load Razorpay SDK dynamically
 function loadRazorpaySDK() {
     return new Promise((resolve, reject) => {
@@ -1697,3 +1640,118 @@ async function loadProducts() {
     console.error('Products load karne mein error:', error);
   }
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const checkoutForm = document.getElementById('checkoutForm');
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', async (e) => {
+      // 1. Page ko submit / reload hone se roko
+      e.preventDefault();
+
+      const orderPayload = {
+        userId: GUEST_USER_ID,
+        shippingDetails: {
+          fullName: document.getElementById('fullName')?.value || '',
+          email: document.getElementById('shippingEmail')?.value || '',
+          phone: document.getElementById('shippingPhone')?.value || '',
+          street: document.getElementById('streetAddress')?.value || '',
+          city: document.getElementById('city')?.value || '',
+          state: document.getElementById('state')?.value || '',
+          pincode: document.getElementById('pincode')?.value || ''
+        },
+        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value || 'COD'
+      };
+
+      try {
+        // 2. Data direct backend API route par bhejo
+        const response = await fetch(`${API_BASE_URL}/orders/create`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(orderPayload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert('Order successfully place ho gaya!');
+          window.location.href = 'order-success.html';
+        } else {
+          alert(data.message || 'Order save karne me dikkat aayi.');
+        }
+      } catch (error) {
+        console.error('Order Submit Error:', error);
+        alert('Server connection fail ho gaya!');
+      }
+    });
+  }
+});
+
+
+
+
+    // document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    //   // 1. URL me parameters add hone se rokega
+    //   e.preventDefault(); 
+
+    //   const email = document.getElementById('email').value;
+    //   const password = document.getElementById('password').value;
+
+    //   try {
+    //     // 2. Fetch/Axios se request body me POST data bhejein
+    //     const response = await fetch('/api/login', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ email, password })
+    //     });
+
+    //     const data = await response.json();
+    //     console.log(data);
+
+    //     if (data.success) {
+    //       alert('Login Successful!');
+    //       // Redirect to home page
+    //       window.location.href = '/index.html';
+    //     } else {
+    //       alert(data.message || 'Login failed!');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error during login:', error);
+    //     alert('Server Error. Please try again later.');
+    //   }
+    // });
+ // Wishlist Heart Icon Click Handler
+async function handleWishlistClick(productId) {
+  const token = localStorage.getItem('token');
+
+  // 1. Agar user logged in nahi hai, toh login.html par bhej do
+  if (!token) {
+    alert('Wishlist me add karne ke liye pehle Login karein!');
+    window.location.href = `login.html?redirectWishlist=${productId}`;
+    return;
+  }
+
+  // 2. Agar user logged in hai, toh backend API call karein
+  try {
+    const response = await fetch('/api/wishlist/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ productId })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert('Product Wishlist me add ho gaya!');
+    } else {
+      alert(data.message || 'Wishlist add karne me error aaya');
+    }
+  } catch (err) {
+    console.error('Error adding to wishlist:', err);
+    alert('Server connection error!');
+  }
+}
+

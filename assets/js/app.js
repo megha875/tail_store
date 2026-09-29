@@ -86,5 +86,61 @@ const wishlistRoutes = require('./routes/wishlistRoutes');
 
 // Mount the route
 app.use('/api/wishlist', wishlistRoutes);
+const express = require('express');
+const app = express();
+
+// 1. JSON Data Parse karne ke liye Middleware (Yeh zaroori hai)
+app.use(express.json());
+
+// 2. Login POST Route Endpoint
+app.post('/api/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Form Validation Check
+        if (!email || !password) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Email aur Password dono required hain!" 
+            });
+        }
+
+        // 3. Database se User find karein (Example: MongoDB/Mongoose User Model)
+        // const user = await User.findOne({ email });
+        
+        // Demo Check (Aap is jagah apna DB verification code use karein):
+        if (email === "test@gmail.com" && password === "123456") {
+            
+            // Success Response with Token and User ID
+            return res.status(200).json({
+                success: true,
+                message: "Login Successful!",
+                token: "jwt_token_sample_xyz123", // Real project me JWT token sign karke bhejte hain
+                userId: "usr_67890",
+                user: {
+                    id: "usr_67890",
+                    email: email,
+                    name: "Test User"
+                }
+            });
+        } else {
+            return res.status(401).json({
+                success: false,
+                message: "Invalid Email or Password!"
+            });
+        }
+
+    } catch (error) {
+        console.error("Login Server Error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+});
+
+
+
+
 
 

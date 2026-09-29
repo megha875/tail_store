@@ -86,3 +86,38 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
+document.addEventListener('DOMContentLoaded', async () => {
+  // URL se orderId get karein
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get('orderId');
+
+  if (!orderId) return;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/orders/${orderId}`);
+    if (response.ok) {
+      const order = await response.json();
+
+      // UI Elements update karein
+      document.getElementById('orderIdDisplay').innerText = order.orderId || order._id;
+      
+      // Items list render karein
+      const itemsContainer = document.getElementById('orderItemsList');
+      if (itemsContainer && order.items) {
+        itemsContainer.innerHTML = order.items.map(item => `
+          <div class="flex justify-between py-2 border-b">
+            <span>${item.productId.name || item.productId.title} (x${item.quantity})</span>
+            <span>₹${item.productId.price * item.quantity}</span>
+          </div>
+        `).join('');
+      }
+
+      // Subtotal aur Total update karein
+      if (document.getElementById('subtotal')) document.getElementById('subtotal').innerText = `₹${order.totalAmount}`;
+      if (document.getElementById('totalAmount')) document.getElementById('totalAmount').innerText = `₹${order.totalAmount}`;
+    }
+  } catch (error) {
+    console.error('Failed to load order details:', error);
+  }
+});
+

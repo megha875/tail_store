@@ -204,12 +204,12 @@
 <div class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
   <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
     
-    <!-- Login Form -->
+    
     <div class="bg-white p-8 sm:p-10 rounded-xl shadow-md border border-gray-100">
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Login</h2>
       
-      <form action="#" method="POST" class="space-y-4">
-        <!-- Email Input -->
+     <form class="space-y-4">
+        
         <div>
           <label for="login-email" class="block text-sm text-gray-700 mb-1">Email</label>
           <input 
@@ -221,7 +221,7 @@
           >
         </div>
 
-        <!-- Password Input -->
+    
         <div>
           <label for="login-password" class="block text-sm text-gray-700 mb-1">Password</label>
           <input 
@@ -233,7 +233,7 @@
           >
         </div>
 
-        <!-- Remember Me Checkbox -->
+  
         <div class="flex items-center pt-1">
           <input 
             type="checkbox" 
@@ -244,12 +244,12 @@
           <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember Me</label>
         </div>
 
-        <!-- Forgot Password Link -->
+    
         <div class="pt-1">
           <a href="#" class="text-sm font-normal text-[#ff0055] hover:underline">Forgot Password?</a>
         </div>
 
-        <!-- Login Button -->
+      
         <div class="pt-3">
           <button 
             type="submit" 
@@ -258,14 +258,14 @@
             Login
           </button>
         </div>
-      </form>
+      </form> 
     </div>
 
     <!-- Register Form -->
     <div class="bg-white p-8 sm:p-10 rounded-xl shadow-md border border-gray-100">
       <h2 class="text-2xl font-bold text-gray-900 mb-6">Register</h2>
       
-      <form action="#" method="POST" class="space-y-4">
+      <form class="space-y-4">
         <!-- Email Input -->
         <div>
           <label for="register-email" class="block text-sm text-gray-700 mb-1">Email</label>
@@ -278,7 +278,7 @@
           >
         </div>
 
-        <!-- Password Input -->
+     
         <div>
           <label for="register-password" class="block text-sm text-gray-700 mb-1">Password</label>
           <input 
@@ -604,6 +604,112 @@
   </div>
 </div>
 <!--Bottom Section End-->
+// auth.js — login + register form handling (replaces the old inline <script> in login.html)
+
+const AUTH_API = 'http://localhost:5500/api/auth';
+
+async function postJSON(url, payload) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json().catch(() => ({}));
+  return { ok: res.ok, data };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ---------- LOGIN ----------
+  const loginForm = document.getElementById('loginForm');
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // stops data from going into the URL
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      try {
+        const { ok, data } = await postJSON(`${AUTH_API}/login`, { email, password });
+
+        if (ok && data.success) {
+          localStorage.setItem('userToken', data.token);
+          localStorage.setItem('userId', data.user.id);
+          window.location.href = 'index.html';
+        } else {
+          alert(data.message || 'Login failed');
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        alert('Server se connect nahi ho pa raha hai.');
+      }
+    });
+  }
+
+  // ---------- REGISTER ----------
+  const registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('register-email').value.trim();
+      const password = document.getElementById('register-password').value;
+      const confirm = document.getElementById('confirm-password').value;
+
+      if (password !== confirm) {
+        alert('Password aur Confirm Password match nahi kar rahe.');
+        return;
+      }
+
+      try {
+        const { ok, data } = await postJSON(`${AUTH_API}/register`, { email, password });
+
+        if (ok && data.success) {
+          alert('Registration successful! Ab login karein.');
+          registerForm.reset();
+        } else {
+          alert(data.message || 'Registration failed');
+        }
+      } catch (err) {
+        console.error('Register error:', err);
+        alert('Server se connect nahi ho pa raha hai.');
+      }
+    });
+  }
+});
+</script>
+<script>
+ document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+
+      if (loginForm) {
+        loginForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+
+          try {
+            const response = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+              alert('Login Successful!');
+              window.location.href = '/index.html';
+            } else {
+              alert(data.message || 'Login failed');
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        });
+      }
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
 </body>
