@@ -15,5 +15,3 @@ app.post('/api/wishlist/toggle', async (req, res) => {
   await user.save();
   res.json({ success: true, isWishlisted: !exists });
 });
-
-

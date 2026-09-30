@@ -73,7 +73,3 @@ async function fetchProducts() {
 }
 
 document.addEventListener('DOMContentLoaded', fetchProducts);
-
-
-
-

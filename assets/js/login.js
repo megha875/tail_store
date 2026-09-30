@@ -73,3 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+
+// Login success handler code in login.js
+if (data.success) {
+    localStorage.setItem('userId', data.user._id || data.user.id);
+    localStorage.setItem('userToken', data.token);
+
+    // Redirect back to Home page
+    window.location.href = 'index.html';
+}
