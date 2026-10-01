@@ -1,5 +1,5 @@
 // Localhost port ko backend server ke port se match karein
-const API_BASE_URL = 'http://localhost:5000/api'; 
+const API_BASE_URL = 'http://localhost:5500/api'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const checkoutForm = document.getElementById('checkoutForm');

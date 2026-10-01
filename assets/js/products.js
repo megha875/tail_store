@@ -94,6 +94,8 @@ async function addToCart(productId, title, price, image, quantity = 1, event = n
         event.stopPropagation();
     }
 
+    const userId = localStorage.getItem('userId') || 'guest_user';
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingIndex = cart.findIndex(item => item.id === productId || item._id === productId);
 
@@ -106,11 +108,23 @@ async function addToCart(productId, title, price, image, quantity = 1, event = n
     localStorage.setItem("cart", JSON.stringify(cart));
 
     try {
-        await fetch('http://localhost:5500/api/cart/add', {
+        const res = await fetch('http://localhost:5500/api/cart/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId: 'guest_user', productId, quantity })
+            body: JSON.stringify({
+                userId,
+                productId,
+                quantity,
+                name: title,
+                image: image,
+                price: price
+            })
         });
+
+        const data = await res.json();
+        if (!res.ok) {
+            console.warn('Backend Cart Sync Warning:', data.message || 'Cart save failed');
+        }
     } catch (error) {
         console.warn("Backend Cart Sync Warning:", error);
     }

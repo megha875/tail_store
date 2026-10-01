@@ -15,7 +15,7 @@ async function renderDynamicCart() {
     try {
 
         const response = await fetch(
-            'http://localhost:5500/api/cart?userId=guest_user'
+            'http://localhost:5500/api/cart?userId=megha_user'
         );
 
         if (!response.ok) {
@@ -195,7 +195,7 @@ async function updateQuantity(productId, action) {
                 },
 
                 body: JSON.stringify({
-                    userId: 'guest_user',
+                    userId: 'megha_user',
                     productId: productId,
                     action: action
                 })
@@ -232,7 +232,7 @@ async function removeFromCart(productId) {
                 },
 
                 body: JSON.stringify({
-                    userId: 'guest_user',
+                    userId: 'megha_user',
                     productId: productId
                 })
             }

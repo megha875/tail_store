@@ -323,10 +323,19 @@ async function renderDynamicCart() {
 
 async function addToCart(productId) {
   try {
+    const userId = localStorage.getItem('userId') || 'guest_user';
+    const product = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]').find(item => String(item._id || item.id) === String(productId)) : null;
     const res = await fetch('http://localhost:5500/api/cart/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, quantity: 1, userId: 'guest_user' })
+      body: JSON.stringify({
+        productId,
+        quantity: 1,
+        userId,
+        name: product?.name || product?.title || 'Product',
+        image: product?.image || '',
+        price: Number(product?.price || 0)
+      })
     });
     const data = await res.json();
     alert(data.message || 'Product Cart me add ho gaya!');
@@ -337,10 +346,11 @@ async function addToCart(productId) {
 
 async function updateQuantity(productId, action) {
   try {
-    await fetch('http://localhost:5000/api/cart/update', {
+    const userId = localStorage.getItem('userId') || 'guest_user';
+    await fetch('http://localhost:5500/api/cart/update', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, action, userId: 'guest_user' })
+      body: JSON.stringify({ productId, action, userId })
     });
     renderDynamicCart();
   } catch (err) {
@@ -350,10 +360,11 @@ async function updateQuantity(productId, action) {
 
 async function removeFromCart(productId) {
   try {
-    await fetch('http://localhost:5000/api/cart/remove', {
+    const userId = localStorage.getItem('userId') || 'guest_user';
+    await fetch('http://localhost:5500/api/cart/remove', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, userId: 'guest_user' })
+      body: JSON.stringify({ productId, userId })
     });
     renderDynamicCart();
   } catch (err) {
@@ -398,44 +409,56 @@ function updateNavbarCartBadge() {
 }
 
 // 2. Add To Cart (Pure AJAX - Direct Dynamic Sync)
-function addToCart(productId, event) {
+async function addToCart(productId, event) {
     if (event) {
         event.preventDefault();
         event.stopPropagation();
     }
 
-    // Instant Local Badge Increment (+1 Without Reload)
-    const badge = document.getElementById('cart-badge-count');
-    if (badge) {
-        const currentCount = parseInt(badge.innerText) || 0;
-        badge.innerText = currentCount + 1;
-    }
+    const userId = localStorage.getItem('userId') || 'guest_user';
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5500/api/cart/add', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    try {
+        const productResponse = await fetch(`${API_BASE_URL}/products/${productId}`);
+        const product = productResponse.ok ? await productResponse.json() : null;
 
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            updateNavbarCartBadge(); // Database sync
-        } else {
-            alert("Product add nahi ho paya!");
-            updateNavbarCartBadge();
+        const badge = document.getElementById('cart-badge-count');
+        if (badge) {
+            const currentCount = parseInt(badge.innerText) || 0;
+            badge.innerText = currentCount + 1;
         }
-    };
 
-    xhr.onerror = function () {
-        updateNavbarCartBadge();
-    };
+        const payload = {
+            userId,
+            productId,
+            quantity: 1,
+            name: product?.name || product?.title || 'Product',
+            image: product?.image || '',
+            price: Number(product?.price || 0)
+        };
 
-    const data = JSON.stringify({
-        userId: 'guest_user',
-        productId: productId,
-        quantity: 1
-    });
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:5500/api/cart/add', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
-    xhr.send(data);
-    return false;
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                updateNavbarCartBadge();
+            } else {
+                alert("Product add nahi ho paya!");
+                updateNavbarCartBadge();
+            }
+        };
+
+        xhr.onerror = function () {
+            updateNavbarCartBadge();
+        };
+
+        xhr.send(JSON.stringify(payload));
+        return false;
+    } catch (error) {
+        console.error('Add to Cart Error:', error);
+        return false;
+    }
 }
 
 // 3. Remove From Cart (Pure AJAX - Instant '0' Badge Sync Without Refresh)
@@ -527,22 +550,26 @@ async function addToCart(productId, quantity = 1, event = null) {
     }
 
     try {
+        const userId = localStorage.getItem('userId') || GUEST_USER_ID;
+        const productResponse = await fetch(`${API_BASE_URL}/products/${productId}`);
+        const product = productResponse.ok ? await productResponse.json() : null;
+
         const response = await fetch(`${API_BASE_URL}/cart/add`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                userId: GUEST_USER_ID,
-                productId: productId,
-                quantity: quantity
+                userId,
+                productId,
+                quantity,
+                name: product?.name || product?.title || 'Product',
+                image: product?.image || '',
+                price: Number(product?.price || 0)
             })
         });
 
         if (!response.ok) throw new Error("Product add nahi ho saka");
 
-        // Instant Badge Sync without page refresh
         await updateCartBadge();
-
-        // Custom Event Trigger
         window.dispatchEvent(new CustomEvent('cartUpdated'));
 
     } catch (error) {
@@ -1755,11 +1782,50 @@ async function handleWishlistClick(productId) {
   }
 }
 
-document.getElementById('loginForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+// document.getElementById('loginForm').addEventListener('submit', function (e) {
+//   e.preventDefault();
 
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+//   const email = document.getElementById('email').value;
+//   const password = document.getElementById('password').value;
 
-  console.log('Form Submitted:', { email, password });
+//   console.log('Form Submitted:', { email, password });
+// });
+
+
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  // 1. Browser ke default form submit aur URL update hone ko rokega
+  e.preventDefault(); 
+
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  try {
+    // 2. Direct API endpoint par request bhejega
+   // '/api/login' ki jagah poora URL dein
+const response = await fetch('http://localhost:5500/api/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ email, password })
+});
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert('Login Successful!');
+      
+      // User ki details browser mein save karein
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Home page par redirect karein
+      window.location.href = '/index.html';
+    } else {
+      alert(data.message); // e.g., "Invalid Email ya Password!"
+    }
+  } catch (err) {
+    console.error('Login Error:', err);
+    alert('Server error! Please try again.');
+  }
 });

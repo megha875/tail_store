@@ -1827,6 +1827,7 @@
 //     return res.status(500).json({ success: false, message: err.message });
 //   }
 // });
+require('dotenv').config(); // Load environment variables
  const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -1844,7 +1845,9 @@ app.use(express.json());
 app.use(express.static(__dirname));
 
 // --- MONGO DB CONNECTION ---
-const MONGO_URI = 'mongodb+srv://meghaagarwal1255_db_user:meghaagakwz@cluster0.njjkys0.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0';
+// const MONGO_URI = 'mongodb+srv://meghaagarwal1255_db_user:meghaagakwz@cluster0.njjkys0.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=Cluster0';
+
+const MONGO_URI = process.env.MONGO_URI;  
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB Atlas Connected Successfully!'))
@@ -2254,5 +2257,4 @@ app.listen(PORT, () => {
 });
 
 
-
-
+app.use(express.urlencoded({ extended: true }));
