@@ -321,59 +321,107 @@ async function renderDynamicCart() {
 // 3. CART ACTIONS (ADD, UPDATE, DELETE)
 // ==========================================
 
-async function addToCart(productId) {
-  try {
-    const userId = localStorage.getItem('userId') || 'guest_user';
-    const product = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]').find(item => String(item._id || item.id) === String(productId)) : null;
-    const res = await fetch('http://localhost:5500/api/cart/add', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        productId,
-        quantity: 1,
-        userId,
-        name: product?.name || product?.title || 'Product',
-        image: product?.image || '',
-        price: Number(product?.price || 0)
-      })
-    });
-    const data = await res.json();
-    alert(data.message || 'Product Cart me add ho gaya!');
-  } catch (err) {
-    console.error('Add to Cart Error:', err);
-  }
+// async function addToCart(productId) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     const product = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]').find(item => String(item._id || item.id) === String(productId)) : null;
+//     const res = await fetch('http://localhost:5500/api/cart/add', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({
+//         productId,
+//         quantity: 1,
+//         userId,
+//         name: product?.name || product?.title || 'Product',
+//         image: product?.image || '',
+//         price: Number(product?.price || 0)
+//       })
+//     });
+//     const data = await res.json();
+//     alert(data.message || 'Product Cart me add ho gaya!');
+//   } catch (err) {
+//     console.error('Add to Cart Error:', err);
+//   }
+// }
+
+// async function updateQuantity(productId, action) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     await fetch('http://localhost:5500/api/cart/update', {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ productId, action, userId })
+//     });
+//     renderDynamicCart();
+//   } catch (err) {
+//     console.error("Quantity Update Error:", err);
+//   }
+// }
+
+// async function removeFromCart(productId) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     await fetch('http://localhost:5500/api/cart/remove', {
+//       method: 'DELETE',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ productId, userId })
+//     });
+//     renderDynamicCart();
+//   } catch (err) {
+//     console.error("Remove Item Error:", err);
+//   }
+// }
+
+
+// UPDATED REMOVE FROM CART FUNCTION
+async function removeFromCart(productId, event = null) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const token = localStorage.getItem("token") || localStorage.getItem("userToken");
+    const userId = localStorage.getItem("userId") || 'guest_user';
+
+    // 1. LocalStorage se product turant remove karein (UI Sync)
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+    } catch (e) {
+        cart = [];
+    }
+
+    cart = cart.filter(item => String(item.id || item._id) !== String(productId));
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // UI ko refresh karein
+    if (typeof renderCart === 'function') renderCart();
+    if (typeof renderCartPage === 'function') renderCartPage();
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+
+    // 2. Safe Backend API Request (Crash-Proof)
+    try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (token && token !== 'undefined' && token !== 'null') {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const res = await fetch('http://localhost:5500/api/cart/remove', {
+            method: 'DELETE', // Agar backend par POST route hai toh yahan 'POST' likhein
+            headers: headers,
+            body: JSON.stringify({ userId, productId })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+            console.warn('Backend Cart Remove Warning:', data.message || 'Cart remove failed on server');
+        } else {
+            console.log('Cart item removed successfully from backend');
+        }
+    } catch (error) {
+        console.warn("Backend server connection failed, item removed locally:", error);
+    }
 }
-
-async function updateQuantity(productId, action) {
-  try {
-    const userId = localStorage.getItem('userId') || 'guest_user';
-    await fetch('http://localhost:5500/api/cart/update', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, action, userId })
-    });
-    renderDynamicCart();
-  } catch (err) {
-    console.error("Quantity Update Error:", err);
-  }
-}
-
-async function removeFromCart(productId) {
-  try {
-    const userId = localStorage.getItem('userId') || 'guest_user';
-    await fetch('http://localhost:5500/api/cart/remove', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, userId })
-    });
-    renderDynamicCart();
-  } catch (err) {
-    console.error("Remove Item Error:", err);
-  }
-}
-
-
-
 
 // 1. Navbar Badge Update (Pure AJAX - No Page Refresh)
 function updateNavbarCartBadge() {
@@ -1239,22 +1287,48 @@ function initCheckoutEvents() {
   });
 
   // Login Button Click Handler
-  document.getElementById('btn-login')?.addEventListener('click', () => {
-    localStorage.setItem('userToken', 'dummy_secure_token_12345');
+  // document.getElementById('btn-login')?.addEventListener('click', () => {
+  //   localStorage.setItem('userToken', 'dummy_secure_token_12345');
 
-    const step2 = document.getElementById('step-2');
-    const stepAuth = document.getElementById('step-auth');
+  //   const step2 = document.getElementById('step-2');
+  //   const stepAuth = document.getElementById('step-auth');
 
-    if (stepAuth) {
-      stepAuth.classList.add('hidden');
-      stepAuth.classList.remove('flex');
-    }
+  //   if (stepAuth) {
+  //     stepAuth.classList.add('hidden');
+  //     stepAuth.classList.remove('flex');
+  //   }
 
-    if (step2) {
-      step2.classList.remove('hidden');
-      step2.classList.add('flex');
-    }
-  });
+  //   if (step2) {
+  //     step2.classList.remove('hidden');
+  //     step2.classList.add('flex');
+  //   }
+  // });
+
+
+
+  // Login Button Click Handler
+const loginBtn = document.getElementById('btn-login');
+
+if (loginBtn) {
+loginBtn.addEventListener('click', () => {
+localStorage.setItem('userToken', 'dummy_secure_token_12345');
+ 
+const step2 = document.getElementById('step-2');
+const stepAuth = document.getElementById('step-auth');
+
+if (stepAuth) {
+  stepAuth.classList.add('hidden');
+  stepAuth.classList.remove('flex');
+}
+
+if (step2) {
+  step2.classList.remove('hidden');
+  step2.classList.add('flex');
+} 
+
+});
+}
+
 
   // ==========================================
   // 3. FORM SUBMISSION & PAYMENT HANDLING
@@ -1793,39 +1867,79 @@ async function handleWishlistClick(productId) {
 
 
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  // 1. Browser ke default form submit aur URL update hone ko rokega
-  e.preventDefault(); 
+// document.getElementById('loginForm').addEventListener('submit', async (e) => {
+//   // 1. Browser ke default form submit aur URL update hone ko rokega
+//   e.preventDefault(); 
 
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
+//   const email = document.getElementById('loginEmail').value;
+//   const password = document.getElementById('loginPassword').value;
 
-  try {
-    // 2. Direct API endpoint par request bhejega
-   // '/api/login' ki jagah poora URL dein
-const response = await fetch('http://localhost:5500/api/login', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ email, password })
-});
+//   try {
+//     // 2. Direct API endpoint par request bhejega
+//     const response = await fetch('/api/login', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ email, password })
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    if (data.success) {
-      alert('Login Successful!');
+//     if (data.success) {
+//       alert('Login Successful!');
       
-      // User ki details browser mein save karein
-      localStorage.setItem('user', JSON.stringify(data.user));
+//       // User ki details browser mein save karein
+//       localStorage.setItem('user', JSON.stringify(data.user));
       
-      // Home page par redirect karein
-      window.location.href = '/index.html';
-    } else {
-      alert(data.message); // e.g., "Invalid Email ya Password!"
+//       // Home page par redirect karein
+//       window.location.href = '/index.html';
+//     } else {
+//       alert(data.message); // e.g., "Invalid Email ya Password!"
+//     }
+//   } catch (err) {
+//     console.error('Login Error:', err);
+//     alert('Server error! Please try again.');
+//   }
+// });
+
+
+const loginForm = document.getElementById('loginForm');
+
+if (loginForm) {
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail')?.value;
+    const password = document.getElementById('loginPassword')?.value;
+
+    if (!email || !password) {
+      alert('Please enter email and password');
+      return;
     }
-  } catch (err) {
-    console.error('Login Error:', err);
-    alert('Server error! Please try again.');
-  }
-});
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert('Login Successful!');
+
+        localStorage.setItem('user', JSON.stringify(data.user));
+        window.location.href = '/index.html';
+      } else {
+        alert(data.message || 'Invalid Email or Password!');
+      }
+    } catch (err) {
+      console.error('Login Error:', err);
+      alert('Server error! Please try again.');
+    }
+  });
+}

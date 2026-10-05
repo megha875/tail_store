@@ -88,6 +88,45 @@ async function loadProducts() {
 }
 
 // 2. ADD TO CART FUNCTION
+// async function addToCart(productId, title, price, image, quantity = 1, event = null) {
+//     if (event) {
+//         event.preventDefault();
+//         event.stopPropagation();
+//     }
+
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+
+//     let cart = JSON.parse(localStorage.getItem("cart")) || [];
+//     const existingIndex = cart.findIndex(item => item.id === productId || item._id === productId);
+
+//     if (existingIndex > -1) {
+//         cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + quantity;
+//     } else {
+//         cart.push({ id: productId, _id: productId, title, name: title, price, image, quantity });
+//     }
+
+//     localStorage.setItem("cart", JSON.stringify(cart));
+
+//     try {
+//         const res = await fetch('http://localhost:5500/api/cart/add', {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ userId, productId, quantity })
+//         });
+
+//         const data = await res.json();
+//         if (!res.ok) {
+//             console.warn('Backend Cart Sync Warning:', data.message || 'Cart save failed');
+//         }
+//     } catch (error) {
+//         console.warn("Backend Cart Sync Warning:", error);
+//     }
+
+//     if (typeof updateCartBadge === 'function') updateCartBadge();
+//     alert(`${title} cart me add ho gaya!`);
+// }
+
+
 async function addToCart(productId, title, price, image, quantity = 1, event = null) {
     if (event) {
         event.preventDefault();
@@ -95,41 +134,68 @@ async function addToCart(productId, title, price, image, quantity = 1, event = n
     }
 
     const userId = localStorage.getItem('userId') || 'guest_user';
+    const token = localStorage.getItem("token") || localStorage.getItem("userToken");
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingIndex = cart.findIndex(item => item.id === productId || item._id === productId);
+    // 1. LocalStorage update (Client side par instantly item save karein)
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+    } catch (e) {
+        cart = [];
+    }
+
+    const existingIndex = cart.findIndex(item => String(item.id || item._id) === String(productId));
 
     if (existingIndex > -1) {
-        cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + quantity;
+        cart[existingIndex].quantity = (Number(cart[existingIndex].quantity) || 1) + Number(quantity);
     } else {
-        cart.push({ id: productId, _id: productId, title, name: title, price, image, quantity });
+        cart.push({
+            id: productId,
+            _id: productId,
+            title: title,
+            name: title,
+            price: Number(price),
+            image: image,
+            quantity: Number(quantity)
+        });
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
 
+    // 2. Header Badge Counter Update
+    if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+    }
+
+    // 3. Backend API Sync (Complete Payload)
     try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (token && token !== 'undefined' && token !== 'null') {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
         const res = await fetch('http://localhost:5500/api/cart/add', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: headers,
             body: JSON.stringify({
                 userId,
                 productId,
-                quantity,
+                quantity: Number(quantity),
+                title: title,
                 name: title,
-                image: image,
-                price: price
+                price: Number(price),
+                image: image
             })
         });
 
         const data = await res.json();
         if (!res.ok) {
-            console.warn('Backend Cart Sync Warning:', data.message || 'Cart save failed');
+            console.log('Backend sync skipped:', data.message || 'Cart saved locally');
         }
     } catch (error) {
-        console.warn("Backend Cart Sync Warning:", error);
+        console.log("Backend offline, cart saved locally.");
     }
 
-    if (typeof updateCartBadge === 'function') updateCartBadge();
     alert(`${title} cart me add ho gaya!`);
 }
 
@@ -197,5 +263,31 @@ async function Wishlist(productId, event) {
             icon.classList.add('fa-regular');
         }
         alert("Wishlist update karne me problem aayi. Server log check karein.");
+    }
+}
+
+
+
+
+async function syncCartWithBackend(productId, title, price, image, quantity = 1) {
+    const userId = localStorage.getItem('userId') || 'guest_user';
+
+    try {
+        await fetch('http://localhost:5500/api/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                productId: productId,
+                title: title,
+                price: Number(price),
+                image: image,
+                quantity: Number(quantity)
+            })
+        });
+    } catch (error) {
+        console.log("Backend offline, cart saved locally.");
     }
 }
