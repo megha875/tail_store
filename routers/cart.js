@@ -3,14 +3,20 @@ const router = express.Router();
 const Cart = require('./models/Cart');
 
 // 1. Get Cart Data for User
-router.get('/api/cart/:userId', async (req, res) => {
-    try {
-        const { userId } = req.params;
-        const cart = await Cart.findOne({ userId });
-        res.json({ success: true, cart });
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
+// GET /api/cart/:userId
+router.get('/:userId', async (req, res) => {
+  try {
+    const cart = await Cart.findOne({ userId: req.params.userId })
+      .populate('items.productId'); // Isse productId ki jagah full Product object populate ho jayega
+
+    if (!cart) {
+      return res.status(404).json({ message: "Cart empty or not found" });
     }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 // 2. Plus/Minus (+1 / -1) Quantity Update Route
@@ -56,6 +62,41 @@ router.delete('/api/cart/remove', async (req, res) => {
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
+});
+
+// POST /api/cart/add
+router.post('/add', async (req, res) => {
+  const { userId, productId, quantity, title, price, image } = req.body;
+
+  try {
+    let cart = await Cart.findOne({ userId });
+
+    if (!cart) {
+      // Agar user ki cart nahi bani hui hai
+      cart = new Cart({
+        userId,
+        items: [{ productId, quantity, title, price, image }]
+      });
+    } else {
+      // Check karein product pehle se cart me hai ya nahi
+      const itemIndex = cart.items.findIndex(
+        (item) => item.productId.toString() === productId
+      );
+
+      if (itemIndex > -1) {
+        // Agar product pehle se cart me hai -> Purani functionality ki tarah bas quantity badhayein
+        cart.items[itemIndex].quantity += quantity;
+      } else {
+        // Agar naya product hai -> Naye details ke sath array me push karein
+        cart.items.push({ productId, quantity, title, price, image });
+      }
+    }
+
+    await cart.save();
+    res.status(200).json({ success: true, message: "Cart updated successfully", cart });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 module.exports = router;

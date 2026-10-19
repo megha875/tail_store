@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SEO Services</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal-900: #0b3d44;
+    --teal-700: #0f5a63;
+    --teal-500: #1b8591;
+    --mint: #8fe3d4;
+    --ink: #10222b;
+    --muted: #5b6b73;
+    --navy: #0a2447;
+  }
+  body { font-family: "Poppins", system-ui, sans-serif; color: var(--ink); background: #fff; }
+
+  .services { padding: 80px 0; }
+  .services__title { font-weight: 700; font-size: clamp(1.7rem, 3.2vw, 2.4rem); line-height: 1.25; }
+  .services__title mark {
+    background: linear-gradient(transparent 55%, #bfeef0 55%);
+    padding: 0 .25em; color: inherit;
+  }
+  .services__lead { max-width: 640px; color: var(--muted); font-size: .95rem; }
+
+  /* Card */
+  .svc-card {
+    position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+    height: 100%; min-height: 240px; padding: 1.5rem; overflow: hidden;
+    color: #fff; text-decoration: none; border-radius: 14px;
+    background: linear-gradient(150deg, var(--teal-500) 0%, var(--teal-700) 55%, var(--teal-900) 100%);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .svc-card:hover { color: #fff; transform: translateY(-6px); box-shadow: 0 16px 32px rgba(11, 61, 68, .28); }
+  .svc-card:focus-visible { outline: 3px solid var(--mint); outline-offset: 3px; }
+
+  /* big faint icon in the top-right, like the reference's illustration area */
+  .svc-card__bg-icon {
+    position: absolute; top: -10px; right: -6px;
+    font-size: 8.5rem; line-height: 1; color: rgba(255, 255, 255, .09);
+    transition: transform .35s ease, color .35s ease;
+  }
+  .svc-card:hover .svc-card__bg-icon { transform: scale(1.1) rotate(-6deg); color: rgba(143, 227, 212, .2); }
+
+  .svc-card__icon {
+    width: 52px; height: 52px; display: grid; place-items: center;
+    border-radius: 12px; background: rgba(255, 255, 255, .14);
+    font-size: 1.5rem; margin-bottom: auto; /* pushes text to bottom */
+    backdrop-filter: blur(2px);
+  }
+  .svc-card__title { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 .35rem; }
+  .svc-card__text { font-size: .85rem; color: rgba(255, 255, 255, .85); margin: 0; padding-right: 2.5rem; }
+
+  .svc-card__arrow {
+    position: absolute; right: 1.25rem; bottom: 1.25rem;
+    width: 34px; height: 34px; display: grid; place-items: center;
+    border-radius: 50%; border: 1px solid rgba(255, 255, 255, .5);
+    transition: background .25s ease, color .25s ease, transform .25s ease;
+  }
+  .svc-card:hover .svc-card__arrow { background: var(--mint); color: var(--teal-900); border-color: var(--mint); transform: translateX(4px); }
+
+  .btn-viewall {
+    background: var(--navy); color: #fff; font-weight: 500; font-size: .9rem;
+    padding: .65rem 2.2rem; border-radius: 8px; border: 0;
+  }
+  .btn-viewall:hover, .btn-viewall:focus-visible { background: #123a73; color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .svc-card, .svc-card * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<section class="services">
+  <div class="container">
+
+    <div class="text-center mx-auto mb-5">
+      <h2 class="services__title mb-3">
+        By <mark>ranking first on Google</mark><br>
+        and targeting your customers at every step
+      </h2>
+      <p class="services__lead mx-auto mb-0">
+        Wherever your customers are, your business shows up. Our SEO approach lifts your rankings across local, mobile, and voice search.
+      </p>
+    </div>
+
+    <div class="row g-3 g-lg-4">
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-phone svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-phone"></i></span>
+          <h3 class="svc-card__title">App Store SEO</h3>
+          <p class="svc-card__text">Get your mobile app to the top of the App Store and Play Store.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-cart3 svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-cart3"></i></span>
+          <h3 class="svc-card__title">Ecommerce SEO</h3>
+          <p class="svc-card__text">Attract more traffic with well-ranked, optimized product pages.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-globe-europe-africa svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-globe-europe-africa"></i></span>
+          <h3 class="svc-card__title">International SEO</h3>
+          <p class="svc-card__text">Stand out in every country and region you sell to.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-geo-alt svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-geo-alt"></i></span>
+          <h3 class="svc-card__title">Local SEO</h3>
+          <p class="svc-card__text">Put your business on the map for people searching nearby.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-phone-vibrate svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-phone-vibrate"></i></span>
+          <h3 class="svc-card__title">Mobile SEO</h3>
+          <p class="svc-card__text">Get found by high-converting mobile customers.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-translate svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-translate"></i></span>
+          <h3 class="svc-card__title">Multilingual SEO</h3>
+          <p class="svc-card__text">Improve your site's ranking in every language it supports.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-mic svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-mic"></i></span>
+          <h3 class="svc-card__title">Voice Search Optimization</h3>
+          <p class="svc-card__text">Optimize for spoken questions and long-tail keywords.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-wordpress svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-wordpress"></i></span>
+          <h3 class="svc-card__title">WordPress SEO</h3>
+          <p class="svc-card__text">Drive traffic and improve rankings with an optimized WordPress site.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <a href="#" class="svc-card">
+          <i class="bi bi-youtube svc-card__bg-icon"></i>
+          <span class="svc-card__icon"><i class="bi bi-youtube"></i></span>
+          <h3 class="svc-card__title">YouTube SEO</h3>
+          <p class="svc-card__text">Rank your videos higher on YouTube and Google search.</p>
+          <span class="svc-card__arrow"><i class="bi bi-chevron-right"></i></span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="#" class="btn btn-viewall">View all services</a>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

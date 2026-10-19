@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip Services Section</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    /* Section Styling */
+    .services-section {
+      background-color: #f4f7f6;
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-weight: 800;
+      color: #0c1b29;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      color: #555555;
+      max-width: 720px;
+      margin: 0 auto 50px auto;
+      font-size: 0.95rem;
+    }
+
+    /* Flip Card Container & 3D Effect */
+    .flip-card-container {
+      perspective: 1000px;
+      margin-bottom: 24px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      text-align: left;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Active flipped state */
+    .flip-card-container.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Front and Back common styling */
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    /* Front Card Styling */
+    .card-front {
+      background-color: #0b4f58; /* Dark teal background */
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Watermark Number */
+    .bg-number {
+      position: absolute;
+      top: 5px;
+      left: 15px;
+      font-size: 3.8rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.15);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* Card Image on Front */
+    .card-img-thumb {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 95px;
+      height: 75px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .front-content {
+      position: relative;
+      z-index: 2;
+      margin-top: 55px;
+    }
+
+    .front-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .front-desc {
+      font-size: 0.825rem;
+      color: #d1e7e9;
+      margin-bottom: 0;
+    }
+
+    .flip-hint {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      justify-content: flex-end;
+    }
+
+    /* Back Card Styling */
+    .card-back {
+      background-color: #072e34;
+      color: #ffffff;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #0b4f58;
+    }
+
+    .back-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #00d2c4;
+      margin-bottom: 8px;
+    }
+
+    .back-para {
+      font-size: 0.8rem;
+      color: #e0f2f1;
+      line-height: 1.45;
+    }
+
+    .btn-back {
+      font-size: 0.75rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+      padding: 4px 12px;
+      border-radius: 20px;
+      align-self: flex-start;
+      transition: background 0.2s;
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* View All Button */
+    .btn-custom-dark {
+      background-color: #0b1b28;
+      color: #ffffff;
+      padding: 10px 32px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-custom-dark:hover {
+      background-color: #050d14;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<section class="services-section">
+  <div class="container">
+    
+    <!-- Title -->
+    <div class="text-center">
+      <h2 class="section-title">By Ranking First on Google<br>And Targeting Your Customers at Every Step</h2>
+      <p class="section-subtitle">
+        Click any card to flip and read detailed information about our specialized SEO services.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="row">
+      
+      <!-- Card 01 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">01</div>
+              <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=300&q=80" alt="App Store SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">App Store SEO</h5>
+                <p class="front-desc">Make your mobile app appear on top of App Store and Play Store.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">App Store Optimization (ASO)</h6>
+                <p class="back-para">We optimize your app title, keywords, screenshots, and metadata to boost downloads, improve rankings on iOS App Store & Google Play Store, and drive higher organic conversions.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">02</div>
+              <img src="https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=300&q=80" alt="Ecommerce SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">Ecommerce SEO</h5>
+                <p class="front-desc">Attract more traffic with a well-ranked and optimized page.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Boost E-Commerce Sales</h6>
+                <p class="back-para">Optimize product categories, product descriptions, schema markup, and site architecture to drive high-intent shoppers straight to your online store and increase sales.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 03 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">03</div>
+              <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=300&q=80" alt="International SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">International SEO</h5>
+                <p class="front-desc">Stand out in your target location with SEO.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Global Search Reach</h6>
+                <p class="back-para">Expand your brand globally with geo-targeting, ccTLD strategies, hreflang implementation, and region-specific optimization for multi-country search engines.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 04 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">04</div>
+              <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=300&q=80" alt="Local SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">Local SEO</h5>
+                <p class="front-desc">Let users come one step closer to your business.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Dominate Local Market</h6>
+                <p class="back-para">Dominate local map packs, optimize Google Business Profile, gain local citations, and drive foot traffic directly to your physical stores and local service areas.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 05 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">05</div>
+              <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=300&q=80" alt="Mobile SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">Mobile SEO</h5>
+                <p class="front-desc">Get found by high-converting mobile customers.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Mobile-First Optimization</h6>
+                <p class="back-para">Ensure lightning-fast mobile load speeds, mobile-friendly responsive designs, and seamless user experiences tuned for Google's mobile-first indexing.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 06 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">06</div>
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300&q=80" alt="Multilingual SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">Multilingual SEO</h5>
+                <p class="front-desc">We improve your site's ranking in every language it supports.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Multi-Language Reach</h6>
+                <p class="back-para">Connect with audiences worldwide by optimizing content across multiple languages, avoiding duplicate content issues, and implementing proper canonicals.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 07 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">07</div>
+              <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=300&q=80" alt="Voice Search Optimization" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">Voice Search Optimization</h5>
+                <p class="front-desc">Optimize for voice queries and long-tail keywords.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Voice Assistant Ready</h6>
+                <p class="back-para">Target natural language queries and conversational keywords to feature on Siri, Google Assistant, and Alexa answer boxes for instant search exposure.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 08 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">08</div>
+              <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=300&q=80" alt="WordPress SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">WordPress SEO</h5>
+                <p class="front-desc">Drive traffic & enhance search ranking with optimized WordPress site.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">WordPress Performance</h6>
+                <p class="back-para">Speed up your WordPress site, configure SEO plugins (Yoast/RankMath), fix indexing errors, and structure content for optimal crawling efficiency.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 09 -->
+      <div class="col-md-4">
+        <div class="flip-card-container" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="card-front">
+              <div class="bg-number">09</div>
+              <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=300&q=80" alt="YouTube SEO" class="card-img-thumb">
+              <div class="front-content">
+                <h5 class="front-title">YouTube SEO</h5>
+                <p class="front-desc">Make your videos rank higher on YouTube and Google searches.</p>
+              </div>
+              <div class="flip-hint">
+                Click to read details <i class="fa-solid fa-rotate-right"></i>
+              </div>
+            </div>
+            <div class="card-back">
+              <div>
+                <h6 class="back-title">Video Search Ranking</h6>
+                <p class="back-para">Optimize video titles, descriptions, tags, custom thumbnails, and video transcripts to grow channel subscribers and rank on top of YouTube search.</p>
+              </div>
+              <button class="btn-back"><i class="fa-solid fa-arrow-left"></i> Go Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Button -->
+    <div class="text-center mt-4">
+      <a href="#" class="btn btn-custom-dark">View All Services</a>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

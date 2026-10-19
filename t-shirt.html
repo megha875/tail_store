@@ -93,7 +93,7 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
             <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
@@ -105,15 +105,30 @@
 
 
     <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+ 
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
       <!-- Outlined Register Button (Image Style) -->
-      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Register
       </a>
 
 
       <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Login
-      </a>
+      </a> -->
 
       <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -862,7 +877,7 @@
 //   });
 // });
 </script>
-
+<script src="./assets/js/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
 </body>

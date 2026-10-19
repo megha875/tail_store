@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services Section</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    /* Section Background */
+    .services-section {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+    }
+
+    /* Section Title Styling */
+    .section-title {
+      font-weight: 800;
+      color: #0b1a27;
+      margin-bottom: 12px;
+    }
+    
+    .section-subtitle {
+      color: #555555;
+      max-width: 700px;
+      margin: 0 auto 50px auto;
+      font-size: 0.95rem;
+    }
+
+    /* Service Card Custom Styling */
+    .service-card {
+      background-color: #0d5c63; /* Dark teal background */
+      border: none;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      background-color: #0a4b51;
+    }
+
+    /* Watermark Big Number */
+    .bg-number {
+      position: absolute;
+      top: 5px;
+      left: 15px;
+      font-size: 4rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.12);
+      line-height: 1;
+      user-select: none;
+    }
+
+    /* Illustrative Icon Container */
+    .card-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2.8rem;
+      color: rgba(255, 255, 255, 0.3);
+      transition: color 0.3s ease;
+    }
+
+    .service-card:hover .card-icon {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Card Content */
+    .card-body-content {
+      position: relative;
+      z-index: 2;
+      padding-top: 60px;
+    }
+
+    .card-title {
+      color: #ffffff;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      color: #d1e7e9;
+      font-size: 0.825rem;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+
+    /* Arrow Link Icon */
+    .card-arrow {
+      color: #ffffff;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .card-arrow {
+      transform: translateX(5px);
+    }
+
+    /* Custom Button */
+    .btn-custom-dark {
+      background-color: #0d2840;
+      color: #ffffff;
+      padding: 10px 32px;
+      font-weight: 600;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom-dark:hover {
+      background-color: #07192a;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+<section class="services-section">
+  <div class="container">
+    
+    <!-- Header Title Section -->
+    <div class="text-center">
+      <h2 class="section-title">By Ranking First on Google<br>And Targeting Your Customers at Every Step</h2>
+      <p class="section-subtitle">
+        No matter where they are, let it be authentic, yet omnipresent. As a leading <strong>SEO company</strong>, our unified approach is built to deliver high jumps in ranking.
+      </p>
+    </div>
+
+    <!-- 3x3 Grid Cards -->
+    <div class="row g-3">
+      
+      <!-- Card 01 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">01</div>
+          <div class="card-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">App Store SEO</h5>
+            <p class="card-text">Make your mobile app appear on top of App Store and Play Store.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 02 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">02</div>
+          <div class="card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">Ecommerce SEO</h5>
+            <p class="card-text">Attract more traffic with a well-ranked and optimized page.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 03 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">03</div>
+          <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">International SEO</h5>
+            <p class="card-text">Stand out in your target location with SEO.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 04 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">04</div>
+          <div class="card-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">Local SEO</h5>
+            <p class="card-text">Let users come one step closer to your business.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 05 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">05</div>
+          <div class="card-icon"><i class="fa-solid fa-mobile-retro"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">Mobile SEO</h5>
+            <p class="card-text">Get found by high-converting mobile customers.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 06 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">06</div>
+          <div class="card-icon"><i class="fa-solid fa-language"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">Multilingual SEO</h5>
+            <p class="card-text">We improve your site's ranking in every language it supports.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 07 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">07</div>
+          <div class="card-icon"><i class="fa-solid fa-microphone"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">Voice Search Optimization</h5>
+            <p class="card-text">Optimize for voice queries and long-tail keywords.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 08 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">08</div>
+          <div class="card-icon"><i class="fa-brands fa-wordpress"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">WordPress SEO</h5>
+            <p class="card-text">Drive traffic & enhance search ranking with optimized WordPress site.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 09 -->
+      <div class="col-md-4">
+        <div class="card service-card p-3">
+          <div class="bg-number">09</div>
+          <div class="card-icon"><i class="fa-brands fa-youtube"></i></div>
+          <div class="card-body-content">
+            <h5 class="card-title">YouTube SEO</h5>
+            <p class="card-text">Make your videos rank higher on YouTube and Google searches.</p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-chevron-right card-arrow"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Action Button -->
+    <div class="text-center mt-5">
+      <a href="#" class="btn btn-custom-dark">View All</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Bootstrap 5 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

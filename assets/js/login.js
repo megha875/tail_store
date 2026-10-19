@@ -43,102 +43,102 @@
 
 
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  // 1. Browser ke default URL submission ko rokne ke liye
-  e.preventDefault(); 
+// document.getElementById('loginForm').addEventListener('submit', async (e) => {
+//   // 1. Browser ke default URL submission ko rokne ke liye
+//   e.preventDefault(); 
 
-  const email = document.getElementById('loginEmail').value;
-  const password = document.getElementById('loginPassword').value;
+//   const email = document.getElementById('loginEmail').value;
+//   const password = document.getElementById('loginPassword').value;
 
-  try {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
+//   try {
+//     const response = await fetch('/api/login', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({ email, password })
+//     });
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    if (data.success) {
-      alert('Login Successful!');
-      // User details ko localStorage mein store karein
-      localStorage.setItem('user', JSON.stringify(data.user));
+//     if (data.success) {
+//       alert('Login Successful!');
+//       // User details ko localStorage mein store karein
+//       localStorage.setItem('user', JSON.stringify(data.user));
       
-      // Page redirect karein
-      window.location.href = '/index.html';
-    } else {
-      alert(data.message);
-    }
-  } catch (err) {
-    console.error('Error:', err);
-  }
-});
+//       // Page redirect karein
+//       window.location.href = '/index.html';
+//     } else {
+//       alert(data.message);
+//     }
+//   } catch (err) {
+//     console.error('Error:', err);
+//   }
+// });
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const loginForm = document.getElementById('loginForm');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const loginForm = document.getElementById('loginForm');
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', async function(e) {
-      e.preventDefault(); 
+//   if (loginForm) {
+//     loginForm.addEventListener('submit', async function(e) {
+//       e.preventDefault(); 
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+//       const email = document.getElementById('email').value;
+//       const password = document.getElementById('password').value;
 
-      try {
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+//       try {
+//         const response = await fetch('/api/login', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ email, password })
+//         });
 
-        const data = await response.json();
-        console.log(data);
+//         const data = await response.json();
+//         console.log(data);
 
-        if (data.success) {
-          alert('Login Successful!');
-          window.location.href = '/index.html';
-        } else {
-          alert(data.message || 'Login failed!');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    });
-  }
-});
-
-
-
-// Login success handler code in login.js
-if (data.success) {
-    localStorage.setItem('userId', data.user._id || data.user.id);
-    localStorage.setItem('userToken', data.token);
-
-    // Redirect back to Home page
-    window.location.href = 'index.html';
-}
+//         if (data.success) {
+//           alert('Login Successful!');
+//           window.location.href = '/index.html';
+//         } else {
+//           alert(data.message || 'Login failed!');
+//         }
+//       } catch (error) {
+//         console.error('Error:', error);
+//       }
+//     });
+//   }
+// });
 
 
-async function handleLogin(email, password) {
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  });
 
-  const data = await res.json();
+// // Login success handler code in login.js
+// if (data.success) {
+//     localStorage.setItem('userId', data.user._id || data.user.id);
+//     localStorage.setItem('userToken', data.token);
 
-  if (data.success) {
-    // 1. User ID ko LocalStorage me save karein
-    localStorage.setItem('userId', data.userId);
-    localStorage.setItem('user', JSON.stringify(data.user));
+//     // Redirect back to Home page
+//     window.location.href = 'index.html';
+// }
 
-    // 2. Login hote hi uss user ki wishlist refresh / fetch karein
-    fetchUserWishlist(data.userId);
-  }
-}
+
+// async function handleLogin(email, password) {
+//   const res = await fetch('/api/login', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({ email, password })
+//   });
+
+//   const data = await res.json();
+
+//   if (data.success) {
+//     // 1. User ID ko LocalStorage me save karein
+//     localStorage.setItem('userId', data.userId);
+//     localStorage.setItem('user', JSON.stringify(data.user));
+
+//     // 2. Login hote hi uss user ki wishlist refresh / fetch karein
+//     fetchUserWishlist(data.userId);
+//   }
+// }
 
 

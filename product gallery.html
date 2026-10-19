@@ -93,7 +93,7 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
             <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
@@ -105,15 +105,30 @@
 
 
     <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+ 
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
       <!-- Outlined Register Button (Image Style) -->
-      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Register
       </a>
 
 
       <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Login
-      </a>
+      </a> -->
 
       <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,6 +226,9 @@
 <!-- Grid Parent Container -->
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
   <!-- Dynamic cards append honge -->
+</div>
+<div class="gallery-container" id="galleryGrid">
+  <!-- Backend se data aane ke baad yahan items dynamically inject honge -->
 </div>
 <!--Gallery Banner Section Start-->
 
@@ -387,7 +405,7 @@
 
    <div class=" slider section max-w-7xl mx-auto  pt-6 py-6">
     <div class="text-center mb-10">
-      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl ">Galery Products</h2>
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl ">Gallery Products</h2>
       <p class="mt-2 text-sm text-gray-600   py-4">Explore our latest collection</p>
     </div>
 
@@ -918,7 +936,210 @@ const productsData = [
 </script>
 
 
+
+
+
+<script>
+        function goToDetail(id) {
+            window.location.href = `/product-detail.html?id=${id}`;
+        }
+
+        fetch('/api/products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('product-container');
+                if (!container) return;
+                
+                container.innerHTML = '';
+
+                products.forEach((product, index) => {
+                    const cardHTML = `
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+                            
+                            <!-- Image click event -->
+                            <div onclick="goToDetail('${product._id}')" class="image-wrapper cursor-pointer relative">
+                                <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                                    NEW
+                                </span>
+
+                                <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                                <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                                    <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                        <i class="fa-regular fa-heart text-base"></i>
+                                    </button>
+
+                                    <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                        <i class="fa-solid fa-share-nodes text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Title click event -->
+                            <h3 onclick="goToDetail('${product._id}')" class="text-lg font-bold text-gray-800 cursor-pointer mb-1 hover:text-blue-600">
+                                ${product.title}
+                            </h3>
+
+                            <p class="text-gray-500 text-sm mb-3">
+                                ${product.category}
+                            </p>
+
+                            <div class="amount_part flex flex-col gap-2">
+                                <span class="text-blue-600 font-bold text-xl">
+                                    ₹${product.price}
+                                </span>
+
+                                <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    container.insertAdjacentHTML('beforeend', cardHTML);
+                });
+            })
+            .catch(err => console.error('Error fetching products:', err));
+    </script>
+ <script src="./assets/js/main.js"></script>
+   
+
+<script src="./assets/js/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+<script src="./assets/js/wishlist-client.js"></script>
+<script src="./assets/js/share-client.js"></script>
+<script>
+  (() => {
+    const form = document.getElementById('gallery-video-form');
+    const fileInput = document.getElementById('gallery-video-file');
+    const titleInput = document.getElementById('gallery-video-title');
+    const submitButton = document.getElementById('gallery-video-submit');
+    const status = document.getElementById('gallery-video-status');
+    const videoList = document.getElementById('gallery-video-list');
+    const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    const apiBaseUrl = isLocalHost
+      ? `http://${window.location.hostname || '127.0.0.1'}:5501`
+      : window.location.origin;
+
+    function makeVideoCard(video) {
+      const card = document.createElement('article');
+      card.className = 'group relative h-72 overflow-hidden border border-[#e5d8c2] bg-[#e7dcc8] shadow-sm sm:h-80';
+
+      const player = document.createElement('video');
+      player.className = 'h-full w-full object-cover';
+      player.controls = true;
+      player.preload = 'metadata';
+      player.autoplay = true;
+      player.muted = true;
+      player.loop = true;
+      player.playsInline = true;
+      player.src = `${apiBaseUrl}${video.url}`;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent';
+      const details = document.createElement('div');
+      details.className = 'pointer-events-none absolute bottom-0 left-0 p-5 text-white';
+      const title = document.createElement('h3');
+      title.className = 'truncate text-xl font-bold';
+      title.textContent = video.title || video.filename;
+      details.appendChild(title);
+      card.append(player, overlay, details);
+      return card;
+    }
+
+    async function loadGalleryVideos() {
+      videoList.replaceChildren();
+      const loading = document.createElement('p');
+      loading.className = 'text-sm text-gray-500';
+      loading.textContent = 'Loading videos...';
+      videoList.appendChild(loading);
+
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/gallery/videos`);
+        const responseText = await response.text();
+        let videos;
+        try {
+          videos = responseText ? JSON.parse(responseText) : [];
+        } catch {
+          throw new Error(`Video API returned an invalid response (HTTP ${response.status}). Restart the backend after updating server.js.`);
+        }
+        if (!response.ok) throw new Error(videos.message || `Could not load videos (HTTP ${response.status}).`);
+        if (!Array.isArray(videos)) throw new Error('The gallery returned an invalid video list.');
+
+        videoList.replaceChildren();
+        if (videos.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'col-span-full border border-dashed border-[#cdbb9e] bg-white/60 px-5 py-10 text-center text-sm text-[#62584d]';
+          empty.textContent = 'No videos have been uploaded yet. Choose a fashion video below to add one.';
+          videoList.appendChild(empty);
+          return;
+        }
+        videos.forEach(video => videoList.appendChild(makeVideoCard(video)));
+      } catch (error) {
+        console.error('Gallery videos could not be loaded:', error);
+        videoList.replaceChildren();
+        const message = document.createElement('p');
+        message.className = 'text-sm text-red-600';
+        message.textContent = error.message || 'Could not load gallery videos. Check that the backend is running.';
+        videoList.appendChild(message);
+      }
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) {
+        status.textContent = 'Please choose a video file first.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+      if (!file.type.startsWith('video/')) {
+        status.textContent = 'Please choose a valid video file.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+      if (file.size > 100 * 1024 * 1024) {
+        status.textContent = 'The selected video is larger than 100 MB.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+
+      submitButton.disabled = true;
+      status.textContent = 'Uploading video to MongoDB...';
+      status.className = 'text-sm text-gray-500';
+
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/gallery/videos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-Video-Content-Type': file.type,
+            'X-Video-Filename': encodeURIComponent(file.name),
+            'X-Video-Title': encodeURIComponent(titleInput.value.trim())
+          },
+          body: file
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || `Upload failed (HTTP ${response.status}).`);
+
+        status.textContent = 'Video uploaded and saved to MongoDB successfully.';
+        status.className = 'text-sm font-semibold text-green-700';
+        form.reset();
+        await loadGalleryVideos();
+      } catch (error) {
+        console.error('Gallery video upload failed:', error);
+        status.textContent = error.message || 'Video upload failed. Please check the backend and try again.';
+        status.className = 'text-sm font-semibold text-red-600';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    document.getElementById('gallery-video-refresh').addEventListener('click', loadGalleryVideos);
+    loadGalleryVideos();
+  })();
+</script>
 </body>
 </html>

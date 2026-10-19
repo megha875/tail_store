@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Services - Modern Hybrid Grid</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(18, 26, 43, 0.85);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --neon-mint: #00ffa3;
+            --accent-cyan: #00e5ff;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --drawer-bg: #0d1424;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Background Element */
+        .ambient-bg {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 255, 163, 0.12) 0%, rgba(0, 229, 255, 0.05) 50%, rgba(0, 0, 0, 0) 70%);
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .services-section {
+            position: relative;
+            padding: 90px 0;
+            z-index: 1;
+        }
+
+        /* Section Header */
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 30px;
+            background: rgba(0, 255, 163, 0.08);
+            border: 1px solid rgba(0, 255, 163, 0.3);
+            color: var(--neon-mint);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .main-heading {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: #ffffff;
+        }
+
+        .main-heading span {
+            background: linear-gradient(135deg, var(--neon-mint) 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtext {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 650px;
+            margin: 15px auto 60px auto;
+        }
+
+        /* Service Cards Grid System */
+        .service-card {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            padding: 28px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+        }
+
+        /* Subtle Background Artwork on Card */
+        .card-bg-art {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.06;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            filter: grayscale(100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .service-card:hover .card-bg-art {
+            opacity: 0.18;
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        /* Card Header Elements */
+        .card-top {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .icon-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--neon-mint);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .icon-box {
+            background: var(--neon-mint);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 255, 163, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .num-pill {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.08);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Card Content */
+        .card-body-content {
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .card-title {
+            color: var(--neon-mint);
+        }
+
+        .card-description {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Card Footer Action */
+        .card-footer-action {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.825rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .action-arrow {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .action-arrow {
+            background: var(--neon-mint);
+            color: var(--bg-dark);
+            transform: translateX(5px);
+        }
+
+        /* Hover Border Glow Effect */
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 163, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 255, 163, 0.12);
+        }
+
+        /* Slide-Over Drawer Custom Styling (Offcanvas) */
+        .offcanvas-custom {
+            background-color: var(--drawer-bg) !important;
+            color: var(--text-main);
+            border-left: 1px solid rgba(0, 255, 163, 0.2) !important;
+            width: 500px !important;
+            max-width: 90vw !important;
+        }
+
+        .offcanvas-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 24px 30px;
+        }
+
+        .btn-close-custom {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-close-custom:hover {
+            background: var(--neon-mint);
+            color: var(--bg-dark);
+        }
+
+        .drawer-img-box {
+            position: relative;
+            height: 220px;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .drawer-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drawer-price-tag {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--neon-mint);
+            color: var(--neon-mint);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .feature-icon {
+            color: var(--neon-mint);
+            margin-top: 3px;
+        }
+
+        .btn-drawer-cta {
+            background: linear-gradient(135deg, var(--neon-mint) 0%, var(--accent-cyan) 100%);
+            color: var(--bg-dark);
+            font-weight: 800;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 255, 163, 0.25);
+        }
+
+        .btn-drawer-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 255, 163, 0.4);
+            color: var(--bg-dark);
+        }
+
+        /* Bottom View All CTA */
+        .btn-outline-glow {
+            border: 1px solid var(--neon-mint);
+            color: var(--neon-mint);
+            padding: 12px 36px;
+            border-radius: 30px;
+            font-weight: 700;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-glow:hover {
+            background: var(--neon-mint);
+            color: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(0, 255, 163, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-bg"></div>
+
+    <section class="services-section">
+        <div class="container">
+            
+            <!-- Section Title Header -->
+            <div class="text-center">
+                <div class="section-badge"><i class="fa-solid fa-rocket"></i> Elite SEO Solutions</div>
+                <h2 class="main-heading">Rank First on Search Engines<br><span>Convert High-Intent Customers</span></h2>
+                <p class="section-subtext">Click any service module to explore deep technical capabilities, features, and tailored growth frameworks.</p>
+            </div>
+
+            <!-- 3x3 Grid Matrix -->
+            <div class="row g-4 mt-2">
+                
+                <!-- Service 01 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('app-store-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                            <span class="num-pill">01</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">App Store SEO</h3>
+                            <p class="card-description">Position your mobile applications at the peak of Apple App Store & Google Play organic rankings.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 02 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('ecommerce-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-cart-shopping"></i></div>
+                            <span class="num-pill">02</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">Ecommerce SEO</h3>
+                            <p class="card-description">Scale storefront revenue through schema markup, catalog architecture, and product keyword optimization.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 03 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('international-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-globe"></i></div>
+                            <span class="num-pill">03</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">International SEO</h3>
+                            <p class="card-description">Expand brand footprint globally with geo-targeting, ccTLD setups, and hreflang tag alignment.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 04 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('local-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                            <span class="num-pill">04</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">Local SEO</h3>
+                            <p class="card-description">Dominate Google Map 3-Packs and convert nearby active consumers looking for your services.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 05 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('mobile-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-mobile-retro"></i></div>
+                            <span class="num-pill">05</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">Mobile SEO</h3>
+                            <p class="card-description">Maximize Core Web Vitals and user experience built specifically for Google’s Mobile-First Indexing.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 06 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('multilingual-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-language"></i></div>
+                            <span class="num-pill">06</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">Multilingual SEO</h3>
+                            <p class="card-description">Reach multi-regional markets in their native language with precise canonical and localized search strategies.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 07 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('voice-search')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-solid fa-microphone"></i></div>
+                            <span class="num-pill">07</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">Voice Search Optimization</h3>
+                            <p class="card-description">Capture long-tail conversational speech queries across Siri, Alexa, and Google Voice Assistant.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 08 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('wordpress-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-brands fa-wordpress"></i></div>
+                            <span class="num-pill">08</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">WordPress SEO</h3>
+                            <p class="card-description">Optimize database queries, site speeds, Yoast/RankMath settings, and content structures on WordPress.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 09 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card" onclick="openDrawer('youtube-seo')">
+                        <div class="card-bg-art" style="background-image: url('https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80');"></div>
+                        <div class="card-top">
+                            <div class="icon-box"><i class="fa-brands fa-youtube"></i></div>
+                            <span class="num-pill">09</span>
+                        </div>
+                        <div class="card-body-content">
+                            <h3 class="card-title">YouTube SEO</h3>
+                            <p class="card-description">Dominate video search rankings, maximize watch time, and turn video views into direct channel growth.</p>
+                        </div>
+                        <div class="card-footer-action">
+                            <span>Explore Framework</span>
+                            <div class="action-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Section Bottom CTA -->
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-glow">View All Growth Packages <i class="fa-solid fa-arrow-right ms-2"></i></button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Slide-Over Drawer Side Panel (Offcanvas) -->
+    <div class="offcanvas offcanvas-end offcanvas-custom" tabindex="-1" id="serviceDrawer">
+        <div class="offcanvas-header">
+            <div class="d-flex align-items-center gap-3">
+                <div class="icon-box" id="drawerIcon" style="width: 44px; height: 44px; font-size: 1.2rem;"></div>
+                <div>
+                    <span class="num-pill" id="drawerNum">01</span>
+                    <h5 class="offcanvas-title fw-bold text-white mt-1" id="drawerTitle">Service Title</h5>
+                </div>
+            </div>
+            <button type="button" class="btn-close-custom" data-bs-dismiss="offcanvas"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="offcanvas-body p-4">
+            
+            <div class="drawer-img-box">
+                <img id="drawerImg" src="" alt="Service Showcase">
+                <div class="drawer-price-tag" id="drawerPrice">Starting $499/mo</div>
+            </div>
+
+            <p class="text-light fs-6 mb-4" id="drawerDesc">Service description goes here.</p>
+
+            <h6 class="text-uppercase text-muted fw-bold fs-7 mb-3" style="letter-spacing: 1px;">Key Service Deliverables</h6>
+
+            <div id="drawerFeaturesList" class="mb-4">
+                <!-- Dynamic feature bullets generated here -->
+            </div>
+
+            <div class="mt- auto pt-3">
+                <button class="btn btn-drawer-cta"><i class="fa-solid fa-bolt"></i> Request Strategy Proposal</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Data Store for dynamic Slide-Over Drawer content
+        const servicesData = {
+            'app-store-seo': {
+                num: '01',
+                icon: 'fa-solid fa-mobile-screen-button',
+                title: 'App Store SEO (ASO)',
+                img: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80',
+                price: 'Custom / Project',
+                desc: 'Comprehensive App Store Optimization (ASO) designed to scale organic app installs on Apple App Store and Google Play.',
+                features: [
+                    'App title, subtitle, and keyword field optimization',
+                    'A/B testing screenshot visuals and app preview videos',
+                    'Localization across 25+ global app marketplaces',
+                    'Review velocity & star rating management framework'
+                ]
+            },
+            'ecommerce-seo': {
+                num: '02',
+                icon: 'fa-solid fa-cart-shopping',
+                title: 'Ecommerce SEO Growth',
+                img: 'https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=600&q=80',
+                price: '$799 / month',
+                desc: 'Drive high-intent online buyers straight to your product pages with specialized e-commerce search architecture.',
+                features: [
+                    'Product schema & rich snippet markup implementation',
+                    'Internal linking & faceted navigation fix',
+                    'Conversion rate optimization for category pages',
+                    'Shopify, WooCommerce & Magento technical audits'
+                ]
+            },
+            'international-seo': {
+                num: '03',
+                icon: 'fa-solid fa-globe',
+                title: 'International SEO Strategy',
+                img: 'https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80',
+                price: '$1,200 / month',
+                desc: 'Unlock new global markets with geo-targeted search campaigns tailored to specific countries and regional platforms.',
+                features: [
+                    'Hreflang language tag implementation & validation',
+                    'ccTLD vs Subdirectory strategy setup',
+                    'Global backlink profile acquisition',
+                    'Region-specific keyword intent analysis'
+                ]
+            },
+            'local-seo': {
+                num: '04',
+                icon: 'fa-solid fa-location-dot',
+                title: 'Local SEO & Map Pack',
+                img: 'https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=600&q=80',
+                price: '$399 / month',
+                desc: 'Capture nearby customer searches and rank in the top Google Maps 3-Pack for high-converting localized searches.',
+                features: [
+                    'Google Business Profile (GBP) full optimization',
+                    'Local NAP citation building & cleanup',
+                    'Geo-tagged photo uploads and review acquisition',
+                    'Local landing page optimization'
+                ]
+            },
+            'mobile-seo': {
+                num: '05',
+                icon: 'fa-solid fa-mobile-retro',
+                title: 'Mobile SEO & Speed',
+                img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80',
+                price: '$499 / month',
+                desc: 'Prepare your website for Google’s Mobile-First indexing with speed acceleration and responsive UX tuning.',
+                features: [
+                    'Core Web Vitals (LCP, INP, CLS) optimization',
+                    'Mobile viewport and tap target fixes',
+                    'Accelerated Mobile Pages (AMP) assessment',
+                    'Touch UX conversion funnels'
+                ]
+            },
+            'multilingual-seo': {
+                num: '06',
+                icon: 'fa-solid fa-language',
+                title: 'Multilingual SEO',
+                img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80',
+                price: '$899 / month',
+                desc: 'Engage non-English speaking demographics seamlessly with native translation SEO frameworks.',
+                features: [
+                    'Multi-language indexation monitoring',
+                    'Native keyword translation (not auto-translate)',
+                    'Canonical tag structure for localized versions',
+                    'Cross-language content mapping'
+                ]
+            },
+            'voice-search': {
+                num: '07',
+                icon: 'fa-solid fa-microphone',
+                title: 'Voice Search Optimization',
+                img: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80',
+                price: '$450 / month',
+                desc: 'Structure your site data to earn featured snippets and answer voice queries on Siri, Alexa & Google Home.',
+                features: [
+                    'Conversational speech keyword targeting',
+                    'FAQ Schema structured data implementation',
+                    'Featured Snippet position zero optimization',
+                    'Question-based long-tail content creation'
+                ]
+            },
+            'wordpress-seo': {
+                num: '08',
+                icon: 'fa-brands fa-wordpress',
+                title: 'WordPress SEO Optimization',
+                img: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80',
+                price: '$350 / month',
+                desc: 'Full-stack WordPress optimization including plugin configuration, database cleanup, and speed enhancements.',
+                features: [
+                    'Yoast / RankMath Pro setup & configuration',
+                    'Database query optimization & page caching',
+                    'Permalink & category hierarchy restructuring',
+                    'Automated XML sitemap & robots.txt tuning'
+                ]
+            },
+            'youtube-seo': {
+                num: '09',
+                icon: 'fa-brands fa-youtube',
+                title: 'YouTube Video SEO',
+                img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80',
+                price: '$599 / month',
+                desc: 'Increase video impressions, subscriber growth, and rank your video content higher on YouTube and Google search.',
+                features: [
+                    'Video title, tag, and description keyword tuning',
+                    'Custom thumbnail click-through rate (CTR) optimization',
+                    'Video chapters & timestamp schema creation',
+                    'Closed captioning & transcript optimization'
+                ]
+            }
+        };
+
+        // JS Function to Open Drawer with dynamic content
+        function openDrawer(serviceKey) {
+            const data = servicesData[serviceKey];
+            if (!data) return;
+
+            document.getElementById('drawerNum').innerText = data.num;
+            document.getElementById('drawerIcon').innerHTML = `<i class="${data.icon}"></i>`;
+            document.getElementById('drawerTitle').innerText = data.title;
+            document.getElementById('drawerImg').src = data.img;
+            document.getElementById('drawerPrice').innerText = data.price;
+            document.getElementById('drawerDesc').innerText = data.desc;
+
+            // Generate feature list
+            const listContainer = document.getElementById('drawerFeaturesList');
+            listContainer.innerHTML = data.features.map(f => `
+                <div class="feature-item">
+                    <i class="fa-solid fa-circle-check feature-icon"></i>
+                    <span>${f}</span>
+                </div>
+            `).join('');
+
+            // Trigger Bootstrap Offcanvas
+            const bsDrawer = new bootstrap.Offcanvas(document.getElementById('serviceDrawer'));
+            bsDrawer.show();
+        }
+    </script>
+</body>
+</html>

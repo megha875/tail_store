@@ -509,80 +509,33 @@ document.addEventListener('DOMContentLoaded', loadCart);
 
 
 
-
-const mongoose = require('mongoose');
-
-// Cart item schema with proper types
-const cartItemSchema = new mongoose.Schema({
-    productId: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        default: ''
-    },
-    price: {
-        type: Number,
-        default: 0
-    },
-    image: {
-        type: String,
-        default: ''
-    },
-    quantity: {
-        type: Number,
-        default: 1
-    }
-});
-
-const cartSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: true,
-        default: 'guest_user'
-    },
-    items: [cartItemSchema]
-}, { timestamps: true });
-
-module.exports = mongoose.model('Cart', cartSchema);
-
-
 const mongoose = require('mongoose');
 
 const cartItemSchema = new mongoose.Schema({
-    productId: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true
-    },
-    image: {
-        type: String,
-        default: ''
-    },
-    quantity: {
-        type: Number,
-        default: 1
-    }
+  // Existing product reference
+  productId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product', // Aapke Product model ka exact naam
+    required: true
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    default: 1
+  },
+  // Extra fields optional details ke liye (agar price/name snapshot chahiye):
+  title: String,
+  price: Number,
+  image: String
 });
 
 const cartSchema = new mongoose.Schema({
-    userId: {
-        type: String,
-        required: true,
-        default: 'guest_user'
-    },
-    items: [cartItemSchema]
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  items: [cartItemSchema]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Cart', cartSchema);
-
-
-

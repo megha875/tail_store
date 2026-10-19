@@ -1,4 +1,3 @@
-
 // ==========================================
 // 1. INITIALIZATION & ROUTING LOGIC
 // ==========================================
@@ -80,25 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- PRODUCT DETAIL: THUMBNAILS ---
-  const mainImg = document.getElementById('main-product-img');
-  const thumbButtons = document.querySelectorAll('.thumb-btn');
+  // const mainImg = document.getElementById('main-product-img');
+  // const thumbButtons = document.querySelectorAll('.thumb-btn');
 
-  if (mainImg && thumbButtons.length > 0) {
-    thumbButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const clickedImg = btn.querySelector('img');
-        if (clickedImg) {
-          mainImg.src = clickedImg.src;
-          thumbButtons.forEach(b => {
-            b.classList.remove('border-[#ff0055]');
-            b.classList.add('border-transparent');
-          });
-          btn.classList.remove('border-transparent');
-          btn.classList.add('border-[#ff0055]');
-        }
-      });
-    });
-  }
+  // if (mainImg && thumbButtons.length > 0) {
+  //   thumbButtons.forEach(btn => {
+  //     btn.addEventListener('click', () => {
+  //       const clickedImg = btn.querySelector('img');
+  //       if (clickedImg) {
+  //         mainImg.src = clickedImg.src;
+  //         thumbButtons.forEach(b => {
+  //           b.classList.remove('border-[#ff0055]');
+  //           b.classList.add('border-transparent');
+  //         });
+  //         btn.classList.remove('border-transparent');
+  //         btn.classList.add('border-[#ff0055]');
+  //       }
+  //     });
+  //   });
+  // }
 
   // --- PRODUCT DETAIL: QUANTITY COUNTER ---
   const qtyCount = document.getElementById('qty-count');
@@ -129,13 +128,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- HERO SLIDER ---
+
   const wrapper = document.getElementById('sliderWrapper');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const dots = document.querySelectorAll('.dot');
 
-  if (wrapper) {
+  if (wrapper && wrapper.dataset.dynamic !== 'true') {
     let currentIndex = 0;
     const totalSlides = wrapper.children.length || 1;
 
@@ -259,7 +258,7 @@ async function renderDynamicCart() {
   if (!cartContainer) return;
 
   try {
-    const res = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+    const res = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
     const cart = await res.json();
 
     if (!cart.items || cart.items.length === 0) {
@@ -406,7 +405,7 @@ async function removeFromCart(productId, event = null) {
             headers['Authorization'] = `Bearer ${token}`;
         }
 
-        const res = await fetch('http://localhost:5500/api/cart/remove', {
+        const res = await fetch(`${API_BASE_URL}/cart/remove`, {
             method: 'DELETE', // Agar backend par POST route hai toh yahan 'POST' likhein
             headers: headers,
             body: JSON.stringify({ userId, productId })
@@ -429,7 +428,7 @@ function updateNavbarCartBadge() {
     if (!badge) return;
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost:5500/api/cart?userId=guest_user', true);
+    xhr.open('GET', `${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`, true);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -485,7 +484,7 @@ async function addToCart(productId, event) {
         };
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost:5500/api/cart/add', true);
+        xhr.open('POST', `${API_BASE_URL}/cart/add`, true);
         xhr.setRequestHeader('Content-Type', 'application/json');
 
         xhr.onload = function () {
@@ -517,7 +516,7 @@ function removeFromCart(productId, event) {
     }
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:5500/api/cart/remove', true);
+    xhr.open('DELETE', `${API_BASE_URL}/cart/remove`, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
 
     xhr.onload = function () {
@@ -539,7 +538,7 @@ function removeFromCart(productId, event) {
     };
 
     const data = JSON.stringify({
-        userId: 'guest_user',
+        userId: getCartUserId(),
         productId: productId
     });
 
@@ -557,8 +556,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 // 1. API & BADGE INTEGRATION (Global)
 // ==========================================
-const API_BASE_URL = 'http://localhost:5500/api';
-const GUEST_USER_ID = 'guest_user';
+const API_BASE_URL = `http://${window.location.hostname}:5501/api`;
+const getCartUserId = () => localStorage.getItem('userId') || 'guest_user';
 
 // --- NAVBAR BADGE UPDATE ---
 async function updateCartBadge(cartData = null) {
@@ -571,7 +570,7 @@ async function updateCartBadge(cartData = null) {
 
         // Agar cart data missing hai toh backend se fetch karein
         if (!cart) {
-            const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+            const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
             if (response.ok) {
                 cart = await response.json();
             }
@@ -598,7 +597,7 @@ async function addToCart(productId, quantity = 1, event = null) {
     }
 
     try {
-        const userId = localStorage.getItem('userId') || GUEST_USER_ID;
+        const userId = getCartUserId();
         const productResponse = await fetch(`${API_BASE_URL}/products/${productId}`);
         const product = productResponse.ok ? await productResponse.json() : null;
 
@@ -642,7 +641,7 @@ async function renderDynamicCart() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/cart?userId=${GUEST_USER_ID}`);
+        const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
 
         if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);
@@ -736,7 +735,7 @@ async function updateQuantity(productId, action) {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                userId: GUEST_USER_ID,
+                userId: getCartUserId(),
                 productId: productId,
                 action: action
             })
@@ -758,7 +757,7 @@ async function removeFromCart(productId) {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                userId: GUEST_USER_ID,
+                userId: getCartUserId(),
                 productId: productId
             })
         });
@@ -882,26 +881,26 @@ document.addEventListener('DOMContentLoaded', function () {
 // })
 
 
-function changeMainImage(clickedThumb) {
-    const mainImg = document.getElementById('main-product-img');
-    const thumbImg = clickedThumb.querySelector('img');
+// function changeMainImage(clickedThumb) {
+//     const mainImg = document.getElementById('main-product-img');
+//     const thumbImg = clickedThumb.querySelector('img');
 
-    if (mainImg && thumbImg) {
-        // Main image ka src change karo
-        mainImg.src = thumbImg.src;
+//     if (mainImg && thumbImg) {
+//         // Main image ka src change karo
+//         mainImg.src = thumbImg.src;
 
-        // Sabhi thumbnail buttons se active pink border hatao
-        const allThumbs = document.querySelectorAll('.thumb-btn');
-        allThumbs.forEach(btn => {
-            btn.classList.remove('border-[#ff0055]');
-            btn.classList.add('border-transparent');
-        });
+//         // Sabhi thumbnail buttons se active pink border hatao
+//         const allThumbs = document.querySelectorAll('.thumb-btn');
+//         allThumbs.forEach(btn => {
+//             btn.classList.remove('border-[#ff0055]');
+//             btn.classList.add('border-transparent');
+//         });
 
-        // Current clicked thumbnail par active pink border lagao
-        clickedThumb.classList.remove('border-transparent');
-        clickedThumb.classList.add('border-[#ff0055]');
-    }
-}
+//         // Current clicked thumbnail par active pink border lagao
+//         clickedThumb.classList.remove('border-transparent');
+//         clickedThumb.classList.add('border-[#ff0055]');
+//     }
+// }
 
 
 
@@ -1469,96 +1468,10 @@ async function saveOrderToDatabase(finalPayload) {
 }
 
 
-// ==========================================
-// FETCH & DISPLAY CART ON CHECKOUT PAGE
-// ==========================================
-async function loadCheckoutSummary() {
-    const checkoutContainer = document.getElementById('checkout-cart-items');
-    const subtotalEl = document.getElementById('checkout-subtotal');
-    const totalEl = document.getElementById('checkout-total');
-
-    // Agar hum checkout page par nahi hain toh return ho jao
-    if (!checkoutContainer) return;
-
-    try {
-        // Backend API se Cart Data Fetch karein
-        const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
-        
-        if (!response.ok) {
-            throw new Error('Cart fetch error');
-        }
-
-        const cartData = await response.json();
-        const items = cartData.items || [];
-
-        if (items.length === 0) {
-            checkoutContainer.innerHTML = `
-                <p class="text-gray-500 text-sm text-center py-4">Aapki cart me koi product nahi hai.</p>
-            `;
-            if (subtotalEl) subtotalEl.textContent = '₹0';
-            if (totalEl) totalEl.textContent = '₹0';
-            return;
-        }
-
-        let subtotal = 0;
-        let htmlContent = '';
-
-        items.forEach(item => {
-            // Check karein product populated hai ya direct object hai
-            const product = item.productId && typeof item.productId === 'object' ? item.productId : item;
-            const price = product.price || 0;
-            const quantity = item.quantity || 1;
-            const itemTotal = price * quantity;
-            
-            subtotal += itemTotal;
-
-            htmlContent += `
-                <div class="flex items-center justify-between border-b pb-3">
-                    <div class="flex items-center space-x-3">
-                        <img 
-                            src="${product.image || 'https://via.placeholder.com/60'}" 
-                            alt="${product.name || product.title || 'Product'}" 
-                            class="w-14 h-14 object-cover rounded-lg border"
-                        >
-                        <div>
-                            <h4 class="text-sm font-semibold text-gray-800 line-clamp-1">${product.name || product.title || 'Product'}</h4>
-                            <p class="text-xs text-gray-500">Qty: ${quantity} × ₹${price}</p>
-                        </div>
-                    </div>
-                    <span class="text-sm font-bold text-gray-900">₹${itemTotal}</span>
-                </div>
-            `;
-        });
-
-        // HTML update karein
-        checkoutContainer.innerHTML = htmlContent;
-
-        // Amounts update karein
-        if (subtotalEl) subtotalEl.textContent = `₹${subtotal}`;
-        if (totalEl) totalEl.textContent = `₹${subtotal}`;
-
-    } catch (error) {
-        console.error("Checkout summary load error:", error);
-        checkoutContainer.innerHTML = `
-            <p class="text-red-500 text-sm text-center py-4">Cart items load karne me dikkat aayi.</p>
-        `;
-    }
-}
-
-// DOM load hone par run karein
-document.addEventListener('DOMContentLoaded', () => {
-    loadCheckoutSummary();
-});
-
-
-
-
-
 // Global variable cart items store karne ke liye
 let currentCartItems = [];
 let currentSubtotal = 0;
 
-// Update loadCheckoutSummary to save cart items in variable
 async function loadCheckoutSummary() {
     const checkoutContainer = document.getElementById('checkout-cart-items');
     const subtotalEl = document.getElementById('checkout-subtotal');
@@ -1567,43 +1480,54 @@ async function loadCheckoutSummary() {
     if (!checkoutContainer) return;
 
     try {
-        const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+        const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
+        if (!response.ok) {
+            throw new Error(`Cart request failed (HTTP ${response.status})`);
+        }
+
         const cartData = await response.json();
         currentCartItems = cartData?.items || [];
 
         if (currentCartItems.length === 0) {
             checkoutContainer.innerHTML = `<p class="text-gray-500 text-sm text-center py-4">Cart empty hai.</p>`;
+            currentSubtotal = 0;
             if (subtotalEl) subtotalEl.textContent = '₹0';
             if (totalEl) totalEl.textContent = '₹0';
             return;
         }
 
         let subtotal = 0;
-        let htmlContent = '';
+        const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[character]);
 
-        currentCartItems.forEach(item => {
+        const htmlContent = currentCartItems.map(item => {
             const product = (item.productId && typeof item.productId === 'object') ? item.productId : item;
             const name = product.name || product.title || 'Product';
-            const image = product.image || 'https://via.placeholder.com/60';
+            const image = product.image || product.imageUrl || 'https://via.placeholder.com/60';
             const price = Number(product.price) || 0;
             const quantity = Number(item.quantity) || 1;
             const itemTotal = price * quantity;
 
             subtotal += itemTotal;
 
-            htmlContent += `
+            return `
                 <div class="flex items-center justify-between border-b pb-3">
                     <div class="flex items-center space-x-3">
-                        <img src="${image}" alt="${name}" class="w-14 h-14 object-cover rounded-lg border">
+                        <img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" class="w-14 h-14 object-cover rounded-lg border">
                         <div>
-                            <h4 class="text-sm font-semibold text-gray-800 line-clamp-1">${name}</h4>
+                            <h4 class="text-sm font-semibold text-gray-800 line-clamp-1">${escapeHtml(name)}</h4>
                             <p class="text-xs text-gray-500">Qty: ${quantity} × ₹${price}</p>
                         </div>
                     </div>
                     <span class="text-sm font-bold text-gray-900">₹${itemTotal}</span>
                 </div>
             `;
-        });
+        }).join('');
 
         currentSubtotal = subtotal;
         checkoutContainer.innerHTML = htmlContent;
@@ -1612,65 +1536,11 @@ async function loadCheckoutSummary() {
 
     } catch (error) {
         console.error("Cart error:", error);
+        checkoutContainer.innerHTML = `<p class="text-red-500 text-sm text-center py-4">Cart items load nahi ho sake. Server connection check karke page refresh karein.</p>`;
     }
 }
 
-// Order Submit Form Handler
-const checkoutForm = document.getElementById('checkout-form');
-if (checkoutForm) {
-    checkoutForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        if (!currentCartItems || currentCartItems.length === 0) {
-            alert('Aapki cart khali hai!');
-            return;
-        }
-
-        const btn = document.getElementById('place-order-btn');
-        btn.disabled = true;
-        btn.innerHTML = 'Placing Order...';
-
-        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-
-        const orderData = {
-            userId: 'guest_user',
-            customer: {
-                fullName: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                deliveryAddress: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('state').value} - ${document.getElementById('pincode').value}`
-            },
-            items: currentCartItems,
-            totalAmount: currentSubtotal,
-            paymentMethod: paymentMethod
-        };
-
-        try {
-            const response = await fetch('http://localhost:5500/api/orders/place', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData)
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                // Order Success Page par Redirect karein
-                window.location.href = `order-success.html?orderId=${result.orderId}`;
-            } else {
-                alert('Order fail ho gaya: ' + result.message);
-                btn.disabled = false;
-                btn.innerHTML = 'Place Order';
-            }
-        } catch (err) {
-            console.error('Order error:', err);
-            alert('Server error! Kripya dobara try karein.');
-            btn.disabled = false;
-            btn.innerHTML = 'Place Order';
-        }
-    });
-}
-
+document.addEventListener('DOMContentLoaded', loadCheckoutSummary);
 
 // Function to load Razorpay SDK dynamically
 function loadRazorpaySDK() {
@@ -1743,55 +1613,6 @@ async function loadProducts() {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const checkoutForm = document.getElementById('checkoutForm');
-
-  if (checkoutForm) {
-    checkoutForm.addEventListener('submit', async (e) => {
-      // 1. Page ko submit / reload hone se roko
-      e.preventDefault();
-
-      const orderPayload = {
-        userId: GUEST_USER_ID,
-        shippingDetails: {
-          fullName: document.getElementById('fullName')?.value || '',
-          email: document.getElementById('shippingEmail')?.value || '',
-          phone: document.getElementById('shippingPhone')?.value || '',
-          street: document.getElementById('streetAddress')?.value || '',
-          city: document.getElementById('city')?.value || '',
-          state: document.getElementById('state')?.value || '',
-          pincode: document.getElementById('pincode')?.value || ''
-        },
-        paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value || 'COD'
-      };
-
-      try {
-        // 2. Data direct backend API route par bhejo
-        const response = await fetch(`${API_BASE_URL}/orders/create`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderPayload)
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-          alert('Order successfully place ho gaya!');
-          window.location.href = 'order-success.html';
-        } else {
-          alert(data.message || 'Order save karne me dikkat aayi.');
-        }
-      } catch (error) {
-        console.error('Order Submit Error:', error);
-        alert('Server connection fail ho gaya!');
-      }
-    });
-  }
-});
-
-
-
-
     // document.getElementById('loginForm').addEventListener('submit', async function(e) {
     //   // 1. URL me parameters add hone se rokega
     //   e.preventDefault(); 
@@ -1822,124 +1643,934 @@ document.addEventListener('DOMContentLoaded', () => {
     //     alert('Server Error. Please try again later.');
     //   }
     // });
- // Wishlist Heart Icon Click Handler
-async function handleWishlistClick(productId) {
-  const token = localStorage.getItem('token');
+// ==========================================
+// 1. PRODUCTS LOAD & RENDER FUNCTION
+// ==========================================
+async function loadProducts() {
+    const gridContainer =
+        document.getElementById('productGrid') ||
+        document.getElementById('products-container') ||
+        document.getElementById('product-container');
 
-  // 1. Agar user logged in nahi hai, toh login.html par bhej do
-  if (!token) {
-    alert('Wishlist me add karne ke liye pehle Login karein!');
-    window.location.href = `login.html?redirectWishlist=${productId}`;
-    return;
-  }
+    if (!gridContainer) return; 
 
-  // 2. Agar user logged in hai, toh backend API call karein
-  try {
-    const response = await fetch('/api/wishlist/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ productId })
-    });
+    try {
+        const response = await fetch('http://localhost:5500/api/products');
 
-    const data = await response.json();
-    if (response.ok) {
-      alert('Product Wishlist me add ho gaya!');
-    } else {
-      alert(data.message || 'Wishlist add karne me error aaya');
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const products = await response.json();
+
+        if (!products || products.length === 0) {
+            gridContainer.innerHTML = `
+                <p class="text-center text-gray-500 py-10 col-span-full">
+                    Database me abhi koi product nahi hai.
+                </p>
+            `;
+            return;
+        }
+
+        window.allProducts = products;
+
+        gridContainer.innerHTML = products.map((item, index) => {
+            const productTitle = item.title || item.name || 'Product';
+            const productImage = item.image || 'https://via.placeholder.com/150';
+            const productPrice = item.price || 0;
+            const productId = item._id || item.id;
+
+            return `
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${item.category || ''}">
+                    <div class="image-wrapper cursor-pointer relative">
+                        <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                            NEW
+                        </span>
+
+                        <img src="${productImage}" alt="${productTitle}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                        <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                            <!-- Wishlist Button -->
+                            <button type="button" onclick="Wishlist('${productId}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+
+                            <!-- Share Button -->
+                            <button type="button" onclick="shareProduct('${productId}', '${productTitle}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                <i class="fa-solid fa-share-nodes text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-800 cursor-pointer mb-1">
+                        ${productTitle}
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mb-3">
+                        ${item.category || 'General'}
+                    </p>
+
+                    <div class="amount_part flex flex-col gap-2">
+                        <span class="text-blue-600 font-bold text-xl">
+                            ₹${productPrice}
+                        </span>
+
+                        <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error("Product Error:", error);
+        if (gridContainer) {
+            gridContainer.innerHTML = `
+                <p class="text-center text-red-500 py-10 col-span-full">
+                    Products load nahi ho pa rahe hain. Server verify karein.
+                </p>
+            `;
+        }
     }
-  } catch (err) {
-    console.error('Error adding to wishlist:', err);
-    alert('Server connection error!');
-  }
 }
 
-// document.getElementById('loginForm').addEventListener('submit', function (e) {
-//   e.preventDefault();
+// Button Click Event Handler
+function handleCartClick(index, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    const product = window.allProducts[index];
+    if (product) {
+        addToCart(product);
+    }
+}
 
-//   const email = document.getElementById('email').value;
-//   const password = document.getElementById('password').value;
+// ==========================================
+// 2. ADD TO CART FUNCTION
+// ==========================================
+async function addToCart(product) {
+    const userId = localStorage.getItem('userId') || 'guest_user';
 
-//   console.log('Form Submitted:', { email, password });
-// });
+    const cartData = {
+        userId: userId,
+        productId: product._id || product.id,
+        title: product.title || product.name,
+        price: Number(product.price) || 0,
+        image: product.image || '',
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingIndex = cart.findIndex(item => String(item.id || item._id || item.productId) === String(cartData.productId));
+
+    if (existingIndex > -1) {
+        cart[existingIndex].quantity = (Number(cart[existingIndex].quantity) || 1) + 1;
+    } else {
+        cart.push(cartData);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cartData)
+        });
+
+        const result = await response.json();
+        console.log("MongoDB Sync Response:", result);
+    } catch (err) {
+        console.error("Fetch Error:", err);
+    }
+
+    alert(`${cartData.title} cart me add ho gaya!`);
+}
+
+// Page load listener
+document.addEventListener('DOMContentLoaded', loadProducts);
+
+
+// ==========================================
+// 3. WISHLIST TOGGLE & LOGIN MODAL POPUP FUNCTION (YAHAN ADD KAREIN)
+// ==========================================
+async function Wishlist(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Auth check
+    const token = localStorage.getItem("token") || localStorage.getItem("userToken");
+    const userId = localStorage.getItem("userId");
+    const isLoggedIn = token && userId && userId !== 'guest_user' && token !== 'undefined' && token !== 'null';
+
+    // 1. Agar user logged in nahi hai -> Login Modal kholo
+    if (!isLoggedIn) {
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) {
+            loginModal.classList.remove('hidden'); // Modal show karne ke liye
+        } else {
+            alert("Wishlist me add karne ke liye pehle login karein.");
+            window.location.href = 'login.html'; // Agar modal ID nahi milti toh redirect karein
+        }
+        return;
+    }
+
+    // 2. Agar user logged in hai -> UI Toggle (Red Heart)
+    const btn = event ? (event.currentTarget || event.target.closest('button')) : null;
+    const icon = btn ? btn.querySelector('i') : null;
+    if (!icon) return;
+
+    const isCurrentlyWishlisted = icon.classList.contains('fa-solid');
+
+    if (isCurrentlyWishlisted) {
+        icon.classList.remove('fa-solid', 'text-red-500');
+        icon.classList.add('fa-regular');
+    } else {
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid', 'text-red-500');
+    }
+
+    // 3. Backend MongoDB Sync
+    try {
+        const response = await fetch('http://localhost:5500/api/wishlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ userId, productId })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Wishlist update failed');
+
+    } catch (error) {
+        console.error("Wishlist Sync Error:", error);
+        // Revert icon on error
+        if (isCurrentlyWishlisted) {
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid', 'text-red-500');
+        } else {
+            icon.classList.remove('fa-solid', 'text-red-500');
+            icon.classList.add('fa-regular');
+        }
+    }
+}
+
+// Modal Close Functions
+function closeLoginModal() {
+    const loginModal = document.getElementById('loginModal');
+    if (loginModal) {
+        loginModal.classList.add('hidden');
+    }
+}
+
+// Outside Backdrop Click Event
+document.addEventListener('click', function (e) {
+    const loginModal = document.getElementById('loginModal');
+    if (loginModal && e.target === loginModal) {
+        closeLoginModal();
+    }
+});
 
 
 
-// document.getElementById('loginForm').addEventListener('submit', async (e) => {
-//   // 1. Browser ke default form submit aur URL update hone ko rokega
-//   e.preventDefault(); 
 
-//   const email = document.getElementById('loginEmail').value;
-//   const password = document.getElementById('loginPassword').value;
 
-//   try {
-//     // 2. Direct API endpoint par request bhejega
-//     const response = await fetch('/api/login', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({ email, password })
+
+// script.js file ke bottom par paste karein
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+  
+//   if (mobileLogoutBtn) {
+//     mobileLogoutBtn.addEventListener('click', () => {
+//       localStorage.removeItem('userToken');
+//       localStorage.removeItem('userId');
+//       localStorage.removeItem('userEmail');
+//       window.location.reload();
 //     });
-
-//     const data = await response.json();
-
-//     if (data.success) {
-//       alert('Login Successful!');
-      
-//       // User ki details browser mein save karein
-//       localStorage.setItem('user', JSON.stringify(data.user));
-      
-//       // Home page par redirect karein
-//       window.location.href = '/index.html';
-//     } else {
-//       alert(data.message); // e.g., "Invalid Email ya Password!"
-//     }
-//   } catch (err) {
-//     console.error('Login Error:', err);
-//     alert('Server error! Please try again.');
 //   }
 // });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const authGuestButtons = document.getElementById('auth-guest-buttons');
+  const authUserMenu = document.getElementById('auth-user-menu');
+  const logoutBtn = document.getElementById('logout-btn');
 
-const loginForm = document.getElementById('loginForm');
+  const mobileAuthGuest = document.getElementById('mobile-auth-guest');
+  const mobileAuthUser = document.getElementById('mobile-auth-user');
+  const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
 
-if (loginForm) {
-  loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  // Auth State Update function
+  function updateAuthState() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-    const email = document.getElementById('loginEmail')?.value;
-    const password = document.getElementById('loginPassword')?.value;
+    if (isLoggedIn === 'true') {
+      // Desktop Navbar
+      if (authGuestButtons) authGuestButtons.classList.add('hidden');
+      if (authUserMenu) authUserMenu.classList.remove('hidden');
 
-    if (!email || !password) {
-      alert('Please enter email and password');
-      return;
+      // Mobile Navbar
+      if (mobileAuthGuest) mobileAuthGuest.classList.add('hidden');
+      if (mobileAuthUser) mobileAuthUser.classList.remove('hidden');
+    } else {
+      // Desktop Navbar
+      if (authGuestButtons) authGuestButtons.classList.remove('hidden');
+      if (authUserMenu) authUserMenu.classList.add('hidden');
+
+      // Mobile Navbar
+      if (mobileAuthGuest) mobileAuthGuest.classList.remove('hidden');
+      if (mobileAuthUser) mobileAuthUser.classList.add('hidden');
     }
+  }
 
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
+  // Logout Handler
+  function handleLogout() {
+    localStorage.removeItem('isLoggedIn');
+    updateAuthState();
+    // Agar chaho toh logout ke baad login page par redirect kar sakte ho:
+    // window.location.href = 'login.html';
+  }
 
-      const data = await response.json();
+  if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+  if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
 
-      if (data.success) {
-        alert('Login Successful!');
+  // Page load par status check karein
+  updateAuthState();
+});
 
-        localStorage.setItem('user', JSON.stringify(data.user));
-        window.location.href = '/index.html';
-      } else {
-        alert(data.message || 'Invalid Email or Password!');
-      }
-    } catch (err) {
-      console.error('Login Error:', err);
-      alert('Server error! Please try again.');
-    }
-  });
+
+
+
+
+// Example API Fetch function
+// async function loadProducts() {
+//     try {
+//         const response = await fetch('/api/products'); // Aapka API Endpoint
+//         const products = await response.json();
+        
+//         const gridContainer = document.getElementById('gridContainer'); // Aapke container ki ID
+
+//         // 👇 YAHAN PAR PASTE KAREIN
+//         window.allProducts = products;
+
+//         gridContainer.innerHTML = products.map((item, index) => {
+//             const productTitle = item.title || item.name || 'Product';
+//             const productImage = item.image || 'https://via.placeholder.com/150';
+//             const productPrice = item.price || 0;
+//             const productId = item._id || item.id;
+
+//             const safeTitle = productTitle.replace(/'/g, "\\'");
+
+//             return `
+//                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${item.category || ''}">
+//                     <div class="image-wrapper cursor-pointer relative">
+//                         <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+//                             NEW
+//                         </span>
+
+//                         <img src="${productImage}" alt="${productTitle}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+//                         <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+//                             <!-- Wishlist Button -->
+//                             <button type="button" onclick="Wishlist('${productId}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+//                                 <i class="fa-regular fa-heart text-base"></i>
+//                             </button>
+
+//                             <!-- Share Button -->
+//                             <button type="button" onclick="shareProduct('${productId}', '${safeTitle}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+//                                 <i class="fa-solid fa-share-nodes text-sm"></i>
+//                             </button>
+//                         </div>
+//                     </div>
+
+//                     <h3 class="text-lg font-bold text-gray-800 cursor-pointer mb-1">
+//                         ${productTitle}
+//                     </h3>
+
+//                     <p class="text-gray-500 text-sm mb-3">
+//                         ${item.category || 'General'}
+//                     </p>
+
+//                     <div class="amount_part flex flex-col gap-2">
+//                         <span class="text-blue-600 font-bold text-xl">
+//                             ₹${productPrice}
+//                         </span>
+
+//                         <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+//                             Add to Cart
+//                         </button>
+//                     </div>
+//                 </div>
+//             `;
+//         }).join('');
+
+//     } catch (error) {
+//         console.error("Product Error:", error);
+//         if (gridContainer) {
+//             gridContainer.innerHTML = `
+//                 <p class="text-center text-red-500 py-10 col-span-full">
+//                     Products load nahi ho pa rahe hain. Server verify karein.
+//                 </p>
+//             `;
+//         }
+//     }
+// }
+
+// Page load hone par run karein
+document.addEventListener('DOMContentLoaded', loadProducts);
+
+
+
+
+
+
+
+// Share Icon
+let activeShareData = { id: '', title: '', url: '' };
+
+// Share Icon click handler - Popup Modal Open Karega
+function shareProduct(id, title, event) {
+    if (event) event.stopPropagation();
+
+    const productUrl = `${window.location.origin}/product.html?id=${id}`;
+    
+    activeShareData = {
+        id: id,
+        title: title,
+        url: productUrl
+    };
+
+    document.getElementById('modalProductTitle').innerText = title;
+    
+    // Show Modal
+    const modal = document.getElementById('shareModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
 }
+
+// Modal Close Function
+function closeShareModal() {
+    const modal = document.getElementById('shareModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Outside Modal Click Handler to Close
+document.getElementById('shareModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeShareModal();
+    }
+});
+
+
+// Example: Aapke Products ka Data (Backend ya Array se mil raha hai)
+const products = [
+  { _id: '651a2b3c4d5e6f7a', name: 'Reebok' },
+  { _id: '651a2b3c4d5e6f7b', name: 'Nike' }
+];
+
+// Target container jahan icons render hone hain
+const modalContainer = document.getElementById('shareOptionsContainer');
+
+// Function to render share buttons
+function renderShareButtons(product) {
+  // HERE: Is variable me aap button code add karte hain
+  const productHtml = `
+    <button 
+      onclick="handleShare('whatsapp', '${product._id}', '${product.name}')" 
+      class="flex flex-col items-center justify-center p-3 rounded-full hover:bg-gray-100">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" class="w-8 h-8">
+      <span class="text-xs mt-1 text-gray-600">WhatsApp</span>
+    </button>
+  `;
+
+  // HTML container me inject karna
+  modalContainer.innerHTML = productHtml;
+}
+
+
+// Share Icon k code hai y mera  api k 
+
+async function shareProduct(productId, productName, platform) {
+  try {
+    const response = await fetch('/api/shares', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        productId: productId,
+        productName: productName,
+        platform: platform,
+        userId: localStorage.getItem('userId') || 'guest_user'
+      })
+    });
+
+    const result = await response.json();
+    console.log('Share API Response:', result);
+
+    if (result.success) {
+      console.log('MongoDB me data save ho gaya!');
+    } else {
+      console.error('Save fail hua:', result.message);
+    }
+  } catch (error) {
+    console.error('Network Error:', error);
+  }
+}
+
+// Share Icon / Button Click Event Listener
+document.addEventListener('DOMContentLoaded', () => {
+  const whatsappBtn = document.getElementById('whatsapp-share-btn');
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', () => {
+      shareProduct('65a123456789', 'Cool T-Shirt', 'WhatsApp');
+    });
+  }
+});
+
+
+// Global State (taaki selected product tracking me pass ho sake)
+let currentShareProduct = { id: '', title: '' };
+
+// Share Modal Open karne ka function
+function shareProduct(productId, productTitle, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    // Selected product detail save karein
+    currentShareProduct = { id: productId, title: productTitle };
+
+    // Share Modal Open Karein
+    const modal = document.getElementById('shareModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+}
+
+// Share Modal Close karne ka function
+function closeShareModal() {
+    const modal = document.getElementById('shareModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+
+// AAPKA SHAREACTION FUNCTION
+function shareAction(platform) {
+    if (!currentShareProduct.id) return;
+
+    const productId = currentShareProduct.id;
+    const productTitle = currentShareProduct.title;
+    
+    // Product Page Redirect URL
+    const shareUrl = `${window.location.origin}/product/${productId}`;
+    const shareSubject = `Check out ${productTitle}`;
+    const shareBody = `Check out this product: ${productTitle}\n\nClick here to view: ${shareUrl}`;
+
+    // Backend MongoDB Tracking API Call
+    fetch(`http://localhost:5500/api/products/share/${productId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ platform })
+    }).catch(err => console.error("Tracking Error:", err));
+
+    // Platform Specific Sharing Links
+    if (platform === 'gmail') {
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(shareSubject)}&body=${encodeURIComponent(shareBody)}`;
+        window.open(gmailUrl, '_blank');
+    } else if (platform === 'whatsapp') {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareBody)}`, '_blank');
+    } else if (platform === 'facebook') {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'linkedin') {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'sms') {
+        window.open(`sms:?body=${encodeURIComponent(shareBody)}`, '_blank');
+    } else if (platform === 'copyLink') {
+        navigator.clipboard.writeText(shareUrl);
+        alert('Link copied to clipboard!');
+    }
+    
+    closeShareModal();
+}
+
+function handleAddToCart(event, productId) {
+    // Event ko parent link tak jaane se rokna (Event Bubbling Stop)
+    event.stopPropagation();
+    event.preventDefault();
+
+    // Aapka Cart ka logic yahan aayega
+    console.log("Cart me product add hua, ID:", productId);
+    
+    // Example: Toast alert ya backend API call
+    alert("Product added to cart!");
+  }
+
+
+
+  // Example: script.js ya main.js file
+
+// 1. DOM element select karein jahan products render karne hain
+const productContainer = document.getElementById('product-list'); // (Check karein aapke container ki ID kya hai)
+
+// 2. Backend API se fetch karne wala function
+async function loadProducts() {
+  try {
+    const response = await fetch('http://localhost:5000/api/products'); // Aapka backend URL
+    const products = await response.json();
+
+    // 3. YAHAN REPLACEE/PASTE KAREIN 👇
+    productContainer.innerHTML = products.map(product => `
+      <div class="relative w-64 border rounded-lg overflow-hidden bg-white p-4 shadow-sm flex flex-col">
+        
+        <!-- Image Box + Link Wrapper -->
+        <div class="relative w-full h-48 mb-3">
+          <a href="/product-detail.html?id=${product._id || product.id}" class="block w-full h-full relative z-10">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover rounded-md" />
+          </a>
+
+          <!-- Badges & Icons Overlay -->
+          <div class="absolute inset-0 pointer-events-none z-20 flex justify-between p-2">
+            <span class="bg-black text-white text-[10px] font-bold px-2 py-1 rounded h-fit pointer-events-auto">NEW</span>
+            
+            <div class="flex flex-col gap-2">
+              <button class="bg-white p-1.5 rounded-full shadow pointer-events-auto hover:bg-gray-100">
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Name & Price -->
+        <a href="/product-detail.html?id=${product._id || product.id}" class="block no-underline">
+          <h3 class="font-bold text-gray-800 text-base hover:text-blue-600 transition-colors">${product.name}</h3>
+          <p class="text-xs text-gray-500">${product.category || ''}</p>
+          <p class="text-lg font-bold text-blue-600 mt-1">₹${product.price}</p>
+        </a>
+
+        <!-- Add to Cart Button -->
+        <button onclick="handleAddToCart(event, '${product._id || product.id}')" class="mt-3 w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-md font-medium text-sm transition-colors cursor-pointer">
+          Add to Cart
+        </button>
+
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
+}
+
+// 4. Add to Cart Handler Function (Same JS File me sabse niche add karein)
+function handleAddToCart(event, productId) {
+  event.stopPropagation();
+  event.preventDefault();
+  
+  console.log("Cart me add hua ID:", productId);
+  // Add to cart logic here
+}
+
+// Function Call
+loadProducts();
+
+
+
+
+
+
+
+
+
+// Example: Jab backend se API response aaye
+fetch('/api/products')
+  .then(res => res.json())
+  .then(products => {
+    const container = document.getElementById('product-container');
+    container.innerHTML = ''; // Container clean karein
+
+    products.forEach((product, index) => {
+      // Backend se '_id' ya 'id' mil rahi hogi
+      const cardHTML = `
+        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+            <div onclick="goToDetail('${product._id}')" class="image-wrapper cursor-pointer relative">
+                <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                    NEW
+                </span>
+
+                <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                    <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                        <i class="fa-regular fa-heart text-base"></i>
+                    </button>
+
+                    <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                        <i class="fa-solid fa-share-nodes text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <h3 onclick="goToDetail('${product._id}')" class="text-lg font-bold text-gray-800 cursor-pointer mb-1 hover:text-blue-600">
+                ${product.title}
+            </h3>
+
+            <p class="text-gray-500 text-sm mb-3">
+                ${product.category}
+            </p>
+
+            <div class="amount_part flex flex-col gap-2">
+                <span class="text-blue-600 font-bold text-xl">
+                    ₹${product.price}
+                </span>
+
+                <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML('beforeend', cardHTML);
+    });
+  });
+
+// script.js / main.js mein API call ke andar paste karein
+
+fetch('/api/products') // Aapka backend API URL
+    .then(res => res.json())
+    .then(products => {
+        const container = document.getElementById('product-container');
+        if (!container) return;
+
+        container.innerHTML = ''; // Container khali karein
+
+    
+        products.forEach((product, index) => {
+            const cardHTML = `
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+                    
+                    <!-- Image Wrapper Wrapped with <a> Tag -->
+                    <div class="image-wrapper relative">
+                        <a href="/product-detail.html?id=${product._id}" class="block z-0">
+                            <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                                NEW
+                            </span>
+                            <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+                        </a>
+
+                        <!-- Wishlist aur Share Buttons -->
+                        <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-20">
+                            <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+                            <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                <i class="fa-solid fa-share-nodes text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Title Linked with <a> Tag -->
+                    <h3 class="text-lg font-bold text-gray-800 mb-1 hover:text-blue-600">
+                        <a href="/product-detail.html?id=${product._id}" class="block">
+                            ${product.title}
+                        </a>
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mb-3">${product.category}</p>
+
+                    <div class="amount_part flex flex-col gap-2">
+                        <span class="text-blue-600 font-bold text-xl">₹${product.price}</span>
+                        <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    })
+    .catch(err => console.error('Error fetching products:', err));
+
+
+    async function fetchLatestProducts() {
+        try {
+            const response = await fetch('http://localhost:5500/api/products'); 
+            const products = await response.json();
+
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const id = product._id || product.id;
+                const image = product.image || product.img || 'https://via.placeholder.com/300';
+                const name = product.name || product.title || 'Product';
+                const category = product.category || 'General';
+                const price = product.price || 0;
+
+                const card = document.createElement('div');
+                card.className = "relative bg-white border rounded-2xl p-4 shadow-sm hover:shadow-md transition flex flex-col justify-between cursor-pointer group";
+
+                // =========================================================
+                // Correct Path: Agar file same folder me hai
+                // =========================================================
+                card.addEventListener('click', function() {
+                    window.location.href = `product-detail.html?id=${id}`;
+                });
+                // =========================================================
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative bg-gray-100 rounded-xl overflow-hidden mb-4">
+                            <span class="absolute top-2 left-2 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">NEW</span>
+                            <img src="${image}" alt="${name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+
+                        <h3 class="font-bold text-gray-900 group-hover:text-pink-600 transition text-lg mb-1 line-clamp-1">${name}</h3>
+                        <p class="text-xs text-gray-500 capitalize mb-2">${category}</p>
+                        <p class="font-bold text-blue-600 text-xl">₹${price}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <button 
+                            type="button"
+                            class="add-to-cart-btn w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2.5 rounded-xl transition shadow-sm active:scale-95">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+
+                // Add to cart button event
+                const cartBtn = card.querySelector('.add-to-cart-btn');
+                cartBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    alert(`Added ${name} to cart!`);
+                });
+
+                container.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchLatestProducts);
+    //swipper silder back or front image
+   
+    document.getElementById('menShopBtn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        try {
+            const response = await fetch('http://localhost:5000/api/men-products');
+            const result = await response.json();
+            
+            if (result.success) {
+                displayProducts(result.data);
+            } else {
+                console.error('Failed to fetch products');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    function displayProducts(products) {
+        const container = document.getElementById('productContainer');
+        container.innerHTML = ''; 
+        
+        if (products.length === 0) {
+            container.innerHTML = '<p>No products found in Men category.</p>';
+            return;
+        }
+        
+        products.forEach(product => {
+            const productCard = `
+                <div class="border p-4 rounded shadow">
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover mb-2">
+                    <h3 class="font-bold">${product.title}</h3>
+                    <p class="text-gray-600">₹${product.price}</p>
+                </div>
+            `;
+            container.innerHTML += productCard;
+        });
+    }
+async function loadProducts(key, name) {
+    setActive(key);
+    document.getElementById('category-title').textContent = `${name} Products`;
+    gridEl.innerHTML = '';
+    try {
+      // 🚀 YAHAN PAR IS CODE KO ADD KARNA HAI:
+      const { data } = await axios.get(`${API_BASE}/api/products/filter`, { 
+        params: { category: key } // key me 'men', 'women', ya 'accessories' pass hoga
+      });
+      
+      currentProducts = data;
+      
+      if (!data || data.length === 0) {
+        gridEl.innerHTML = '<p class="text-gray-500 col-span-full">Is category me koi product nahi hai.</p>';
+        return;
+      }
+
+      gridEl.innerHTML = data.map(p => productCard(p, name)).join('');
+    } catch (err) {
+      console.error('Products error:', err.message, err.response?.status, err.response?.data);
+      gridEl.innerHTML = '<p class="text-red-500 col-span-full">Products load nahi hue.</p>';
+    }
+  }
+
+
+
+
+        document.querySelectorAll('.product-card').forEach((card) => {
+            card.addEventListener('click', (e) => {
+                // Agar 'Add to Cart' button par click hua hai, toh detail page par na jaye
+                if (e.target.closest('.cart-btn')) return;
+
+                // Card ke andar se dynamically image aur title uthayein
+                const imgElement = card.querySelector('img');
+                const titleElement = card.querySelector('h3');
+
+                const imgSrc = imgElement ? imgElement.src : '';
+                const productTitle = titleElement ? titleElement.innerText : 'Product Details';
+
+                let imagesArray = [];
+                const dataGallery = card.getAttribute('data-images');
+                
+                if (dataGallery) {
+                    imagesArray = JSON.parse(dataGallery);
+                } else {
+                    imagesArray = [imgSrc, imgSrc, imgSrc]; 
+                }
+
+                // LocalStorage mein dynamically save karein
+                localStorage.setItem('selectedProductGallery', JSON.stringify(imagesArray));
+                localStorage.setItem('selectedProductTitle', productTitle);
+
+                // Product Detail page par redirect karein
+                window.location.href = 'product-detail.html';
+            });
+        });
+   
+//   const response = await fetch(
+//     'http://localhost:5500/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
+//     {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(productData)
+//     }
+// );

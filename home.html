@@ -29,7 +29,7 @@
 
 
     <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
-      <a href="index.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      <a href="" class="hover:text-gray-300 transition-colors py-2">Home</a>
       
 
       <div class="relative group py-2">
@@ -93,7 +93,7 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
             <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
@@ -285,7 +285,7 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     
     <!-- Card 1: Men -->
-    <div class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group">
+    <div onclick="location.href='men.html'" class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- Background Image -->
       <img 
         src="./assets/img/men.jpg" 
@@ -301,7 +301,7 @@
           Men
         </h3>
         <a 
-          href="#men" 
+          href="men.html" onclick="event.stopPropagation();" 
           class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-md transition-all duration-200 transform active:scale-95"
         >
           Shop now
@@ -310,7 +310,7 @@
     </div>
 
     <!-- Card 2: Women -->
-    <div class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group">
+    <div onclick="location.href='women.html'" class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- Background Image -->
       <img 
         src="./assets/img/2.png" 
@@ -326,7 +326,7 @@
           Women
         </h3>
         <a 
-          href="#women" 
+          href="women.html" onclick="event.stopPropagation();" 
           class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-md transition-all duration-200 transform active:scale-95"
         >
           Shop now
@@ -335,7 +335,7 @@
     </div>
 
     <!-- Card 3: Accessories -->
-    <div class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group">
+    <div onclick="location.href='accessories.html'" class="relative h-[320px] rounded-2xl overflow-hidden shadow-lg group cursor-pointer">
       <!-- Background Image -->
       <img 
         src="./assets/img/3.jpg" 
@@ -351,7 +351,7 @@
           Accessories
         </h3>
         <a 
-          href="#accessories" 
+          href="accessories.html" onclick="event.stopPropagation();" 
           class="bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-md transition-all duration-200 transform active:scale-95"
         >
           Shop now
@@ -604,7 +604,7 @@
 
 <section class="latest_products max-w-7xl mx-auto px-4 py-9">
   
-  <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
+  <h2 data-homepage-setting="latestProductsTitle" class="text-2xl sm:text-3xl font-bold text-gray-900 mb-8">
     Latest products
   </h2>
 
@@ -969,30 +969,31 @@
 <!-- Brands Carousel Section  End-->
 
 <!-- NewsLetter Section Start-->
-<section class="newsletter-section  w-full bg-white py-8 px-4 border-y border-gray-100">
+<section id="newsletter-section" class="newsletter-section w-full bg-white py-8 px-4 border-y border-gray-100">
   <div class="max-w-4xl mx-auto text-center space-y-6">
-    
-    <!-- Heading -->
     <h2 class="text-2xl sm:text-3xl md:text-3xl font-bold text-gray-900 tracking-tight">
-      Join our newsletter and <span class="text-[#ff0048]">get $50 discount</span> for your first order
+      <span data-newsletter-heading>Join our newsletter and</span>
+      <span data-newsletter-offer class="text-[#ff0048]">get $50 discount</span>
+      <span data-newsletter-ending>for your first order</span>
     </h2>
 
-    <!-- Form -->
-    <form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onSubmit="return false;">
-      <input 
+    <form data-newsletter-form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
+      <input
+        name="email"
         type="email" 
-        placeholder="Enter your email address" 
+        placeholder="Enter your email address"
+        aria-label="Email address"
         class="w-full sm:w-80 px-6 py-3.5 rounded-full border border-gray-200 bg-gray-50/50 text-gray-700 placeholder-gray-400 focus:outline-none focus:border-gray-400 text-sm transition-all"
         required
       />
-      <button 
+      <button
         type="submit" 
         class="w-full sm:w-auto px-8 py-3.5 bg-[#ff0048] hover:bg-[#e0003f] text-white font-medium rounded-full text-sm transition-colors duration-200 shadow-sm"
       >
-        Subscribe
+        <span data-newsletter-button>Subscribe</span>
       </button>
     </form>
-
+    <p data-newsletter-message class="hidden text-sm font-semibold" role="status" aria-live="polite"></p>
   </div>
 </section>
 <!--NewsLetter Section End-->
@@ -1017,12 +1018,12 @@
           <a href="#" class="px-6 py-2.5 bg-[#ff0048] hover:bg-[#e0003f] text-white text-sm font-semibold rounded-full transition-colors duration-200 shadow-md">
             Shop Now
           </a>
-          <a href="#" class="px-6 py-2.5 bg-[#ff0048] hover:bg-[#e0003f] text-white text-sm font-semibold rounded-full transition-colors duration-200 shadow-md">
+          <!-- <a href="#" class="px-6 py-2.5 bg-[#ff0048] hover:bg-[#e0003f] text-white text-sm font-semibold rounded-full transition-colors duration-200 shadow-md">
             New Arrivals
           </a>
           <a href="#" class="px-6 py-2.5 bg-[#ff0048] hover:bg-[#e0003f] text-white text-sm font-semibold rounded-full transition-colors duration-200 shadow-md">
             Sale
-          </a>
+          </a> -->
         </div>
       </div>
 
@@ -1260,15 +1261,13 @@
 
   </div>
 </footer> -->
+
+
 <footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
-
-  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
   <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-8 gap-x-8 sm:gap-x-12">
 
-    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
-    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
-      
-      <!-- Column 1: Shop -->
+      <!-- Shop Column -->
       <div>
         <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
@@ -1280,7 +1279,7 @@
         </ul>
       </div>
 
-      <!-- Column 2: Pages -->
+      <!-- Pages Column -->
       <div>
         <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
@@ -1291,7 +1290,7 @@
         </ul>
       </div>
 
-      <!-- Column 3: Account -->
+      <!-- Account Column -->
       <div>
         <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
@@ -1301,45 +1300,61 @@
         </ul>
       </div>
 
-      <!-- Column 4: Follow Us -->
+      <!-- Customer Policies Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Customer Policies</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="contact.html" class="hover:text-gray-900 transition-colors">Contact Us</a></li>
+          <li><a href="fqa.html" class="hover:text-gray-900 transition-colors">FAQ</a></li>
+          <li><a href="T&C.html" class="hover:text-gray-900 transition-colors">T&C</a></li>
+          <li><a href="terms.html" class="hover:text-gray-900 transition-colors">Terms Of Use</a></li>
+          <li><a href="T&O.html" class="hover:text-gray-900 transition-colors">Track Orders</a></li>
+          <li><a href="shipping.html" class="hover:text-gray-900 transition-colors">Shipping</a></li>
+          <li><a href="cancellation.html" class="hover:text-gray-900 transition-colors">Cancellation</a></li>
+          <li><a href="P&P.html" class="hover:text-gray-900 transition-colors">Privacy policy</a></li>
+     
+        </ul>
+      </div>
+
+      <!-- Follow Us Column -->
       <div>
         <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
         <ul class="space-y-3 text-base font-semibold text-gray-600">
           <li>
-            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-facebook-f text-center "></i>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center"></i>
               <span>Facebook</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-twitter text-center "></i>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center"></i>
               <span>Twitter</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-instagram text-center "></i>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center"></i>
               <span>Instagram</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-pinterest-p text-center "></i>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center"></i>
               <span>Pinterest</span>
             </a>
           </li>
           <li>
-            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
-              <i class="fa-brands fa-youtube text-center "></i>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center"></i>
               <span>YouTube</span>
             </a>
           </li>
         </ul>
       </div>
 
-      <!-- Column 5: Contact Us & Logo -->
-      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
+      <!-- Contact Us Column -->
+      <div class="col-span-2 sm:col-span-1 lg:col-span-1">
         <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
         
         <div class="mb-5 flex flex-col items-start">
@@ -1365,10 +1380,13 @@
       </div>
 
     </div>
-
   </div>
 </footer>
 <!--Footer Section End-->
+
+
+
+
 <!--Bottom Section Start-->
 <div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1439,7 +1457,15 @@
 <script>
   
 </script>
+<script src="./assets/js/main.js"></script>
+   
+   <script src="./assets/js/product-detail.js"></script>
+    <script src="./assets/js/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+<script src="./assets/js/newsletter.js"></script>
+<script src="./assets/js/homepage-settings.js"></script>
+
 </body>
 </html>

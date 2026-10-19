@@ -138,3 +138,144 @@ app.post('/api/login', async (req, res) => {
         });
     }
 });
+
+
+
+// ==========================================
+// 🛒 CART ROUTES SECTION
+// ==========================================
+
+// 1. Is GET Route ko yahan replace/add karein
+app.get('/api/cart', async (req, res) => {
+  const { userId = 'guest_user' } = req.query;
+  try {
+    const cart = await Cart.findOne({ userId }).populate({
+      path: 'items.productId',
+      select: 'name price image category stock' // Isse Product ka name, price aur image frontend par aayega
+    });
+
+    res.json(cart || { userId, items: [] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// 2. Iske neeche aapke baaki cart routes honge (Add, Update, Remove, Clear)
+app.post('/api/cart/add', async (req, res) => { ... });
+app.put('/api/cart/update', async (req, res) => { ... });
+app.delete('/api/cart/remove', async (req, res) => { ... });
+app.delete('/api/cart/clear', async (req, res) => { ... });
+
+
+
+
+
+
+
+// script.js / main.js
+
+function goToDetail(id) {
+    window.location.href = `/product-detail.html?id=${id}`;
+}
+
+function Wishlist(id, event) {
+    event.stopPropagation();
+    // Wishlist logic...
+}
+
+function handleCartClick(index, event) {
+    // Cart logic...
+}
+
+
+
+// Backend se products fetch karke loop chalayein
+async function fetchProducts() {
+  const response = await fetch('/api/products');
+  const products = await response.json();
+
+  const container = document.getElementById('products-container');
+  container.innerHTML = '';
+
+  products.forEach(product => {
+    // Card ki HTML structure Tailwind CSS ke sath
+    container.innerHTML += `
+      <div class="bg-white border rounded-2xl p-4 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+        
+        <!-- Clickable Link with MongoDB _id -->
+        <a href="product-detail.html?id=${product._id}" class="group block">
+          <div class="relative bg-gray-100 rounded-xl overflow-hidden mb-3">
+            <span class="absolute top-2 left-2 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded">NEW</span>
+            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+          </div>
+          <h3 class="font-bold text-gray-900 group-hover:text-pink-600 transition">${product.name}</h3>
+          <p class="text-xs text-gray-500">${product.category}</p>
+          <p class="font-bold text-blue-600 mt-2 text-lg">₹${product.price}</p>
+        </a>
+
+        <!-- Add to Cart Button (Link ke bahar rakhein) -->
+        <div class="mt-4">
+          <button onclick="addToCart('${product._id}')" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2.5 rounded-xl transition">
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
+    `;
+  });
+}
+
+fetchProducts();
+
+
+
+const express = require('express');
+const app = express();
+
+// Apne product route ko yahan import karein
+const productRoutes = require('./routes/productRoutes'); 
+
+// Route ko middleware ki tarah use karein
+app.use('/api', productRoutes);
+
+// Server start karein
+app.listen(5000, () => {
+    console.log('Server is running on port 5500');
+});
+
+
+
+
+const Product = require('./models/Product'); // Model ka path
+
+// Route
+app.post('/api/products/add', async (req, res) => {
+    try {
+        const { name, price, category, image, images, description, stock } = req.body;
+
+        const newProduct = new Product({
+            name,
+            price,
+            category,
+            image,
+            images: images || [],
+            description,
+            stock
+        });
+
+        await newProduct.save();
+
+        res.status(201).json({
+            success: true,
+            message: 'Product and Gallery Images successfully MongoDB mein add ho gaya!',
+            product: newProduct
+        });
+
+    } catch (error) {
+        console.error("Error saving product:", error);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});

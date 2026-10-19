@@ -93,7 +93,7 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-            <a href="product-details.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
             <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
@@ -105,15 +105,30 @@
 
 
     <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+ 
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
       <!-- Outlined Register Button (Image Style) -->
-      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Register
       </a>
 
 
       <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
         Login
-      </a>
+      </a> -->
 
       <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,275 +214,37 @@
 </header>
 
 <!--Navbar Section End-->
-<!--Product Section Start-->
-<!-- <section class="product_card max-w-7xl mx-auto px-4 py-8 font-sans">
-
-  <nav class="text-xs text-gray-500 mb-6 space-x-1">
-    <a href="#" class="hover:underline">Home</a>
-    <span>&gt;</span>
-    <a href="#" class="hover:underline">Shop</a>
-    <span>&gt;</span>
-    <a href="#" class="hover:underline">T-shirts</a>
-    <span>&gt;</span>
-    <span class="text-gray-900 font-medium">Preppy T-shirt</span>
-  </nav>
 
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-    
-   
-    <div class="space-y-4">
-     
-      <div class="w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
-        <img id="main-product-img" src="./assets/img/latest3.png" alt="Preppy T-shirt" class="w-full h-full object-cover transition-opacity duration-300">
-      </div>
 
-    
-      <div class="grid grid-cols-5 gap-3">
-        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border-2 border-[#ff0055] focus:outline-none cursor-pointer">
-          <img src="./assets/img/latest3.png" alt="Thumbnail 1" class="w-full h-full object-cover">
-        </button>
-        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
-          <img src="./assets/img/latest4.png" alt="Thumbnail 2" class="w-full h-full object-cover">
-        </button>
-        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
-          <img src="./assets/img/2.jpg" alt="Thumbnail 3" class="w-full h-full object-cover">
-        </button>
-        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
-          <img src="./assets/img/latest1.png" alt="Thumbnail 4" class="w-full h-full object-cover">
-        </button>
-        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
-          <img src="./assets/img/latest2.png" alt="Thumbnail 5" class="w-full h-full object-cover">
-        </button>
-      </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-8 font-sans">
+    <div class="product-detail-wrapper">
+        <div id="detail-card">
+    <!-- Left Side: Thumbnails -->
+    <div class="thumbnail-list" id="thumbnailContainer">
+        <!-- Thumbnails will be injected here dynamically -->
     </div>
 
-
-    <div class="flex flex-col">
-   
-      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Preppy T-shirt</h1>
-
-    
-      <div class="flex items-center space-x-2 text-xs mb-6">
-        <div class="flex text-black text-sm">
-          ★★★★★
-        </div>
-        <span class="text-gray-500">(0 Reviews)</span>
-        <span class="text-gray-300">|</span>
-        <button class="text-[#ff0055] hover:underline cursor-pointer">Write a review</button>
-      </div>
-
-     
-      <div class="space-y-1.5 text-xs text-gray-600 mb-6">
-        <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
-        <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
-        <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
-      </div>
-
-    
-      <hr class="border-gray-200 mb-6">
-
-  
-      <div class="text-2xl font-bold text-gray-900 mb-6">
-        $40.00
-      </div>
-
-    
-      <div class="flex items-center space-x-3 mb-6">
-        <button id="decrement-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">-</button>
-        <span id="qty-count" class="text-sm font-semibold text-gray-900 w-6 text-center">1</span>
-        <button id="increment-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">+</button>
-      </div>
-
-     
-      <div class="mb-6">
-        <button class="w-36 bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
-          Add to Cart
-        </button>
-      </div>
-
-    
-      <hr class="border-gray-200 mb-6">
-
-     
-      <div class="flex items-center space-x-4 text-gray-700 mb-8">
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-instagram text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-pinterest-p text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-twitter text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
-      </div>
-
-      
-      <div>
-        <h3 class="font-bold text-gray-900 text-sm mb-2">Product Description</h3>
-        <p class="text-xs text-gray-500 leading-relaxed max-w-lg">
-          This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
-        </p>
-      </div>
-
+    <!-- Right Side: Main Display Image -->
+    <div class="main-image-view">
+        <img id="mainProductImage" src="" alt="Product Image">
     </div>
-
-  </div>
-</section> -->
-<!--Product Section Start-->
-<section class="product_card max-w-7xl mx-auto px-4 py-8 font-sans">
-  <!-- BREADCRUMB NAVIGATION -->
-  <nav class="text-xs text-gray-500 mb-6 space-x-1">
-    <a href="#" class="hover:underline">Home</a>
-    <span>&gt;</span>
-    <a href="#" class="hover:underline">Shop</a>
-    <span>&gt;</span>
-    <a href="#" class="hover:underline">T-shirts</a>
-    <span>&gt;</span>
-    <span class="text-gray-900 font-medium">Preppy T-shirt</span>
-  </nav>
-
-  <!-- PRODUCT DETAIL CONTAINER -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-    
-    <!-- LEFT SIDE: IMAGE GALLERY -->
-    <div class="space-y-4">
-      <!-- Main Featured Image -->
-      <div class="w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
-        <img id="main-product-img" src="./assets/img/1.jpg" alt="Preppy T-shirt" class="w-full h-full object-cover transition-opacity duration-300">
-      </div>
-
-      <!-- Thumbnail Images Grid -->
-      <div class="grid grid-cols-5 gap-3" id="thumbnail-container">
-        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-[#ff0055] focus:outline-none cursor-pointer transition-all">
-          <img src="./assets/img/latest3.png" alt="Thumbnail 1" class="w-full h-full object-cover">
-        </button>
-        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
-          <img src="./assets/img/latest2.png" alt="Thumbnail 2" class="w-full h-full object-cover">
-        </button>
-        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
-          <img src="./assets/img/latest4.png" alt="Thumbnail 3" class="w-full h-full object-cover">
-        </button>
-        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
-          <img src="./assets/img/3.jpg" alt="Thumbnail 4" class="w-full h-full object-cover">
-        </button>
-        <button class="thumb-btn h-20 rounded-xl overflow-hidden border-2 border-transparent hover:border-[#ff0055] focus:outline-none cursor-pointer transition-all">
-          <img src="./assets/img/latest2.png" alt="Thumbnail 5" class="w-full h-full object-cover">
-        </button>
-      </div>
-    </div>
-
-    <!-- RIGHT SIDE: PRODUCT DETAILS -->
-    <div class="flex flex-col">
-      <!-- Title -->
-      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Preppy T-shirt</h1>
-
-      <!-- Rating & Reviews -->
-      <div class="flex items-center space-x-2 text-xs mb-6">
-        <div class="flex text-black text-sm">
-          ★★★★★
-        </div>
-        <span class="text-gray-500">(0 Reviews)</span>
-        <span class="text-gray-300">|</span>
-        <button class="text-[#ff0055] hover:underline cursor-pointer">Write a review</button>
-      </div>
-
-      <!-- Meta Info -->
-      <!-- <div class="space-y-1.5 text-xs text-gray-600 mb-6">
-        <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
-        <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
-        <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
-      </div> -->
-     <div class="space-y-2.5 text-base text-gray-600 mb-6">
-  <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
-  <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
-  <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
 </div>
-      <!-- Border Separator -->
-      <hr class="border-gray-200 mb-6">
-
-      <!-- Price -->
-      <div class="text-2xl font-bold text-gray-900 mb-6">
-        $40.00
-      </div>
-
-      <!-- Quantity Selector -->
-      <div class="flex items-center space-x-3 mb-6">
-        <button id="decrement-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">-</button>
-        <span id="qty-count" class="text-sm font-semibold text-gray-900 w-6 text-center">1</span>
-        <button id="increment-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">+</button>
-      </div>
-
-      <!-- Add to Cart Button -->
-      <div class="mb-6">
-        <button class="w-36 bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Border Separator -->
-      <hr class="border-gray-200 mb-6">
-
-      <!-- Social Share Links -->
-      <div class="flex items-center space-x-4 text-gray-700 mb-8">
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-instagram text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-pinterest-p text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-twitter text-sm"></i></a>
-        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
-      </div>
-
-
-      <!-- SOCIAL SHARE LINKS WITH SVG ICONS -->
-      <div class="flex items-center space-x-4 text-gray-800 mb-8">
-        <!-- Facebook -->
-        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Facebook">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-        </a>
-
-        <!-- Instagram -->
-        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Instagram">
-          <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-          </svg>
-        </a>
-
-        <!-- Pinterest -->
-        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Pinterest">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
-          </svg>
-        </a>
-
-        <!-- Twitter / X -->
-        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="Twitter">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-        </a>
-
-        <!-- WhatsApp -->
-        <a href="#" class="hover:text-[#ff0055] transition-colors p-1" aria-label="WhatsApp">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-          </svg>
-        </a>
-      </div>
-      <!-- Product Description -->
-      <div>
-        <h3 class="font-bold text-gray-900 text-sm mb-2 text-xl">Product Description</h3>
-        <!-- <p class="text-xs text-gray-500 leading-relaxed max-w-lg">
-          This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
-        </p> -->
-        <p class="text-base text-gray-500 leading-relaxed max-w-lg">
-  This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
-</p>
-      </div>
-
-    </div>
 
   </div>
-</section>
+</div>
+
+
+
+<!--Product Section Start-->
+
+
+
+
+
+
+<!--Product Section Start-->
 <!--Product Section End-->
 
 <!--Product Section Start-->
@@ -852,6 +629,7 @@
             <div class="product-card bg-white rounded-2xl p-3 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full border border-gray-100">
               <div>
                 <div class="w-full h-[380px] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                  
                   <img src="./assets/img/2.jpg" alt="Black suit" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
                 </div>
                 <h3 class="font-bold text-gray-900 text-base mb-1">Black suit</h3>
@@ -1251,84 +1029,18 @@
   </div>
 </div>
 <!--Bottom Section End-->
-<script>
-  // Form Submission Logic
-const reviewForm = document.getElementById('review-form');
-const reviewsList = document.getElementById('reviews-list');
-
-if (reviewForm && reviewsList) {
-  reviewForm.addEventListener('submit', function(e) {
-    // 1. Page refresh hone se rokein
-    e.preventDefault();
-
-    // 2. Form values read karein
-    const name = document.getElementById('review-name').value;
-    const ratingVal = document.getElementById('review-rating').value;
-    const reviewText = document.getElementById('review-text').value;
-
-    // Stars format karein
-    const stars = '★'.repeat(ratingVal) + '☆'.repeat(5 - ratingVal);
-
-    // 3. New Review HTML Card banayein
-    const newReview = document.createElement('div');
-    newReview.className = 'border-b border-gray-100 pb-3';
-    newReview.innerHTML = `
-      <div class="flex items-center space-x-2 mb-1">
-        <span class="font-bold text-gray-900">${name}</span>
-        <span class="text-black text-xs">${stars}</span>
-      </div>
-      <p class="text-gray-600">${reviewText}</p>
-    `;
-
-    // 4. New review ko list ke sabse upar add karein
-    reviewsList.prepend(newReview);
-
-    // 5. Form inputs clear karein
-    reviewForm.reset();
-
-    alert('Review submitted successfully!');
-  });
-}
 
 
+  
 
- 
-
- document.addEventListener("DOMContentLoaded", function () {
-      var featuredSwiper = new Swiper(".productSlider", {
-        slidesPerView: 1,
-        spaceBetween: 16,
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        navigation: {
-          nextEl: ".slider-next",
-          prevEl: ".slider-prev",
-        },
-        pagination: {
-          el: ".slider-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 24,
-          },
-        },
-      });
-    });
-</script>
+  
+  <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/products.js"></script>
+<script src="./assets/js/product-detail.js"></script>
+    <script src="./assets/js/navbar.js"></script>
+<script src="./assets/js/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="./assets/js/script.js"></script>
+
 </body>
 </html>

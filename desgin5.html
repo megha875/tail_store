@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Services Section</title>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .services-section {
+      background: linear-gradient(135deg, #071624 0%, #0c253b 100%);
+      padding: 80px 0;
+      color: #ffffff;
+    }
+
+    .section-title {
+      font-weight: 800;
+      font-size: 2.3rem;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      color: #94a3b8;
+      max-width: 680px;
+      margin: 0 auto 60px auto;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* 3D Flip Card Architecture */
+    .service-card-wrapper {
+      perspective: 1200px;
+      margin-bottom: 25px;
+      cursor: pointer;
+    }
+
+    .service-card-inner {
+      position: relative;
+      width: 100%;
+      height: 270px;
+      transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 14px;
+    }
+
+    .service-card-wrapper.flipped .service-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Front and Back common styling */
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    /* Front Face Design */
+    .card-front {
+      background: rgba(13, 70, 84, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card-wrapper:hover .card-front {
+      border-color: rgba(0, 210, 196, 0.5);
+      box-shadow: 0 15px 35px rgba(0, 210, 196, 0.15);
+    }
+
+    /* Watermark Number */
+    .watermark-num {
+      position: absolute;
+      top: 10px;
+      left: 18px;
+      font-size: 4.2rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.07);
+      line-height: 1;
+      user-select: none;
+      z-index: 1;
+    }
+
+    /* Thumbnail Image with Glow */
+    .card-img-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 75px;
+      height: 75px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 210, 196, 0.4);
+      z-index: 2;
+    }
+
+    .card-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card-wrapper:hover .card-img-container img {
+      transform: scale(1.1);
+    }
+
+    .front-content {
+      position: relative;
+      z-index: 2;
+      margin-top: 55px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      margin-bottom: 0;
+    }
+
+    .card-footer-info {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 0.75rem;
+      color: #00d2c4;
+      font-weight: 600;
+    }
+
+    .card-footer-info i {
+      margin-left: 5px;
+      transition: transform 0.3s;
+    }
+
+    .service-card-wrapper:hover .card-footer-info i {
+      transform: translateX(4px);
+    }
+
+    /* Back Face Design */
+    .card-back {
+      background: #092032;
+      border: 1px solid #00d2c4;
+      transform: rotateY(180deg);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .back-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #00d2c4;
+      margin-bottom: 8px;
+    }
+
+    .back-desc {
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      line-height: 1.55;
+    }
+
+    .btn-flip-back {
+      background: rgba(0, 210, 196, 0.15);
+      color: #00d2c4;
+      border: 1px solid rgba(0, 210, 196, 0.3);
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 20px;
+      align-self: flex-start;
+      transition: all 0.2s;
+    }
+
+    .btn-flip-back:hover {
+      background: #00d2c4;
+      color: #071624;
+    }
+
+    /* CTA Button */
+    .btn-view-all {
+      background: linear-gradient(135deg, #00d2c4 0%, #039688 100%);
+      color: #071624;
+      padding: 12px 36px;
+      font-weight: 700;
+      border-radius: 30px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0, 210, 196, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-view-all:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 210, 196, 0.5);
+      color: #071624;
+    }
+  </style>
+</head>
+<body>
+
+<section class="services-section">
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="text-center">
+      <h2 class="section-title">By Ranking First on Google<br>And Targeting Your Customers at Every Step</h2>
+      <p class="section-subtitle">
+        Explore our specialized digital growth strategies. Click on any interactive card below to discover comprehensive service insights.
+      </p>
+    </div>
+
+    <!-- 3x3 Grid -->
+    <div class="row g-4">
+      
+      <!-- Card 1 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">01</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=250&q=80" alt="App Store SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">App Store SEO</h5>
+                <p class="card-desc">Make your mobile app appear on top of App Store and Play Store.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">App Store Optimization</h5>
+                <p class="back-desc">We optimize your app title, keywords, visual creatives, and review ratings to boost organic discovery, rank higher in app marketplace searches, and increase download rates.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">02</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1556742049-0a670f4a4591?auto=format&fit=crop&w=250&q=80" alt="Ecommerce SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">Ecommerce SEO</h5>
+                <p class="card-desc">Attract more traffic with a well-ranked and optimized page.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">E-Commerce Revenue Growth</h5>
+                <p class="back-desc">Enhance product page architecture, implement structured schema data, target high-intent buying keywords, and convert casual store visitors into loyal paying customers.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">03</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=250&q=80" alt="International SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">International SEO</h5>
+                <p class="card-desc">Stand out in your target location with SEO.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Global Expansion SEO</h5>
+                <p class="back-desc">Target overseas markets effectively using precise hreflang tags, localized content strategy, ccTLD setups, and multi-region search engine alignment.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">04</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=250&q=80" alt="Local SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">Local SEO</h5>
+                <p class="card-desc">Let users come one step closer to your business.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Local Business Dominance</h5>
+                <p class="back-desc">Optimize your Google Business Profile, build authoritative local citations, manage reviews, and capture high-converting 'near me' local search traffic.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">05</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=250&q=80" alt="Mobile SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">Mobile SEO</h5>
+                <p class="card-desc">Get found by high-converting mobile customers.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Mobile-First Excellence</h5>
+                <p class="back-desc">Deliver lightning-fast load speeds, fully responsive mobile layouts, and optimal user experiences built for Google’s mobile-first indexing algorithms.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">06</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=250&q=80" alt="Multilingual SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">Multilingual SEO</h5>
+                <p class="card-desc">We improve your site's ranking in every language it supports.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Multilingual Optimization</h5>
+                <p class="back-desc">Seamlessly rank across diverse linguistic audiences by creating culturally tailored content, proper canonical tags, and eliminating duplicate text issues.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">07</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=250&q=80" alt="Voice Search Optimization">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">Voice Search Optimization</h5>
+                <p class="card-desc">Optimize for voice queries and long-tail keywords.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Voice Assistant Targeting</h5>
+                <p class="back-desc">Target conversational phrasing and natural language queries to win featured snippets on modern voice search platforms like Siri, Alexa, and Google Assistant.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">08</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=250&q=80" alt="WordPress SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">WordPress SEO</h5>
+                <p class="card-desc">Drive traffic & enhance search ranking with optimized WordPress site.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">WordPress Performance SEO</h5>
+                <p class="back-desc">Boost site speed, tune plugin configurations, resolve crawl errors, and set up professional SEO architecture specifically for WordPress platforms.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="service-card-wrapper" onclick="this.classList.toggle('flipped')">
+          <div class="service-card-inner">
+            <div class="card-face card-front">
+              <div class="watermark-num">09</div>
+              <div class="card-img-container">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=250&q=80" alt="YouTube SEO">
+              </div>
+              <div class="front-content">
+                <h5 class="card-title">YouTube SEO</h5>
+                <p class="card-desc">Make your videos rank higher on YouTube and Google searches.</p>
+              </div>
+              <div class="card-footer-info">
+                <span>Click to view details</span> <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </div>
+            <div class="card-face card-back">
+              <div>
+                <h5 class="back-title">Video Ranking Strategies</h5>
+                <p class="back-desc">Optimize video metadata, tags, custom thumbnails, and descriptions to expand viewer retention, subscriber growth, and organic search visibility.</p>
+              </div>
+              <button class="btn-flip-back"><i class="fa-solid fa-rotate-left"></i> Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA Button -->
+    <div class="text-center mt-5">
+      <a href="#" class="btn btn-view-all">View All Services <i class="fa-solid fa-arrow-right ms-2"></i></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

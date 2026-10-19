@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brush Stroke Effect</title>
+  <style>
+    html, body { height: 100%; margin: 0; }
+
+    body {
+      background: #0f0f0f;
+      display: grid;
+      place-items: center;
+    }
+
+    .brush {
+      position: relative;
+      isolation: isolate;
+      width: min(750px, 92vw);
+      height: 125px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #123;
+      font: 600 28px/1 system-ui, sans-serif;
+    }
+
+    /* AFTER: grey background box */
+    .brush::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #e6e6e6;
+      z-index: -2;
+    }
+
+    /* BEFORE: blue brush streaks */
+    .brush::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 14px;
+      top: 20px;
+      bottom: 20px;
+      z-index: -1;
+      background: repeating-linear-gradient(
+        to bottom,
+        #9fdcf3 0 6px,
+        #c4e9f6 6px 8px,
+        #a5def4 8px 15px,
+        #d3ecf5 15px 17px,
+        #98d9f1 17px 22px
+      );
+      filter: blur(1.5px);
+      -webkit-mask-image: linear-gradient(to right,
+        transparent 0%, #000 8%, #000 40%, rgba(0,0,0,.3) 100%);
+              mask-image: linear-gradient(to right,
+        transparent 0%, #000 8%, #000 40%, rgba(0,0,0,.3) 100%);
+    }
+  </style>
+</head>
+<body>
+  <div class="brush">
+    <span>Your Text</span>
+  </div>
+</body>
+</html>

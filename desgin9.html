@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium SEO Services - Luxury Interactive Showcase</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #040d12;
+            --bg-card-teal: #082830;
+            --accent-cyan: #00f2fe;
+            --accent-teal: #00c6ff;
+            --accent-emerald: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-muted: #8e9aaf;
+            --glass-bg: rgba(8, 40, 48, 0.65);
+            --glass-border: rgba(0, 242, 254, 0.18);
+            --glow-shadow: 0 0 35px rgba(0, 242, 254, 0.25);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Ambient Glowing Background Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.45;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: #00f2fe;
+            top: -100px;
+            left: -100px;
+        }
+        .orb-2 {
+            width: 550px;
+            height: 550px;
+            background: #0b3c49;
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: #7928ca;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            animation-delay: -9s;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 80px) scale(0.95); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Styling */
+        .badge-pill-header {
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--accent-cyan);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .gradient-heading {
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 80%, var(--accent-teal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .header-subtext {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        /* Nav Tab Switcher */
+        .nav-switcher-wrapper {
+            background: rgba(8, 30, 38, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 60px;
+            padding: 6px;
+            display: inline-flex;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-switcher .nav-link {
+            color: var(--text-muted);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 28px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            background: transparent;
+        }
+
+        .nav-switcher .nav-link i {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-switcher .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-cyan), #0082c8);
+            color: #030f14;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+            font-weight: 700;
+        }
+
+        .nav-switcher .nav-link:hover:not(.active) {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* TAB 1: 3D GLASSMORPHISM FLIP CARDS */
+        .flip-card-3d {
+            perspective: 1200px;
+            height: 330px;
+            margin-bottom: 30px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-style: preserve-3d;
+            border-radius: 20px;
+        }
+
+        .flip-card-3d:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .flip-card-front {
+            background: linear-gradient(145deg, rgba(11, 60, 73, 0.7), rgba(4, 18, 24, 0.85));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .flip-card-front::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 24px;
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(0,242,254,0.4), transparent 60%, rgba(0,242,254,0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .card-number-glow {
+            font-size: 3.8rem;
+            font-weight: 800;
+            background: linear-gradient(180deg, rgba(0, 242, 254, 0.6), rgba(0, 242, 254, 0.05));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -2px;
+        }
+
+        .flip-card-front .title {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 10px;
+        }
+
+        .flip-hint-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.08);
+            padding: 6px 14px;
+            border-radius: 30px;
+            width: fit-content;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .flip-card-back {
+            background: linear-gradient(145deg, #071e26, #030f14);
+            transform: rotateY(180deg);
+            border-color: rgba(0, 242, 254, 0.5);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);
+            text-align: left;
+        }
+
+        .flip-card-back .desc {
+            color: #c0ceda;
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        .btn-card-cta {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+            color: #030f14;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .btn-card-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 242, 254, 0.4);
+            color: #000;
+        }
+
+
+        /* TAB 2: INTERACTIVE NEON CURTAIN & SLIDE CARDS */
+        .curtain-card {
+            position: relative;
+            height: 330px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: rgba(6, 26, 33, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+        }
+
+        /* Animated Gradient Border for Tab 2 */
+        .curtain-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 26px;
+            background: conic-gradient(from 0deg, transparent 70%, var(--accent-cyan), var(--accent-purple), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+            animation: rotateBorder 6s linear infinite;
+        }
+
+        .curtain-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotateBorder {
+            100% { transform: rotate(360deg); }
+        }
+
+        .curtain-card-inner {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            background: #061920;
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .icon-box-neon {
+            width: 55px;
+            height: 55px;
+            border-radius: 16px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .curtain-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, #0b3c49, #04171d);
+            border-radius: 24px;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: inset 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .curtain-card:hover .curtain-overlay {
+            bottom: 0;
+        }
+
+        .feature-tag {
+            font-size: 0.78rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: var(--accent-cyan);
+        }
+
+
+        /* TAB 3: MAGNETIC HOLOGRAPHIC DEPTH CARDS */
+        .holo-card {
+            background: rgba(8, 35, 45, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 32px;
+            height: 330px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holo-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .holo-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.25), 0 0 20px rgba(0, 242, 254, 0.2);
+            background: rgba(11, 48, 60, 0.8);
+        }
+
+        .holo-card:hover::after {
+            opacity: 1;
+        }
+
+        .holo-num {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-cyan);
+            background: rgba(0, 242, 254, 0.12);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .holo-card:hover .holo-num {
+            background: var(--accent-cyan);
+            color: #030f14;
+            box-shadow: 0 0 20px var(--accent-cyan);
+            transform: scale(1.1);
+        }
+
+        .pill-expand-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-radius: 50px;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .holo-card:hover .pill-expand-btn {
+            background: var(--accent-cyan);
+            color: #030f14;
+            border-color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        /* Floating Bottom Action Bar */
+        .bottom-action-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(5, 20, 27, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 10px 24px;
+            border-radius: 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 242, 254, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-view-all {
+            background: linear-gradient(135deg, var(--accent-cyan), #0072ff);
+            color: #030f14;
+            font-weight: 800;
+            border: none;
+            padding: 10px 26px;
+            border-radius: 50px;
+            font-size: 0.92rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-view-all:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.7);
+            color: #000;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .nav-switcher-wrapper {
+                width: 100%;
+                border-radius: 20px;
+            }
+            .nav-switcher {
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-switcher .nav-link {
+                justify-content: center;
+                width: 100%;
+            }
+            .bottom-action-bar {
+                width: 90%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <div class="container py-5 main-container">
+
+        <!-- HEADER SECTION -->
+        <div class="text-center mb-5">
+            <div class="badge-pill-header mb-3">
+                <i class="fa-solid fa-chart-line"></i> India's #1 SEO Company
+            </div>
+            <h1 class="display-4 gradient-heading mb-3">
+                By Ranking first on Google <br class="d-none d-md-block">
+                And targeting your customers at every step
+            </h1>
+            <p class="header-subtext mb-4">
+                No matter where they are, let it be authentic, yet omnipresent. As a leading SEO company in India, our unified approach is built to deliver high jumps in ranking, keeping local, mobile, and voice searches ticked.
+            </p>
+
+            <!-- INTERACTIVE TAB SWITCHER -->
+            <div class="nav-switcher-wrapper mt-3">
+                <ul class="nav nav-switcher" id="styleTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab" data-bs-target="#tab1" type="button" role="tab">
+                            <i class="fa-solid fa-cube"></i> 3D Glass Flip Cards
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2" type="button" role="tab">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Neon Curtain Slide
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tab3-tab" data-bs-toggle="tab" data-bs-target="#tab3" type="button" role="tab">
+                            <i class="fa-solid fa-layer-group"></i> Holographic Depth
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT AREA -->
+        <div class="tab-content" id="styleTabsContent">
+
+            <!-- ================= PAGE / TAB 1: 3D GLASSMORPHISM FLIP CARDS ================= -->
+            <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                <div class="row g-4">
+                    <!-- Service 01 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">01</div>
+                                        <i class="fa-brands fa-app-store-ios text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">App Store SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #01</div>
+                                        <h4 class="fw-bold text-white mb-3">App Store SEO</h4>
+                                        <p class="desc">Make your mobile app appear on top of App Store and Play Store with optimized metadata, visual assets, and keyword targeting.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">02</div>
+                                        <i class="fa-solid fa-cart-shopping text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">Ecommerce SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #02</div>
+                                        <h4 class="fw-bold text-white mb-3">Ecommerce SEO</h4>
+                                        <p class="desc">Attract more traffic with a well-ranked and optimized page to turn casual site visitors into loyal buyers.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">03</div>
+                                        <i class="fa-solid fa-globe text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">International SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #03</div>
+                                        <h4 class="fw-bold text-white mb-3">International SEO</h4>
+                                        <p class="desc">Stand out in your target location with SEO tailored for global search engine algorithms and audience behaviors.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">04</div>
+                                        <i class="fa-solid fa-location-dot text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">Local SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #04</div>
+                                        <h4 class="fw-bold text-white mb-3">Local SEO</h4>
+                                        <p class="desc">Let users come one step closer to your business with localized maps optimization and geo-targeted keyword positioning.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 05 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">05</div>
+                                        <i class="fa-solid fa-mobile-screen-button text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">Mobile SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #05</div>
+                                        <h4 class="fw-bold text-white mb-3">Mobile SEO</h4>
+                                        <p class="desc">Get found by high-converting mobile customers through lightning-fast page loading and seamless mobile UX design.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 06 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">06</div>
+                                        <i class="fa-solid fa-language text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">Multilingual SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #06</div>
+                                        <h4 class="fw-bold text-white mb-3">Multilingual SEO</h4>
+                                        <p class="desc">We improve your site's ranking in every language it supports using hreflang tags and localized search intent targeting.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 07 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">07</div>
+                                        <i class="fa-solid fa-microphone-lines text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">Voice Search Optimization</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #07</div>
+                                        <h4 class="fw-bold text-white mb-3">Voice Search Optimization</h4>
+                                        <p class="desc">Optimize for voice queries and long-tail keywords to capture natural conversational AI assistant queries.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 08 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">08</div>
+                                        <i class="fa-brands fa-wordpress text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">WordPress SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #08</div>
+                                        <h4 class="fw-bold text-white mb-3">WordPress SEO</h4>
+                                        <p class="desc">Drive traffic & enhance search ranking with optimized WordPress site structure, caching, and technical schema.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 09 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="flip-card-3d">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div class="card-number-glow">09</div>
+                                        <i class="fa-brands fa-youtube text-info fs-3"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="title">YouTube SEO</h3>
+                                        <div class="flip-hint-badge mt-2">
+                                            Hover to flip <i class="fa-solid fa-rotate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <div>
+                                        <div class="text-info fw-bold mb-1">SERVICE #09</div>
+                                        <h4 class="fw-bold text-white mb-3">YouTube SEO</h4>
+                                        <p class="desc">Make your videos rank higher on YouTube and Google searches with optimized tags, transcripts, and engagement tactics.</p>
+                                    </div>
+                                    <a href="#" class="btn-card-cta">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ================= PAGE / TAB 2: INTERACTIVE NEON CURTAIN & SLIDE CARDS ================= -->
+            <div class="tab-pane fade" id="tab2" role="tabpanel">
+                <div class="row g-4">
+
+                    <!-- Service 01 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-brands fa-app-store-ios"></i></div>
+                                    <span class="text-muted fw-bold fs-5">01</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">App Store SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">ASO</span>
+                                        <span class="feature-tag">Play Store</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">App Store SEO</h4>
+                                    <p class="text-light small">Make your mobile app appear on top of App Store and Play Store.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">High Growth</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                    <span class="text-muted fw-bold fs-5">02</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">Ecommerce SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Conversion</span>
+                                        <span class="feature-tag">Sales</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">Ecommerce SEO</h4>
+                                    <p class="text-light small">Attract more traffic with a well-ranked and optimized page.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">High ROI</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-globe"></i></div>
+                                    <span class="text-muted fw-bold fs-5">03</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">International SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Global</span>
+                                        <span class="feature-tag">Geo-Targeting</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">International SEO</h4>
+                                    <p class="text-light small">Stand out in your target location with SEO.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Global Reach</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-location-dot"></i></div>
+                                    <span class="text-muted fw-bold fs-5">04</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">Local SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Google Maps</span>
+                                        <span class="feature-tag">Local Pack</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">Local SEO</h4>
+                                    <p class="text-light small">Let users come one step closer to your business.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Foot Traffic</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 05 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                                    <span class="text-muted fw-bold fs-5">05</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">Mobile SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Mobile First</span>
+                                        <span class="feature-tag">AMP</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">Mobile SEO</h4>
+                                    <p class="text-light small">Get found by high-converting mobile customers.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Instant Load</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 06 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-language"></i></div>
+                                    <span class="text-muted fw-bold fs-5">06</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">Multilingual SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Hreflang</span>
+                                        <span class="feature-tag">Localization</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">Multilingual SEO</h4>
+                                    <p class="text-light small">We improve your site's ranking in every language it supports.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Multi-Region</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 07 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-solid fa-microphone-lines"></i></div>
+                                    <span class="text-muted fw-bold fs-5">07</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">Voice Search SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">AI Search</span>
+                                        <span class="feature-tag">Siri / Alexa</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">Voice Search Optimization</h4>
+                                    <p class="text-light small">Optimize for voice queries and long-tail keywords.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Future Ready</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 08 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-brands fa-wordpress"></i></div>
+                                    <span class="text-muted fw-bold fs-5">08</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">WordPress SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">CMS</span>
+                                        <span class="feature-tag">Technical</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">WordPress SEO</h4>
+                                    <p class="text-light small">Drive traffic & enhance search ranking with optimized WordPress site.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Fast Ranking</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 09 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="curtain-card">
+                            <div class="curtain-card-inner">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-box-neon"><i class="fa-brands fa-youtube"></i></div>
+                                    <span class="text-muted fw-bold fs-5">09</span>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">YouTube SEO</h3>
+                                    <p class="text-muted small mb-0">Hover to sweep up curtain details</p>
+                                </div>
+                            </div>
+                            <div class="curtain-overlay">
+                                <div>
+                                    <div class="d-flex gap-2 mb-3">
+                                        <span class="feature-tag">Video Rank</span>
+                                        <span class="feature-tag">Search</span>
+                                    </div>
+                                    <h4 class="fw-bold text-white mb-2">YouTube SEO</h4>
+                                    <p class="text-light small">Make your videos rank higher on YouTube and Google searches.</p>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between border-top border-secondary pt-3">
+                                    <span class="text-info fw-bold small">Top Video</span>
+                                    <i class="fa-solid fa-circle-arrow-right text-info fs-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- ================= PAGE / TAB 3: MAGNETIC HOLOGRAPHIC DEPTH CARDS ================= -->
+            <div class="tab-pane fade" id="tab3" role="tabpanel">
+                <div class="row g-4">
+
+                    <!-- Service 01 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">01</div>
+                                <i class="fa-brands fa-app-store-ios text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">App Store SEO</h3>
+                                <p class="text-muted small mb-0">Make your mobile app appear on top of App Store and Play Store.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Get Top Position</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 02 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">02</div>
+                                <i class="fa-solid fa-cart-shopping text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Ecommerce SEO</h3>
+                                <p class="text-muted small mb-0">Attract more traffic with a well-ranked and optimized page.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Boost Sales Traffic</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 03 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">03</div>
+                                <i class="fa-solid fa-globe text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">International SEO</h3>
+                                <p class="text-muted small mb-0">Stand out in your target location with SEO.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Expand Globally</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 04 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">04</div>
+                                <i class="fa-solid fa-location-dot text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Local SEO</h3>
+                                <p class="text-muted small mb-0">Let users come one step closer to your business.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Dominate Local Map</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 05 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">05</div>
+                                <i class="fa-solid fa-mobile-screen-button text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Mobile SEO</h3>
+                                <p class="text-muted small mb-0">Get found by high-converting mobile customers.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Optimize Mobile UI</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 06 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">06</div>
+                                <i class="fa-solid fa-language text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Multilingual SEO</h3>
+                                <p class="text-muted small mb-0">We improve your site's ranking in every language it supports.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Target All Languages</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 07 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">07</div>
+                                <i class="fa-solid fa-microphone-lines text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">Voice Search Optimization</h3>
+                                <p class="text-muted small mb-0">Optimize for voice queries and long-tail keywords.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Capture Voice Intent</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 08 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">08</div>
+                                <i class="fa-brands fa-wordpress text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">WordPress SEO</h3>
+                                <p class="text-muted small mb-0">Drive traffic & enhance search ranking with optimized WordPress site.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Optimize CMS Site</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Service 09 -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="holo-card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="holo-num">09</div>
+                                <i class="fa-brands fa-youtube text-muted fs-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">YouTube SEO</h3>
+                                <p class="text-muted small mb-0">Make your videos rank higher on YouTube and Google searches.</p>
+                            </div>
+                            <a href="#" class="pill-expand-btn">
+                                <span>Rank Video #1</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FLOATING ACTION BAR -->
+    <div class="bottom-action-bar">
+        <div class="d-flex align-items-center gap-2">
+            <span class="spinner-grow spinner-grow-sm text-info" role="status"></span>
+            <span class="text-white small fw-bold d-none d-sm-inline">SEO Audit Ready</span>
+        </div>
+        <a href="#" class="btn-view-all">
+            <span>View All Services</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
