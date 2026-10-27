@@ -447,7 +447,11 @@
 <script>
       async function loadAndFilterWomenProducts() {
         try {
+<<<<<<< HEAD
           const response = await fetch('http://localhost:5000/api/products?category=women&includeAll=true');
+=======
+          const response = await fetch('http://localhost:5501/api/products?category=women&includeAll=true');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
           if (!response.ok) throw new Error(`Products request failed (HTTP ${response.status})`);
           const allProducts = await response.json();
           if (!Array.isArray(allProducts)) throw new Error('Products response was not a product list');

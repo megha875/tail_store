@@ -15,7 +15,11 @@ async function renderDynamicCart() {
     try {
 
         const response = await fetch(
+<<<<<<< HEAD
             'http://localhost:5000/api/cart?userId=megha_user'
+=======
+            'http://localhost:5500/api/cart?userId=megha_user'
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         );
 
         if (!response.ok) {
@@ -186,7 +190,11 @@ async function updateQuantity(productId, action) {
     try {
 
         const response = await fetch(
+<<<<<<< HEAD
             'http://localhost:5000/api/cart/update',
+=======
+            'http://localhost:5500/api/cart/update',
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             {
                 method: 'PUT',
 
@@ -223,7 +231,11 @@ async function removeFromCart(productId) {
     try {
 
         const response = await fetch(
+<<<<<<< HEAD
             'http://localhost:5000/api/cart/remove',
+=======
+            'http://localhost:5500/api/cart/remove',
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             {
                 method: 'DELETE',
 
@@ -290,7 +302,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //     if (!badge) return;
 
     //     try {
+<<<<<<< HEAD
     //         const response = await fetch('http://localhost:5000/api/cart?userId=guest_user');
+=======
+    //         const response = await fetch('http://localhost:5500/api/cart?userId=guest_user');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             
     //         if (!response.ok) {
     //             badge.innerText = '0';
@@ -316,7 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //     if (event) event.preventDefault(); // Form submit refresh roke
 
     //     try {
+<<<<<<< HEAD
     //         const response = await fetch('http://localhost:5000/api/cart/add', {
+=======
+    //         const response = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({
@@ -348,7 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //     if (event) event.preventDefault();
 
     //     try {
+<<<<<<< HEAD
     //         const response = await fetch('http://localhost:5000/api/cart/remove', {
+=======
+    //         const response = await fetch('http://localhost:5500/api/cart/remove', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     //             method: 'POST',
     //             headers: { 'Content-Type': 'application/json' },
     //             body: JSON.stringify({
@@ -380,7 +404,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // 1. Cart Page Data Fetch & Render Function
+<<<<<<< HEAD
 const API_URL = 'http://localhost:5000/api/cart';
+=======
+const API_URL = 'http://localhost:5500/api/cart';
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 // 1. MongoDB se Cart Load karna aur Display karna
 async function loadCart() {

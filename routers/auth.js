@@ -1,5 +1,9 @@
 // // auth.js
+<<<<<<< HEAD
 // const AUTH_API = 'http://localhost:5000/api/auth';
+=======
+// const AUTH_API = 'http://localhost:5500/api/auth';
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 // function checkAndUpdateAuthUI() {
 //   const token = localStorage.getItem('userToken');

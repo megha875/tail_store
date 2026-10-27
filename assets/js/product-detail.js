@@ -14,7 +14,11 @@ async function loadProductDetails() {
   try {
     const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
     const apiOrigin = isLocalHost || window.location.protocol === 'file:'
+<<<<<<< HEAD
       ? 'http://localhost:5000'
+=======
+      ? 'http://localhost:5501'
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       : window.location.origin;
     const response = await fetch(`${apiOrigin}/api/products/${encodeURIComponent(productId)}`);
     const responseText = await response.text();
@@ -22,7 +26,11 @@ async function loadProductDetails() {
     try {
       product = responseText ? JSON.parse(responseText) : {};
     } catch {
+<<<<<<< HEAD
       throw new Error(`Product API ne JSON ke bajay HTML bheja (HTTP ${response.status}). Product page ko http://localhost:5000 par kholein.`);
+=======
+      throw new Error(`Product API ne JSON ke bajay HTML bheja (HTTP ${response.status}). Product page ko http://localhost:5500 par kholein.`);
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     }
 
     if (!response.ok) {
@@ -47,18 +55,25 @@ function renderProductDetail(container, product) {
     '"': '&quot;',
     "'": '&#39;'
   })[character]);
+<<<<<<< HEAD
 
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   const gallery = [...new Set([
     product.image,
     ...(Array.isArray(product.images) ? product.images : [])
   ].filter((image) => typeof image === 'string' && image.trim()).map((image) => image.trim()))];
+<<<<<<< HEAD
   
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   const images = gallery.length ? gallery : ['assets/img/category.png'];
   const name = product.name || product.title || 'Product';
   const price = Number(product.price) || 0;
   const category = product.category || 'General';
   const description = product.description || 'Is product ke liye abhi description available nahi hai.';
   const stock = Number.isFinite(Number(product.stock)) ? Number(product.stock) : null;
+<<<<<<< HEAD
   
   const colors = Array.isArray(product.colors) ? product.colors.filter(Boolean) : [];
   const sizes = Array.isArray(product.sizes) ? product.sizes.filter(Boolean) : [];
@@ -114,12 +129,22 @@ function renderProductDetail(container, product) {
       </div>
     `;
   }
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
   container.innerHTML = `
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start bg-white p-6 rounded-2xl shadow-lg">
       <section class="lg:col-span-7 flex flex-col-reverse sm:flex-row gap-4" aria-label="Product images">
         <div id="productThumbnails" class="flex sm:flex-col gap-3 overflow-x-auto sm:overflow-y-auto sm:max-h-[500px]" aria-label="Product thumbnails">
+<<<<<<< HEAD
           ${thumbnailsHTML}
+=======
+          ${images.map((image, index) => `
+            <button type="button" class="product-thumbnail border-2 ${index === 0 ? 'border-indigo-600' : 'border-gray-200'} rounded-lg overflow-hidden w-20 h-20 shrink-0 hover:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-index="${index}" aria-label="Show product image ${index + 1}" aria-pressed="${index === 0}">
+              <img src="${escapeHTML(image)}" alt="${escapeHTML(name)} thumbnail ${index + 1}" class="w-full h-full object-cover">
+            </button>
+          `).join('')}
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         </div>
         <div class="relative w-full min-h-[350px] sm:h-[500px] bg-gray-100 rounded-2xl overflow-hidden flex items-center justify-center">
           <img id="main-product-img" src="${escapeHTML(images[0])}" alt="${escapeHTML(name)}" class="w-full h-full min-h-[350px] sm:h-[500px] object-contain p-3">
@@ -131,6 +156,7 @@ function renderProductDetail(container, product) {
       </section>
 
       <section class="lg:col-span-5 flex flex-col gap-4">
+<<<<<<< HEAD
         <span class="text-xs font-bold uppercase tracking-wider text-[#FF0043] bg-[#FF0043]/10 px-3 py-1 rounded-full w-max">${escapeHTML(category)}</span>
         <h1 class="text-3xl font-bold text-gray-900">${escapeHTML(name)}</h1>
         <p class="text-3xl font-extrabold text-[#FF0043]">₹${price.toLocaleString('en-IN')}</p>
@@ -142,6 +168,14 @@ function renderProductDetail(container, product) {
 
         <p id="optionError" class="hidden text-sm font-semibold text-red-600"></p>
         <button type="button" id="addProductToCart" class="mt-2 w-full bg-[#FF0043] hover:bg-[#d90039] disabled:bg-gray-400 text-white font-semibold py-3.5 px-6 rounded-full transition duration-200" ${stock === 0 ? 'disabled' : ''}>
+=======
+        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full w-max">${escapeHTML(category)}</span>
+        <h1 class="text-3xl font-bold text-gray-900">${escapeHTML(name)}</h1>
+        <p class="text-3xl font-extrabold text-emerald-600">₹${price.toLocaleString('en-IN')}</p>
+        <p class="text-gray-600 leading-relaxed whitespace-pre-line">${escapeHTML(description)}</p>
+        ${stock !== null ? `<p class="text-sm ${stock > 0 ? 'text-gray-500' : 'text-red-600'}">${stock > 0 ? `${stock} in stock` : 'Out of stock'}</p>` : ''}
+        <button type="button" id="addProductToCart" class="mt-2 w-full bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 text-white font-medium py-3.5 px-6 rounded-xl transition duration-200 shadow-lg" ${stock === 0 ? 'disabled' : ''}>
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
           ${stock === 0 ? 'Out of stock' : 'Add to Cart'}
         </button>
       </section>
@@ -156,7 +190,11 @@ function renderProductDetail(container, product) {
     mainImage.src = images[activeIndex];
     thumbnails.forEach((thumbnail, thumbnailIndex) => {
       const selected = thumbnailIndex === activeIndex;
+<<<<<<< HEAD
       thumbnail.classList.toggle('border-[#FF0043]', selected);
+=======
+      thumbnail.classList.toggle('border-indigo-600', selected);
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       thumbnail.classList.toggle('border-gray-200', !selected);
       thumbnail.setAttribute('aria-pressed', String(selected));
     });
@@ -167,6 +205,7 @@ function renderProductDetail(container, product) {
   });
   container.querySelector('#previousProductImage')?.addEventListener('click', () => selectImage(activeIndex - 1));
   container.querySelector('#nextProductImage')?.addEventListener('click', () => selectImage(activeIndex + 1));
+<<<<<<< HEAD
 
   let selectedColor = '';
   let selectedSize = '';
@@ -252,12 +291,21 @@ function renderProductDetail(container, product) {
       return;
     }
     window.TailStoreCart.add({ ...product, color: selectedColor, size: selectedSize }, event);
+=======
+  container.querySelector('#addProductToCart')?.addEventListener('click', () => {
+    if (typeof window.addToCart !== 'function') {
+      console.error('Add-to-cart handler is not available on this page.');
+      return;
+    }
+    window.addToCart(product);
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   });
 }
 
 function showProductDetailMessage(container, message) {
   container.innerHTML = `<p class="py-12 text-center text-red-600 font-semibold">${message}</p>`;
 }
+<<<<<<< HEAD
 
 
 
@@ -288,3 +336,5 @@ const tabButtons = container.querySelectorAll('.tab-btn');
       }
     });
   });
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8

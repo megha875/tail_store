@@ -4,7 +4,11 @@
 
   const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   const apiHost = window.location.hostname || '127.0.0.1';
+<<<<<<< HEAD
   const apiBaseUrl = isLocalHost ? `http://${apiHost}:5000` : window.location.origin;
+=======
+  const apiBaseUrl = isLocalHost ? `http://${apiHost}:5501` : window.location.origin;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
   function safeHref(value) {
     const href = typeof value === 'string' ? value.trim() : '';

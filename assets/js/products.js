@@ -10,7 +10,11 @@
 // //     if (!gridContainer) return; 
 
 // //     try {
+<<<<<<< HEAD
 // //         const response = await fetch('http://localhost:5000/api/products');
+=======
+// //         const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 // //         if (!response.ok) {
 // //             throw new Error(`HTTP Error: ${response.status}`);
@@ -108,7 +112,11 @@
 // // //     localStorage.setItem("cart", JSON.stringify(cart));
 
 // // //     try {
+<<<<<<< HEAD
 // // //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+// // //         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // // //             method: 'POST',
 // // //             headers: { 'Content-Type': 'application/json' },
 // // //             body: JSON.stringify({ userId, productId, quantity })
@@ -174,7 +182,11 @@
 // //             headers['Authorization'] = `Bearer ${token}`;
 // //         }
 
+<<<<<<< HEAD
 // //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+// //         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: headers,
 // //             body: JSON.stringify({
@@ -239,7 +251,11 @@
 
 // //     // D. Backend Database Sync (API Call)
 // //     try {
+<<<<<<< HEAD
 // //         const response = await fetch('http://localhost:5000/api/wishlist', {
+=======
+// //         const response = await fetch('http://localhost:5500/api/wishlist', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: {
 // //                 'Content-Type': 'application/json',
@@ -273,7 +289,11 @@
 // //     const userId = localStorage.getItem('userId') || 'guest_user';
 
 // //     try {
+<<<<<<< HEAD
 // //         await fetch('http://localhost:5000/api/cart/add', {
+=======
+// //         await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: {
 // //                 'Content-Type': 'application/json'
@@ -303,7 +323,11 @@
 // //     if (!gridContainer) return; 
 
 // //     try {
+<<<<<<< HEAD
 // //         const response = await fetch('http://localhost:5000/api/products');
+=======
+// //         const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 // //         if (!response.ok) {
 // //             throw new Error(`HTTP Error: ${response.status}`);
@@ -396,7 +420,11 @@
 // //     if (!gridContainer) return; 
 
 // //     try {
+<<<<<<< HEAD
 // //         const response = await fetch('http://localhost:5000/api/products');
+=======
+// //         const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 // //         if (!response.ok) {
 // //             throw new Error(`HTTP Error: ${response.status}`);
@@ -494,7 +522,11 @@
 // // //     localStorage.setItem("cart", JSON.stringify(cart));
 
 // // //     try {
+<<<<<<< HEAD
 // // //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+// // //         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // // //             method: 'POST',
 // // //             headers: { 'Content-Type': 'application/json' },
 // // //             body: JSON.stringify({ userId, productId, quantity })
@@ -560,7 +592,11 @@
 // //             headers['Authorization'] = `Bearer ${token}`;
 // //         }
 
+<<<<<<< HEAD
 // //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+// //         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: headers,
 // //             body: JSON.stringify({
@@ -625,7 +661,11 @@
 
 // //     // D. Backend Database Sync (API Call)
 // //     try {
+<<<<<<< HEAD
 // //         const response = await fetch('http://localhost:5000/api/wishlist', {
+=======
+// //         const response = await fetch('http://localhost:5500/api/wishlist', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: {
 // //                 'Content-Type': 'application/json',
@@ -659,7 +699,11 @@
 // //     const userId = localStorage.getItem('userId') || 'guest_user';
 
 // //     try {
+<<<<<<< HEAD
 // //         await fetch('http://localhost:5000/api/cart/add', {
+=======
+// //         await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: {
 // //                 'Content-Type': 'application/json'
@@ -688,7 +732,11 @@
 //     if (!gridContainer) return; 
 
 //     try {
+<<<<<<< HEAD
 //         const response = await fetch('http://localhost:5000/api/products');
+=======
+//         const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 //         if (!response.ok) {
 //             throw new Error(`HTTP Error: ${response.status}`);
@@ -786,7 +834,11 @@
 // //     localStorage.setItem("cart", JSON.stringify(cart));
 
 // //     try {
+<<<<<<< HEAD
 // //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+// //         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 // //             method: 'POST',
 // //             headers: { 'Content-Type': 'application/json' },
 // //             body: JSON.stringify({ userId, productId, quantity })
@@ -852,7 +904,11 @@
 //             headers['Authorization'] = `Bearer ${token}`;
 //         }
 
+<<<<<<< HEAD
 //         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+//         const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //             method: 'POST',
 //             headers: headers,
 //             body: JSON.stringify({
@@ -917,7 +973,11 @@
 
 //     // D. Backend Database Sync (API Call)
 //     try {
+<<<<<<< HEAD
 //         const response = await fetch('http://localhost:5000/api/wishlist', {
+=======
+//         const response = await fetch('http://localhost:5500/api/wishlist', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json',
@@ -951,7 +1011,11 @@
 //     const userId = localStorage.getItem('userId') || 'guest_user';
 
 //     try {
+<<<<<<< HEAD
 //         await fetch('http://localhost:5000/api/cart/add', {
+=======
+//         await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json'
@@ -1010,7 +1074,11 @@
 
 //     // B. MongoDB Backend me sync karein
 //     try {
+<<<<<<< HEAD
 //         const response = await fetch('http://localhost:5000/api/cart/add', {
+=======
+//         const response = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //             method: 'POST',
 //             headers: { 'Content-Type': 'application/json' },
 //             body: JSON.stringify(cartData)
@@ -1123,7 +1191,11 @@ async function addToCart(productId, title, price, image, quantity = 1, event = n
             headers['Authorization'] = `Bearer ${token}`;
         }
  
+<<<<<<< HEAD
         const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+        const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             method: 'POST',
             headers: headers,
             body: JSON.stringify({
@@ -1188,7 +1260,11 @@ async function Wishlist(productId, event) {
  
     // D. Backend Database Sync (API Call)
     try {
+<<<<<<< HEAD
         const response = await fetch('http://localhost:5000/api/wishlist', {
+=======
+        const response = await fetch('http://localhost:5500/api/wishlist', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1222,7 +1298,11 @@ async function syncCartWithBackend(productId, title, price, image, quantity = 1)
     const userId = localStorage.getItem('userId') || 'guest_user';
  
     try {
+<<<<<<< HEAD
         await fetch('http://localhost:5000/api/cart/add', {
+=======
+        await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -1283,7 +1363,11 @@ async function addToCart(product) {
  
     // B. MongoDB Backend me sync karein
     try {
+<<<<<<< HEAD
         const response = await fetch('http://localhost:5000/api/cart/add', {
+=======
+        const response = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(cartData)

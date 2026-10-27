@@ -576,7 +576,11 @@
       const submitButton = this.querySelector('button[type="submit"]');
       const formData = Object.fromEntries(new FormData(this).entries());
       const apiUrl = window.location.port === '5500'
+<<<<<<< HEAD
         ? 'http://localhost:5000/api/contact'
+=======
+        ? 'http://localhost:5501/api/contact'
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         : '/api/contact';
 
       submitButton.disabled = true;

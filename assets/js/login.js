@@ -7,7 +7,11 @@
 
 //     try {
 //         // 2. Direct Express Backend API Endpoint par hit karein
+<<<<<<< HEAD
 //         const response = await fetch('http://localhost:5000/api/login', {
+=======
+//         const response = await fetch('http://localhost:5500/api/login', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //             method: 'POST',
 //             headers: {
 //                 'Content-Type': 'application/json'

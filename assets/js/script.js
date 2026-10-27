@@ -221,7 +221,11 @@ async function loadProducts() {
   if (!gridContainer) return;
 
   try {
+<<<<<<< HEAD
     const response = await fetch('http://localhost:5000/api/products');
+=======
+    const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     const products = await response.json();
 
     if (!products || products.length === 0) {
@@ -324,7 +328,11 @@ async function renderDynamicCart() {
 //   try {
 //     const userId = localStorage.getItem('userId') || 'guest_user';
 //     const product = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]').find(item => String(item._id || item.id) === String(productId)) : null;
+<<<<<<< HEAD
 //     const res = await fetch('http://localhost:5000/api/cart/add', {
+=======
+//     const res = await fetch('http://localhost:5500/api/cart/add', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'POST',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify({
@@ -346,7 +354,11 @@ async function renderDynamicCart() {
 // async function updateQuantity(productId, action) {
 //   try {
 //     const userId = localStorage.getItem('userId') || 'guest_user';
+<<<<<<< HEAD
 //     await fetch('http://localhost:5000/api/cart/update', {
+=======
+//     await fetch('http://localhost:5500/api/cart/update', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'PUT',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify({ productId, action, userId })
@@ -360,7 +372,11 @@ async function renderDynamicCart() {
 // async function removeFromCart(productId) {
 //   try {
 //     const userId = localStorage.getItem('userId') || 'guest_user';
+<<<<<<< HEAD
 //     await fetch('http://localhost:5000/api/cart/remove', {
+=======
+//     await fetch('http://localhost:5500/api/cart/remove', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'DELETE',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify({ productId, userId })
@@ -556,7 +572,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 // 1. API & BADGE INTEGRATION (Global)
 // ==========================================
+<<<<<<< HEAD
 const API_BASE_URL = `http://${window.location.hostname}:5000/api`;
+=======
+const API_BASE_URL = `http://${window.location.hostname}:5501/api`;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 const getCartUserId = () => localStorage.getItem('userId') || 'guest_user';
 
 // --- NAVBAR BADGE UPDATE ---
@@ -1098,7 +1118,11 @@ function switchTab(tabName) {
 // async function saveOrderToDatabase(finalPayload) {
 //   try {
 //     // 1. Backend API Call
+<<<<<<< HEAD
 //     const response = await fetch('http://localhost:5000/api/orders/place', {
+=======
+//     const response = await fetch('http://localhost:5500/api/orders/place', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'POST',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify(finalPayload)
@@ -1168,7 +1192,11 @@ function switchTab(tabName) {
 // // 3. AAPKA PLACE ORDER FUNCTION
 // async function placeOrder(orderData) {
 //   try {
+<<<<<<< HEAD
 //     const res = await fetch('http://localhost:5000/api/orders/place', {
+=======
+//     const res = await fetch('http://localhost:5500/api/orders/place', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'POST',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify(orderData)
@@ -1205,7 +1233,11 @@ function switchTab(tabName) {
 // if (confirmOrderBtn) {
 //   confirmOrderBtn.addEventListener('click', () => {
 
+<<<<<<< HEAD
 //     fetch('http://localhost:5000/api/orders/place', {
+=======
+//     fetch('http://localhost:5500/api/orders/place', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //       method: 'POST',
 //       headers: { 'Content-Type': 'application/json' },
 //       body: JSON.stringify({
@@ -1419,7 +1451,11 @@ if (step2) {
 
 async function saveOrderToDatabase(finalPayload) {
   try {
+<<<<<<< HEAD
     const response = await fetch('http://localhost:5000/api/orders/place', {
+=======
+    const response = await fetch('http://localhost:5500/api/orders/place', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(finalPayload)
@@ -1655,7 +1691,11 @@ async function loadProducts() {
     if (!gridContainer) return; 
 
     try {
+<<<<<<< HEAD
         const response = await fetch('http://localhost:5000/api/products');
+=======
+        const response = await fetch('http://localhost:5500/api/products');
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
         if (!response.ok) {
             throw new Error(`HTTP Error: ${response.status}`);
@@ -1837,7 +1877,11 @@ async function Wishlist(productId, event) {
 
     // 3. Backend MongoDB Sync
     try {
+<<<<<<< HEAD
         const response = await fetch('http://localhost:5000/api/wishlist', {
+=======
+        const response = await fetch('http://localhost:5500/api/wishlist', {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -2180,7 +2224,11 @@ function shareAction(platform) {
     const shareBody = `Check out this product: ${productTitle}\n\nClick here to view: ${shareUrl}`;
 
     // Backend MongoDB Tracking API Call
+<<<<<<< HEAD
     fetch(`http://localhost:5000/api/products/share/${productId}`, {
+=======
+    fetch(`http://localhost:5500/api/products/share/${productId}`, {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ platform })
@@ -2407,7 +2455,11 @@ fetch('/api/products') // Aapka backend API URL
 
     async function fetchLatestProducts() {
         try {
+<<<<<<< HEAD
             const response = await fetch('http://localhost:5000/api/products'); 
+=======
+            const response = await fetch('http://localhost:5500/api/products'); 
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             const products = await response.json();
 
             const container = document.getElementById('product-container');
@@ -2565,7 +2617,11 @@ async function loadProducts(key, name) {
         });
    
 //   const response = await fetch(
+<<<<<<< HEAD
 //     'http://localhost:5000/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
+=======
+//     'http://localhost:5500/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 //     {
 //         method: 'POST',
 //         headers: {
@@ -2573,6 +2629,7 @@ async function loadProducts(key, name) {
 //         },
 //         body: JSON.stringify(productData)
 //     }
+<<<<<<< HEAD
 // );
 
 
@@ -2635,3 +2692,6 @@ async function loadOrders() {
     console.error('Error loading orders:', error);
   }
 }
+=======
+// );
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8

@@ -289,7 +289,11 @@ async function refreshCartNavbarCount() {
   const userId = localStorage.getItem("userId") || "guest_user";
   try {
     const response = await fetch(
+<<<<<<< HEAD
       `http://${window.location.hostname}:5000/api/cart?userId=${encodeURIComponent(userId)}`
+=======
+      `http://${window.location.hostname}:5501/api/cart?userId=${encodeURIComponent(userId)}`
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     );
     const cart = await response.json();
     if (!response.ok) {
@@ -306,6 +310,7 @@ async function refreshCartNavbarCount() {
 refreshCartNavbarCount();
 window.addEventListener("cartUpdated", refreshCartNavbarCount);
 window.addEventListener("pageshow", refreshCartNavbarCount);
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
     const userName = localStorage.getItem('userName') || localStorage.getItem('userEmail');
     const dropdownGuest = document.getElementById('dropdown-guest');
@@ -335,3 +340,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8

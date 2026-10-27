@@ -85,6 +85,7 @@
                         class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF0043]"></textarea>
                     <p class="text-xs text-gray-400 mt-1">Multiple image URLs ko comma (,) se separate karke likhein.</p>
                 </div>
+<<<<<<< HEAD
 
                 <!-- Color-specific images -->
                 <div>
@@ -114,6 +115,8 @@
                     </div>
                 </div>
 
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                 <fieldset class="rounded-lg border border-gray-300 px-4 py-3">
                     <legend class="px-1 text-sm font-semibold text-gray-700">Show product in</legend>
                     <div class="flex flex-wrap gap-6">
@@ -147,7 +150,11 @@
 
                 <!-- Message -->
                 <div id="formMessage" class="hidden rounded-lg px-4 py-3 text-sm font-semibold"></div>
+<<<<<<< HEAD
                   
+=======
+
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                 <!-- Submit -->
                 <button type="submit" id="submitBtn"
                     class="w-full bg-[#FF0043] hover:bg-[#d90039] text-white font-bold py-3.5 rounded-lg transition">
@@ -158,6 +165,7 @@
         </div>
 
     </main>
+<<<<<<< HEAD
       <!--Product-->
        
 
@@ -279,6 +287,9 @@
             });
         })();
     </script>
+=======
+
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     <script>
         const productForm = document.getElementById('productForm');
         const productImage = document.getElementById('productImage');
@@ -289,7 +300,11 @@
 
         const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
         const apiHost = window.location.hostname || '127.0.0.1';
+<<<<<<< HEAD
         const localBackendOrigin = `http://${apiHost}:5000`;
+=======
+        const localBackendOrigin = `http://${apiHost}:5501`;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         const apiBaseUrl = isLocalHost || window.location.protocol === 'file:'
             ? localBackendOrigin
             : window.location.origin;
@@ -322,6 +337,7 @@
                 category: document.getElementById('productCategory').value.trim(),
                 image: document.getElementById('productImage').value.trim(),
                 images: imagesArray,
+<<<<<<< HEAD
                 colorImages: document.getElementById('colorImagesInput').value
                     .split(/\r?\n/)
                     .map(line => line.trim())
@@ -338,6 +354,10 @@
                 stock: 10,
                 colors: document.getElementById('productColors').value.split(',').map(v => v.trim()).filter(Boolean),
                 sizes: document.getElementById('productSizes').value.split(',').map(v => v.trim()).filter(Boolean),
+=======
+                description: document.getElementById('productDescription').value.trim(),
+                stock: 10,
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                 isLatest: document.getElementById('addToLatest').checked,
                 isPopular: document.getElementById('addToPopular').checked,
                 isOnSale: document.getElementById('addToSale').checked
@@ -365,7 +385,11 @@
                 try {
                     data = responseText ? JSON.parse(responseText) : {};
                 } catch {
+<<<<<<< HEAD
                     throw new Error(`Product API ka valid response nahi mila (HTTP ${response.status}). Admin page ko http://localhost:5000/admin.html se kholein.`);
+=======
+                    throw new Error(`Product API ka valid response nahi mila (HTTP ${response.status}). Admin page ko http://localhost:5500/admin.html se kholein.`);
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                 }
 
                 console.log("SERVER STATUS:", response.status);
@@ -386,7 +410,11 @@
                 console.error("FULL PRODUCT ERROR:", error);
                 formMessage.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-red-100 text-red-700';
                 formMessage.innerText = error instanceof TypeError
+<<<<<<< HEAD
                     ? 'Backend se connection nahi ho raha. Terminal mein "npm start" chala kar admin page http://localhost:5000/admin.html par kholein.'
+=======
+                    ? 'Backend se connection nahi ho raha. Terminal mein "npm start" chala kar admin page http://localhost:5500/admin.html par kholein.'
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                     : error.message;
                 formMessage.classList.remove('hidden');
             } finally {
@@ -394,6 +422,169 @@
             }
         });
     </script>
+<<<<<<< HEAD
+=======
+    <script>
+        (() => {
+            const form = document.getElementById('homepageBannerForm');
+            const message = document.getElementById('bannerFormMessage');
+            const submitButton = document.getElementById('bannerSubmitBtn');
+            if (!form) return;
+            const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+            const apiHost = window.location.hostname || '127.0.0.1';
+            const apiBaseUrl = isLocalHost || window.location.protocol === 'file:'
+                ? `http://${apiHost}:5501`
+                : window.location.origin;
+
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                submitButton.disabled = true;
+                message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-gray-100 text-gray-700';
+                message.textContent = 'Saving banner to MongoDB...';
+                message.classList.remove('hidden');
+
+                try {
+                    const formData = new FormData(form);
+                    const payload = Object.fromEntries(formData.entries());
+                    payload.buttons = [{ text: payload.buttonText, link: payload.link }];
+                    const response = await fetch(`${apiBaseUrl}/api/banners`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const responseText = await response.text();
+                    let result;
+                    try {
+                        result = responseText ? JSON.parse(responseText) : {};
+                    } catch {
+                        throw new Error(`Banner API returned an invalid response (HTTP ${response.status}).`);
+                    }
+                    if (!response.ok) throw new Error(result.message || `Banner save failed (HTTP ${response.status}).`);
+
+                    message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-green-100 text-green-700';
+                    message.textContent = result.message || 'Banner saved to MongoDB.';
+                    form.reset();
+                } catch (error) {
+                    console.error('Homepage banner save failed:', error);
+                    message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-red-100 text-red-700';
+                    message.textContent = error.message || 'Banner could not be saved.';
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+        })();
+    </script>
+    <script>
+        (() => {
+            const form = document.getElementById('newsletterSettingsForm');
+            const message = document.getElementById('newsletterSettingsMessage');
+            const submitButton = document.getElementById('newsletterSettingsSubmit');
+            if (!form) return;
+            const apiHost = window.location.hostname || '127.0.0.1';
+            const isLocalHost = ['localhost', '127.0.0.1'].includes(apiHost);
+            const apiBaseUrl = isLocalHost || window.location.protocol === 'file:'
+                ? `http://${apiHost}:5501`
+                : window.location.origin;
+
+            function showMessage(text, isError = false) {
+                message.className = `rounded-lg px-4 py-3 text-sm font-semibold ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+                message.textContent = text;
+                message.classList.remove('hidden');
+            }
+
+            async function loadSettings() {
+                try {
+                    const response = await fetch(`${apiBaseUrl}/api/newsletter/settings`);
+                    const settings = await response.json();
+                    if (!response.ok) throw new Error(settings.message || `Settings load failed (HTTP ${response.status}).`);
+                    for (const field of ['heading', 'offer', 'ending', 'placeholder', 'buttonText']) {
+                        form.elements[field].value = settings[field] || '';
+                    }
+                } catch (error) {
+                    console.error('Newsletter settings load failed:', error);
+                    showMessage(error.message || 'Newsletter settings could not be loaded.', true);
+                }
+            }
+
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                submitButton.disabled = true;
+                try {
+                    const payload = Object.fromEntries(new FormData(form).entries());
+                    const response = await fetch(`${apiBaseUrl}/api/newsletter/settings`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message || `Settings save failed (HTTP ${response.status}).`);
+                    showMessage(result.message || 'Newsletter content saved to MongoDB.');
+                } catch (error) {
+                    console.error('Newsletter settings save failed:', error);
+                    showMessage(error.message || 'Newsletter content could not be saved.', true);
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+
+            loadSettings();
+        })();
+    </script>
+    <script>
+        (() => {
+            const form = document.getElementById('homepageSettingsForm');
+            const message = document.getElementById('homepageSettingsMessage');
+            const submitButton = document.getElementById('homepageSettingsSubmit');
+            if (!form) return;
+            const apiHost = window.location.hostname || '127.0.0.1';
+            const isLocalHost = ['localhost', '127.0.0.1'].includes(apiHost);
+            const apiBaseUrl = isLocalHost || window.location.protocol === 'file:'
+                ? `http://${apiHost}:5501`
+                : window.location.origin;
+
+            function showMessage(text, isError = false) {
+                message.className = `rounded-lg px-4 py-3 text-sm font-semibold ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+                message.textContent = text;
+                message.classList.remove('hidden');
+            }
+
+            async function loadSettings() {
+                try {
+                    const response = await fetch(`${apiBaseUrl}/api/homepage/settings`);
+                    const settings = await response.json();
+                    if (!response.ok) throw new Error(settings.message || `Homepage settings load failed (HTTP ${response.status}).`);
+                    form.elements.latestProductsTitle.value = settings.latestProductsTitle || '';
+                } catch (error) {
+                    console.error('Homepage settings load failed:', error);
+                    showMessage(error.message || 'Homepage settings could not be loaded.', true);
+                }
+            }
+
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                submitButton.disabled = true;
+                try {
+                    const response = await fetch(`${apiBaseUrl}/api/homepage/settings`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ latestProductsTitle: form.elements.latestProductsTitle.value })
+                    });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message || `Homepage settings save failed (HTTP ${response.status}).`);
+                    showMessage(result.message || 'Homepage section title saved to MongoDB.');
+                } catch (error) {
+                    console.error('Homepage settings save failed:', error);
+                    showMessage(error.message || 'Homepage section title could not be saved.', true);
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+
+            loadSettings();
+        })();
+    </script>
+
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 </body>
 
 </html>

@@ -5,7 +5,11 @@
   const apiHost = window.location.hostname || '127.0.0.1';
   const isLocalHost = ['localhost', '127.0.0.1'].includes(apiHost);
   const apiBaseUrl = isLocalHost || window.location.protocol === 'file:'
+<<<<<<< HEAD
     ? `http://${apiHost}:5000`
+=======
+    ? `http://${apiHost}:5501`
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     : window.location.origin;
 
   fetch(`${apiBaseUrl}/api/homepage/settings`)

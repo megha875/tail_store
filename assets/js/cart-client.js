@@ -1,5 +1,9 @@
 (() => {
+<<<<<<< HEAD
   const apiBaseUrl = `http://${window.location.hostname}:5000`;
+=======
+  const apiBaseUrl = `http://${window.location.hostname}:5501`;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   const getUserId = () => localStorage.getItem('userId') || 'guest_user';
 
   function updateBadge(cart) {
@@ -24,8 +28,11 @@
         price: Number(product.price) || 0,
         image: product.image || product.imageUrl || '',
         category: product.category || 'General',
+<<<<<<< HEAD
         color: item.color || '',
         size: item.size || '',
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         quantity: Number(item.quantity) || 1
       }];
     });
@@ -58,8 +65,11 @@
     event?.preventDefault();
     event?.stopPropagation();
     const productId = String(product?._id || product?.id || '');
+<<<<<<< HEAD
     const color = String(product?.color || '').trim();
     const size = String(product?.size || '').trim();
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     if (!productId) {
       alert('Product ID nahi mila, isliye cart mein add nahi hua.');
       return;
@@ -77,7 +87,11 @@
       const response = await fetch(`${apiBaseUrl}/api/cart/add`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+<<<<<<< HEAD
         body: JSON.stringify({ userId: getUserId(), productId, quantity: 1, color, size })
+=======
+        body: JSON.stringify({ userId: getUserId(), productId, quantity: 1 })
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || `Cart add failed (HTTP ${response.status})`);
@@ -136,12 +150,15 @@
       container.innerHTML = items.map(item => {
         const product = item.productId;
         const productId = String(product._id);
+<<<<<<< HEAD
         const color = item.color || '';
         const size = item.size || '';
         const variantAttrs = `data-color="${escapeHtml(color)}" data-size="${escapeHtml(size)}"`;
         const variantLine = (color || size)
           ? `<p class="mt-1 text-sm text-gray-600">${color ? `Color: <span class="font-semibold">${escapeHtml(color)}</span>` : ''}${color && size ? ' &nbsp;|&nbsp; ' : ''}${size ? `Size: <span class="font-semibold">${escapeHtml(size)}</span>` : ''}</p>`
           : '';
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         const quantity = Number(item.quantity) || 1;
         const price = Number(product.price) || 0;
         const itemTotal = price * quantity;
@@ -154,18 +171,30 @@
                 <div>
                   <h3 class="text-lg font-bold text-gray-900">${escapeHtml(product.name || product.title || 'Product')}</h3>
                   <p class="mt-1 text-sm text-gray-500">${escapeHtml(product.category || 'General')}</p>
+<<<<<<< HEAD
                   ${variantLine}
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
                   <p class="mt-2 font-bold text-[#FF0043]">₹${price}</p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
                 <div class="flex items-center overflow-hidden rounded-lg border">
+<<<<<<< HEAD
                   <button type="button" data-cart-action="decrease" data-product-id="${escapeHtml(productId)}" ${variantAttrs} class="bg-gray-100 px-3 py-2 font-bold hover:bg-gray-200" aria-label="Decrease quantity">−</button>
                   <span class="px-4 py-2 font-semibold">${quantity}</span>
                   <button type="button" data-cart-action="increase" data-product-id="${escapeHtml(productId)}" ${variantAttrs} class="bg-gray-100 px-3 py-2 font-bold hover:bg-gray-200" aria-label="Increase quantity">+</button>
                 </div>
                 <span class="min-w-[80px] text-right font-bold text-gray-900">₹${itemTotal}</span>
                 <button type="button" data-cart-action="remove" data-product-id="${escapeHtml(productId)}" ${variantAttrs} class="text-xl text-red-500 hover:text-red-700" aria-label="Remove product">×</button>
+=======
+                  <button type="button" data-cart-action="decrease" data-product-id="${escapeHtml(productId)}" class="bg-gray-100 px-3 py-2 font-bold hover:bg-gray-200" aria-label="Decrease quantity">−</button>
+                  <span class="px-4 py-2 font-semibold">${quantity}</span>
+                  <button type="button" data-cart-action="increase" data-product-id="${escapeHtml(productId)}" class="bg-gray-100 px-3 py-2 font-bold hover:bg-gray-200" aria-label="Increase quantity">+</button>
+                </div>
+                <span class="min-w-[80px] text-right font-bold text-gray-900">₹${itemTotal}</span>
+                <button type="button" data-cart-action="remove" data-product-id="${escapeHtml(productId)}" class="text-xl text-red-500 hover:text-red-700" aria-label="Remove product">×</button>
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
               </div>
             </div>
           </article>`;
@@ -181,12 +210,20 @@
     }
   }
 
+<<<<<<< HEAD
   async function updateQuantity(productId, action, color = '', size = '') {
+=======
+  async function updateQuantity(productId, action) {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     try {
       const response = await fetch(`${apiBaseUrl}/api/cart/update`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
+<<<<<<< HEAD
         body: JSON.stringify({ userId: getUserId(), productId, action, color, size })
+=======
+        body: JSON.stringify({ userId: getUserId(), productId, action })
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || `Cart update failed (HTTP ${response.status})`);
@@ -197,12 +234,20 @@
     }
   }
 
+<<<<<<< HEAD
   async function remove(productId, color = '', size = '') {
+=======
+  async function remove(productId) {
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     try {
       const response = await fetch(`${apiBaseUrl}/api/cart/remove`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
+<<<<<<< HEAD
         body: JSON.stringify({ userId: getUserId(), productId, color, size })
+=======
+        body: JSON.stringify({ userId: getUserId(), productId })
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || `Cart remove failed (HTTP ${response.status})`);
@@ -222,9 +267,15 @@
 
     const actionButton = event.target.closest('[data-cart-action]');
     if (!actionButton) return;
+<<<<<<< HEAD
     const { cartAction, productId, color = '', size = '' } = actionButton.dataset;
     if (cartAction === 'remove') remove(productId, color, size);
     else updateQuantity(productId, cartAction, color, size);
+=======
+    const { cartAction, productId } = actionButton.dataset;
+    if (cartAction === 'remove') remove(productId);
+    else updateQuantity(productId, cartAction);
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   });
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -238,6 +289,7 @@
 
   window.TailStoreCart = { add, render: renderCart, updateBadge };
 })();
+<<<<<<< HEAD
 function updateCartItem(index, newColor, newSize) {
   let cart = JSON.parse(localStorage.getItem('cart') || '[]');
   cart[index].color = newColor;
@@ -285,3 +337,5 @@ document.getElementById('applyCouponBtn')?.addEventListener('click', async () =>
         console.error('Error applying coupon:', error);
     }
 });
+=======
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8

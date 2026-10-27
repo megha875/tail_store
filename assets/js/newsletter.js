@@ -7,7 +7,11 @@
   const button = form?.querySelector('button[type="submit"]');
   const apiHost = window.location.hostname || '127.0.0.1';
   const apiBaseUrl = ['localhost', '127.0.0.1'].includes(apiHost)
+<<<<<<< HEAD
     ? `http://${apiHost}:5000/api`
+=======
+    ? `http://${apiHost}:5501/api`
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     : `${window.location.origin}/api`;
 
   async function loadSettings() {

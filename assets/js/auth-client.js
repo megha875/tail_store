@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const authApiUrl = `http://${window.location.hostname}:5000/api`;
+=======
+const authApiUrl = `http://${window.location.hostname}:5501/api`;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = document.getElementById('loginForm');

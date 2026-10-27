@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const MAIN_API_BASE_URL = `http://${window.location.hostname}:5000/api`;
+=======
+const MAIN_API_BASE_URL = `http://${window.location.hostname}:5501/api`;
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 document.addEventListener('DOMContentLoaded', () => {
   const checkoutForm = document.getElementById('checkoutForm');
@@ -82,6 +86,7 @@ document.addEventListener('DOMContentLoaded', fetchProducts);
 
 
 
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
     // Check karein ki user logged in hai ya nahi (localStorage mein userId ya token check karein)
     const userId = localStorage.getItem('userId') || localStorage.getItem('token');
@@ -115,6 +120,9 @@ function updateCartBadge() {
         badge.innerText = totalItems;
     }
 }
+=======
+
+>>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 
 
