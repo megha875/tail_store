@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - TailStore</title>
+  
+  <!-- Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body class="bg-gray-50 font-['Manrope'] min-h-screen flex flex-col">
+
+  <!-- Header Navigation -->
+  <header class="w-full bg-[#050B14]">
+    <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white relative">
+      <div class="flex items-center">
+        <a href="index.html" class="block">
+          <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+        </a>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="text-sm font-semibold hover:text-gray-300 transition-colors">Back to Store</a>
+        <button onclick="logoutUser()" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-5 py-2 rounded-full transition-all">
+          Logout
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Dashboard Main Layout -->
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="lg:col-span-1 bg-white rounded-2xl shadow-sm border p-4 h-fit space-y-2">
+      <div class="px-4 py-3 mb-2 border-b border-gray-100">
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Welcome, <span id="sidebarUserName" class="text-gray-800">User</span></h3>
+      </div>
+
+      <button onclick="switchTab('profile')" id="btn-profile" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-800 bg-gray-100 font-bold rounded-xl transition text-left">
+        <i class="fa-regular fa-user w-5 text-[#FF0043]"></i>
+        <span>Profile Overview</span>
+      </button>
+
+      <button onclick="switchTab('cart')" id="btn-cart" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold rounded-xl transition text-left">
+        <i class="fa-solid fa-cart-shopping w-5 text-[#FF0043]"></i>
+        <span>My Cart</span>
+      </button>
+
+      <button onclick="switchTab('orders')" id="btn-orders" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold rounded-xl transition text-left">
+        <i class="fa-solid fa-box w-5 text-[#FF0043]"></i>
+        <span>My Orders</span>
+      </button>
+
+      <button onclick="switchTab('wishlist')" id="btn-wishlist" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold rounded-xl transition text-left">
+        <i class="fa-regular fa-heart w-5 text-[#FF0043]"></i>
+        <span>Wishlist</span>
+      </button>
+
+      <button onclick="switchTab('addresses')" id="btn-addresses" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold rounded-xl transition text-left">
+        <i class="fa-solid fa-location-dot w-5 text-[#FF0043]"></i>
+        <span>Saved Addresses</span>
+      </button>
+
+      <button onclick="switchTab('settings')" id="btn-settings" class="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900 font-semibold rounded-xl transition text-left">
+        <i class="fa-solid fa-gear w-5 text-[#FF0043]"></i>
+        <span>Account Settings</span>
+      </button>
+
+      <div class="pt-4 border-t border-gray-100">
+        <button onclick="logoutUser()" class="w-full flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50 font-semibold rounded-xl transition text-left">
+          <i class="fa-solid fa-arrow-right-from-bracket w-5"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="lg:col-span-3 space-y-6">
+
+      <!-- 1. Profile Section -->
+      <div id="profile-section" class="tab-content bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Profile Overview</h1>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
+            <input type="text" id="profileName" class="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-50" readonly>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+            <input type="email" id="profileEmail" class="w-full border border-gray-300 rounded-lg px-4 py-3 bg-gray-50" readonly>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Cart Section -->
+      <div id="cart-section" class="tab-content hidden bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">My Shopping Cart</h1>
+        <div id="dashboardCartList" class="space-y-4">
+          <p class="text-gray-500">Loading cart...</p>
+        </div>
+      </div>
+
+      <!-- 3. Orders Section -->
+      <div id="orders-section" class="tab-content hidden bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">My Orders History</h1>
+        <div id="ordersList" class="space-y-4">
+          <p class="text-gray-500">Loading orders...</p>
+        </div>
+      </div>
+
+      <!-- 4. Wishlist Section -->
+      <div id="wishlist-section" class="tab-content hidden bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">My Wishlist</h1>
+        <div id="wishlistContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <p class="text-gray-500 col-span-full">Loading wishlist...</p>
+        </div>
+      </div>
+
+      <!-- 5. Saved Addresses Section -->
+      <div id="addresses-section" class="tab-content hidden bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Saved Addresses</h1>
+        <div id="addressContainer" class="space-y-4">
+          <p class="text-gray-500">Loading addresses...</p>
+        </div>
+      </div>
+
+      <!-- 6. Account Settings Section -->
+      <div id="settings-section" class="tab-content hidden bg-white rounded-2xl shadow-sm border p-6 md:p-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Account Settings</h1>
+        <form class="space-y-4" onsubmit="event.preventDefault(); alert('Password updated successfully!');">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">Current Password</label>
+            <input type="password" required class="w-full border border-gray-300 rounded-lg px-4 py-3">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-1">New Password</label>
+            <input type="password" required class="w-full border border-gray-300 rounded-lg px-4 py-3">
+          </div>
+          <button type="submit" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-3 rounded-lg transition">
+            Update Password
+          </button>
+        </form>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Dashboard JavaScript Logic -->
+  <script>
+  (function () {
+    'use strict';
+
+    var isLocal = ['localhost', '127.0.0.1', ''].indexOf(location.hostname) !== -1;
+    var API = isLocal ? 'http://' + (location.hostname || 'localhost') + ':5000' : location.origin;
+    var enc = encodeURIComponent;
+    var $ = function (id) { return document.getElementById(id); };
+
+    function readUserId() {
+      var bad = ['', 'guest_user', 'undefined', 'null'];
+      var id = localStorage.getItem('userId');
+      if (id && bad.indexOf(id) === -1) return id;
+      try {
+        var u = JSON.parse(localStorage.getItem('user') || 'null');
+        var uid = u && (u.id || u._id);
+        if (uid) { localStorage.setItem('userId', uid); return String(uid); }
+      } catch (e) { /* ignore */ }
+      return null;
+    }
+
+    var userId = readUserId();
+    var loggedIn = localStorage.getItem('isLoggedIn') === 'true' && !!userId;
+
+    if (!loggedIn) {
+      window.switchTab = function () {};
+      window.logoutUser = function () { location.href = 'login.html'; };
+      var main = document.querySelector('main');
+      if (main) {
+        main.innerHTML =
+          '<div class="bg-white rounded-2xl shadow-sm border p-8 text-center space-y-4">' +
+            '<h1 class="text-2xl font-bold text-gray-900">Please login to see your dashboard</h1>' +
+            '<p class="text-gray-600">Cart, orders, wishlist aur addresses dekhne ke liye pehle login kijiye.</p>' +
+            '<a href="login.html?redirect=user-dashboard.html" class="inline-block bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-3 rounded-lg transition">Go to Login</a>' +
+          '</div>';
+      }
+      return;
+    }
+
+    function esc(v) {
+      return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+    function money(n) { return '\u20B9' + Number(n || 0).toLocaleString('en-IN'); }
+    function msg(text, color) { return '<p class="' + (color || 'text-gray-500') + '">' + esc(text) + '</p>'; }
+    function loading() { return msg('Loading...'); }
+
+    async function api(path, options) {
+      var res = await fetch(API + path, options);
+      var data = {};
+      try { data = await res.json(); } catch (e) { /* empty body */ }
+      if (!res.ok) throw new Error(data.message || data.error || ('Request failed (HTTP ' + res.status + ')'));
+      return data;
+    }
+
+    function jsonOpts(method, body) {
+      return { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
+    }
+
+    var loaders = {
+      profile: loadProfile,
+      cart: loadCart,
+      orders: loadOrders,
+      wishlist: loadWishlist,
+      addresses: loadAddresses
+    };
+
+    window.switchTab = function (tabName) {
+      document.querySelectorAll('.tab-content').forEach(function (s) { s.classList.add('hidden'); });
+      document.querySelectorAll('aside button[onclick^="switchTab"]').forEach(function (btn) {
+        btn.classList.remove('bg-gray-100', 'font-bold', 'text-gray-800');
+        btn.classList.add('text-gray-600', 'font-semibold');
+      });
+      var section = $(tabName + '-section');
+      if (section) section.classList.remove('hidden');
+      var activeBtn = $('btn-' + tabName);
+      if (activeBtn) {
+        activeBtn.classList.add('bg-gray-100', 'font-bold', 'text-gray-800');
+        activeBtn.classList.remove('text-gray-600', 'font-semibold');
+      }
+      if (loaders[tabName]) loaders[tabName]();
+    };
+
+    window.logoutUser = function () {
+      ['isLoggedIn', 'userId', 'user', 'userEmail', 'currentUser', 'cart', 'cartSubtotal']
+        .forEach(function (k) { localStorage.removeItem(k); });
+      location.href = 'login.html';
+    };
+
+    // ---------- Profile ----------
+    async function loadProfile() {
+      var user = JSON.parse(localStorage.getItem('user') || '{}');
+      var email = localStorage.getItem('userEmail') || user.email || '';
+      var name = user.name || (email ? email.split('@')[0] : 'User');
+      
+      $('sidebarUserName').textContent = name;
+      $('profileName').value = name;
+      $('profileEmail').value = email;
+
+      try {
+        var data = await api('/api/users/' + enc(userId) + '/profile');
+        if (data && data.user) {
+          $('profileName').value = data.user.name || name;
+          $('profileEmail').value = data.user.email || email;
+          $('sidebarUserName').textContent = data.user.name || name;
+        }
+      } catch (e) { console.error('Profile load failed:', e); }
+    }
+
+    // ---------- Cart ----------
+    async function loadCart() {
+      var box = $('dashboardCartList');
+      if (!box) return;
+      box.innerHTML = loading();
+      try {
+        var cart = await api('/api/cart?userId=' + enc(userId));
+        var items = (cart.items || []).filter(function (i) { return i.productId && typeof i.productId === 'object'; });
+        if (!items.length) {
+          box.innerHTML = msg('Your cart is empty.') +
+            '<a href="index.html" class="inline-block mt-3 text-[#FF0043] font-semibold hover:underline">Continue shopping</a>';
+          return;
+        }
+        var total = 0;
+        var rows = items.map(function (i) {
+          var p = i.productId, qty = Number(i.quantity) || 1, price = Number(p.price) || 0;
+          total += price * qty;
+          var variant = [i.color, i.size].filter(Boolean).join(' / ');
+          return '<div class="flex flex-wrap justify-between items-center gap-3 p-4 border rounded-xl bg-white" ' +
+            'data-pid="' + esc(p._id) + '" data-color="' + esc(i.color || '') + '" data-size="' + esc(i.size || '') + '">' +
+            '<div class="flex items-center gap-4">' +
+              '<img src="' + esc(p.image || p.imageUrl || './assets/img/1.jpg') + '" alt="' + esc(p.name || p.title) + '" class="w-16 h-16 object-cover rounded-lg border">' +
+              '<div><h4 class="font-bold text-gray-900">' + esc(p.name || p.title) + '</h4>' +
+              (variant ? '<p class="text-xs text-gray-500">' + esc(variant) + '</p>' : '') +
+              '<p class="text-sm text-gray-600">' + money(price) + '</p></div>' +
+            '</div>' +
+            '<div class="flex items-center gap-3">' +
+              '<button type="button" data-act="decrease" class="w-8 h-8 rounded-full border hover:bg-gray-100">-</button>' +
+              '<span class="w-6 text-center font-semibold">' + qty + '</span>' +
+              '<button type="button" data-act="increase" class="w-8 h-8 rounded-full border hover:bg-gray-100">+</button>' +
+              '<button type="button" data-act="remove" class="ml-2 text-red-600 text-sm font-semibold hover:underline">Remove</button>' +
+            '</div></div>';
+        }).join('');
+        box.innerHTML = rows +
+          '<div class="flex flex-wrap justify-between items-center gap-3 pt-4 border-t">' +
+            '<p class="text-lg font-bold">Total: <span class="text-[#FF0043]">' + money(total) + '</span></p>' +
+            '<a href="checkout.html" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-3 rounded-lg transition">Proceed to Checkout</a>' +
+          '</div>';
+      } catch (e) {
+        box.innerHTML = msg('Cart load nahi ho saka: ' + e.message, 'text-red-500');
+      }
+    }
+
+    if ($('dashboardCartList')) {
+      $('dashboardCartList').addEventListener('click', async function (ev) {
+        var btn = ev.target.closest('[data-act]');
+        if (!btn) return;
+        var row = btn.closest('[data-pid]');
+        var payload = { userId: userId, productId: row.dataset.pid, color: row.dataset.color, size: row.dataset.size };
+        btn.disabled = true;
+        try {
+          if (btn.dataset.act === 'remove') {
+            await api('/api/cart/remove', jsonOpts('DELETE', payload));
+          } else {
+            payload.action = btn.dataset.act;
+            await api('/api/cart/update', jsonOpts('PUT', payload));
+          }
+          loadCart();
+        } catch (e) {
+          alert(e.message);
+          btn.disabled = false;
+        }
+      });
+    }
+
+    // ---------- Orders ----------
+   
+async function loadOrders() {
+      const box = $('ordersList') || document.getElementById('my-orders-container');
+      if (!box) return;
+      
+      box.innerHTML = '<p class="text-gray-500">Loading orders...</p>';
+      
+      try {
+        var data = await api('/api/orders/user/' + enc(userId));
+        var orders = data.orders || data || [];
+
+        if (!orders.length) {
+          box.innerHTML = '<p class="text-gray-500">Aapne abhi tak koi order place nahi kiya hai.</p>' +
+            '<a href="index.html" class="inline-block mt-3 text-[#FF0043] font-semibold hover:underline">Start shopping</a>';
+          return;
+        }
+
+        box.innerHTML = orders.map(function (o) {
+          // Same products ko group/merge karne ke liye map taaki duplicate rows na aayein
+          const itemMap = {};
+          (o.items || []).forEach(function (i) {
+            var p = (i.productId && typeof i.productId === 'object') ? i.productId : i;
+            var name = i.name || p.name || p.title || 'Product';
+            var price = Number(i.price != null ? i.price : p.price) || 0;
+            var image = i.image || p.image || p.imageUrl || './assets/img/1.jpg';
+            var qty = Number(i.quantity || i.qty) || 1;
+            
+            var key = (p._id ? String(p._id) : name);
+            if (itemMap[key]) {
+              itemMap[key].quantity += qty;
+            } else {
+              itemMap[key] = { name: name, price: price, image: image, quantity: qty };
+            }
+          });
+
+          const uniqueItems = Object.values(itemMap);
+          var itemsHtml = uniqueItems.map(function (i) {
+            return '<div class="flex items-center gap-3 py-2 border-b border-gray-100 last:border-none">' +
+              '<img src="' + esc(i.image) + '" alt="" class="w-12 h-12 object-cover rounded-lg border">' +
+              '<div class="text-sm">' +
+              '<p class="font-semibold text-gray-900">' + esc(i.name) + '</p>' +
+              '<p class="text-gray-500">Qty: ' + i.quantity + ' &middot; ₹' + i.price + '</p>' +
+              '</div></div>';
+          }).join('');
+
+          return '<div class="border border-gray-200 rounded-xl p-4 bg-white shadow-sm space-y-3 mb-4">' +
+            '<div class="flex justify-between items-center text-sm">' +
+            '<span class="font-bold text-gray-900">Order ID: #' + esc(String(o._id || '').slice(-8).toUpperCase()) + '</span>' +
+            '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">' + esc(o.paymentStatus || 'Pending') + '</span>' +
+            '</div>' +
+            '<p class="text-xs text-gray-500">Date: ' + new Date(o.createdAt || Date.now()).toLocaleDateString('en-IN') + '</p>' +
+            '<div class="space-y-1">' + itemsHtml + '</div>' +
+            '<div class="flex justify-between items-center pt-2 border-t font-bold text-gray-900">' +
+            '<span>Total Amount:</span>' +
+            '<span class="text-[#FF0043]">₹' + o.totalAmount + '</span>' +
+            '</div></div>';
+        }).join('');
+
+      } catch (error) {
+        console.error('Error loading orders:', error);
+        box.innerHTML = '<p class="text-red-500">Orders load nahi ho sake.</p>';
+      }
+    }
+
+    // ---------- Wishlist ----------
+    async function loadWishlist() {
+      var box = $('wishlistContainer');
+      if (!box) return;
+      box.innerHTML = '<p class="text-gray-500 col-span-full">Loading...</p>';
+      try {
+        var w = await api('/api/wishlist/' + enc(userId));
+        var ids = w.productIds || [];
+        if (!ids.length) {
+          box.innerHTML = '<p class="text-gray-500 col-span-full">Your wishlist is empty.</p>';
+          return;
+        }
+        var products = await Promise.all(ids.map(function (id) {
+          return api('/api/products/' + enc(id)).catch(function () { return null; });
+        }));
+        products = products.filter(Boolean);
+        if (!products.length) {
+          box.innerHTML = '<p class="text-gray-500 col-span-full">Your wishlist is empty.</p>';
+          return;
+        }
+        box.innerHTML = products.map(function (p) {
+          return '<div class="border rounded-xl p-3 bg-white flex gap-3 items-center" data-wid="' + esc(p._id) + '">' +
+            '<img src="' + esc(p.image || p.imageUrl || './assets/img/1.jpg') + '" alt="' + esc(p.name || p.title) + '" class="w-20 h-20 object-cover rounded-lg border">' +
+            '<div class="flex-1 min-w-0"><h4 class="font-bold text-gray-900 truncate">' + esc(p.name || p.title) + '</h4>' +
+            '<p class="text-sm text-gray-600">' + money(p.price) + '</p>' +
+            '<div class="mt-2 flex gap-4 text-sm font-semibold">' +
+              '<a href="product-detail.html?id=' + esc(p._id) + '" class="text-[#FF0043] hover:underline">View</a>' +
+            '</div></div></div>';
+        }).join('');
+      } catch (e) {
+        box.innerHTML = '<p class="text-red-500 col-span-full">Wishlist load nahi ho saki: ' + esc(e.message) + '</p>';
+      }
+    }
+
+    // ---------- Addresses ----------
+    async function loadAddresses() {
+      var box = $('addressContainer');
+      if (!box) return;
+      box.innerHTML = loading();
+      try {
+        var res = await api('/api/addresses/' + enc(userId));
+        var addrs = res.addresses || [];
+        if (!addrs.length) {
+          box.innerHTML = '<p class="text-gray-500">Koi saved address nahi mila.</p>';
+          return;
+        }
+        box.innerHTML = addrs.map(function (addr) {
+          return '<div class="p-4 border border-gray-200 rounded-xl bg-gray-50 flex justify-between items-center">' +
+            '<div><p class="font-bold text-gray-800">' + esc(addr.fullName || 'Saved Address') + '</p>' +
+            '<p class="text-sm text-gray-600 mt-1">' + esc(addr.addressLine || addr.street) + ', ' + esc(addr.city) + ' - ' + esc(addr.pincode) + '</p>' +
+            '<p class="text-xs text-gray-500 mt-1">Phone: ' + esc(addr.phone || 'N/A') + '</p></div>' +
+          '</div>';
+        }).join('');
+      } catch (e) {
+        box.innerHTML = '<p class="text-red-500">Addresses load nahi ho sake.</p>';
+      }
+    }
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', function () {
+      loadProfile();
+    });
+  })();
+  </script>
+</body>
+</html>

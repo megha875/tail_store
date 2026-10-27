@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Services - 3 Design Layouts</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #0d233a;
+        }
+        .section-title {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            color: #555;
+            margin-bottom: 50px;
+        }
+
+        /* ================= PAGE 1: 3D FLIP CARDS ================= */
+        .flip-card {
+            background-color: transparent;
+            height: 280px;
+            perspective: 1000px;
+            margin-bottom: 25px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+        .flip-card-front {
+            background: linear-gradient(135deg, #0b3c49 0%, #0d233a 100%);
+            color: white;
+        }
+        .flip-card-front .card-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        .flip-card-front h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .flip-card-back {
+            background: #ffffff;
+            color: #0d233a;
+            transform: rotateY(180deg);
+            border: 2px solid #0b3c49;
+            text-align: center;
+        }
+        .flip-card-back h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0b3c49;
+        }
+        .flip-card-back p {
+            font-size: 0.95rem;
+            color: #555;
+            margin: 0;
+        }
+
+        /* ================= PAGE 2: SLIDE-UP HOVER OVERLAY ================= */
+        .slide-card {
+            position: relative;
+            height: 260px;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+        }
+        .slide-card .base-content .num {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #0b3c49;
+            opacity: 0.8;
+        }
+        .slide-card .base-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #0d233a;
+        }
+        .slide-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0b3c49;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            transition: bottom 0.4s ease-in-out;
+        }
+        .slide-card:hover .slide-overlay {
+            bottom: 0;
+        }
+        .slide-overlay h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .slide-overlay p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: #e2e8f0;
+        }
+
+        /* ================= PAGE 3: GRADIENT ZOOM HOVER ================= */
+        .zoom-card {
+            background: #ffffff;
+            border-radius: 12px;
+            height: 260px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #eaeaea;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .zoom-card .num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #0b3c49;
+            margin-bottom: 5px;
+        }
+        .zoom-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0d233a;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .zoom-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+        .zoom-card:hover {
+            transform: translateY(-8px);
+            background: #0b3c49;
+            border-color: #0b3c49;
+            box-shadow: 0 10px 25px rgba(11, 60, 73, 0.3);
+        }
+        .zoom-card:hover .num,
+        .zoom-card:hover h3,
+        .zoom-card:hover p {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV TABS FOR DEMO SWITCHING -->
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h2 class="section-title">By Ranking first on Google</h2>
+            <h4 class="section-subtitle">And targeting your customers at every step</h4>
+            <p class="text-muted">Choose from 3 different interactive layout styles built with Bootstrap 5 and modern CSS hover/flip effects (No Images).</p>
+        </div>
+
+        <!-- ================= DESIGN 1: 3D FLIP CARDS ================= -->
+        <div class="mb-5 border-bottom pb-5">
+            <h3 class="fw-bold text-primary mb-4">Design Style 1: 3D Flip Card Effect</h3>
+            <div class="row">
+                <!-- Item 1 -->
+                <div class="col-md-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-number">01</div>
+                                <h3>App Store SEO</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>App Store SEO</h4>
+                                <p>Make your mobile app appear on top of App Store and Play Store.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="col-md-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-number">02</div>
+                                <h3>Ecommerce SEO</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>Ecommerce SEO</h4>
+                                <p>Attract more traffic with a well-ranked and optimized page.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="col-md-4">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="card-number">03</div>
+                                <h3>International SEO</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <h4>International SEO</h4>
+                                <p>Stand out in your target location with SEO.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= DESIGN 2: SLIDE-UP OVERLAY ================= -->
+        <div class="mb-5 border-bottom pb-5">
+            <h3 class="fw-bold text-success mb-4">Design Style 2: Slide-Up Hover Overlay</h3>
+            <div class="row">
+                <!-- Item 4 -->
+                <div class="col-md-4">
+                    <div class="slide-card">
+                        <div class="base-content">
+                            <div class="num">04</div>
+                            <h3>Local SEO</h3>
+                        </div>
+                        <div class="slide-overlay">
+                            <h4>Local SEO</h4>
+                            <p>Let users come one step closer to your business.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="col-md-4">
+                    <div class="slide-card">
+                        <div class="base-content">
+                            <div class="num">05</div>
+                            <h3>Mobile SEO</h3>
+                        </div>
+                        <div class="slide-overlay">
+                            <h4>Mobile SEO</h4>
+                            <p>Get found by high-converting mobile customers.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 6 -->
+                <div class="col-md-4">
+                    <div class="slide-card">
+                        <div class="base-content">
+                            <div class="num">06</div>
+                            <h3>Multilingual SEO</h3>
+                        </div>
+                        <div class="slide-overlay">
+                            <h4>Multilingual SEO</h4>
+                            <p>We improve your site's ranking in every language it supports.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= DESIGN 3: GRADIENT ZOOM HOVER ================= -->
+        <div class="mb-5">
+            <h3 class="fw-bold text-warning mb-4">Design Style 3: Smooth Zoom & Background Glow</h3>
+            <div class="row">
+                <!-- Item 7 -->
+                <div class="col-md-4">
+                    <div class="zoom-card">
+                        <div class="num">07</div>
+                        <h3>Voice Search Optimization</h3>
+                        <p>Optimize for voice queries and long-tail keywords.</p>
+                    </div>
+                </div>
+                <!-- Item 8 -->
+                <div class="col-md-4">
+                    <div class="zoom-card">
+                        <div class="num">08</div>
+                        <h3>WordPress SEO</h3>
+                        <p>Drive traffic & enhance search ranking with optimized WordPress site.</p>
+                    </div>
+                </div>
+                <!-- Item 9 -->
+                <div class="col-md-4">
+                    <div class="zoom-card">
+                        <div class="num">09</div>
+                        <h3>YouTube SEO</h3>
+                        <p>Make your videos rank higher on YouTube and Google searches.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- View All Button -->
+        <div class="text-center mt-4">
+            <button class="btn btn-dark px-5 py-2 rounded-pill fw-bold">View All</button>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

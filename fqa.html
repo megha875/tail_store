@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+    <!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
+    </div>
+
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+      <!-- Outlined Register Button (Image Style) -->
+      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Register
+      </a>
+
+
+      <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Login
+      </a>
+
+      <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+      </button> -->
+      <!-- Cart Icon Button (Updated with Link and Dynamic Badge Counter) -->
+<a href="cart.html" id="nav-cart-btn" class="p-1 hover:text-gray-300 transition-colors relative flex items-center" aria-label="Cart">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+  </svg>
+  
+  <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+    0
+  </span>
+</a>
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <!-- Mobile Accordion Item: Men -->
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+  
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+
+<!--Navbar Section End-->
+    <div class="text-center pt-10 pb-4">
+        <p class="text-xs sm:text-sm text-gray-500 mb-2">
+            <a href="#" class="hover:underline">Home</a> &gt; <span class="text-gray-700 font-medium">FAQs</span>
+        </p>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 font-normal tracking-wide">
+            Frequently Asked Questions
+        </h1>
+    </div>
+
+    <!-- Main FAQ Container -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="border-t border-b border-gray-200 divide-y divide-gray-200" id="faq-accordion">
+
+            <!-- Item 1 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        1. Do you deliver to my location (Pincode)?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">We deliver to over 25,000+ pincodes across India. You can enter your delivery pincode on the product details page or during checkout to check serviceability for your location.</p>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        2. Is my product covered by insurance during delivery?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Yes, all shipments sent by TailStore are 100% transit-insured. Your order is completely safe and covered until it reaches your doorstep.</p>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        3. How will the delivery be done?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Deliveries are handled via our trusted premium logistics partners (BlueDart, Delhivery, etc.). High-value shipments require an OTP verification upon delivery.</p>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        4. How much does it cost to have a TailStore product delivered to my home?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">We offer free standard shipping on all orders above ₹999. For orders below ₹999, a nominal shipping fee of ₹79 will be added at checkout.</p>
+                </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        5. What is the estimated delivery time?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Standard delivery takes 3 to 5 business days for major cities, and up to 7 business days for remote locations.</p>
+                </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        6. What payment options are available?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">We accept Credit/Debit Cards, UPI (GPay, PhonePe, Paytm), Net Banking, EMI, and Cash on Delivery (COD) for eligible pincodes.</p>
+                </div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        7. Can I cancel my order after placing it?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Yes, orders can be canceled before they are dispatched. Go to 'My Orders' section in your account to request a cancellation.</p>
+                </div>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        8. What is the return and exchange policy?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">We offer a 7-day easy return policy for unused products with original brand tags and packaging intact.</p>
+                </div>
+            </div>
+
+            <!-- Item 9 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        9. How long does a refund take to process?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Once the quality check of the returned item is completed at our hub, refunds are initiated within 48 hours to your original payment method.</p>
+                </div>
+            </div>
+
+            <!-- Item 10 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        10. Are all products authentic and certified?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Yes, 100% of our products are genuine, sourced directly from certified manufacturers, and come with official warranty certificates.</p>
+                </div>
+            </div>
+
+            <!-- Item 11 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        11. How do I track my active order?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">You will receive an SMS and Email with a direct tracking link as soon as your order is shipped.</p>
+                </div>
+            </div>
+
+            <!-- Item 12 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        12. Is Cash on Delivery (COD) available everywhere?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">COD is available for most locations across India for orders up to ₹20,000.</p>
+                </div>
+            </div>
+
+            <!-- Item 13 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        13. Do I need an account to place an order?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">No, you can place an order as a guest. However, creating an account helps you track orders easily and get exclusive discount coupons.</p>
+                </div>
+            </div>
+
+            <!-- Item 14 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        14. How can I apply a discount or promo coupon?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">You can apply your promo code during checkout on the payment review screen before completing the payment.</p>
+                </div>
+            </div>
+
+            <!-- Item 15 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        15. What should I do if I receive a damaged product?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Please notify our support team within 24 hours of delivery with photos or unboxing video of the damaged package for an immediate replacement.</p>
+                </div>
+            </div>
+
+            <!-- Item 16 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        16. Do you deliver internationally?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Currently, we only ship within India. International shipping will be launched soon.</p>
+                </div>
+            </div>
+
+            <!-- Item 17 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        17. Can I change my delivery address after ordering?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Address changes are possible only before the order has been dispatched. Contact support immediately for address update requests.</p>
+                </div>
+            </div>
+
+            <!-- Item 18 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        18. How can I contact customer care?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">You can reach out to us at support@tailstore.com or call us at +91 1800-123-4567 between 9 AM - 7 PM IST.</p>
+                </div>
+            </div>
+
+            <!-- Item 19 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        19. Is gift wrapping available for products?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Yes, gift packaging along with a customized personalized card is available at checkout for a nominal charge.</p>
+                </div>
+            </div>
+
+            <!-- Item 20 -->
+            <div class="faq-item py-4 sm:py-5">
+                <button class="faq-toggle w-full flex justify-between items-center text-left focus:outline-none group">
+                    <span class="text-sm sm:text-base font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">
+                        20. How do I join the TailStore Loyalty Program?
+                    </span>
+                    <span class="icon text-xl font-light text-gray-600 ml-4">+</span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden opacity-0 text-xs sm:text-sm text-gray-600 leading-relaxed mt-0">
+                    <p class="pt-3">Creating an account automatically enrolls you in our reward program, earning you points on every purchase made.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-8 gap-x-8 sm:gap-x-12">
+
+      <!-- Shop Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <!-- Pages Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <!-- Account Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Policies Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Customer Policies</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Contact Us</a></li>
+          <li><a href="fqa.html" class="hover:text-gray-900 transition-colors">FAQ</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">T&C</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Terms Of Use</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Track Orders</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shipping</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cancellation</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Privacy policy</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Grievance Redressal</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">FSSAI Food Safety Connect app</a></li>
+        </ul>
+      </div>
+
+      <!-- Follow Us Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center"></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center"></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center"></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center"></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center"></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Us Column -->
+      <div class="col-span-2 sm:col-span-1 lg:col-span-1">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!--Footer Section End-->
+<!--Bottom Section Start-->
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      
+      <!-- Copyright, Links & Description -->
+      <div class="space-y-3 text-gray-800">
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
+
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
+
+      <!-- Payment Icons -->
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <!-- PayPal -->
+        <!-- <div class="h-6 px-2.5 bg-[#2c2e2f] text-white font-bold italic text-[11px] rounded flex items-center justify-center tracking-tight">
+          <img src="./assets/img/paypal (1).svg" alt="payal"/>
+        </div> -->
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/paypal (1).svg" 
+    alt="PayPal" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+        <!-- Stripe -->
+           <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/stripe.svg" 
+    alt="Stripe" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+        <!-- VISA -->
+         <div class="h-6 px-2.5  rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/visa.svg" 
+    alt="VISA" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Bottom Section End-->
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggles = document.querySelectorAll(".faq-toggle");
+
+            toggles.forEach(toggle => {
+                toggle.addEventListener("click", () => {
+                    const item = toggle.parentElement;
+                    const answer = item.querySelector(".faq-answer");
+                    const icon = toggle.querySelector(".icon");
+
+                    const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
+
+                    // Close all other open accordions
+                    document.querySelectorAll(".faq-answer").forEach(ans => {
+                        ans.style.maxHeight = "0px";
+                        ans.classList.add("opacity-0");
+                    });
+                    document.querySelectorAll(".faq-toggle .icon").forEach(ic => {
+                        ic.textContent = "+";
+                    });
+
+                    // If clicked item was not open, open it
+                    if (!isOpen) {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        answer.classList.remove("opacity-0");
+                        icon.textContent = "−"; // Minus sign
+                    }
+                });
+            });
+        });
+    </script>
+
+<script src="./assets/js/main.js"></script>
+   
+   <script src="./assets/js/product-detail.js"></script>
+    <script src="./assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+</body>
+</html>

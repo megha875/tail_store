@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Grid Design with Flip Cards</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .services-section {
+            background-color: #ffffff;
+            padding: 70px 0;
+        }
+
+        /* Perspective for 3D flip effect */
+        .card-flip-container {
+            perspective: 1000px;
+            height: 380px;
+        }
+
+        .service-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .card-flip-container.flipped .service-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Front & Back Faces */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* FRONT FACE */
+        .card-front {
+            background-color: #0b4f58; /* Rich dark teal */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-number {
+            position: absolute;
+            top: 12px;
+            left: 18px;
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.15);
+            line-height: 1;
+            user-select: none;
+            z-index: 2;
+        }
+
+        .card-img-container {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            background-color: #07353b;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .service-card-inner:hover .card-img-container img {
+            transform: scale(1.08);
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 18px 22px;
+            color: #ffffff;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+
+        .service-desc {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+
+        .card-footer-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #4dc4d4;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* BACK FACE */
+        .card-back {
+            background-color: #07333a;
+            color: #ffffff;
+            transform: rotateY(180deg);
+            padding: 25px;
+            border: 2px solid #4dc4d4;
+            box-sizing: border-border;
+        }
+
+        .back-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4dc4d4;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .back-text {
+            font-size: 0.88rem;
+            color: #e0f2f1;
+            line-height: 1.6;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .back-btn-close {
+            background-color: #4dc4d4;
+            color: #0b4f58;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .back-btn-close:hover {
+            background-color: #ffffff;
+            color: #07333a;
+        }
+
+        .section-header h2 {
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .section-header h2 span {
+            color: #0b4f58;
+            border-bottom: 3px solid #4dc4d4;
+            padding-bottom: 2px;
+        }
+
+        .btn-view-all {
+            background-color: #0b4f58;
+            color: white;
+            font-weight: 600;
+            padding: 12px 35px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-all:hover {
+            background-color: #07333a;
+            color: white;
+            box-shadow: 0 6px 16px rgba(11, 79, 88, 0.35);
+        }
+    </style>
+</head>
+<body>
+
+    <section class="services-section">
+        <div class="container">
+            <!-- Header Section -->
+            <div class="text-center section-header mb-5">
+                <h2 class="mb-3">By Ranking First on Google<br><span>And targeting your customers at every step</span></h2>
+                <p class="text-muted">Click any service card to turn it over and read detailed information.</p>
+            </div>
+
+            <!-- 3x3 Services Grid -->
+            <div class="row g-4">
+                
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">01</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=80" alt="App Store SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=App+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">App Store SEO</h3>
+                                        <p class="service-desc">Make your mobile app appear on top of App Store and Play Store search results.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-mobile-screen-button me-2"></i>App Store SEO</h4>
+                                <div class="back-text">
+                                    <p>Our App Store Optimization (ASO) strategies help increase visibility across both Apple App Store and Google Play Store.</p>
+                                    <p>We optimize app titles, keywords, screenshots, ratings, and localized metadata to boost organic downloads and reach your ideal mobile audience efficiently.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">02</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1556742049-0a67568a0d70?auto=format&fit=crop&w=600&q=80" alt="Ecommerce SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Ecommerce+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">Ecommerce SEO</h3>
+                                        <p class="service-desc">Attract more high-intent shoppers with optimized product pages.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-cart-shopping me-2"></i>Ecommerce SEO</h4>
+                                <div class="back-text">
+                                    <p>Scale your online store sales organically with targeted keyword optimization for products and categories.</p>
+                                    <p>We improve technical site structure, implement Schema product markup, fix site speed, and drive organic conversions directly to your checkout page.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">03</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80" alt="International SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Global+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">International SEO</h3>
+                                        <p class="service-desc">Expand your brand global footprint across multiple countries and regions.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-earth-americas me-2"></i>International SEO</h4>
+                                <div class="back-text">
+                                    <p>Target search engine traffic from specific countries, languages, and global territories seamlessly.</p>
+                                    <p>Includes ccTLD setup, hreflang tag implementation, country-specific keyword targeting, and culturally localized content optimization.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">04</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=600&q=80" alt="Local SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Local+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">Local SEO</h3>
+                                        <p class="service-desc">Dominate Google Maps and local search results near your location.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-location-dot me-2"></i>Local SEO</h4>
+                                <div class="back-text">
+                                    <p>Get listed in Google 3-Pack and capture nearby active buyers looking for your products or services.</p>
+                                    <p>We optimize Google Business Profiles (GBP), build localized citations, manage customer reviews, and enhance local NAP consistency.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">05</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80" alt="Mobile SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Mobile+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">Mobile SEO</h3>
+                                        <p class="service-desc">Get found easily by mobile users with responsive, fast pages.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-mobile-retro me-2"></i>Mobile SEO</h4>
+                                <div class="back-text">
+                                    <p>Ensure your website complies with Google Mobile-First Indexing standards for max performance.</p>
+                                    <p>We audit mobile page speed, refine responsive touch UI/UX, optimize mobile Core Web Vitals, and eliminate mobile rendering errors.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">06</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80" alt="Multilingual SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Multilingual+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">Multilingual SEO</h3>
+                                        <p class="service-desc">Boost rankings in every language your site supports globally.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-language me-2"></i>Multilingual SEO</h4>
+                                <div class="back-text">
+                                    <p>Connect with non-English speaking markets without sacrificing indexing speed or search visibility.</p>
+                                    <p>Our solutions include accurate multi-language indexing, translated content optimization, localized backlinks, and correct canonical tagging.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">07</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80" alt="Voice Search Optimization" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=Voice+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">Voice Search Optimization</h3>
+                                        <p class="service-desc">Optimize for conversational queries on Alexa, Siri, and Google Assistant.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-solid fa-microphone-lines me-2"></i>Voice Search SEO</h4>
+                                <div class="back-text">
+                                    <p>Capture voice queries powered by smart speakers and mobile digital assistants.</p>
+                                    <p>We target natural conversational phrases, long-tail search intent, FAQ schema markup, and concise featured snippet positions.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">08</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80" alt="WordPress SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=WordPress+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">WordPress SEO</h3>
+                                        <p class="service-desc">Drive traffic and enhance search rankings with optimized WordPress sites.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-brands fa-wordpress me-2"></i>WordPress SEO</h4>
+                                <div class="back-text">
+                                    <p>Turn your WordPress site into a high-ranking lead generation machine.</p>
+                                    <p>Includes Yoast/RankMath configuration, permalink cleanup, database speed optimization, security tweaks, and customized blog content strategy.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 9 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-flip-container" onclick="toggleFlip(this)">
+                        <div class="service-card-inner">
+                            <!-- FRONT -->
+                            <div class="card-front">
+                                <div class="card-number">09</div>
+                                <div class="card-img-container">
+                                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=600&q=80" alt="YouTube SEO" onerror="this.src='https://placehold.co/600x350/07353b/ffffff?text=YouTube+SEO'">
+                                </div>
+                                <div class="card-content">
+                                    <div>
+                                        <h3 class="service-title">YouTube SEO</h3>
+                                        <p class="service-desc">Rank your videos higher on YouTube search and Google Video results.</p>
+                                    </div>
+                                    <div class="card-footer-link">
+                                        <span>Click to view details</span>
+                                        <i class="fa-solid fa-rotate-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- BACK -->
+                            <div class="card-back">
+                                <h4 class="back-title"><i class="fa-brands fa-youtube me-2"></i>YouTube SEO</h4>
+                                <div class="back-text">
+                                    <p>Maximize video views, channel subscribers, and watch time organically.</p>
+                                    <p>We optimize video titles, tags, descriptions, custom thumbnails, video chapters, closed captions, and cross-channel embedding strategies.</p>
+                                </div>
+                                <div>
+                                    <button class="back-btn-close" onclick="event.stopPropagation(); toggleFlip(this.closest('.card-flip-container'))">
+                                        <i class="fa-solid fa-arrow-left"></i> Go Back
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- View All Button -->
+            <div class="text-center mt-5">
+                <a href="#view-all" class="btn btn-view-all">View All Services</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- JavaScript for Card Flip Functionality -->
+    <script>
+        function toggleFlip(element) {
+            element.classList.toggle('flipped');
+        }
+    </script>
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

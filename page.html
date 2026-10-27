@@ -1,0 +1,67 @@
+    <!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    margin: 0;
+    padding: 30px;
+    background: #111;
+  }
+
+  .box {
+    width: 753px;
+    height: 126px;
+    background: #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stroke {
+    position: relative;
+    width: 700px;
+    height: 84px;
+  }
+
+  .brush {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      #9fdcf3 0 4px,
+      #b9e6f6 4px 7px,
+      #8fd5f0 7px 9px,
+      #cdeaf5 9px 13px
+    );
+    filter: blur(1.2px);
+    -webkit-mask-image: linear-gradient(to right,
+      transparent 0%, #000 8%, #000 55%, rgba(0,0,0,.35) 100%);
+    mask-image: linear-gradient(to right,
+      transparent 0%, #000 8%, #000 55%, rgba(0,0,0,.35) 100%);
+  }
+
+  /* text bilkul center me */
+  .text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #0b3a55;
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="stroke">
+      <div class="brush"></div>
+      <div class="text">Your Text Here</div>
+    </div>
+  </div>
+</body>
+</html>

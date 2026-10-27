@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen SEO Services Suite - 3 Unique Concepts</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Space Grotesk, Plus Jakarta Sans, JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-main: #020813;
+            --card-glass: rgba(7, 21, 38, 0.7);
+            --card-glass-back: rgba(4, 14, 26, 0.96);
+            --accent-cyan: #00f2fe;
+            --accent-blue: #0077ff;
+            --accent-purple: #8b5cf6;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --text-primary: #ffffff;
+            --text-muted: #94a3b8;
+            --border-glow: rgba(0, 242, 254, 0.3);
+            --scroll-thumb: #00f2fe;
+            --scroll-track: rgba(2, 10, 20, 0.8);
+        }
+
+        [data-theme="light"] {
+            --bg-main: #f1f5f9;
+            --card-glass: rgba(255, 255, 255, 0.85);
+            --card-glass-back: #ffffff;
+            --text-primary: #0f172a;
+            --text-muted: #64748b;
+            --border-glow: rgba(0, 119, 255, 0.25);
+            --scroll-track: #e2e8f0;
+            --scroll-thumb: #0077ff;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Ambient Glowing Orbs Background */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+        .orb-cyan { width: 550px; height: 550px; background: #00f2fe; top: -180px; left: -120px; }
+        .orb-purple { width: 600px; height: 600px; background: #8b5cf6; bottom: -200px; right: -150px; animation-delay: -6s; }
+        .orb-pink { width: 400px; height: 400px; background: #ec4899; top: 35%; left: 45%; opacity: 0.25; }
+
+        @keyframes orbFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.08); }
+            100% { transform: translate(-40px, 70px) scale(0.95); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom Universal Inner Scrollbar (Right Side) */
+        .custom-scroll {
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+            padding-right: 12px;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: var(--scroll-track);
+            border-radius: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-blue));
+            border-radius: 8px;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+
+        /* Top Header & Navigation Switchers */
+        .header-tag {
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 22px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cyan) 75%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 800;
+        }
+
+        /* Navigation Pills Controls */
+        .concept-switcher {
+            background: rgba(10, 25, 45, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 50px;
+            padding: 6px;
+            display: inline-flex;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .concept-switcher .nav-link {
+            color: var(--text-muted);
+            border-radius: 40px;
+            padding: 10px 24px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .concept-switcher .nav-link.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #020813;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+
+        /* Utility Floating Toolbar */
+        .utility-bar {
+            background: rgba(10, 25, 45, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 12px 20px;
+        }
+
+        /* Search Bar */
+        .search-box {
+            background: rgba(2, 8, 19, 0.6);
+            border: 1px solid var(--border-glow);
+            color: var(--text-primary);
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        .search-box:focus {
+            background: rgba(2, 8, 19, 0.8);
+            color: #ffffff;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            outline: none;
+        }
+
+        /* Theme Toggle Btn */
+        .btn-theme-toggle {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            color: var(--text-primary);
+            border-radius: 12px;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .btn-theme-toggle:hover {
+            background: var(--accent-cyan);
+            color: #000;
+        }
+
+        /* Common Badge Feature Tags */
+        .feature-chip {
+            font-size: 0.72rem;
+            font-weight: 600;
+            background: rgba(0, 242, 254, 0.12);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            color: var(--accent-cyan);
+            padding: 3px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin: 0 4px 6px 0;
+        }
+
+        .benefit-item {
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 18px;
+        }
+        .benefit-item::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 0.75rem;
+        }
+
+        /* ==========================================================================
+           DESIGN CONCEPT 1: 3D VERTICAL PRISM ROTATING CARD
+           ========================================================================== */
+        .prism-card-wrapper {
+            perspective: 1200px;
+            height: 380px;
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .prism-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            border-radius: 24px;
+        }
+        .prism-card-wrapper:hover .prism-card-inner,
+        .prism-card-wrapper.active .prism-card-inner {
+            transform: rotateX(180deg);
+        }
+        .prism-front, .prism-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 24px;
+            padding: 26px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .prism-front {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .prism-front::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+        }
+        .prism-back {
+            background: var(--card-glass-back);
+            transform: rotateX(180deg);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.25);
+        }
+        .prism-icon-box {
+            width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            background: rgba(0, 242, 254, 0.12);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+        }
+        .prism-num {
+            font-size: 3.8rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(180deg, var(--accent-cyan), rgba(0, 242, 254, 0.1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+        }
+
+        /* ==========================================================================
+           DESIGN CONCEPT 2: NEUMORPHIC CYBERPUNK TERMINAL / HUD
+           ========================================================================== */
+        .hud-card {
+            background: rgba(3, 14, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            border-radius: 20px;
+            height: 380px;
+            padding: 22px;
+            position: relative;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 15px rgba(0, 242, 254, 0.05);
+        }
+        .hud-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.25), inset 0 0 20px rgba(0, 242, 254, 0.1);
+            transform: translateY(-5px);
+        }
+        .hud-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+            padding-bottom: 12px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .hud-status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .hud-terminal-window {
+            background: rgba(1, 8, 16, 0.9);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 12px;
+            padding: 14px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ==========================================================================
+           DESIGN CONCEPT 3: ACCORDION SPLIT-SCREEN SLIDING PANEL
+           ========================================================================== */
+        .split-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            height: 380px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .split-left {
+            width: 100%;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+        .split-right {
+            position: absolute;
+            right: -100%;
+            top: 0;
+            width: 60%;
+            height: 100%;
+            background: var(--card-glass-back);
+            border-left: 1px solid var(--accent-cyan);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        }
+        .split-card:hover .split-right,
+        .split-card.active .split-right {
+            right: 0;
+        }
+        .split-card:hover .split-left,
+        .split-card.active .split-left {
+            width: 40%;
+            opacity: 0.5;
+        }
+
+        /* Bottom Floating CTA Bar */
+        .floating-cta {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99;
+            background: rgba(2, 10, 20, 0.9);
+            backdrop-filter: blur(25px);
+            border: 1px solid var(--accent-cyan);
+            padding: 10px 30px;
+            border-radius: 50px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 242, 254, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #020813;
+            font-weight: 800;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-gradient:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--accent-cyan);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Glowing Background Orbs -->
+    <div class="ambient-orb orb-cyan"></div>
+    <div class="ambient-orb orb-purple"></div>
+    <div class="ambient-orb orb-pink"></div>
+
+    <div class="container py-5 main-container">
+
+        <!-- HEADER -->
+        <div class="text-center mb-4">
+            <div class="header-tag mb-3">
+                <i class="fa-solid fa-chart-line"></i> Top SEO Services Architecture
+            </div>
+            <h1 class="display-4 title-gradient mb-3">
+                By Ranking first on Google <br class="d-none d-md-block">
+                And targeting your customers at every step
+            </h1>
+            <p class="text-secondary mx-auto fs-6" style="max-width: 800px; line-height: 1.7;">
+                No matter where they are. Let it be authentic, yet omnipresent. As a leading SEO company in India, our unified approach is built to deliver high jumps in ranking, keeping local, mobile, and voice searches ticked.
+            </p>
+        </div>
+
+        <!-- UTILITY CONTROL BAR (Search + Concept Switcher + Dark/Light Theme) -->
+       
+        <!-- TAB CONTENT AREA -->
+        <div class="tab-content" id="conceptTabsContent">
+
+            <!-- ================= CONCEPT 1: 3D PRISM FLIP CARD ================= -->
+            <div class="tab-pane fade show active" id="concept1" role="tabpanel">
+                <div class="row g-4" id="prism-container">
+                    <!-- Dynamic rendering via JavaScript -->
+                </div>
+            </div>
+
+            <!-- ================= CONCEPT 2: CYBERPUNK HUD TERMINAL ================= -->
+            <div class="tab-pane fade" id="concept2" role="tabpanel">
+                <div class="row g-4" id="hud-container">
+                    <!-- Dynamic rendering via JavaScript -->
+                </div>
+            </div>
+
+            <!-- ================= CONCEPT 3: ACCORDION SPLIT-SCREEN PANEL ================= -->
+            <div class="tab-pane fade" id="concept3" role="tabpanel">
+                <div class="row g-4" id="split-container">
+                    <!-- Dynamic rendering via JavaScript -->
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FLOATING BOTTOM CTA BAR -->
+    <div class="floating-cta">
+        <div class="d-flex align-items-center gap-2">
+            <span class="spinner-grow spinner-grow-sm text-info" role="status"></span>
+            <span class="text-white small fw-bold">Custom Scrollbar Enabled</span>
+        </div>
+        <a href="javascript:void(0)" class="btn-gradient" onclick="alert('Navigating to full services breakdown!')">
+            View All Services <i class="fa-solid fa-arrow-right ms-1"></i>
+        </a>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 9 SEO Services Data Source
+        const servicesData = [
+            {
+                id: "01",
+                title: "App Store SEO",
+                icon: "fa-brands fa-app-store-ios",
+                desc: "Make your mobile app appear on top of App Store and Play Store.",
+                tags: ["ASO Optimization", "Keyword Metadata", "Ratings Boost"],
+                benefits: [
+                    "Drives organic app downloads on iOS & Google Play.",
+                    "Optimizes title, subtitle, and keyword fields.",
+                    "Conducts competitor screenshot A/B testing.",
+                    "Improves user review conversion rates."
+                ]
+            },
+            {
+                id: "02",
+                title: "Ecommerce SEO",
+                icon: "fa-solid fa-cart-shopping",
+                desc: "Attract more traffic with a well-ranked and optimized page.",
+                tags: ["Product Schema", "Category SEO", "High ROI"],
+                benefits: [
+                    "Directs high-intent buyers to product pages.",
+                    "Fixes duplicate URLs & canonical issues.",
+                    "Enhances Google Shopping rich snippet tags.",
+                    "Optimizes store architecture for conversions."
+                ]
+            },
+            {
+                id: "03",
+                title: "International SEO",
+                icon: "fa-solid fa-globe",
+                desc: "Stand out in your target location with SEO tailored for global search.",
+                tags: ["ccTLDs", "Geo-Targeting", "Hreflang Tags"],
+                benefits: [
+                    "Expands search presence across multiple countries.",
+                    "Sets up correct hreflang language targeting.",
+                    "Aligns content with regional search behaviors.",
+                    "Configures global domain structures smoothly."
+                ]
+            },
+            {
+                id: "04",
+                title: "Local SEO",
+                icon: "fa-solid fa-location-dot",
+                desc: "Let users come one step closer to your business in local maps.",
+                tags: ["Google Business", "Local 3-Pack", "NAP Audit"],
+                benefits: [
+                    "Ranks business on Google Maps top results.",
+                    "Establishes local directory citation links.",
+                    "Drives foot traffic and phone calls directly.",
+                    "Manages customer reviews & trust signals."
+                ]
+            },
+            {
+                id: "05",
+                title: "Mobile SEO",
+                icon: "fa-solid fa-mobile-screen-button",
+                desc: "Get found by high-converting mobile customers with fast rendering.",
+                tags: ["Mobile-First", "Core Web Vitals", "Speed Boost"],
+                benefits: [
+                    "Achieves sub-2-second page loading speeds.",
+                    "Ensures touch-friendly UI and mobile UX.",
+                    "Meets Google's Mobile-First Indexing rules.",
+                    "Reduces bounce rate for smartphone visitors."
+                ]
+            },
+            {
+                id: "06",
+                title: "Multilingual SEO",
+                icon: "fa-solid fa-language",
+                desc: "We improve your site's ranking in every language it supports.",
+                tags: ["Hreflang", "Multi-Language", "Native Search"],
+                benefits: [
+                    "Captures non-English organic search queries.",
+                    "Implements precise technical language tags.",
+                    "Eliminates cross-language duplicate content.",
+                    "Boosts regional search engine performance."
+                ]
+            },
+            {
+                id: "07",
+                title: "Voice Search Optimization",
+                icon: "fa-solid fa-microphone-lines",
+                desc: "Optimize for voice queries and long-tail conversational keywords.",
+                tags: ["FAQ Schema", "Position 0", "AI Search"],
+                benefits: [
+                    "Ranks for Siri, Alexa & Google Assistant.",
+                    "Targets question-based user search intent.",
+                    "Wins Google Featured Snippet positions.",
+                    "Prepares site for modern AI audio devices."
+                ]
+            },
+            {
+                id: "08",
+                title: "WordPress SEO",
+                icon: "fa-brands fa-wordpress",
+                desc: "Drive traffic & enhance search ranking with optimized WordPress site.",
+                tags: ["CMS Cache", "RankMath/Yoast", "Security"],
+                benefits: [
+                    "Cleans up database & plugin performance.",
+                    "Optimizes permalinks and sitemap indexing.",
+                    "Enforces structured schema data markup.",
+                    "Hardens CMS against search-damaging malware."
+                ]
+            },
+            {
+                id: "09",
+                title: "YouTube SEO",
+                icon: "fa-brands fa-youtube",
+                desc: "Make your videos rank higher on YouTube and Google searches.",
+                tags: ["Video Tags", "Transcripts", "CTR Booster"],
+                benefits: [
+                    "Ranks videos in Google search carousels.",
+                    "Optimizes video titles, tags, and thumbnails.",
+                    "Increases subscriber retention and watch time.",
+                    "Injects key moments & chapter metadata."
+                ]
+            }
+        ];
+
+        // 1. Render Concept 1 (3D Vertical Prism Card)
+        function renderPrismCards(items) {
+            const container = document.getElementById("prism-container");
+            container.innerHTML = items.map(item => `
+                <div class="col-lg-4 col-md-6 service-card-item">
+                    <div class="prism-card-wrapper" onclick="this.classList.toggle('active')">
+                        <div class="prism-card-inner">
+                            <!-- FRONT SIDE -->
+                            <div class="prism-front">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="prism-num">${item.id}</div>
+                                    <div class="prism-icon-box"><i class="${item.icon}"></i></div>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold text-white mb-2">${item.title}</h3>
+                                    <span class="badge bg-dark border border-info text-info rounded-pill px-3 py-2 fs-7">
+                                        Hover / Tap to Rotate <i class="fa-solid fa-arrows-rotate ms-1"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- BACK SIDE WITH RIGHT SCROLLBAR -->
+                            <div class="prism-back">
+                                <div class="d-flex align-items-center justify-content-between border-bottom border-secondary pb-2 mb-2">
+                                    <h5 class="fw-bold text-info mb-0">${item.title}</h5>
+                                    <span class="badge bg-info text-dark fw-bold">${item.id}</span>
+                                </div>
+                                <!-- RIGHT SIDE SLEEK SCROLLBAR AREA -->
+                                <div class="custom-scroll flex-grow-1 my-2">
+                                    <p class="text-white small fw-semibold mb-2">${item.desc}</p>
+                                    <div class="mb-2">
+                                        ${item.tags.map(t => `<span class="feature-chip">${t}</span>`).join('')}
+                                    </div>
+                                    <div class="mt-2">
+                                        ${item.benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info w-100 rounded-pill fw-bold">Explore Service</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 2. Render Concept 2 (Cyberpunk Terminal HUD)
+        function renderHUDCards(items) {
+            const container = document.getElementById("hud-container");
+            container.innerHTML = items.map(item => `
+                <div class="col-lg-4 col-md-6 service-card-item">
+                    <div class="hud-card">
+                        <div class="hud-header">
+                            <div><span class="hud-status-dot"></span><span class="text-info small fw-bold">SYSTEM//ONLINE</span></div>
+                            <span class="text-secondary small fw-bold">ID:${item.id}</span>
+                        </div>
+                        <div class="my-3">
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <i class="${item.icon} text-info fs-3"></i>
+                                <h4 class="fw-bold text-white mb-0">${item.title}</h4>
+                            </div>
+                        </div>
+                        <!-- SCROLLABLE TERMINAL WINDOW -->
+                        <div class="hud-terminal-window custom-scroll flex-grow-1 mb-3">
+                            <p class="text-info small fw-semibold mb-2">&gt; ${item.desc}</p>
+                            <div class="mb-2">
+                                ${item.tags.map(t => `<span class="feature-chip">${t}</span>`).join('')}
+                            </div>
+                            <div>
+                                ${item.benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-info w-100 rounded-pill fw-bold text-dark">
+                            <i class="fa-solid fa-terminal me-1"></i> Launch Optimization
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 3. Render Concept 3 (Accordion Split Panel)
+        function renderSplitCards(items) {
+            const container = document.getElementById("split-container");
+            container.innerHTML = items.map(item => `
+                <div class="col-lg-4 col-md-6 service-card-item">
+                    <div class="split-card" onclick="this.classList.toggle('active')">
+                        <!-- LEFT MAIN PANEL -->
+                        <div class="split-left">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <span class="fs-1 fw-bold text-info">${item.id}</span>
+                                <i class="${item.icon} fs-2 text-info"></i>
+                            </div>
+                            <div>
+                                <h3 class="fw-bold text-white mb-2">${item.title}</h3>
+                                <span class="badge bg-dark border border-info text-info rounded-pill px-3 py-2 fs-7">
+                                    Hover / Tap to Slide Panel <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- RIGHT SLIDING DETAIL PANEL WITH RIGHT SCROLLBAR -->
+                        <div class="split-right">
+                            <div class="d-flex align-items-center justify-content-between border-bottom border-secondary pb-2 mb-2">
+                                <h6 class="fw-bold text-info mb-0">${item.title}</h6>
+                                <span class="badge bg-info text-dark fw-bold">${item.id}</span>
+                            </div>
+                            <div class="custom-scroll flex-grow-1 my-2">
+                                <p class="text-white small fw-semibold mb-2">${item.desc}</p>
+                                <div class="mb-2">
+                                    ${item.tags.map(t => `<span class="feature-chip">${t}</span>`).join('')}
+                                </div>
+                                <div>
+                                    ${item.benefits.map(b => `<div class="benefit-item">${b}</div>`).join('')}
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-outline-info w-100 rounded-pill fw-bold">View Specs</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial Initialization
+        renderPrismCards(servicesData);
+        renderHUDCards(servicesData);
+        renderSplitCards(servicesData);
+
+        // Search Filter Function
+        function filterServices() {
+            const query = document.getElementById("searchInput").value.toLowerCase();
+            const filtered = servicesData.filter(s => 
+                s.title.toLowerCase().includes(query) || 
+                s.desc.toLowerCase().includes(query) ||
+                s.tags.some(t => t.toLowerCase().includes(query))
+            );
+            renderPrismCards(filtered);
+            renderHUDCards(filtered);
+            renderSplitCards(filtered);
+        }
+
+        // Dark / Light Theme Toggle Function
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById("themeIcon");
+            if (html.getAttribute("data-theme") === "dark") {
+                html.setAttribute("data-theme", "light");
+                themeIcon.className = "fa-solid fa-sun";
+            } else {
+                html.setAttribute("data-theme", "dark");
+                themeIcon.className = "fa-solid fa-moon";
+            }
+        }
+    </script>
+</body>
+</html>

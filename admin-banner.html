@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Homepage Banner</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-['Manrope']">
+    <header class="bg-[#050B14] px-6 py-5 text-white">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
+            <h1 class="text-xl font-bold md:text-2xl">Homepage Banner Admin</h1>
+            <nav class="flex flex-wrap items-center gap-2">
+                <a href="admin.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Add Product</a>
+                <a href="admin-banner.html" aria-current="page" class="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold">Add Banner</a>
+                <a href="admin-newsletter.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Newsletter</a>
+                <a href="admin-homepage.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Homepage Heading</a>
+                <a href="index.html" class="rounded-lg bg-[#FF0043] px-5 py-2 text-sm font-semibold hover:bg-[#d90039]">View Store</a>
+            </nav>
+        </div>
+    </header>
+    <main class="mx-auto max-w-4xl px-4 py-10">
+        <section class="rounded-2xl border bg-white p-6 shadow-sm md:p-8">
+            <h2 class="text-2xl font-bold text-gray-900">Add Homepage Banner</h2>
+            <p class="mb-8 mt-1 text-gray-500">Banner MongoDB mein save hoga aur selected homepage section mein dikhega.</p>
+            <form id="homepageBannerForm" class="space-y-5">
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Banner section</span>
+                        <select name="placement" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                            <option value="hero">Homepage hero carousel</option>
+                            <option value="promo">Welcome shop banner</option>
+                            <option value="category">Shop category cards</option>
+                        </select>
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Small heading</span>
+                        <input name="eyebrow" maxlength="80" placeholder="New Season Collection" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Main heading</span>
+                        <input name="title" maxlength="160" required placeholder="Elevate your style" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                </div>
+                <label class="block">
+                    <span class="mb-2 block text-sm font-semibold text-gray-700">Description</span>
+                    <textarea name="description" maxlength="500" rows="3" placeholder="A short banner description" class="w-full rounded-lg border border-gray-300 px-4 py-3"></textarea>
+                </label>
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Banner image URL or project path</span>
+                        <input name="image" required placeholder="./assets/img/banner.jpg" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Button link</span>
+                        <input name="link" value="shop.html" placeholder="shop.html" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                </div>
+                <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Button text</span>
+                        <input name="buttonText" value="SHOP NOW" maxlength="40" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                    <label class="block">
+                        <span class="mb-2 block text-sm font-semibold text-gray-700">Display order</span>
+                        <input name="order" type="number" min="0" step="1" value="0" class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                    </label>
+                </div>
+                <div id="bannerFormMessage" class="hidden rounded-lg px-4 py-3 text-sm font-semibold" role="status" aria-live="polite"></div>
+                <button id="bannerSubmitBtn" type="submit" class="w-full rounded-lg bg-[#FF0043] py-3.5 font-bold text-white transition hover:bg-[#d90039]">Save Banner</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        (() => {
+            const form = document.getElementById('homepageBannerForm');
+            const message = document.getElementById('bannerFormMessage');
+            const submitButton = document.getElementById('bannerSubmitBtn');
+            const apiHost = window.location.hostname || '127.0.0.1';
+            const apiBaseUrl = ['localhost', '127.0.0.1'].includes(apiHost) || window.location.protocol === 'file:'
+                ? `http://${apiHost}:5000`
+                : window.location.origin;
+
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                submitButton.disabled = true;
+                message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-gray-100 text-gray-700';
+                message.textContent = 'Saving banner to MongoDB...';
+                message.classList.remove('hidden');
+                try {
+                    const payload = Object.fromEntries(new FormData(form).entries());
+                    payload.buttons = [{ text: payload.buttonText, link: payload.link }];
+                    const response = await fetch(`${apiBaseUrl}/api/banners`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message || `Banner save failed (HTTP ${response.status}).`);
+                    message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-green-100 text-green-700';
+                    message.textContent = result.message || 'Banner saved to MongoDB.';
+                    form.reset();
+                } catch (error) {
+                    console.error('Homepage banner save failed:', error);
+                    message.className = 'rounded-lg px-4 py-3 text-sm font-semibold bg-red-100 text-red-700';
+                    message.textContent = error.message || 'Banner could not be saved.';
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

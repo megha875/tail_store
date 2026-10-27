@@ -1,0 +1,2637 @@
+// ==========================================
+// 1. INITIALIZATION & ROUTING LOGIC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  // --- Dynamic Page Route Handlers ---
+  const cartContainer = document.getElementById('cartItems');
+  const gridContainer = document.getElementById('productGrid') || document.getElementById('products-container');
+
+  if (cartContainer) {
+    renderDynamicCart(); // Run on Cart Page
+  }
+  
+  if (gridContainer) {
+    // loadProducts(); // Run on Home/Products Page
+  }
+
+  // --- DYNAMIC EVENT DELEGATION FOR PRODUCT CARDS (MODAL) ---
+  const modal = document.getElementById('productModal');
+  const modalContainer = document.getElementById('modalContainer');
+
+  if (gridContainer && modal && modalContainer) {
+    gridContainer.addEventListener('click', (e) => {
+      const card = e.target.closest('.product-card');
+      if (!card) return;
+
+      const isClickable = e.target.closest('.image-wrapper') || e.target.closest('h3');
+      if (isClickable) {
+        e.preventDefault();
+
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalPrice = document.getElementById('modalPrice');
+
+        if (modalImg) modalImg.src = card.querySelector('.product-card-img')?.src || '';
+        if (modalTitle) modalTitle.innerText = card.querySelector('h3')?.innerText || '';
+        if (modalCategory) modalCategory.innerText = card.querySelector('p')?.innerText || '';
+        if (modalPrice) modalPrice.innerText = card.querySelector('span.text-blue-600')?.innerText || '';
+
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modalContainer.classList.remove('scale-95');
+        modalContainer.classList.add('scale-100');
+      }
+    });
+  }
+
+  // Hide Modal Logic
+  if (modal && modalContainer) {
+    const closeModalBtn = document.getElementById('closeModal');
+    const hideModal = () => {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modalContainer.classList.remove('scale-100');
+      modalContainer.classList.add('scale-95');
+    };
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+  }
+
+  // --- CATEGORY SIDEBAR FILTER ---
+  const categoryCheckboxes = document.querySelectorAll('.category-filter');
+  if (categoryCheckboxes.length > 0) {
+    function filterProducts() {
+      const selectedCategories = Array.from(categoryCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => cb.value);
+
+      document.querySelectorAll('.product-card').forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        const shouldShow = selectedCategories.length === 0 || selectedCategories.includes(cardCategory);
+        card.style.display = shouldShow ? 'flex' : 'none';
+      });
+    }
+
+    categoryCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', filterProducts);
+    });
+  }
+
+  // --- PRODUCT DETAIL: THUMBNAILS ---
+  // const mainImg = document.getElementById('main-product-img');
+  // const thumbButtons = document.querySelectorAll('.thumb-btn');
+
+  // if (mainImg && thumbButtons.length > 0) {
+  //   thumbButtons.forEach(btn => {
+  //     btn.addEventListener('click', () => {
+  //       const clickedImg = btn.querySelector('img');
+  //       if (clickedImg) {
+  //         mainImg.src = clickedImg.src;
+  //         thumbButtons.forEach(b => {
+  //           b.classList.remove('border-[#ff0055]');
+  //           b.classList.add('border-transparent');
+  //         });
+  //         btn.classList.remove('border-transparent');
+  //         btn.classList.add('border-[#ff0055]');
+  //       }
+  //     });
+  //   });
+  // }
+
+  // --- PRODUCT DETAIL: QUANTITY COUNTER ---
+  const qtyCount = document.getElementById('qty-count');
+  const incrementBtn = document.getElementById('increment-btn');
+  const decrementBtn = document.getElementById('decrement-btn');
+
+  if (qtyCount && incrementBtn && decrementBtn) {
+    let count = parseInt(qtyCount.innerText) || 1;
+    incrementBtn.addEventListener('click', () => {
+      count++;
+      qtyCount.innerText = count;
+    });
+    decrementBtn.addEventListener('click', () => {
+      if (count > 1) {
+        count--;
+        qtyCount.innerText = count;
+      }
+    });
+  }
+
+  // --- NAVBAR MOBILE MENU TOGGLE ---
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+
+  const wrapper = document.getElementById('sliderWrapper');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dots = document.querySelectorAll('.dot');
+
+  if (wrapper && wrapper.dataset.dynamic !== 'true') {
+    let currentIndex = 0;
+    const totalSlides = wrapper.children.length || 1;
+
+    function updateSlider() {
+      wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) {
+          dot.classList.add('bg-white', 'w-8');
+          dot.classList.remove('bg-white/50', 'w-3');
+        } else {
+          dot.classList.add('bg-white/50', 'w-3');
+          dot.classList.remove('bg-white', 'w-8');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    }
+
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    updateSlider();
+    let autoPlay = setInterval(nextSlide, 3000);
+
+    const sliderContainer = wrapper.parentElement;
+    if (sliderContainer) {
+      sliderContainer.addEventListener('mouseenter', () => clearInterval(autoPlay));
+      sliderContainer.addEventListener('mouseleave', () => autoPlay = setInterval(nextSlide, 3000));
+    }
+  }
+
+  // --- REVIEWS FORM SUBMISSION ---
+  const reviewForm = document.getElementById('review-form');
+  const reviewsList = document.getElementById('reviews-list');
+
+  if (reviewForm) {
+    reviewForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('review-name');
+      const ratingInput = document.getElementById('review-rating');
+      const textInput = document.getElementById('review-text');
+
+      const ratingVal = parseInt(ratingInput?.value || 5);
+      const stars = '★'.repeat(ratingVal) + '☆'.repeat(5 - ratingVal);
+
+      const newReview = document.createElement('div');
+      newReview.className = 'border-b border-gray-100 pb-3 transition-all duration-300 opacity-0 transform -translate-y-2';
+      newReview.innerHTML = `
+        <div class="flex items-center space-x-2 mb-1">
+          <span class="font-bold text-gray-900">${nameInput?.value || 'Anonymous'}</span>
+          <span class="text-black text-xs">${stars}</span>
+        </div>
+        <p class="text-gray-600">${textInput?.value || ''}</p>
+      `;
+
+      if (reviewsList) {
+        reviewsList.prepend(newReview);
+        setTimeout(() => {
+          newReview.classList.remove('opacity-0', '-translate-y-2');
+        }, 50);
+      }
+
+      reviewForm.reset();
+    });
+  }
+});
+
+// ==========================================
+// 2. DYNAMIC API FETCH & RENDER FUNCTIONS
+// ==========================================
+
+// Fetch Products for Home Page Grid
+async function loadProducts() {
+  const gridContainer = document.getElementById('productGrid') || document.getElementById('products-container');
+  if (!gridContainer) return;
+
+  try {
+    const response = await fetch('http://localhost:5000/api/products');
+    const products = await response.json();
+
+    if (!products || products.length === 0) {
+      gridContainer.innerHTML = `<p class="text-center text-gray-500 py-10 col-span-full">Database me abhi koi product nahi hai.</p>`;
+      return;
+    }
+
+    gridContainer.innerHTML = products.map(item => `
+      <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${item.category || ''}">
+        <div class="image-wrapper cursor-pointer">
+          <img src="${item.image || 'https://via.placeholder.com/150'}" alt="${item.title || item.name}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+        </div>
+        <h3 class="text-lg font-bold text-gray-800 cursor-pointer mb-1">${item.title || item.name}</h3>
+        <p class="text-gray-500 text-sm mb-3">${item.category || 'General'}</p>
+        <div class="flex justify-between items-center mt-2">
+          <span class="text-blue-600 font-bold text-xl">₹${item.price}</span>
+          <button onclick="addToCart('${item._id}')" class="bg-[#ff0055] text-white px-3 py-1.5 rounded text-sm hover:bg-pink-700 transition">Add to Cart</button>
+        </div>
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error("Products Load Error:", error);
+    gridContainer.innerHTML = `<p class="text-center text-red-500 py-10 col-span-full">Server connection failed!</p>`;
+  }
+}
+
+// Fetch & Render Dynamic MongoDB Cart Data
+async function renderDynamicCart() {
+  const cartContainer = document.getElementById('cartItems');
+  const subtotalEl = document.getElementById('subtotal');
+  const grandTotalEl = document.getElementById('grandTotal');
+
+  if (!cartContainer) return;
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
+    const cart = await res.json();
+
+    if (!cart.items || cart.items.length === 0) {
+      cartContainer.innerHTML = `
+        <div class="text-center py-10">
+          <p class="text-gray-500 text-lg">Aapka Cart khali hai!</p>
+          <a href="/" class="inline-block mt-4 bg-[#ff0055] text-white px-6 py-2 rounded-md hover:bg-pink-700">Shopping Karein</a>
+        </div>`;
+      if (subtotalEl) subtotalEl.innerText = '₹0';
+      if (grandTotalEl) grandTotalEl.innerText = '₹0';
+      return;
+    }
+
+    let subtotal = 0;
+
+    cartContainer.innerHTML = cart.items.map(item => {
+      const product = item.productId;
+      if (!product) return '';
+
+      const itemTotal = product.price * item.quantity;
+      subtotal += itemTotal;
+
+      return `
+        <div class="flex items-center justify-between p-4 mb-4 bg-white border rounded-lg shadow-sm">
+          <div class="flex items-center space-x-4">
+            <img src="${product.image || 'https://via.placeholder.com/80'}" alt="${product.title}" class="w-16 h-16 object-cover rounded">
+            <div>
+              <h3 class="font-bold text-gray-800 text-base">${product.title || product.name}</h3>
+              <p class="text-blue-600 font-bold">₹${product.price}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-6">
+            <div class="flex items-center border rounded">
+              <button onclick="updateQuantity('${product._id}', 'decrease')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold">-</button>
+              <span class="px-4 py-1 font-semibold text-gray-800">${item.quantity}</span>
+              <button onclick="updateQuantity('${product._id}', 'increase')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold">+</button>
+            </div>
+
+            <span class="font-bold text-lg text-gray-800 min-w-[80px] text-right">₹${itemTotal}</span>
+
+            <button onclick="removeFromCart('${product._id}')" class="text-red-500 hover:text-red-700 p-1">
+              ✕
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+    if (grandTotalEl) grandTotalEl.innerText = `₹${subtotal}`;
+
+  } catch (err) {
+    console.error("Cart render error:", err);
+  }
+}
+
+// ==========================================
+// 3. CART ACTIONS (ADD, UPDATE, DELETE)
+// ==========================================
+
+// async function addToCart(productId) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     const product = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]').find(item => String(item._id || item.id) === String(productId)) : null;
+//     const res = await fetch('http://localhost:5000/api/cart/add', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({
+//         productId,
+//         quantity: 1,
+//         userId,
+//         name: product?.name || product?.title || 'Product',
+//         image: product?.image || '',
+//         price: Number(product?.price || 0)
+//       })
+//     });
+//     const data = await res.json();
+//     alert(data.message || 'Product Cart me add ho gaya!');
+//   } catch (err) {
+//     console.error('Add to Cart Error:', err);
+//   }
+// }
+
+// async function updateQuantity(productId, action) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     await fetch('http://localhost:5000/api/cart/update', {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ productId, action, userId })
+//     });
+//     renderDynamicCart();
+//   } catch (err) {
+//     console.error("Quantity Update Error:", err);
+//   }
+// }
+
+// async function removeFromCart(productId) {
+//   try {
+//     const userId = localStorage.getItem('userId') || 'guest_user';
+//     await fetch('http://localhost:5000/api/cart/remove', {
+//       method: 'DELETE',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ productId, userId })
+//     });
+//     renderDynamicCart();
+//   } catch (err) {
+//     console.error("Remove Item Error:", err);
+//   }
+// }
+
+
+// UPDATED REMOVE FROM CART FUNCTION
+async function removeFromCart(productId, event = null) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const token = localStorage.getItem("token") || localStorage.getItem("userToken");
+    const userId = localStorage.getItem("userId") || 'guest_user';
+
+    // 1. LocalStorage se product turant remove karein (UI Sync)
+    let cart = [];
+    try {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+    } catch (e) {
+        cart = [];
+    }
+
+    cart = cart.filter(item => String(item.id || item._id) !== String(productId));
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // UI ko refresh karein
+    if (typeof renderCart === 'function') renderCart();
+    if (typeof renderCartPage === 'function') renderCartPage();
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+
+    // 2. Safe Backend API Request (Crash-Proof)
+    try {
+        const headers = { 'Content-Type': 'application/json' };
+        if (token && token !== 'undefined' && token !== 'null') {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const res = await fetch(`${API_BASE_URL}/cart/remove`, {
+            method: 'DELETE', // Agar backend par POST route hai toh yahan 'POST' likhein
+            headers: headers,
+            body: JSON.stringify({ userId, productId })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+            console.warn('Backend Cart Remove Warning:', data.message || 'Cart remove failed on server');
+        } else {
+            console.log('Cart item removed successfully from backend');
+        }
+    } catch (error) {
+        console.warn("Backend server connection failed, item removed locally:", error);
+    }
+}
+
+// 1. Navbar Badge Update (Pure AJAX - No Page Refresh)
+function updateNavbarCartBadge() {
+    const badge = document.getElementById('cart-badge-count');
+    if (!badge) return;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`, true);
+
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            try {
+                const cart = JSON.parse(xhr.responseText);
+                if (cart && cart.items && cart.items.length > 0) {
+                    const totalCount = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+                    badge.innerText = totalCount;
+                } else {
+                    badge.innerText = '0'; // Empty cart par strictly 0
+                }
+            } catch (e) {
+                badge.innerText = '0';
+            }
+        } else {
+            badge.innerText = '0';
+        }
+    };
+
+    xhr.onerror = function () {
+        badge.innerText = '0';
+    };
+
+    xhr.send();
+}
+
+// 2. Add To Cart (Pure AJAX - Direct Dynamic Sync)
+async function addToCart(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const userId = localStorage.getItem('userId') || 'guest_user';
+
+    try {
+        const productResponse = await fetch(`${API_BASE_URL}/products/${productId}`);
+        const product = productResponse.ok ? await productResponse.json() : null;
+
+        const badge = document.getElementById('cart-badge-count');
+        if (badge) {
+            const currentCount = parseInt(badge.innerText) || 0;
+            badge.innerText = currentCount + 1;
+        }
+
+        const payload = {
+            userId,
+            productId,
+            quantity: 1,
+            name: product?.name || product?.title || 'Product',
+            image: product?.image || '',
+            price: Number(product?.price || 0)
+        };
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `${API_BASE_URL}/cart/add`, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                updateNavbarCartBadge();
+            } else {
+                alert("Product add nahi ho paya!");
+                updateNavbarCartBadge();
+            }
+        };
+
+        xhr.onerror = function () {
+            updateNavbarCartBadge();
+        };
+
+        xhr.send(JSON.stringify(payload));
+        return false;
+    } catch (error) {
+        console.error('Add to Cart Error:', error);
+        return false;
+    }
+}
+
+// 3. Remove From Cart (Pure AJAX - Instant '0' Badge Sync Without Refresh)
+function removeFromCart(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', `${API_BASE_URL}/cart/remove`, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Live badge count update
+            updateNavbarCartBadge();
+
+            // Direct Cart Page re-render agar cart page par maujood hain
+            if (typeof loadCartPage === 'function') {
+                loadCartPage();
+            }
+        } else {
+            alert("Product delete nahi ho saka!");
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error("Remove AJAX error");
+    };
+
+    const data = JSON.stringify({
+        userId: getCartUserId(),
+        productId: productId
+    });
+
+    xhr.send(data);
+    return false;
+}
+
+// 4. Initial Page Load Event
+document.addEventListener('DOMContentLoaded', () => {
+    updateNavbarCartBadge();
+});
+
+
+// ---------------------------------------------------------------
+// ==========================================
+// 1. API & BADGE INTEGRATION (Global)
+// ==========================================
+const API_BASE_URL = `http://${window.location.hostname}:5000/api`;
+const getCartUserId = () => localStorage.getItem('userId') || 'guest_user';
+
+// --- NAVBAR BADGE UPDATE ---
+async function updateCartBadge(cartData = null) {
+    const badge = document.getElementById('cart-badge-count');
+    
+    if (!badge) return;
+
+    try {
+        let cart = cartData;
+
+        // Agar cart data missing hai toh backend se fetch karein
+        if (!cart) {
+            const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
+            if (response.ok) {
+                cart = await response.json();
+            }
+        }
+
+        // Items count set karein
+        if (cart && cart.items && cart.items.length > 0) {
+            const totalItems = cart.items.reduce((total, item) => total + (item.quantity || 1), 0);
+            badge.innerText = totalItems;
+        } else {
+            badge.innerText = '0';
+        }
+    } catch (error) {
+        console.error("Badge Update Error:", error);
+        badge.innerText = '0';
+    }
+}
+
+// --- ADD TO CART (Instant Badge Sync Without Reload) ---
+async function addToCart(productId, quantity = 1, event = null) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    try {
+        const userId = getCartUserId();
+        const productResponse = await fetch(`${API_BASE_URL}/products/${productId}`);
+        const product = productResponse.ok ? await productResponse.json() : null;
+
+        const response = await fetch(`${API_BASE_URL}/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId,
+                productId,
+                quantity,
+                name: product?.name || product?.title || 'Product',
+                image: product?.image || '',
+                price: Number(product?.price || 0)
+            })
+        });
+
+        if (!response.ok) throw new Error("Product add nahi ho saka");
+
+        await updateCartBadge();
+        window.dispatchEvent(new CustomEvent('cartUpdated'));
+
+    } catch (error) {
+        console.error("Add to Cart Error:", error);
+        alert("Product add karne mein dikkat aayi.");
+    }
+}
+
+// ==========================================
+// 2. DYNAMIC CART PAGE RENDER (Cart Page Only)
+// ==========================================
+async function renderDynamicCart() {
+    const cartContainer = document.getElementById('cartItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const grandTotalEl = document.getElementById('grandTotal');
+
+    // Agar cartContainer nahi hai (Matlab hum Cart Page par nahi hain)
+    if (!cartContainer) {
+        // Sirf Navbar Badge update karke return ho jayein
+        await updateCartBadge();
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const cart = await response.json();
+
+        // Update Badge
+        updateCartBadge(cart);
+
+        // Cart Khali Hone Par Handling
+        if (!cart.items || cart.items.length === 0) {
+            cartContainer.innerHTML = `
+                <div class="bg-white rounded-xl border p-10 text-center">
+                    <div class="text-5xl mb-4">🛒</div>
+                    <h2 class="text-xl font-bold text-gray-800">Your Cart is Empty</h2>
+                    <p class="text-gray-500 mt-2">Add some products to your cart.</p>
+                    <a href="index.html" class="inline-block mt-6 bg-[#FF0043] text-white px-6 py-3 rounded-lg font-semibold">
+                        Continue Shopping
+                    </a>
+                </div>
+            `;
+
+            if (subtotalEl) subtotalEl.innerText = '₹0';
+            if (grandTotalEl) grandTotalEl.innerText = '₹0';
+            return;
+        }
+
+        let subtotal = 0;
+
+        cartContainer.innerHTML = cart.items.map(item => {
+            const product = item.productId;
+            if (!product) return '';
+
+            const itemTotal = product.price * item.quantity;
+            subtotal += itemTotal;
+
+            return `
+                <div class="bg-white border rounded-xl p-4 shadow-sm">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                        
+                        <!-- Product Info -->
+                        <div class="flex items-center gap-4">
+                            <img src="${product.image || 'https://via.placeholder.com/100'}" alt="${product.name || product.title}" class="w-24 h-24 object-cover rounded-lg">
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-900">${product.name || product.title}</h3>
+                                <p class="text-gray-500 text-sm mt-1">${product.category || 'General'}</p>
+                                <p class="text-[#FF0043] font-bold mt-2">₹${product.price}</p>
+                            </div>
+                        </div>
+
+                        <!-- Quantity + Action Controls -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center border rounded-lg overflow-hidden">
+                                <button type="button" onclick="updateQuantity('${product._id}', 'decrease')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 font-bold">−</button>
+                                <span class="px-4 py-2 font-semibold">${item.quantity}</span>
+                                <button type="button" onclick="updateQuantity('${product._id}', 'increase')" class="px-3 py-2 bg-gray-100 hover:bg-gray-200 font-bold">+</button>
+                            </div>
+
+                            <span class="font-bold text-gray-900 min-w-[80px] text-right">₹${itemTotal}</span>
+
+                            <button type="button" onclick="removeFromCart('${product._id}')" class="text-red-500 hover:text-red-700 text-xl" title="Remove">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (subtotalEl) subtotalEl.innerText = `₹${subtotal}`;
+        if (grandTotalEl) grandTotalEl.innerText = `₹${subtotal}`;
+
+    } catch (error) {
+        console.error("Cart Error:", error);
+        if (cartContainer) {
+            cartContainer.innerHTML = `
+                <div class="text-center py-10 text-red-500">
+                    Cart load nahi ho pa raha hai.
+                </div>
+            `;
+        }
+    }
+}
+
+// --- QUANTITY UPDATE ---
+async function updateQuantity(productId, action) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/update`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: getCartUserId(),
+                productId: productId,
+                action: action
+            })
+        });
+
+        if (!response.ok) throw new Error('Quantity update failed');
+
+        await renderDynamicCart();
+
+    } catch (error) {
+        console.error("Quantity Update Error:", error);
+    }
+}
+
+// --- REMOVE FROM CART ---
+async function removeFromCart(productId) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/remove`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: getCartUserId(),
+                productId: productId
+            })
+        });
+
+        if (!response.ok) throw new Error('Remove failed');
+
+        await renderDynamicCart();
+
+    } catch (error) {
+        console.error("Remove Item Error:", error);
+    }
+}
+
+// ==========================================
+// 3. INITIALIZATION & EVENT LISTENERS
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial Run for Badge and/or Cart UI
+    renderDynamicCart();
+});
+
+// Broadcaster sync for dynamic changes
+window.addEventListener('cartUpdated', () => {
+    renderDynamicCart();
+});
+
+
+
+
+const popularSwiper = new Swiper('.popularSwiper', {
+  slidesPerView: 1,      // Mobile Screen Par 1 Card
+  spaceBetween: 20,       // Cards ke beech ka gap
+  loop: true,
+  
+  // Navigation Arrows
+  navigation: {
+    nextEl: '.popular-next',
+    prevEl: '.popular-prev',
+  },
+
+  // Responsive Breakpoints
+  breakpoints: {
+    640: {
+      slidesPerView: 2,  // Small Screens (Tablet Portrait)
+      spaceBetween: 20,
+    },
+    768: {
+      slidesPerView: 3,  // Medium Screens (Tablet Landscape)
+      spaceBetween: 24,
+    },
+    1024: {
+      slidesPerView: 4,  // Desktop (1 Line me 4 Cards)
+      spaceBetween: 24,
+    },
+  },
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const brandsSwiper = new Swiper('.brandsSwiper', {
+    // Ek time par kitne logos dikhane hain
+    slidesPerView: 2,
+    spaceBetween: 30,
+    loop: true, // Continuous loop
+    speed: 3000, // Smooth transition speed (milliseconds me)
+
+    // Left-to-Right autoplay configuration
+    autoplay: {
+      delay: 0, // Zero delay for continuous smooth motion
+      disableOnInteraction: false,
+      reverseDirection: true, // Left-to-Right scroll karne ke liye
+    },
+
+    // Custom Navigation Arrows
+    navigation: {
+      nextEl: '.brands-swiper-next',
+      prevEl: '.brands-swiper-prev',
+    },
+
+    // Responsive Breakpoints
+    breakpoints: {
+      640: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 50,
+      },
+    },
+  });
+});
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const latestProductsSection = document.querySelector('.latest_products');
+
+//   if (latestProductsSection) {
+//     latestProductsSection.addEventListener('click', (event) => {
+//       // Check karte hain ki click image-wrapper par ya uske andar kisi image par hua hai
+//       const wrapper = event.target.closest('.image-wrapper');
+      
+//       if (!wrapper) return; // Agar click wrapper par nahi hua toh return ho jao
+
+//       const frontImg = wrapper.querySelector('.front-img');
+//       const backImg = wrapper.querySelector('.back-img');
+
+//       if (frontImg && backImg) {
+//         // Toggle opacity classes
+//         frontImg.classList.toggle('opacity-100');
+//         frontImg.classList.toggle('opacity-0');
+        
+//         backImg.classList.toggle('opacity-0');
+//         backImg.classList.toggle('opacity-100');
+//       }
+//     });
+//   }
+// })
+
+
+// function changeMainImage(clickedThumb) {
+//     const mainImg = document.getElementById('main-product-img');
+//     const thumbImg = clickedThumb.querySelector('img');
+
+//     if (mainImg && thumbImg) {
+//         // Main image ka src change karo
+//         mainImg.src = thumbImg.src;
+
+//         // Sabhi thumbnail buttons se active pink border hatao
+//         const allThumbs = document.querySelectorAll('.thumb-btn');
+//         allThumbs.forEach(btn => {
+//             btn.classList.remove('border-[#ff0055]');
+//             btn.classList.add('border-transparent');
+//         });
+
+//         // Current clicked thumbnail par active pink border lagao
+//         clickedThumb.classList.remove('border-transparent');
+//         clickedThumb.classList.add('border-[#ff0055]');
+//     }
+// }
+
+
+
+function switchTab(tabName) {
+  // 1. Sabhi content panes ko hide karo
+  const panes = document.querySelectorAll('.tab-pane');
+  panes.forEach(pane => pane.classList.add('hidden'));
+
+  // 2. Active tab content ko show karo
+  const activePane = document.getElementById(`content-${tabName}`);
+  if (activePane) {
+    activePane.classList.remove('hidden');
+  }
+
+  // 3. Sabhi tab buttons se active styles hatao
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  tabButtons.forEach(btn => {
+    btn.classList.remove('text-[#ff0055]', 'border-[#ff0055]', 'font-semibold');
+    btn.classList.add('text-gray-700', 'border-transparent');
+  });
+
+  // 4. Clicked tab button par active pink styles apply karo
+  const activeBtn = document.getElementById(`tab-${tabName}`);
+  if (activeBtn) {
+    activeBtn.classList.remove('text-gray-700', 'border-transparent');
+    activeBtn.classList.add('text-[#ff0055]', 'border-[#ff0055]', 'font-semibold');
+  }
+}
+// checkout 
+// "Proceed to Checkout" Button click
+// document.getElementById('btn-proceed').addEventListener('click', () => {
+//   // Sabse pehle Step 1 (Cart) ko hide karo
+//   step1.classList.add('hidden');
+//   step1.classList.remove('block');
+  
+//   // 1. Browser ke Local Storage se user ka secure token check karna
+//   const userToken = localStorage.getItem('userToken');
+
+//   if (userToken) {
+//     // Agar token mil gaya (User pehle se logged in hai)
+//     // Toh direct Step 2 (Shipping Form) show karo
+//     step2.classList.remove('hidden');
+//     step2.classList.add('flex');
+//   } else {
+//     // Agar token nahi mila (User naya hai ya logged out hai)
+//     // Toh Step 1.5 (Login/Guest Screen) show karo
+//     stepAuth.classList.remove('hidden');
+//     stepAuth.classList.add('flex');
+//   }
+// });
+
+// // Login Button click
+// document.getElementById('btn-login').addEventListener('click', () => {
+//   // Real app me yahan backend (API) call hoti hai email/password check karne ke liye.
+//   // Success hone par backend se jo token milta hai, use Local Storage me save karte hain:
+//   localStorage.setItem('userToken', 'dummy_secure_token_12345');
+  
+//   // Token save karne ke baad Shipping Form par redirect karo
+//   stepAuth.classList.add('hidden');
+//   stepAuth.classList.remove('flex');
+  
+//   step2.classList.remove('hidden');
+//   step2.classList.add('flex');
+// });
+
+
+
+// // Form Submit handle karna aur Payload banana
+// document.getElementById('step-2').addEventListener('submit', (e) => {
+//   e.preventDefault(); // Page refresh hone se roko
+  
+//   // 1. Form inputs se current values nikalna
+//   const name = document.getElementById('user-name').value;
+//   const address = document.getElementById('user-address').value;
+  
+//   // Payment method check karna (Maan lijiye HTML me 'pay-cod' ID wala radio button hai)
+//   // Agar aapne payment radio buttons HTML me nahi lagaye, toh is line ko modify kar sakte hain.
+//   const isCOD = document.getElementById('pay-cod') ? document.getElementById('pay-cod').checked : true;
+//   const paymentType = isCOD ? 'COD' : 'Online';
+
+//   // 2. Final Payload (JSON Object) create karna
+//   const orderPayload = {
+//     customer: {
+//       fullName: name,
+//       deliveryAddress: address
+//     },
+//     orderItems: cart,         // Cart array jo file ke top par defined hai
+//     cartTotal: totalPrice,    // Total price jo calculate kiya tha
+//     paymentMethod: paymentType
+//   };
+
+//   // Checking the payload in browser console
+//   console.log("Yeh raha aapka Final JSON Payload jo Backend par jayega:");
+//   console.log(JSON.stringify(orderPayload, null, 2));
+
+//   // Yahan par actual e-commerce site fetch() ka use karke is 'orderPayload' ko 
+//   // API ke through server (Node.js/MongoDB) par bhejti hai.
+  
+//   // Filhal UI ko aage badhane ke liye Step 3 (Summary) show karte hain:
+//   document.getElementById('summary-name').innerText = name;
+//   document.getElementById('summary-address').innerText = address;
+
+//   step2.classList.add('hidden');
+//   step2.classList.remove('flex');
+
+//   step3.classList.remove('hidden');
+//   step3.classList.add('block');
+// });
+
+// // Form Submit handle karna aur Payment Initiate karna
+// document.getElementById('step-2').addEventListener('submit', async (e) => {
+//   e.preventDefault(); 
+  
+//   const name = document.getElementById('user-name').value;
+//   const address = document.getElementById('user-address').value;
+  
+//   // HTML me ID 'pay-cod' wale radio button ki state check karna
+//   const isCOD = document.getElementById('pay-cod') ? document.getElementById('pay-cod').checked : true;
+//   const paymentType = isCOD ? 'COD' : 'Online';
+
+//   const orderPayload = {
+//     customer: { fullName: name, deliveryAddress: address },
+//     orderItems: cart,         
+//     cartTotal: totalPrice,    
+//     paymentMethod: paymentType
+//   };
+
+//   if (paymentType === 'COD') {
+//     // Agar COD hai, toh direct backend ko order save karne bhejein
+//     saveOrderToDatabase(orderPayload); 
+//   } else {
+//     // Agar Online Payment hai, toh Razorpay API call karein
+//     try {
+//       // 1. Backend API ko fetch request bhejna (Order ID lene ke liye)
+//       const response = await fetch('http://localhost:5000/api/create-order', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         // Backend ko sirf total amount bhejna hota hai
+//         body: JSON.stringify({ amount: totalPrice }) 
+//       });
+      
+//       const orderData = await response.json();
+      
+//       // 2. Razorpay Popup Configuration setup karna
+//       const options = {
+//         key: "YOUR_RAZORPAY_TEST_KEY", 
+//         amount: orderData.amount, // Paise hamesha paise (paise) me aate hain (rupee * 100)
+//         currency: "INR",
+//         name: "YouBella Fashion", // Store ka naam yahan display hoga
+//         description: "Shopping Cart Payment",
+//         order_id: orderData.id, // Backend se aayi hui unique Gateway ID
+//         handler: function (paymentResponse) {
+//           // 3. Payment Success hone par Gateway ye function chalata hai
+//           console.log("Payment Successful! ID:", paymentResponse.razorpay_payment_id);
+          
+//           // Transaction ID ko apne payload me add karke database me save karein
+//           orderPayload.transactionId = paymentResponse.razorpay_payment_id;
+//           saveOrderToDatabase(orderPayload);
+//         },
+//         prefill: {
+//           name: name,
+//           email: "customer@example.com", // Form se nikali hui email
+//           contact: "9999999999"          // Form se nikala hua phone number
+//         },
+//         theme: { color: "#3399cc" }
+//       };
+
+//       // 4. Razorpay Popup screen par open karna
+//       const rzp = new Razorpay(options);
+//       rzp.open();
+      
+//     } catch (error) {
+//       console.error("Payment Gateway Error:", error);
+//       alert("Payment popup open karne mein issue aaya.");
+//     }
+//   }
+// });
+
+// // Step 5 par bhejkar UI update karne ka common function
+// function saveOrderToDatabase(finalPayload) {
+//   // Real project me yahan ek aur fetch() call hoti hai jo '/api/save-order' 
+//   // par ye pura 'finalPayload' bhejti hai MongoDB me save hone ke liye.
+  
+//   // UI update karke Success Summary (Step 3 screen) dikhana
+//   document.getElementById('summary-name').innerText = finalPayload.customer.fullName;
+//   document.getElementById('summary-address').innerText = finalPayload.customer.deliveryAddress;
+  
+//   step2.classList.add('hidden');
+//   step2.classList.remove('flex');
+  
+//   step3.classList.remove('hidden');
+//   step3.classList.add('block');
+// }
+// // Function jo Backend API ko order bhejti hai aur UI cleanup karti hai
+// async function saveOrderToDatabase(finalPayload) {
+//   try {
+//     // 1. Backend API Call
+//     const response = await fetch('http://localhost:5000/api/orders/place', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(finalPayload)
+//     });
+
+//     const result = await response.json();
+
+//     if (result.success) {
+//       // ================= STEP 6: CLEANUP & SUCCESS UI =================
+      
+//       // A. Browser/Local storage se cart saaf karna
+//       localStorage.removeItem('cart'); 
+      
+//       // B. Dynamic elements update karna
+//       document.getElementById('summary-name').innerText = finalPayload.customer.fullName;
+//       document.getElementById('summary-address').innerText = finalPayload.customer.deliveryAddress;
+      
+//       // Order ID screen par dikhana
+//       const orderIdElem = document.getElementById('display-order-id');
+//       if (orderIdElem) {
+//         orderIdElem.innerText = `Order ID: #${result.orderId}`;
+//       }
+
+//       // C. Navigation / UI Screens Toggle karna
+//       step2.classList.add('hidden');
+//       step2.classList.remove('flex');
+
+//       step3.classList.remove('hidden');
+//       step3.classList.add('block');
+
+//     } else {
+//       alert('Order Place karne me dikkat aayi: ' + result.message);
+//     }
+
+//   } catch (error) {
+//     console.error('API Error:', error);
+//     alert('Server connect nahi ho pa raha hai.');
+//   }
+// }
+
+// // 1. Target Place Order Button
+// const placeOrderBtn = document.getElementById('place-order-btn');
+
+// // 2. Button Click Listener
+// if (placeOrderBtn) {
+//   placeOrderBtn.addEventListener('click', async () => {
+    
+//     // Form aur Cart se details collect karein
+//     const orderData = {
+//       userId: 'guest_user',
+//       customer: {
+//         fullName: document.getElementById('name-input')?.value || 'Guest',
+//         email: document.getElementById('email-input')?.value || '',
+//         phone: document.getElementById('phone-input')?.value || '',
+//         deliveryAddress: document.getElementById('address-input')?.value || ''
+//       },
+//       items: cartItems, // Aapki cart items array
+//       totalAmount: totalCartPrice, // Total Price
+//       paymentMethod: selectedPaymentMethod // 'COD' ya 'Online'
+//     };
+
+//     // Place Order Function Call
+//     await placeOrder(orderData);
+//   });
+// }
+
+// // 3. AAPKA PLACE ORDER FUNCTION
+// async function placeOrder(orderData) {
+//   try {
+//     const res = await fetch('http://localhost:5000/api/orders/place', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(orderData)
+//     });
+    
+//     const data = await res.json();
+//     console.log("Response:", data);
+
+//     if (data.success) {
+//       // Step 3 UI dikhane aur Order ID update karne ke liye
+//       document.getElementById('step-2')?.classList.add('hidden');
+//       document.getElementById('step-3')?.classList.remove('hidden');
+      
+//       const orderIdElem = document.getElementById('display-order-id');
+//       if (orderIdElem) {
+//         orderIdElem.innerText = `Order ID: #${data.orderId}`;
+//       }
+//     } else {
+//       alert("Order failed: " + data.message);
+//     }
+//   } catch (err) {
+//     console.error("Error:", err);
+//     alert("Server connect nahi ho pa raha hai!");
+//   }
+// }
+
+
+// // script.js
+
+// // 1. Button select karein
+// const confirmOrderBtn = document.getElementById('confirm-order-btn');
+
+// // 2. Click hone par API call karein
+// if (confirmOrderBtn) {
+//   confirmOrderBtn.addEventListener('click', () => {
+
+//     fetch('http://localhost:5000/api/orders/place', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({
+//         userId: "guest_user",
+//         customer: { 
+//           fullName: document.getElementById('name').value, 
+//           email: document.getElementById('email').value, 
+//           phone: document.getElementById('phone').value, 
+//           deliveryAddress: document.getElementById('address').value 
+//         },
+//         items: cartItems, // Aapki cart array
+//         totalAmount: 499,
+//         paymentMethod: "COD"
+//       })
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log("Order Response:", data);
+//       if (data.success) {
+//         alert("Order Successful! Order ID: " + data.orderId);
+//       }
+//     })
+//     .catch(err => console.error("Error:", err));
+
+//   });
+// }
+// ==========================================
+// 1. STEP NAVIGATION & LOGIN HANDLERS
+// ==========================================
+// Global Variables Fallback (Agar pehle se defined nahi hain)
+if (typeof cart === 'undefined') var cart = [];
+if (typeof totalPrice === 'undefined') var totalPrice = 0;
+
+// ==========================================
+// 1. PAGE LOAD INITIALIZER (Fix for Blank Screen)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Page load hote hi Step 1 (Cart / Products) screen show karein
+  const step1 = document.getElementById('step-1');
+  if (step1) {
+    step1.classList.remove('hidden');
+    step1.classList.add('block');
+  }
+
+  // Event Listeners Initialize Karein
+  initCheckoutEvents();
+});
+
+function initCheckoutEvents() {
+  // ==========================================
+  // 2. STEP NAVIGATION & LOGIN HANDLERS
+  // ==========================================
+
+  // Cart se Checkout par jane ka handler
+  document.getElementById('btn-proceed')?.addEventListener('click', () => {
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const stepAuth = document.getElementById('step-auth');
+
+    if (step1) {
+      step1.classList.add('hidden');
+      step1.classList.remove('block');
+    }
+
+    const userToken = localStorage.getItem('userToken');
+
+    if (userToken) {
+      if (step2) {
+        step2.classList.remove('hidden');
+        step2.classList.add('flex');
+      }
+    } else {
+      if (stepAuth) {
+        stepAuth.classList.remove('hidden');
+        stepAuth.classList.add('flex');
+      }
+    }
+  });
+
+  // Login Button Click Handler
+  // document.getElementById('btn-login')?.addEventListener('click', () => {
+  //   localStorage.setItem('userToken', 'dummy_secure_token_12345');
+
+  //   const step2 = document.getElementById('step-2');
+  //   const stepAuth = document.getElementById('step-auth');
+
+  //   if (stepAuth) {
+  //     stepAuth.classList.add('hidden');
+  //     stepAuth.classList.remove('flex');
+  //   }
+
+  //   if (step2) {
+  //     step2.classList.remove('hidden');
+  //     step2.classList.add('flex');
+  //   }
+  // });
+
+
+
+  // Login Button Click Handler
+const loginBtn = document.getElementById('btn-login');
+
+if (loginBtn) {
+loginBtn.addEventListener('click', () => {
+localStorage.setItem('userToken', 'dummy_secure_token_12345');
+ 
+const step2 = document.getElementById('step-2');
+const stepAuth = document.getElementById('step-auth');
+
+if (stepAuth) {
+  stepAuth.classList.add('hidden');
+  stepAuth.classList.remove('flex');
+}
+
+if (step2) {
+  step2.classList.remove('hidden');
+  step2.classList.add('flex');
+} 
+
+});
+}
+
+
+  // ==========================================
+  // 3. FORM SUBMISSION & PAYMENT HANDLING
+  // ==========================================
+
+  const checkoutForm = document.getElementById('step-2');
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', async (e) => {
+      e.preventDefault(); // Page reload hone se rokna
+
+      // Form Details safely fetch karna
+      const name = document.getElementById('user-name')?.value || document.getElementById('name')?.value || 'Guest User';
+      const address = document.getElementById('user-address')?.value || document.getElementById('address')?.value || 'Delhi';
+      const email = document.getElementById('email')?.value || 'guest@example.com';
+      const phone = document.getElementById('phone')?.value || '0000000000';
+
+      // Payment Method Check
+      const payCodElem = document.getElementById('pay-cod');
+      const isCOD = payCodElem ? payCodElem.checked : true;
+      const paymentType = isCOD ? 'COD' : 'Online';
+
+      // Global cart variables verification
+      const currentCart = typeof cart !== 'undefined' ? cart : (typeof cartItems !== 'undefined' ? cartItems : []);
+      const currentTotal = typeof totalPrice !== 'undefined' ? totalPrice : (typeof totalCartPrice !== 'undefined' ? totalCartPrice : 0);
+
+      // Final Payload for MongoDB
+      const orderPayload = {
+        userId: localStorage.getItem('userId') || 'guest_user',
+        customer: {
+          fullName: name,
+          email: email,
+          phone: phone,
+          deliveryAddress: address
+        },
+        items: currentCart,
+        totalAmount: currentTotal,
+        paymentMethod: paymentType
+      };
+
+      if (paymentType === 'COD') {
+        // COD Order Direct Save
+        await saveOrderToDatabase(orderPayload);
+      } else {
+        // Razorpay Online Payment Flow
+        try {
+          const response = await fetch('http://localhost:5000/api/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: currentTotal })
+          });
+
+          const orderData = await response.json();
+
+          const options = {
+            key: "YOUR_RAZORPAY_TEST_KEY",
+            amount: orderData.amount,
+            currency: "INR",
+            name: "YouBella Fashion",
+            description: "Shopping Cart Payment",
+            order_id: orderData.id,
+            handler: function (paymentResponse) {
+              orderPayload.transactionId = paymentResponse.razorpay_payment_id;
+              saveOrderToDatabase(orderPayload);
+            },
+            prefill: {
+              name: name,
+              email: email,
+              contact: phone
+            },
+            theme: { color: "#3399cc" }
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.open();
+
+        } catch (error) {
+          console.error("Payment Gateway Error:", error);
+          alert("Payment popup open karne mein issue aaya.");
+        }
+      }
+    });
+  }
+}
+
+// ==========================================
+// 4. BACKEND API SAVE FUNCTION & UI UPDATE
+// ==========================================
+
+async function saveOrderToDatabase(finalPayload) {
+  try {
+    const response = await fetch('http://localhost:5000/api/orders/place', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(finalPayload)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Cart Cleanup
+      localStorage.removeItem('cart');
+
+      // Update Summary UI
+      const summaryName = document.getElementById('summary-name');
+      if (summaryName) summaryName.innerText = finalPayload.customer.fullName;
+
+      const summaryAddress = document.getElementById('summary-address');
+      if (summaryAddress) summaryAddress.innerText = finalPayload.customer.deliveryAddress;
+
+      const orderIdElem = document.getElementById('display-order-id');
+      if (orderIdElem) {
+        orderIdElem.innerText = `Order ID: #${result.orderId}`;
+      }
+
+      // UI Screen Transitions
+      const step2 = document.getElementById('step-2');
+      const step3 = document.getElementById('step-3');
+
+      if (step2) {
+        step2.classList.add('hidden');
+        step2.classList.remove('flex');
+      }
+
+      if (step3) {
+        step3.classList.remove('hidden');
+        step3.classList.add('block');
+      }
+
+    } else {
+      alert('Order Place karne me dikkat aayi: ' + result.message);
+    }
+
+  } catch (error) {
+    console.error('API Error:', error);
+    alert('Server connect nahi ho pa raha hai.');
+  }
+}
+
+
+// Global variable cart items store karne ke liye
+let currentCartItems = [];
+let currentSubtotal = 0;
+
+async function loadCheckoutSummary() {
+    const checkoutContainer = document.getElementById('checkout-cart-items');
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    const totalEl = document.getElementById('checkout-total');
+
+    if (!checkoutContainer) return;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart?userId=${encodeURIComponent(getCartUserId())}`);
+        if (!response.ok) {
+            throw new Error(`Cart request failed (HTTP ${response.status})`);
+        }
+
+        const cartData = await response.json();
+        currentCartItems = cartData?.items || [];
+
+        if (currentCartItems.length === 0) {
+            checkoutContainer.innerHTML = `<p class="text-gray-500 text-sm text-center py-4">Cart empty hai.</p>`;
+            currentSubtotal = 0;
+            if (subtotalEl) subtotalEl.textContent = '₹0';
+            if (totalEl) totalEl.textContent = '₹0';
+            return;
+        }
+
+        let subtotal = 0;
+        const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        })[character]);
+
+        const htmlContent = currentCartItems.map(item => {
+            const product = (item.productId && typeof item.productId === 'object') ? item.productId : item;
+            const name = product.name || product.title || 'Product';
+            const image = product.image || product.imageUrl || 'https://via.placeholder.com/60';
+            const price = Number(product.price) || 0;
+            const quantity = Number(item.quantity) || 1;
+            const itemTotal = price * quantity;
+
+            subtotal += itemTotal;
+
+            return `
+                <div class="flex items-center justify-between border-b pb-3">
+                    <div class="flex items-center space-x-3">
+                        <img src="${escapeHtml(image)}" alt="${escapeHtml(name)}" class="w-14 h-14 object-cover rounded-lg border">
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-800 line-clamp-1">${escapeHtml(name)}</h4>
+                            <p class="text-xs text-gray-500">Qty: ${quantity} × ₹${price}</p>
+                        </div>
+                    </div>
+                    <span class="text-sm font-bold text-gray-900">₹${itemTotal}</span>
+                </div>
+            `;
+        }).join('');
+
+        currentSubtotal = subtotal;
+        checkoutContainer.innerHTML = htmlContent;
+        if (subtotalEl) subtotalEl.textContent = `₹${subtotal}`;
+        if (totalEl) totalEl.textContent = `₹${subtotal}`;
+
+    } catch (error) {
+        console.error("Cart error:", error);
+        checkoutContainer.innerHTML = `<p class="text-red-500 text-sm text-center py-4">Cart items load nahi ho sake. Server connection check karke page refresh karein.</p>`;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadCheckoutSummary);
+
+// Function to load Razorpay SDK dynamically
+function loadRazorpaySDK() {
+    return new Promise((resolve, reject) => {
+        if (window.Razorpay) {
+            resolve(true); // Already loaded
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => resolve(true);
+        script.onerror = () => reject(new Error('Razorpay script failed to load.'));
+        document.body.appendChild(script);
+    });
+}
+
+// Event handler for Checkout Form
+
+
+// Document load hone par products load karein
+document.addEventListener('DOMContentLoaded', () => {
+  loadProducts();
+});
+
+async function loadProducts() {
+  try {
+    // 1. Backend API se products fetch karein
+    const response = await fetch('/api/products'); // Apne backend API endpoint ka URL rakhein
+    const products = await response.json();
+
+    // 2. Products ko HTML String mein map karein
+    const productCardsHTML = products.map(product => {
+      return `
+        <div class="border rounded-lg p-3 bg-white shadow-sm" data-product-id="${product._id}">
+          
+          <!-- Image Container -->
+          <div class="relative w-full h-48 bg-gray-100 rounded-md overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+
+            <!-- Heart Icon Button -->
+            <button class="wishlist-btn absolute top-2 right-2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md transition-all cursor-pointer">
+              <i class="fa-regular fa-heart text-gray-600 text-lg hover:text-red-500"></i>
+            </button>
+          </div>
+
+          <!-- Product Details -->
+          <div class="mt-3">
+            <h3 class="font-bold text-gray-800 text-base">${product.name}</h3>
+            <p class="text-xs text-gray-500">${product.category || ''}</p>
+            <div class="text-blue-600 font-bold text-lg mt-1">₹${product.price}</div>
+            <button class="w-full bg-pink-600 text-white text-sm font-semibold mt-3 py-2 rounded-md hover:bg-pink-700 transition">
+              Add to Cart
+            </button>
+          </div>
+
+        </div>
+      `;
+    }).join('');
+
+    // 3. Grid container mein HTML render karein
+    document.getElementById('products-container').innerHTML = productCardsHTML;
+
+    // 4. Render hone ke baad Wishlist Button par click event attach karein
+    attachWishlistEvents();
+
+  } catch (error) {
+    console.error('Products load karne mein error:', error);
+  }
+}
+
+
+    // document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    //   // 1. URL me parameters add hone se rokega
+    //   e.preventDefault(); 
+
+    //   const email = document.getElementById('email').value;
+    //   const password = document.getElementById('password').value;
+
+    //   try {
+    //     // 2. Fetch/Axios se request body me POST data bhejein
+    //     const response = await fetch('/api/login', {
+    //       method: 'POST',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify({ email, password })
+    //     });
+
+    //     const data = await response.json();
+    //     console.log(data);
+
+    //     if (data.success) {
+    //       alert('Login Successful!');
+    //       // Redirect to home page
+    //       window.location.href = '/index.html';
+    //     } else {
+    //       alert(data.message || 'Login failed!');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error during login:', error);
+    //     alert('Server Error. Please try again later.');
+    //   }
+    // });
+// ==========================================
+// 1. PRODUCTS LOAD & RENDER FUNCTION
+// ==========================================
+async function loadProducts() {
+    const gridContainer =
+        document.getElementById('productGrid') ||
+        document.getElementById('products-container') ||
+        document.getElementById('product-container');
+
+    if (!gridContainer) return; 
+
+    try {
+        const response = await fetch('http://localhost:5000/api/products');
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const products = await response.json();
+
+        if (!products || products.length === 0) {
+            gridContainer.innerHTML = `
+                <p class="text-center text-gray-500 py-10 col-span-full">
+                    Database me abhi koi product nahi hai.
+                </p>
+            `;
+            return;
+        }
+
+        window.allProducts = products;
+
+        gridContainer.innerHTML = products.map((item, index) => {
+            const productTitle = item.title || item.name || 'Product';
+            const productImage = item.image || 'https://via.placeholder.com/150';
+            const productPrice = item.price || 0;
+            const productId = item._id || item.id;
+
+            return `
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${item.category || ''}">
+                    <div class="image-wrapper cursor-pointer relative">
+                        <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                            NEW
+                        </span>
+
+                        <img src="${productImage}" alt="${productTitle}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                        <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                            <!-- Wishlist Button -->
+                            <button type="button" onclick="Wishlist('${productId}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+
+                            <!-- Share Button -->
+                            <button type="button" onclick="shareProduct('${productId}', '${productTitle}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                <i class="fa-solid fa-share-nodes text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-800 cursor-pointer mb-1">
+                        ${productTitle}
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mb-3">
+                        ${item.category || 'General'}
+                    </p>
+
+                    <div class="amount_part flex flex-col gap-2">
+                        <span class="text-blue-600 font-bold text-xl">
+                            ₹${productPrice}
+                        </span>
+
+                        <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error("Product Error:", error);
+        if (gridContainer) {
+            gridContainer.innerHTML = `
+                <p class="text-center text-red-500 py-10 col-span-full">
+                    Products load nahi ho pa rahe hain. Server verify karein.
+                </p>
+            `;
+        }
+    }
+}
+
+// Button Click Event Handler
+function handleCartClick(index, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    const product = window.allProducts[index];
+    if (product) {
+        addToCart(product);
+    }
+}
+
+// ==========================================
+// 2. ADD TO CART FUNCTION
+// ==========================================
+async function addToCart(product) {
+    const userId = localStorage.getItem('userId') || 'guest_user';
+
+    const cartData = {
+        userId: userId,
+        productId: product._id || product.id,
+        title: product.title || product.name,
+        price: Number(product.price) || 0,
+        image: product.image || '',
+        quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingIndex = cart.findIndex(item => String(item.id || item._id || item.productId) === String(cartData.productId));
+
+    if (existingIndex > -1) {
+        cart[existingIndex].quantity = (Number(cart[existingIndex].quantity) || 1) + 1;
+    } else {
+        cart.push(cartData);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/cart/add`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cartData)
+        });
+
+        const result = await response.json();
+        console.log("MongoDB Sync Response:", result);
+    } catch (err) {
+        console.error("Fetch Error:", err);
+    }
+
+    alert(`${cartData.title} cart me add ho gaya!`);
+}
+
+// Page load listener
+document.addEventListener('DOMContentLoaded', loadProducts);
+
+
+// ==========================================
+// 3. WISHLIST TOGGLE & LOGIN MODAL POPUP FUNCTION (YAHAN ADD KAREIN)
+// ==========================================
+async function Wishlist(productId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Auth check
+    const token = localStorage.getItem("token") || localStorage.getItem("userToken");
+    const userId = localStorage.getItem("userId");
+    const isLoggedIn = token && userId && userId !== 'guest_user' && token !== 'undefined' && token !== 'null';
+
+    // 1. Agar user logged in nahi hai -> Login Modal kholo
+    if (!isLoggedIn) {
+        const loginModal = document.getElementById('loginModal');
+        if (loginModal) {
+            loginModal.classList.remove('hidden'); // Modal show karne ke liye
+        } else {
+            alert("Wishlist me add karne ke liye pehle login karein.");
+            window.location.href = 'login.html'; // Agar modal ID nahi milti toh redirect karein
+        }
+        return;
+    }
+
+    // 2. Agar user logged in hai -> UI Toggle (Red Heart)
+    const btn = event ? (event.currentTarget || event.target.closest('button')) : null;
+    const icon = btn ? btn.querySelector('i') : null;
+    if (!icon) return;
+
+    const isCurrentlyWishlisted = icon.classList.contains('fa-solid');
+
+    if (isCurrentlyWishlisted) {
+        icon.classList.remove('fa-solid', 'text-red-500');
+        icon.classList.add('fa-regular');
+    } else {
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid', 'text-red-500');
+    }
+
+    // 3. Backend MongoDB Sync
+    try {
+        const response = await fetch('http://localhost:5000/api/wishlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ userId, productId })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || 'Wishlist update failed');
+
+    } catch (error) {
+        console.error("Wishlist Sync Error:", error);
+        // Revert icon on error
+        if (isCurrentlyWishlisted) {
+            icon.classList.remove('fa-regular');
+            icon.classList.add('fa-solid', 'text-red-500');
+        } else {
+            icon.classList.remove('fa-solid', 'text-red-500');
+            icon.classList.add('fa-regular');
+        }
+    }
+}
+
+// Modal Close Functions
+function closeLoginModal() {
+    const loginModal = document.getElementById('loginModal');
+    if (loginModal) {
+        loginModal.classList.add('hidden');
+    }
+}
+
+// Outside Backdrop Click Event
+document.addEventListener('click', function (e) {
+    const loginModal = document.getElementById('loginModal');
+    if (loginModal && e.target === loginModal) {
+        closeLoginModal();
+    }
+});
+
+
+
+
+
+
+// script.js file ke bottom par paste karein
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+  
+//   if (mobileLogoutBtn) {
+//     mobileLogoutBtn.addEventListener('click', () => {
+//       localStorage.removeItem('userToken');
+//       localStorage.removeItem('userId');
+//       localStorage.removeItem('userEmail');
+//       window.location.reload();
+//     });
+//   }
+// });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const authGuestButtons = document.getElementById('auth-guest-buttons');
+  const authUserMenu = document.getElementById('auth-user-menu');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  const mobileAuthGuest = document.getElementById('mobile-auth-guest');
+  const mobileAuthUser = document.getElementById('mobile-auth-user');
+  const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+
+  // Auth State Update function
+  function updateAuthState() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (isLoggedIn === 'true') {
+      // Desktop Navbar
+      if (authGuestButtons) authGuestButtons.classList.add('hidden');
+      if (authUserMenu) authUserMenu.classList.remove('hidden');
+
+      // Mobile Navbar
+      if (mobileAuthGuest) mobileAuthGuest.classList.add('hidden');
+      if (mobileAuthUser) mobileAuthUser.classList.remove('hidden');
+    } else {
+      // Desktop Navbar
+      if (authGuestButtons) authGuestButtons.classList.remove('hidden');
+      if (authUserMenu) authUserMenu.classList.add('hidden');
+
+      // Mobile Navbar
+      if (mobileAuthGuest) mobileAuthGuest.classList.remove('hidden');
+      if (mobileAuthUser) mobileAuthUser.classList.add('hidden');
+    }
+  }
+
+  // Logout Handler
+  function handleLogout() {
+    localStorage.removeItem('isLoggedIn');
+    updateAuthState();
+    // Agar chaho toh logout ke baad login page par redirect kar sakte ho:
+    // window.location.href = 'login.html';
+  }
+
+  if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
+  if (mobileLogoutBtn) mobileLogoutBtn.addEventListener('click', handleLogout);
+
+  // Page load par status check karein
+  updateAuthState();
+});
+
+
+
+
+
+// Example API Fetch function
+// async function loadProducts() {
+//     try {
+//         const response = await fetch('/api/products'); // Aapka API Endpoint
+//         const products = await response.json();
+        
+//         const gridContainer = document.getElementById('gridContainer'); // Aapke container ki ID
+
+//         // 👇 YAHAN PAR PASTE KAREIN
+//         window.allProducts = products;
+
+//         gridContainer.innerHTML = products.map((item, index) => {
+//             const productTitle = item.title || item.name || 'Product';
+//             const productImage = item.image || 'https://via.placeholder.com/150';
+//             const productPrice = item.price || 0;
+//             const productId = item._id || item.id;
+
+//             const safeTitle = productTitle.replace(/'/g, "\\'");
+
+//             return `
+//                 <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${item.category || ''}">
+//                     <div class="image-wrapper cursor-pointer relative">
+//                         <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+//                             NEW
+//                         </span>
+
+//                         <img src="${productImage}" alt="${productTitle}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+//                         <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+//                             <!-- Wishlist Button -->
+//                             <button type="button" onclick="Wishlist('${productId}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+//                                 <i class="fa-regular fa-heart text-base"></i>
+//                             </button>
+
+//                             <!-- Share Button -->
+//                             <button type="button" onclick="shareProduct('${productId}', '${safeTitle}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+//                                 <i class="fa-solid fa-share-nodes text-sm"></i>
+//                             </button>
+//                         </div>
+//                     </div>
+
+//                     <h3 class="text-lg font-bold text-gray-800 cursor-pointer mb-1">
+//                         ${productTitle}
+//                     </h3>
+
+//                     <p class="text-gray-500 text-sm mb-3">
+//                         ${item.category || 'General'}
+//                     </p>
+
+//                     <div class="amount_part flex flex-col gap-2">
+//                         <span class="text-blue-600 font-bold text-xl">
+//                             ₹${productPrice}
+//                         </span>
+
+//                         <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+//                             Add to Cart
+//                         </button>
+//                     </div>
+//                 </div>
+//             `;
+//         }).join('');
+
+//     } catch (error) {
+//         console.error("Product Error:", error);
+//         if (gridContainer) {
+//             gridContainer.innerHTML = `
+//                 <p class="text-center text-red-500 py-10 col-span-full">
+//                     Products load nahi ho pa rahe hain. Server verify karein.
+//                 </p>
+//             `;
+//         }
+//     }
+// }
+
+// Page load hone par run karein
+document.addEventListener('DOMContentLoaded', loadProducts);
+
+
+
+
+
+
+
+// Share Icon
+let activeShareData = { id: '', title: '', url: '' };
+
+// Share Icon click handler - Popup Modal Open Karega
+function shareProduct(id, title, event) {
+    if (event) event.stopPropagation();
+
+    const productUrl = `${window.location.origin}/product.html?id=${id}`;
+    
+    activeShareData = {
+        id: id,
+        title: title,
+        url: productUrl
+    };
+
+    document.getElementById('modalProductTitle').innerText = title;
+    
+    // Show Modal
+    const modal = document.getElementById('shareModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+// Modal Close Function
+function closeShareModal() {
+    const modal = document.getElementById('shareModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Outside Modal Click Handler to Close
+document.getElementById('shareModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeShareModal();
+    }
+});
+
+
+// Example: Aapke Products ka Data (Backend ya Array se mil raha hai)
+const products = [
+  { _id: '651a2b3c4d5e6f7a', name: 'Reebok' },
+  { _id: '651a2b3c4d5e6f7b', name: 'Nike' }
+];
+
+// Target container jahan icons render hone hain
+const modalContainer = document.getElementById('shareOptionsContainer');
+
+// Function to render share buttons
+function renderShareButtons(product) {
+  // HERE: Is variable me aap button code add karte hain
+  const productHtml = `
+    <button 
+      onclick="handleShare('whatsapp', '${product._id}', '${product.name}')" 
+      class="flex flex-col items-center justify-center p-3 rounded-full hover:bg-gray-100">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" class="w-8 h-8">
+      <span class="text-xs mt-1 text-gray-600">WhatsApp</span>
+    </button>
+  `;
+
+  // HTML container me inject karna
+  modalContainer.innerHTML = productHtml;
+}
+
+
+// Share Icon k code hai y mera  api k 
+
+async function shareProduct(productId, productName, platform) {
+  try {
+    const response = await fetch('/api/shares', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        productId: productId,
+        productName: productName,
+        platform: platform,
+        userId: localStorage.getItem('userId') || 'guest_user'
+      })
+    });
+
+    const result = await response.json();
+    console.log('Share API Response:', result);
+
+    if (result.success) {
+      console.log('MongoDB me data save ho gaya!');
+    } else {
+      console.error('Save fail hua:', result.message);
+    }
+  } catch (error) {
+    console.error('Network Error:', error);
+  }
+}
+
+// Share Icon / Button Click Event Listener
+document.addEventListener('DOMContentLoaded', () => {
+  const whatsappBtn = document.getElementById('whatsapp-share-btn');
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', () => {
+      shareProduct('65a123456789', 'Cool T-Shirt', 'WhatsApp');
+    });
+  }
+});
+
+
+// Global State (taaki selected product tracking me pass ho sake)
+let currentShareProduct = { id: '', title: '' };
+
+// Share Modal Open karne ka function
+function shareProduct(productId, productTitle, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    
+    // Selected product detail save karein
+    currentShareProduct = { id: productId, title: productTitle };
+
+    // Share Modal Open Karein
+    const modal = document.getElementById('shareModal');
+    if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+}
+
+// Share Modal Close karne ka function
+function closeShareModal() {
+    const modal = document.getElementById('shareModal');
+    if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }
+}
+
+// AAPKA SHAREACTION FUNCTION
+function shareAction(platform) {
+    if (!currentShareProduct.id) return;
+
+    const productId = currentShareProduct.id;
+    const productTitle = currentShareProduct.title;
+    
+    // Product Page Redirect URL
+    const shareUrl = `${window.location.origin}/product/${productId}`;
+    const shareSubject = `Check out ${productTitle}`;
+    const shareBody = `Check out this product: ${productTitle}\n\nClick here to view: ${shareUrl}`;
+
+    // Backend MongoDB Tracking API Call
+    fetch(`http://localhost:5000/api/products/share/${productId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ platform })
+    }).catch(err => console.error("Tracking Error:", err));
+
+    // Platform Specific Sharing Links
+    if (platform === 'gmail') {
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&su=${encodeURIComponent(shareSubject)}&body=${encodeURIComponent(shareBody)}`;
+        window.open(gmailUrl, '_blank');
+    } else if (platform === 'whatsapp') {
+        window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareBody)}`, '_blank');
+    } else if (platform === 'facebook') {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'linkedin') {
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+    } else if (platform === 'sms') {
+        window.open(`sms:?body=${encodeURIComponent(shareBody)}`, '_blank');
+    } else if (platform === 'copyLink') {
+        navigator.clipboard.writeText(shareUrl);
+        alert('Link copied to clipboard!');
+    }
+    
+    closeShareModal();
+}
+
+function handleAddToCart(event, productId) {
+    // Event ko parent link tak jaane se rokna (Event Bubbling Stop)
+    event.stopPropagation();
+    event.preventDefault();
+
+    // Aapka Cart ka logic yahan aayega
+    console.log("Cart me product add hua, ID:", productId);
+    
+    // Example: Toast alert ya backend API call
+    alert("Product added to cart!");
+  }
+
+
+
+  // Example: script.js ya main.js file
+
+// 1. DOM element select karein jahan products render karne hain
+const productContainer = document.getElementById('product-list'); // (Check karein aapke container ki ID kya hai)
+
+// 2. Backend API se fetch karne wala function
+async function loadProducts() {
+  try {
+    const response = await fetch('http://localhost:5000/api/products'); // Aapka backend URL
+    const products = await response.json();
+
+    // 3. YAHAN REPLACEE/PASTE KAREIN 👇
+    productContainer.innerHTML = products.map(product => `
+      <div class="relative w-64 border rounded-lg overflow-hidden bg-white p-4 shadow-sm flex flex-col">
+        
+        <!-- Image Box + Link Wrapper -->
+        <div class="relative w-full h-48 mb-3">
+          <a href="/product-detail.html?id=${product._id || product.id}" class="block w-full h-full relative z-10">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover rounded-md" />
+          </a>
+
+          <!-- Badges & Icons Overlay -->
+          <div class="absolute inset-0 pointer-events-none z-20 flex justify-between p-2">
+            <span class="bg-black text-white text-[10px] font-bold px-2 py-1 rounded h-fit pointer-events-auto">NEW</span>
+            
+            <div class="flex flex-col gap-2">
+              <button class="bg-white p-1.5 rounded-full shadow pointer-events-auto hover:bg-gray-100">
+                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Name & Price -->
+        <a href="/product-detail.html?id=${product._id || product.id}" class="block no-underline">
+          <h3 class="font-bold text-gray-800 text-base hover:text-blue-600 transition-colors">${product.name}</h3>
+          <p class="text-xs text-gray-500">${product.category || ''}</p>
+          <p class="text-lg font-bold text-blue-600 mt-1">₹${product.price}</p>
+        </a>
+
+        <!-- Add to Cart Button -->
+        <button onclick="handleAddToCart(event, '${product._id || product.id}')" class="mt-3 w-full bg-pink-600 hover:bg-pink-700 text-white py-2 rounded-md font-medium text-sm transition-colors cursor-pointer">
+          Add to Cart
+        </button>
+
+      </div>
+    `).join('');
+
+  } catch (error) {
+    console.error("Error loading products:", error);
+  }
+}
+
+// 4. Add to Cart Handler Function (Same JS File me sabse niche add karein)
+function handleAddToCart(event, productId) {
+  event.stopPropagation();
+  event.preventDefault();
+  
+  console.log("Cart me add hua ID:", productId);
+  // Add to cart logic here
+}
+
+// Function Call
+loadProducts();
+
+
+
+
+
+
+
+
+
+// Example: Jab backend se API response aaye
+fetch('/api/products')
+  .then(res => res.json())
+  .then(products => {
+    const container = document.getElementById('product-container');
+    container.innerHTML = ''; // Container clean karein
+
+    products.forEach((product, index) => {
+      // Backend se '_id' ya 'id' mil rahi hogi
+      const cardHTML = `
+        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+            <div onclick="goToDetail('${product._id}')" class="image-wrapper cursor-pointer relative">
+                <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                    NEW
+                </span>
+
+                <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                    <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                        <i class="fa-regular fa-heart text-base"></i>
+                    </button>
+
+                    <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                        <i class="fa-solid fa-share-nodes text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <h3 onclick="goToDetail('${product._id}')" class="text-lg font-bold text-gray-800 cursor-pointer mb-1 hover:text-blue-600">
+                ${product.title}
+            </h3>
+
+            <p class="text-gray-500 text-sm mb-3">
+                ${product.category}
+            </p>
+
+            <div class="amount_part flex flex-col gap-2">
+                <span class="text-blue-600 font-bold text-xl">
+                    ₹${product.price}
+                </span>
+
+                <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+      `;
+
+      container.insertAdjacentHTML('beforeend', cardHTML);
+    });
+  });
+
+// script.js / main.js mein API call ke andar paste karein
+
+fetch('/api/products') // Aapka backend API URL
+    .then(res => res.json())
+    .then(products => {
+        const container = document.getElementById('product-container');
+        if (!container) return;
+
+        container.innerHTML = ''; // Container khali karein
+
+    
+        products.forEach((product, index) => {
+            const cardHTML = `
+                <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+                    
+                    <!-- Image Wrapper Wrapped with <a> Tag -->
+                    <div class="image-wrapper relative">
+                        <a href="/product-detail.html?id=${product._id}" class="block z-0">
+                            <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                                NEW
+                            </span>
+                            <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+                        </a>
+
+                        <!-- Wishlist aur Share Buttons -->
+                        <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-20">
+                            <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                <i class="fa-regular fa-heart text-base"></i>
+                            </button>
+                            <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                <i class="fa-solid fa-share-nodes text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Title Linked with <a> Tag -->
+                    <h3 class="text-lg font-bold text-gray-800 mb-1 hover:text-blue-600">
+                        <a href="/product-detail.html?id=${product._id}" class="block">
+                            ${product.title}
+                        </a>
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mb-3">${product.category}</p>
+
+                    <div class="amount_part flex flex-col gap-2">
+                        <span class="text-blue-600 font-bold text-xl">₹${product.price}</span>
+                        <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        });
+    })
+    .catch(err => console.error('Error fetching products:', err));
+
+
+    async function fetchLatestProducts() {
+        try {
+            const response = await fetch('http://localhost:5000/api/products'); 
+            const products = await response.json();
+
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const id = product._id || product.id;
+                const image = product.image || product.img || 'https://via.placeholder.com/300';
+                const name = product.name || product.title || 'Product';
+                const category = product.category || 'General';
+                const price = product.price || 0;
+
+                const card = document.createElement('div');
+                card.className = "relative bg-white border rounded-2xl p-4 shadow-sm hover:shadow-md transition flex flex-col justify-between cursor-pointer group";
+
+                // =========================================================
+                // Correct Path: Agar file same folder me hai
+                // =========================================================
+                card.addEventListener('click', function() {
+                    window.location.href = `product-detail.html?id=${id}`;
+                });
+                // =========================================================
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative bg-gray-100 rounded-xl overflow-hidden mb-4">
+                            <span class="absolute top-2 left-2 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded z-10">NEW</span>
+                            <img src="${image}" alt="${name}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+
+                        <h3 class="font-bold text-gray-900 group-hover:text-pink-600 transition text-lg mb-1 line-clamp-1">${name}</h3>
+                        <p class="text-xs text-gray-500 capitalize mb-2">${category}</p>
+                        <p class="font-bold text-blue-600 text-xl">₹${price}</p>
+                    </div>
+
+                    <div class="mt-4">
+                        <button 
+                            type="button"
+                            class="add-to-cart-btn w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2.5 rounded-xl transition shadow-sm active:scale-95">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+
+                // Add to cart button event
+                const cartBtn = card.querySelector('.add-to-cart-btn');
+                cartBtn.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    alert(`Added ${name} to cart!`);
+                });
+
+                container.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchLatestProducts);
+    //swipper silder back or front image
+   
+    document.getElementById('menShopBtn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        try {
+            const response = await fetch('http://localhost:5000/api/men-products');
+            const result = await response.json();
+            
+            if (result.success) {
+                displayProducts(result.data);
+            } else {
+                console.error('Failed to fetch products');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    function displayProducts(products) {
+        const container = document.getElementById('productContainer');
+        container.innerHTML = ''; 
+        
+        if (products.length === 0) {
+            container.innerHTML = '<p>No products found in Men category.</p>';
+            return;
+        }
+        
+        products.forEach(product => {
+            const productCard = `
+                <div class="border p-4 rounded shadow">
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover mb-2">
+                    <h3 class="font-bold">${product.title}</h3>
+                    <p class="text-gray-600">₹${product.price}</p>
+                </div>
+            `;
+            container.innerHTML += productCard;
+        });
+    }
+async function loadProducts(key, name) {
+    setActive(key);
+    document.getElementById('category-title').textContent = `${name} Products`;
+    gridEl.innerHTML = '';
+    try {
+      // 🚀 YAHAN PAR IS CODE KO ADD KARNA HAI:
+      const { data } = await axios.get(`${API_BASE}/api/products/filter`, { 
+        params: { category: key } // key me 'men', 'women', ya 'accessories' pass hoga
+      });
+      
+      currentProducts = data;
+      
+      if (!data || data.length === 0) {
+        gridEl.innerHTML = '<p class="text-gray-500 col-span-full">Is category me koi product nahi hai.</p>';
+        return;
+      }
+
+      gridEl.innerHTML = data.map(p => productCard(p, name)).join('');
+    } catch (err) {
+      console.error('Products error:', err.message, err.response?.status, err.response?.data);
+      gridEl.innerHTML = '<p class="text-red-500 col-span-full">Products load nahi hue.</p>';
+    }
+  }
+
+
+
+
+        document.querySelectorAll('.product-card').forEach((card) => {
+            card.addEventListener('click', (e) => {
+                // Agar 'Add to Cart' button par click hua hai, toh detail page par na jaye
+                if (e.target.closest('.cart-btn')) return;
+
+                // Card ke andar se dynamically image aur title uthayein
+                const imgElement = card.querySelector('img');
+                const titleElement = card.querySelector('h3');
+
+                const imgSrc = imgElement ? imgElement.src : '';
+                const productTitle = titleElement ? titleElement.innerText : 'Product Details';
+
+                let imagesArray = [];
+                const dataGallery = card.getAttribute('data-images');
+                
+                if (dataGallery) {
+                    imagesArray = JSON.parse(dataGallery);
+                } else {
+                    imagesArray = [imgSrc, imgSrc, imgSrc]; 
+                }
+
+                // LocalStorage mein dynamically save karein
+                localStorage.setItem('selectedProductGallery', JSON.stringify(imagesArray));
+                localStorage.setItem('selectedProductTitle', productTitle);
+
+                // Product Detail page par redirect karein
+                window.location.href = 'product-detail.html';
+            });
+        });
+   
+//   const response = await fetch(
+//     'http://localhost:5000/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
+//     {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(productData)
+//     }
+// );
+
+
+const Coupon = require('./models/Coupon'); // Agar model banaya hai
+
+app.post('/api/apply-coupon', async (req, res) => {
+  try {
+    const { code } = req.body;
+    const coupon = await Coupon.findOne({ code: code.toUpperCase() });
+
+    if (!coupon) {
+      return res.status(400).json({ success: false, message: 'Invalid Coupon Code' });
+    }
+
+    if (new Date() > coupon.expiryDate) {
+      return res.status(400).json({ success: false, message: 'Coupon has expired' });
+    }
+
+    res.json({ 
+      success: true, 
+      discountPercentage: coupon.discountPercentage, 
+      message: 'Coupon applied successfully!' 
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, message: 'Server Error' });
+  }
+});
+
+
+async function addToCart(itemData) {
+  try {
+    const response = await fetch('/api/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(itemData)
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('Success:', result);
+  } catch (error) {
+    console.error('Cart error:', error);
+  }
+}
+
+
+
+async function loadOrders() {
+  try {
+    const response = await fetch('/api/orders'); // Yeh URL backend route se exact match hona chahiye
+    if (!response.ok) throw new Error('Network response was not ok');
+    const orders = await response.json();
+    // Orders render karne ka logic...
+  } catch (error) {
+    console.error('Error loading orders:', error);
+  }
+}

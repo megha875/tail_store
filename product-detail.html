@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-gray-50">
+
+<!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="index.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+      <a href="checkout.html" class="hover:text-gray-300 transition-colors py-2">Checkout</a>
+    </div>
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
+
+      <a href="cart.html" id="nav-cart-btn" class="p-1 hover:text-gray-300 transition-colors relative flex items-center" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+        <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+          0
+        </span>
+      </a>
+
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+ 
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+<!--Navbar Section End-->
+
+<!-- Product Detail Main Container -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 font-sans">
+  <div class="product-detail-wrapper">
+    <div id="detail-card">
+      <!-- Left Side: Thumbnails -->
+      <div class="thumbnail-list" id="thumbnailContainer">
+          <!-- Thumbnails will be injected here dynamically -->
+      </div>
+      <!-- Right Side: Main Display Image & Add to Cart Info injected via JS -->
+      <div class="main-image-view">
+          <img id="mainProductImage" src="" alt="Product Image">
+      </div>
+    </div>
+  </div>
+
+  
+<div class="mt-6 p-4 bg-gray-50 rounded-xl border border-dashed border-gray-300 max-w-md">
+    <label for="coupon-input" class="block text-sm font-semibold text-gray-800 mb-2">Have a coupon code?</label>
+    <div class="flex gap-2">
+      <input type="text" id="coupon-input" placeholder="Enter code (e.g. SAVE20)" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm uppercase focus:outline-none focus:border-pink-600" />
+      <button type="button" onclick="applyCoupon()" class="px-4 py-2 bg-pink-600 text-white text-sm font-semibold rounded-lg hover:bg-pink-700 transition">Apply</button>
+    </div>
+    <p id="coupon-message" class="text-xs mt-2 hidden"></p>
+  </div>
+  <!-- Integrated Tab Section Directly Underneath Product Info/Add to Cart Area -->
+  <div class="mt-12 p-6 sm:p-8 bg-white rounded-2xl shadow-sm border border-gray-100">
+    <!-- Tabs Navigation Header -->
+    <div class="flex border-b border-gray-200 mb-6 space-x-6 sm:space-x-8">
+      <button onclick="switchTab('description')" id="btn-description" class="py-2 px-1 font-semibold text-pink-600 border-b-2 border-pink-600 focus:outline-none transition">Description</button>
+      <button onclick="switchTab('specs')" id="btn-specs" class="py-2 px-1 font-medium text-gray-500 hover:text-gray-800 focus:outline-none transition">Specifications & Care</button>
+      <button onclick="switchTab('size-guide')" id="btn-size-guide" class="py-2 px-1 font-medium text-gray-500 hover:text-gray-800 focus:outline-none transition">Size Guide</button>
+    </div>
+
+
+    <div id="content-description" class="tab-content text-gray-700 space-y-3">
+      <h3 class="text-lg font-bold text-gray-800">Product Overview</h3>
+      <p>Yeh premium quality ka formal coat hai jo specially weddings, office meetings, aur parties ke liye design kiya gaya hai. Iska fabric comfortable aur skin-friendly hai.</p>
+      <ul class="list-disc list-inside space-y-1 text-sm text-gray-600">
+        <li>Modern slim-fit cutting jo ek sharp look deti hai.</li>
+        <li>Smooth inner lining ke sath aata hai taaki pehnne mein aaram rahe.</li>
+        <li>Durable stitching aur high-quality buttons ka use kiya gaya hai.</li>
+      </ul>
+    </div>
+
+  
+    <div id="content-specs" class="tab-content hidden text-gray-700 space-y-3">
+      <h3 class="text-lg font-bold text-gray-800">Specifications & Material</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm mt-3">
+        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+          <span class="font-semibold text-gray-800">Fabric Type:</span> Blended Cotton & Wool
+        </div>
+        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+          <span class="font-semibold text-gray-800">Fit Type:</span> Slim Fit
+        </div>
+        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+          <span class="font-semibold text-gray-800">Pattern:</span> Checked / Textured
+        </div>
+        <div class="bg-gray-50 p-3 rounded border border-gray-200">
+          <span class="font-semibold text-gray-800">Care Instructions:</span> Dry clean only. Do not bleach.
+        </div>
+      </div>
+    </div>
+
+
+    <div id="content-size-guide" class="tab-content hidden text-gray-700 space-y-3">
+      <h3 class="text-lg font-bold text-gray-800">Size Measurement Chart (Inches)</h3>
+      <div class="overflow-x-auto mt-3">
+        <table class="w-full text-left text-sm border-collapse border border-gray-200">
+          <thead>
+            <tr class="bg-gray-100 text-gray-700">
+              <th class="border border-gray-200 p-3">Size</th>
+              <th class="border border-gray-200 p-3">Chest (Inches)</th>
+              <th class="border border-gray-200 p-3">Length (Inches)</th>
+              <th class="border border-gray-200 p-3">Sleeve (Inches)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr>
+              <td class="border border-gray-200 p-3 font-medium">S</td>
+              <td class="border border-gray-200 p-3">38</td>
+              <td class="border border-gray-200 p-3">28</td>
+              <td class="border border-gray-200 p-3">24</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-200 p-3 font-medium">M</td>
+              <td class="border border-gray-200 p-3">40</td>
+              <td class="border border-gray-200 p-3">29</td>
+              <td class="border border-gray-200 p-3">24.5</td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3 font-medium">L</td>
+              <td class="border border-gray-200 p-3">42</td>
+              <td class="border border-gray-200 p-3">30</td>
+              <td class="border border-gray-200 p-3">25</td>
+            </tr>
+            <tr class="bg-gray-50">
+              <td class="border border-gray-200 p-3 font-medium">XL</td>
+              <td class="border border-gray-200 p-3">44</td>
+              <td class="border border-gray-200 p-3">31</td>
+              <td class="border border-gray-200 p-3">25.5</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Product Modal -->
+<div id="productModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+  <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative transform scale-95 transition-transform duration-300" id="modalContainer">
+    <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold cursor-pointer">&times;</button>
+    
+    <div class="flex flex-col sm:flex-row gap-6">
+      <div class="w-full sm:w-1/2 h-64 rounded-xl overflow-hidden bg-gray-100">
+        <img id="modalImg" src="" alt="Product Image" class="w-full h-full object-cover">
+      </div>
+      <div class="w-full sm:w-1/2 flex flex-col justify-between">
+        <div>
+          <span id="modalCategory" class="text-xs text-gray-500 font-medium">Category</span>
+          <h3 id="modalTitle" class="text-xl font-bold text-gray-900 mt-1 mb-2">Product Title</h3>
+          <div class="flex items-center space-x-2 mb-4">
+            <span id="modalPrice" class="text-xl font-extrabold text-[#ff0055]">$0.00</span>
+            <span id="modalOldPrice" class="text-xs text-gray-400 line-through"></span>
+          </div>
+          <p class="text-sm text-gray-600 mb-4">Ye product premium quality fabrics aur modern design se tayyar kiya gaya hai.</p>
+        </div>
+        
+        <button class="w-full bg-[#ff0055] hover:bg-[#d90048] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="flex items-center hover:text-gray-900 transition-colors"><i class="fa-brands fa-facebook-f text-center "></i><span>Facebook</span></a></li>
+          <li><a href="#" class="flex items-center hover:text-gray-900 transition-colors"><i class="fa-brands fa-twitter text-center "></i><span>Twitter</span></a></li>
+          <li><a href="#" class="flex items-center hover:text-gray-900 transition-colors"><i class="fa-brands fa-instagram text-center "></i><span>Instagram</span></a></li>
+          <li><a href="#" class="flex items-center hover:text-gray-900 transition-colors"><i class="fa-brands fa-pinterest-p text-center "></i><span>Pinterest</span></a></li>
+          <li><a href="#" class="flex items-center hover:text-gray-900 transition-colors"><i class="fa-brands fa-youtube text-center "></i><span>YouTube</span></a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">Phone: (123) 456-7890</p>
+          <p><a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">Email: info@company.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      <div class="space-y-3 text-gray-800">
+        <p class="text-sm sm:text-base font-bold tracking-tight">
+          © 2024 Your Company. All rights reserved by - <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> Distributed by <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+        </p>
+        <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+          <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+          <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+        </div>
+        <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+          Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+          <img src="./assets/img/paypal (1).svg" alt="PayPal" class="h-16.5 w-auto object-contain"/>
+        </div>
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+          <img src="./assets/img/stripe.svg" alt="Stripe" class="h-16.5 w-auto object-contain"/>
+        </div>
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+          <img src="./assets/img/visa.svg" alt="VISA" class="h-16.5 w-auto object-contain"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript to Handle Tab Switching -->
+ <script>
+  document.querySelector('.add-to-cart-btn').addEventListener('click', async () => {
+    const userId = localStorage.getItem('userId'); // Login ke waqt userId store kiya ho
+    
+    if (!userId) {
+        alert('Pehle login karein!');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    const productData = {
+        userId: userId,
+        productId: '12345', // Product ka unique ID
+        title: document.querySelector('.product-title').innerText,
+        price: parseFloat(document.querySelector('.product-price').innerText.replace('₹', '')),
+        quantity: 1,
+        image: document.querySelector('.product-img').src
+    };
+
+    const response = await fetch('/api/cart/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productData)
+    });
+
+    const result = await response.json();
+    if (result.success) {
+        alert('Product successfully cart mein save ho gaya!');
+    }
+});
+ </script>
+<script>
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    
+    ['description', 'specs', 'size-guide'].forEach(name => {
+      const btn = document.getElementById(`btn-${name}`);
+      btn.classList.remove('text-pink-600', 'border-b-2', 'border-pink-600');
+      btn.classList.add('text-gray-500');
+    });
+
+    document.getElementById(`content-${tabName}`).classList.remove('hidden');
+    const activeBtn = document.getElementById(`btn-${tabName}`);
+    activeBtn.classList.remove('text-gray-500');
+    activeBtn.classList.add('text-pink-600', 'border-b-2', 'border-pink-600');
+  }
+</script>
+
+<script src="./assets/js/main.js"></script>
+<script src="./assets/js/cart-client.js"></script>
+<script src="./assets/js/products.js"></script>
+<script src="./assets/js/product-detail.js"></script>
+<script src="./assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+
+</body>
+</html>

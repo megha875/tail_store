@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Homepage Heading</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-['Manrope']">
+    <header class="bg-[#050B14] px-6 py-5 text-white">
+        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
+            <h1 class="text-xl font-bold md:text-2xl">Homepage Settings Admin</h1>
+            <nav class="flex flex-wrap items-center gap-2">
+                <a href="admin.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Add Product</a>
+                <a href="admin-banner.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Add Banner</a>
+                <a href="admin-newsletter.html" class="rounded-lg px-4 py-2 text-sm font-semibold hover:bg-white/10">Newsletter</a>
+                <a href="admin-homepage.html" aria-current="page" class="rounded-lg bg-white/10 px-4 py-2 text-sm font-semibold">Homepage Heading</a>
+                <a href="index.html" class="rounded-lg bg-[#FF0043] px-5 py-2 text-sm font-semibold hover:bg-[#d90039]">View Store</a>
+            </nav>
+        </div>
+    </header>
+    <main class="mx-auto max-w-4xl px-4 py-10">
+        <section class="rounded-2xl border bg-white p-6 shadow-sm md:p-8">
+            <h2 class="text-2xl font-bold text-gray-900">Latest Products Heading</h2>
+            <p class="mb-6 mt-1 text-gray-500">Homepage ke Latest Products section ka title update karein.</p>
+            <form id="homepageSettingsForm" class="space-y-5">
+                <label class="block">
+                    <span class="mb-2 block text-sm font-semibold text-gray-700">Section title</span>
+                    <input name="latestProductsTitle" maxlength="120" required class="w-full rounded-lg border border-gray-300 px-4 py-3">
+                </label>
+                <div id="homepageSettingsMessage" class="hidden rounded-lg px-4 py-3 text-sm font-semibold" role="status" aria-live="polite"></div>
+                <button id="homepageSettingsSubmit" type="submit" class="w-full rounded-lg bg-[#FF0043] py-3.5 font-bold text-white transition hover:bg-[#d90039]">Save Section Title</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        (() => {
+            const form = document.getElementById('homepageSettingsForm');
+            const message = document.getElementById('homepageSettingsMessage');
+            const submitButton = document.getElementById('homepageSettingsSubmit');
+            const apiHost = window.location.hostname || '127.0.0.1';
+            const apiBaseUrl = ['localhost', '127.0.0.1'].includes(apiHost) || window.location.protocol === 'file:'
+                ? `http://${apiHost}:5000`
+                : window.location.origin;
+
+            function showMessage(text, isError = false) {
+                message.className = `rounded-lg px-4 py-3 text-sm font-semibold ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+                message.textContent = text;
+                message.classList.remove('hidden');
+            }
+
+            async function loadSettings() {
+                try {
+                    const response = await fetch(`${apiBaseUrl}/api/homepage/settings`);
+                    const settings = await response.json();
+                    if (!response.ok) throw new Error(settings.message || `Homepage settings load failed (HTTP ${response.status}).`);
+                    form.elements.latestProductsTitle.value = settings.latestProductsTitle || '';
+                } catch (error) {
+                    console.error('Homepage settings load failed:', error);
+                    showMessage(error.message || 'Homepage settings could not be loaded.', true);
+                }
+            }
+
+            form.addEventListener('submit', async event => {
+                event.preventDefault();
+                submitButton.disabled = true;
+                try {
+                    const response = await fetch(`${apiBaseUrl}/api/homepage/settings`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ latestProductsTitle: form.elements.latestProductsTitle.value })
+                    });
+                    const result = await response.json();
+                    if (!response.ok) throw new Error(result.message || `Homepage settings save failed (HTTP ${response.status}).`);
+                    showMessage(result.message || 'Homepage section title saved to MongoDB.');
+                } catch (error) {
+                    console.error('Homepage settings save failed:', error);
+                    showMessage(error.message || 'Homepage section title could not be saved.', true);
+                } finally {
+                    submitButton.disabled = false;
+                }
+            });
+
+            loadSettings();
+        })();
+    </script>
+</body>
+</html>

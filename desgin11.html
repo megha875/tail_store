@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Services Cards</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f4f8;
+    }
+
+    .services-wrapper {
+      padding: 70px 0;
+    }
+
+    .heading-title {
+      font-weight: 800;
+      color: #0f172a;
+      font-size: 2.2rem;
+    }
+
+    .heading-subtitle {
+      color: #64748b;
+      max-width: 650px;
+      margin: 0 auto 50px auto;
+      font-size: 0.95rem;
+    }
+
+    /* Modern Card Styling */
+    .custom-service-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 35px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      height: 100%;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    }
+
+    /* Top decorative gradient line on hover */
+    .custom-service-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #6366f1, #a855f7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .custom-service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
+      border-color: transparent;
+    }
+
+    .custom-service-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Icon Box */
+    .card-icon-box {
+      width: 60px;
+      height: 60px;
+      background: #eef2ff;
+      color: #6366f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      transition: all 0.3s ease;
+    }
+
+    .custom-service-card:hover .card-icon-box {
+      background: #6366f1;
+      color: #ffffff;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Card Text Styles */
+    .card-title-custom {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+
+    .card-desc-custom {
+      font-size: 0.88rem;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Action Link */
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #6366f1;
+      text-decoration: none;
+      transition: gap 0.3s ease;
+    }
+
+    .custom-service-card:hover .card-link {
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<section class="services-wrapper">
+  <div class="container">
+    
+    <!-- Section Header -->
+    <div class="text-center">
+      <h2 class="heading-title">Our Premium SEO Services</h2>
+      <p class="heading-subtitle">
+        Boost your digital presence, increase high-intent organic traffic, and outrank your competition with our tailored strategies.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="row g-4">
+      
+      <!-- Service 1 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h4 class="card-title-custom">App Store SEO</h4>
+          <p class="card-desc-custom">Make your mobile application appear directly on top of Apple App Store and Google Play Store search results.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <h4 class="card-title-custom">Ecommerce SEO</h4>
+          <p class="card-desc-custom">Attract ready-to-buy traffic with a professionally structured and optimized online store page layout.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-globe"></i>
+          </div>
+          <h4 class="card-title-custom">International SEO</h4>
+          <p class="card-desc-custom">Stand out in multiple target locations and global markets using robust multi-region optimization.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <h4 class="card-title-custom">Local SEO</h4>
+          <p class="card-desc-custom">Let local customers come closer to your business by dominating Google map packs and local citations.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 5 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-mobile-retro"></i>
+          </div>
+          <h4 class="card-title-custom">Mobile SEO</h4>
+          <p class="card-desc-custom">Get discovered easily by high-converting mobile phone shoppers with lightning-fast page loading speeds.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 6 -->
+      <div class="col-lg-4 col-md-6">
+        <div class="custom-service-card">
+          <div class="card-icon-box">
+            <i class="fa-solid fa-language"></i>
+          </div>
+          <h4 class="card-title-custom">Multilingual SEO</h4>
+          <p class="card-desc-custom">We improve your platform's search engine ranking smoothly in every single language your audience speaks.</p>
+          <a href="#" class="card-link">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

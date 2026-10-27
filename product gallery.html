@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body >
+
+<!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="index.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+      <a href="checkout.html" class="hover:text-gray-300 transition-colors py-2">Checkout</a>
+    </div>
+
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+ 
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
+      <!-- Outlined Register Button (Image Style) -->
+      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Register
+      </a>
+
+
+      <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Login
+      </a> -->
+
+      <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+      </button> -->
+      <!-- Cart Icon Button (Updated with Link and Dynamic Badge Counter) -->
+<a href="card.html" id="nav-cart-btn" class="p-1 hover:text-gray-300 transition-colors relative flex items-center" aria-label="Cart">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+  </svg>
+  <!-- Dynamic Item Count Badge -->
+  <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+    0
+  </span>
+</a>
+
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <!-- Mobile Accordion Item: Men -->
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+  
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+
+<!--Navbar Section End-->
+<!-- Navbar ke niche jahan main section hai -->
+<main class="max-w-7xl mx-auto py-8">
+
+    <!-- Purane cards wale div ko hata kar yeh ek line paste karein -->
+    <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+        <!-- JavaScript automatic iske andar cards load kar dega -->
+    </div>
+
+</main>
+<!-- Grid Parent Container -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+  <!-- Dynamic cards append honge -->
+</div>
+<div class="gallery-container" id="galleryGrid">
+  <!-- Backend se data aane ke baad yahan items dynamically inject honge -->
+</div>
+<!--Gallery Banner Section Start-->
+
+  <div class="gallery_banner relative w-full max-w-12xl bg-white rounded-2xl shadow-lg overflow-hidden py-8 px-6 sm:px-12 border border-gray-100">
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      
+      <div id="leftStack" class="md:col-span-4 flex justify-center items-center relative h-60 sm:h-64 w-full my-auto">
+        
+        <div onclick="swapPolaroids('leftStack', this)" class="polaroid-card absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-[60%] w-36 sm:w-44 bg-white p-2 pb-3 shadow-md transform -rotate-12 rounded-sm border border-gray-200 z-10 hover:scale-105">
+          <img src="./assets/img/5.jpg" alt="Look 1" class="w-full h-44 sm:h-52 object-cover pointer-events-none">
+        </div>
+        
+        <div onclick="swapPolaroids('leftStack', this)" class="polaroid-card absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-[40%] w-36 sm:w-44 bg-white p-2 pb-3 shadow-xl transform rotate-6 rounded-sm border border-gray-200 z-20 hover:scale-105">
+          <img src="./assets/img/4.jpg" alt="Look 2" class="w-full h-44 sm:h-52 object-cover pointer-events-none">
+        </div>
+
+      </div>
+
+      <div class="md:col-span-4 text-center space-y-3 z-10 my-auto flex flex-col items-center justify-center">
+        
+        <span class="text-xs sm:text-sm font-bold tracking-[0.25em] text-[#ec4899] uppercase">
+          Special Offer
+        </span>
+        
+        <h2 class="text-4xl sm:text-5xl font-serif-custom font-semibold text-[#ec4899] leading-tight italic">
+          COMING<br>SOON
+        </h2>
+
+        <div class="inline-block bg-[#ec4899] text-white text-xs sm:text-sm font-bold px-6 py-2 rounded-full uppercase tracking-widest shadow-md">
+          Up to 35% OFF
+        </div>
+
+        <p class="text-xs sm:text-sm text-[#f472b6] tracking-wide pt-1 leading-relaxed">
+       
+           @reallygreatsite <br>
+          123 Anywhere St., Any City
+        </p>
+
+      </div>
+
+      <div id="rightStack" class="md:col-span-4 flex justify-center items-center relative h-60 sm:h-64 w-full my-auto">
+        
+        <div onclick="swapPolaroids('rightStack', this)" class="polaroid-card absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-[60%] w-36 sm:w-44 bg-white p-2 pb-3 shadow-md transform -rotate-6 rounded-sm border border-gray-200 z-10 hover:scale-105">
+          <img src="./assets/img/3.jpg" alt="Look 3" class="w-full h-44 sm:h-52 object-cover pointer-events-none">
+        </div>
+        
+        <div onclick="swapPolaroids('rightStack', this)" class="polaroid-card absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-[40%] w-36 sm:w-44 bg-white p-2 pb-3 shadow-xl transform rotate-12 rounded-sm border border-gray-200 z-20 hover:scale-105">
+          <img src="./assets/img/2.jpg" alt="Look 4" class="w-full h-44 sm:h-52 object-cover pointer-events-none">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<!--Gallery Banner Section End-->
+
+<!--Product Section Start-->
+<!-- <section class="product_card max-w-7xl mx-auto px-4 py-8 font-sans">
+
+  <nav class="text-xs text-gray-500 mb-6 space-x-1">
+    <a href="#" class="hover:underline">Home</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">Shop</a>
+    <span>&gt;</span>
+    <a href="#" class="hover:underline">T-shirts</a>
+    <span>&gt;</span>
+    <span class="text-gray-900 font-medium">Preppy T-shirt</span>
+  </nav>
+
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+    
+   
+    <div class="space-y-4">
+     
+      <div class="w-full h-[450px] sm:h-[500px] rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
+        <img id="main-product-img" src="./assets/img/latest3.png" alt="Preppy T-shirt" class="w-full h-full object-cover transition-opacity duration-300">
+      </div>
+
+    
+      <div class="grid grid-cols-5 gap-3">
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border-2 border-[#ff0055] focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest3.png" alt="Thumbnail 1" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest4.png" alt="Thumbnail 2" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/2.jpg" alt="Thumbnail 3" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest1.png" alt="Thumbnail 4" class="w-full h-full object-cover">
+        </button>
+        <button onclick="changeImage(this.querySelector('img').src)" class="h-20 rounded-xl overflow-hidden border border-gray-200 hover:border-[#ff0055] transition-colors focus:outline-none cursor-pointer">
+          <img src="./assets/img/latest2.png" alt="Thumbnail 5" class="w-full h-full object-cover">
+        </button>
+      </div>
+    </div>
+
+
+    <div class="flex flex-col">
+   
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Preppy T-shirt</h1>
+
+    
+      <div class="flex items-center space-x-2 text-xs mb-6">
+        <div class="flex text-black text-sm">
+          ★★★★★
+        </div>
+        <span class="text-gray-500">(0 Reviews)</span>
+        <span class="text-gray-300">|</span>
+        <button class="text-[#ff0055] hover:underline cursor-pointer">Write a review</button>
+      </div>
+
+     
+      <div class="space-y-1.5 text-xs text-gray-600 mb-6">
+        <p><span class="text-gray-900 font-semibold">Brand:</span> Nike</p>
+        <p><span class="text-gray-900 font-semibold">Product code:</span> 00123</p>
+        <p><span class="text-gray-900 font-semibold">Availability:</span> <span class="text-gray-900 font-bold">In Stock</span></p>
+      </div>
+
+    
+      <hr class="border-gray-200 mb-6">
+
+  
+      <div class="text-2xl font-bold text-gray-900 mb-6">
+        $40.00
+      </div>
+
+    
+      <div class="flex items-center space-x-3 mb-6">
+        <button id="decrement-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">-</button>
+        <span id="qty-count" class="text-sm font-semibold text-gray-900 w-6 text-center">1</span>
+        <button id="increment-btn" class="w-7 h-7 rounded-full bg-[#ff0055] text-white flex items-center justify-center text-sm font-bold active:scale-95 transition-all cursor-pointer shadow-sm">+</button>
+      </div>
+
+     
+      <div class="mb-6">
+        <button class="w-36 bg-[#ff0055] hover:bg-white hover:text-[#ff0055] border border-[#ff0055] active:scale-95 text-white font-medium text-xs py-2.5 rounded-full transition-all cursor-pointer shadow-sm">
+          Add to Cart
+        </button>
+      </div>
+
+    
+      <hr class="border-gray-200 mb-6">
+
+     
+      <div class="flex items-center space-x-4 text-gray-700 mb-8">
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-instagram text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-pinterest-p text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-twitter text-sm"></i></a>
+        <a href="#" class="hover:text-[#ff0055] transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
+      </div>
+
+      
+      <div>
+        <h3 class="font-bold text-gray-900 text-sm mb-2">Product Description</h3>
+        <p class="text-xs text-gray-500 leading-relaxed max-w-lg">
+          This is a premium quality t-shirt perfect for casual wear. Made with high-quality fabric to ensure comfort and durability.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section> -->
+
+
+<!--Slider Section Start-->
+
+   <div class=" slider section max-w-7xl mx-auto  pt-6 py-6">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl ">Gallery Products</h2>
+      <p class="mt-2 text-sm text-gray-600   py-4">Explore our latest collection</p>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 ">
+
+      <!-- Card 1 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group">
+        <div class="relative overflow-hidden cursor-pointer" onclick="openSliderModal(0)">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop" alt="Stylish Dress" class="w-full h-64 object-cover product-img group-hover:scale-110">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-xs">
+           
+          </div>
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-800 text-lg">Stylish Dress</h3>
+            <p class="text-sm text-gray-500 mt-1">$49.99</p>
+          </div>
+          <button onclick="addToCart('Stylish Dress')" class=" w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+            Add to Cart 
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group">
+        <div class="relative overflow-hidden cursor-pointer" onclick="openSliderModal(1)">
+          <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop" alt="Checker Top" class="w-full h-64 object-cover product-img group-hover:scale-110">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-xs">
+            
+          </div>
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-800 text-lg">Checker Top</h3>
+            <p class="text-sm text-gray-500 mt-1">$29.99</p>
+          </div>
+          <button onclick="addToCart('Checker Top')" class="   w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+            Add to Cart 
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group">
+        <div class="relative overflow-hidden cursor-pointer" onclick="openSliderModal(2)">
+          <img src="https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&auto=format&fit=crop" alt="Cargo Skirt" class="w-full h-64 object-cover product-img group-hover:scale-110">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-xs">
+           
+          </div>
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-800 text-lg">Cargo Skirt</h3>
+            <p class="text-sm text-gray-500 mt-1">$39.99</p>
+          </div>
+          <button onclick="addToCart('Cargo Skirt')" class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm"">
+            Add to Cart 
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group">
+        <div class="relative overflow-hidden cursor-pointer" onclick="openSliderModal(3)">
+          <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop" alt="Knitted Poncho" class="w-full h-64 object-cover product-img group-hover:scale-110">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-xs">
+     
+          </div>
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-800 text-lg">Knitted Poncho</h3>
+            <p class="text-sm text-gray-500 mt-1">$59.99</p>
+          </div>
+          <button onclick="addToCart('Knitted Poncho')" class=" w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm">
+            Add to Cart 
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between group">
+        <div class="relative overflow-hidden cursor-pointer" onclick="openSliderModal(4)">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop" alt="Black Wrap Dress" class="w-full h-64 object-cover product-img group-hover:scale-110">
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-medium text-xs">
+       
+        </div>
+        <div class="p-4 flex flex-col flex-grow justify-between">
+          <div>
+            <h3 class="font-semibold text-gray-800 text-lg">Black Wrap Dress</h3>
+            <p class="text-sm text-gray-500 mt-1">$45.00</p>
+          </div>
+          <button onclick="addToCart('Black Wrap Dress')" class="w-full bg-[#ff0055] hover:bg-[#d90048] active:bg-white active:text-[#ff0055] border-2 border-[#ff0055] text-white font-semibold text-sm py-2.5 rounded-full transition-all duration-200 cursor-pointer active:scale-95 shadow-sm ">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal Slider Container -->
+  <!-- <div id="sliderModal" class="fixed inset-0 bg-black/85 hidden z-50 flex items-center justify-center p-4">
+    <div class="relative max-w-3xl w-full flex flex-col items-center">
+      
+      <button onclick="closeSliderModal()" class="absolute -top-12 right-0 text-white text-4xl font-bold hover:text-gray-300 z-10">
+        &times;
+      </button>
+
+      <div class="relative w-full h-[65vh] sm:h-[75vh] modal-img-container">
+        <img id="currentSliderImg" src="" alt="Zoomed View" onclick="toggleZoom()" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+        
+        <button onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full text-xl transition-all z-20">
+          &#10094;
+        </button>
+        
+        <button onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black text-white p-3 rounded-full text-xl transition-all z-20">
+          &#10095;
+        </button>
+      </div>
+
+      <div id="imageCounter" class="mt-3 text-white text-sm font-medium tracking-wide">
+        1 / 3
+      </div>
+
+    </div>
+  </div> -->
+<!-- Modal Container -->
+<div id="sliderModal" class="fixed inset-0 bg-black/85 hidden z-50 flex items-center justify-center p-4">
+  
+  <!-- Main Card Box (Sare elements iske andar locked hain) -->
+  <div class="relative w-full max-w-lg bg-gray-900 rounded-2xl p-4 shadow-2xl flex flex-col items-center justify-between border border-gray-800">
+    
+    <!-- Top Bar: Counter & Close Button -->
+    <div class="w-full flex items-center justify-between pb-3 border-b border-gray-800 text-white">
+      <span id="imageCounter" class="text-xs font-semibold tracking-wider bg-gray-800 px-3 py-1 rounded-full text-gray-300">
+        1 / 3
+      </span>
+      <button onclick="closeSliderModal()" class="text-gray-400 hover:text-white text-2xl font-bold leading-none px-2 transition-colors">
+        &times;
+      </button>
+    </div>
+
+    <!-- Image & Nav Arrows Container -->
+    <div class="relative w-full h-[400px] sm:h-[480px] my-3 flex items-center justify-center overflow-hidden rounded-xl bg-black">
+      
+      <!-- Fixed Size Image with object-cover -->
+      <img 
+        id="currentSliderImg" 
+        src="" 
+        alt="Zoomed View" 
+        onclick="toggleZoom()" 
+        class="w-full h-full object-cover rounded-xl transition-transform duration-300 cursor-zoom-in"
+      />
+      
+      <!-- Left Arrow -->
+      <button onclick="prevImage()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all shadow-md z-20">
+        &#10094;
+      </button>
+      
+      <!-- Right Arrow -->
+      <button onclick="nextImage()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/90 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg transition-all shadow-md z-20">
+        &#10095;
+      </button>
+    </div>
+
+    <!-- Footer Note -->
+    <p class="text-xs text-gray-400 text-center">
+      Click image to zoom in/out
+    </p>
+
+  </div>
+</div>
+<!--Footer Section Start-->
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+
+  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
+      
+      <!-- Column 1: Shop -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Pages -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Account -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Follow Us -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center "></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center "></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center "></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center "></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center "></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Contact Us & Logo -->
+      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+<!--Footer Section End-->
+<!--Bottom Section Start-->
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      
+      <!-- Copyright, Links & Description -->
+      <div class="space-y-3 text-gray-800">
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
+
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
+
+      <!-- Payment Icons -->
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <!-- PayPal -->
+        <!-- <div class="h-6 px-2.5 bg-[#2c2e2f] text-white font-bold italic text-[11px] rounded flex items-center justify-center tracking-tight">
+          <img src="./assets/img/paypal (1).svg" alt="payal"/>
+        </div> -->
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/paypal (1).svg" 
+    alt="PayPal" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+        <!-- Stripe -->
+           <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/stripe.svg" 
+    alt="Stripe" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+        <!-- VISA -->
+         <div class="h-6 px-2.5  rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/visa.svg" 
+    alt="VISA" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Bottom Section End-->
+<script>
+  // async function loadDynamicProducts() {
+  //   try {
+  //     const res = await fetch('http://localhost:5000/api/products');
+  //     const products = await res.json();
+
+  //     // Gallery cards ke parent container ko target karein
+  //     const container = document.querySelector('.grid') || document.getElementById('products-container');
+      
+  //     if (container) {
+  //       container.innerHTML = products.map(product => `
+  //         <div class="bg-white p-4 rounded-xl shadow-md">
+  //           <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover rounded-lg mb-3">
+  //           <h3 class="font-bold text-gray-800">${product.title}</h3>
+  //           <p class="text-sm text-gray-500">$${product.price}</p>
+  //           <button class="mt-3 w-full bg-pink-500 text-white py-2 rounded-full">Add to Cart</button>
+  //         </div>
+  //       `).join('');
+  //     }
+  //   } catch (err) {
+  //     console.error('Fetch error:', err);
+  //   }
+  // }
+
+  // document.addEventListener('DOMContentLoaded', loadDynamicProducts);
+</script>
+<script>
+const productsData = [
+      {
+        id: 0,
+        images: [
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 1,
+        images: [
+           'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1554568218-0f1715e72254?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 2,
+        images: [
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 3,
+        images: [
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop'
+        ]
+      },
+      {
+        id: 4,
+        images: [
+          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=600&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop'
+        ]
+      }
+    ];
+
+    let currentProductIndex = 0;
+    let currentImageIndex = 0;
+
+    function openSliderModal(productIndex) {
+      currentProductIndex = productIndex;
+      currentImageIndex = 0;
+      updateSlider();
+      document.getElementById('sliderModal').classList.remove('hidden');
+    }
+
+    function closeSliderModal() {
+      document.getElementById('sliderModal').classList.add('hidden');
+      resetZoom();
+    }
+
+    function updateSlider() {
+      resetZoom();
+      const images = productsData[currentProductIndex].images;
+      const imgElement = document.getElementById('currentSliderImg');
+      const counterElement = document.getElementById('imageCounter');
+
+      // Smooth opacity effect
+      imgElement.style.opacity = '0.3';
+      setTimeout(() => {
+        imgElement.src = images[currentImageIndex];
+        imgElement.style.opacity = '1';
+      }, 120);
+
+      counterElement.innerText = `${currentImageIndex + 1} / ${images.length}`;
+    }
+
+    function nextImage() {
+      const images = productsData[currentProductIndex].images;
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateSlider();
+    }
+
+    function prevImage() {
+      const images = productsData[currentProductIndex].images;
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateSlider();
+    }
+
+    function toggleZoom() {
+      const imgElement = document.getElementById('currentSliderImg');
+      imgElement.classList.toggle('zoomed');
+    }
+
+    function resetZoom() {
+      const imgElement = document.getElementById('currentSliderImg');
+      if (imgElement) {
+        imgElement.classList.remove('zoomed');
+      }
+    }
+
+    function addToCart(name) {
+      alert(`${name} added to cart!`);
+    }
+
+    // Keyboard support
+    document.addEventListener('keydown', function(e) {
+      const modal = document.getElementById('sliderModal');
+      if (!modal.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape') closeSliderModal();
+      }
+    });
+
+    // Close modal on outer click
+    document.getElementById('sliderModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeSliderModal();
+      }
+    });
+
+
+
+ function swapPolaroids(containerId, clickedCard) {
+      const stack = document.getElementById(containerId);
+      const cards = stack.querySelectorAll('.polaroid-card');
+
+      cards.forEach(card => {
+        if (card === clickedCard) {
+          card.classList.remove('z-10', 'shadow-md');
+          card.classList.add('z-20', 'shadow-2xl');
+        } else {
+          card.classList.remove('z-20', 'shadow-2xl', 'shadow-xl');
+          card.classList.add('z-10', 'shadow-md');
+        }
+      });
+    }
+
+</script>
+
+
+
+
+
+<script>
+        function goToDetail(id) {
+            window.location.href = `/product-detail.html?id=${id}`;
+        }
+
+        fetch('/api/products')
+            .then(res => res.json())
+            .then(products => {
+                const container = document.getElementById('product-container');
+                if (!container) return;
+                
+                container.innerHTML = '';
+
+                products.forEach((product, index) => {
+                    const cardHTML = `
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden p-4 border flex flex-col justify-between" data-category="${product.category}">
+                            
+                            <!-- Image click event -->
+                            <div onclick="goToDetail('${product._id}')" class="image-wrapper cursor-pointer relative">
+                                <span class="absolute top-2 left-2 z-10 bg-black text-white text-[10px] font-bold px-2 py-1 rounded shadow">
+                                    NEW
+                                </span>
+
+                                <img src="${product.image}" alt="${product.title}" class="product-card-img w-full h-48 object-cover rounded mb-3">
+
+                                <div class="social_icon absolute top-2 right-2 flex flex-col gap-2 z-10">
+                                    <button type="button" onclick="event.stopPropagation(); Wishlist('${product._id}', event)" class="wishlist-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Add to Wishlist">
+                                        <i class="fa-regular fa-heart text-base"></i>
+                                    </button>
+
+                                    <button type="button" onclick="event.stopPropagation(); shareProduct('${product._id}', '${product.title}', event)" class="share-btn bg-white text-black w-9 h-9 rounded-full flex items-center justify-center shadow transition hover:scale-105" title="Share Product">
+                                        <i class="fa-solid fa-share-nodes text-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Title click event -->
+                            <h3 onclick="goToDetail('${product._id}')" class="text-lg font-bold text-gray-800 cursor-pointer mb-1 hover:text-blue-600">
+                                ${product.title}
+                            </h3>
+
+                            <p class="text-gray-500 text-sm mb-3">
+                                ${product.category}
+                            </p>
+
+                            <div class="amount_part flex flex-col gap-2">
+                                <span class="text-blue-600 font-bold text-xl">
+                                    ₹${product.price}
+                                </span>
+
+                                <button type="button" onclick="handleCartClick(${index}, event)" class="btn_part w-full bg-[#ff0055] text-white px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-pink-700 transition text-center">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `;
+
+                    container.insertAdjacentHTML('beforeend', cardHTML);
+                });
+            })
+            .catch(err => console.error('Error fetching products:', err));
+    </script>
+ <script src="./assets/js/main.js"></script>
+   
+
+<script src="./assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+<script src="./assets/js/wishlist-client.js"></script>
+<script src="./assets/js/share-client.js"></script>
+<script>
+  (() => {
+    const form = document.getElementById('gallery-video-form');
+    const fileInput = document.getElementById('gallery-video-file');
+    const titleInput = document.getElementById('gallery-video-title');
+    const submitButton = document.getElementById('gallery-video-submit');
+    const status = document.getElementById('gallery-video-status');
+    const videoList = document.getElementById('gallery-video-list');
+    const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    const apiBaseUrl = isLocalHost
+      ? `http://${window.location.hostname || '127.0.0.1'}:5000`
+      : window.location.origin;
+
+    function makeVideoCard(video) {
+      const card = document.createElement('article');
+      card.className = 'group relative h-72 overflow-hidden border border-[#e5d8c2] bg-[#e7dcc8] shadow-sm sm:h-80';
+
+      const player = document.createElement('video');
+      player.className = 'h-full w-full object-cover';
+      player.controls = true;
+      player.preload = 'metadata';
+      player.autoplay = true;
+      player.muted = true;
+      player.loop = true;
+      player.playsInline = true;
+      player.src = `${apiBaseUrl}${video.url}`;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'pointer-events-none absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent';
+      const details = document.createElement('div');
+      details.className = 'pointer-events-none absolute bottom-0 left-0 p-5 text-white';
+      const title = document.createElement('h3');
+      title.className = 'truncate text-xl font-bold';
+      title.textContent = video.title || video.filename;
+      details.appendChild(title);
+      card.append(player, overlay, details);
+      return card;
+    }
+
+    async function loadGalleryVideos() {
+      videoList.replaceChildren();
+      const loading = document.createElement('p');
+      loading.className = 'text-sm text-gray-500';
+      loading.textContent = 'Loading videos...';
+      videoList.appendChild(loading);
+
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/gallery/videos`);
+        const responseText = await response.text();
+        let videos;
+        try {
+          videos = responseText ? JSON.parse(responseText) : [];
+        } catch {
+          throw new Error(`Video API returned an invalid response (HTTP ${response.status}). Restart the backend after updating server.js.`);
+        }
+        if (!response.ok) throw new Error(videos.message || `Could not load videos (HTTP ${response.status}).`);
+        if (!Array.isArray(videos)) throw new Error('The gallery returned an invalid video list.');
+
+        videoList.replaceChildren();
+        if (videos.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'col-span-full border border-dashed border-[#cdbb9e] bg-white/60 px-5 py-10 text-center text-sm text-[#62584d]';
+          empty.textContent = 'No videos have been uploaded yet. Choose a fashion video below to add one.';
+          videoList.appendChild(empty);
+          return;
+        }
+        videos.forEach(video => videoList.appendChild(makeVideoCard(video)));
+      } catch (error) {
+        console.error('Gallery videos could not be loaded:', error);
+        videoList.replaceChildren();
+        const message = document.createElement('p');
+        message.className = 'text-sm text-red-600';
+        message.textContent = error.message || 'Could not load gallery videos. Check that the backend is running.';
+        videoList.appendChild(message);
+      }
+    }
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const file = fileInput.files && fileInput.files[0];
+      if (!file) {
+        status.textContent = 'Please choose a video file first.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+      if (!file.type.startsWith('video/')) {
+        status.textContent = 'Please choose a valid video file.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+      if (file.size > 100 * 1024 * 1024) {
+        status.textContent = 'The selected video is larger than 100 MB.';
+        status.className = 'text-sm text-red-600';
+        return;
+      }
+
+      submitButton.disabled = true;
+      status.textContent = 'Uploading video to MongoDB...';
+      status.className = 'text-sm text-gray-500';
+
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/gallery/videos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'X-Video-Content-Type': file.type,
+            'X-Video-Filename': encodeURIComponent(file.name),
+            'X-Video-Title': encodeURIComponent(titleInput.value.trim())
+          },
+          body: file
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || `Upload failed (HTTP ${response.status}).`);
+
+        status.textContent = 'Video uploaded and saved to MongoDB successfully.';
+        status.className = 'text-sm font-semibold text-green-700';
+        form.reset();
+        await loadGalleryVideos();
+      } catch (error) {
+        console.error('Gallery video upload failed:', error);
+        status.textContent = error.message || 'Video upload failed. Please check the backend and try again.';
+        status.className = 'text-sm font-semibold text-red-600';
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+
+    document.getElementById('gallery-video-refresh').addEventListener('click', loadGalleryVideos);
+    loadGalleryVideos();
+  })();
+</script>
+</body>
+</html>

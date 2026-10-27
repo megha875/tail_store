@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+    <!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+      <a href="404.html" class="hover:text-gray-300 transition-colors py-2">404 page</a>
+      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
+    </div>
+
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+      <!-- Outlined Register Button (Image Style) -->
+      <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Register
+      </a>
+
+
+      <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Login
+      </a>
+
+      <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+      </button> -->
+      <!-- Cart Icon Button (Updated with Link and Dynamic Badge Counter) -->
+<a href="cart.html" id="nav-cart-btn" class="p-1 hover:text-gray-300 transition-colors relative flex items-center" aria-label="Cart">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+  </svg>
+  
+  <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+    0
+  </span>
+</a>
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <!-- Mobile Accordion Item: Men -->
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+  
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+
+<!--Navbar Section End-->
+  
+<!-- Talstore Terms & Conditions Page -->
+<main class="w-full min-h-screen bg-white text-gray-800">
+
+  <!-- Breadcrumb -->
+  <div class="flex items-center justify-center gap-1 pt-3 text-[10px] sm:text-xs">
+    <a href="index.html" class="text-gray-500 hover:text-black">
+      Home
+    </a>
+    <span class="text-gray-400">/</span>
+    <span class="text-gray-700">Terms & Conditions</span>
+  </div>
+
+  <!-- Page Heading -->
+  <header class="px-4 pt-2 pb-5 text-center">
+    <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
+      Terms & Conditions
+    </h1>
+  </header>
+
+  <!-- Content -->
+  <section class="mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+
+    <!-- Introduction -->
+    <div class="mb-5">
+      <h2 class="mb-1 text-sm font-semibold text-gray-900">
+        Terms and Conditions
+      </h2>
+      <p class="text-xs leading-5 text-gray-700">
+        Welcome to Talstore. These Terms and Conditions govern your access
+        to and use of the Talstore website and the purchase of products
+        available on our platform. By visiting our website or placing an
+        order, you agree to these terms. Please read them carefully before
+        using our services.
+      </p>
+    </div>
+
+    <!-- 1. Product Information -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        1. Product Information and Accuracy
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Talstore makes reasonable efforts to display accurate product
+        descriptions, images, prices, sizes, colours and specifications.
+        Actual product colours may vary depending on your device or screen.
+        Product availability, prices and descriptions may change without
+        prior notice. We will communicate material changes to an order
+        where required by applicable law.
+      </p>
+    </div>
+
+    <!-- 2. Orders and Payments -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        2. Ordering and Payment
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Customers must provide accurate contact, billing and shipping
+        information when placing an order on Talstore. Orders are subject
+        to product availability and confirmation. Available payment methods
+        will be displayed during checkout. We reserve the right to investigate
+        suspected fraudulent transactions and to cancel orders where
+        legally permitted. Any applicable cancellation or refund will be
+        handled according to our policies and applicable law.
+      </p>
+    </div>
+
+    <!-- 3. Shipping and Delivery -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        3. Shipping and Delivery
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Talstore aims to deliver orders to the shipping address provided
+        at checkout within the estimated delivery timeframe. Delivery
+        estimates may vary according to the customer's location, courier
+        availability and other circumstances. Customers are responsible
+        for checking that their address and phone number are correct.
+        Any shipping fees and applicable delivery conditions will be
+        displayed during checkout.
+      </p>
+    </div>
+
+    <!-- 4. Return and Exchange Policy -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        4. Return and Exchange Policy
+      </h3>
+      <p class="mb-2 text-xs leading-5 text-gray-700">
+        Talstore accepts return or exchange requests only in accordance
+        with the applicable product-specific policy displayed on our
+        website. Please review the eligibility conditions before submitting
+        a request.
+      </p>
+
+      <ul class="ml-5 list-disc space-y-1 text-xs leading-5 text-gray-700">
+        <li>
+          <strong>Eligibility:</strong>
+          Products must meet the applicable return or exchange conditions.
+          Items may need to be unused and returned with their original tags,
+          packaging and accessories.
+        </li>
+        <li>
+          <strong>Request Process:</strong>
+          Customers should contact Talstore customer support with their
+          order number and the reason for the request.
+        </li>
+        <li>
+          <strong>Inspection:</strong>
+          Returned products may be inspected to verify that they meet
+          the applicable policy requirements.
+        </li>
+        <li>
+          <strong>Exchange Availability:</strong>
+          Exchanges depend on stock availability, product eligibility
+          and the conditions communicated by Talstore.
+        </li>
+        <li>
+          <strong>Exceptions:</strong>
+          Certain products may be excluded from returns or exchanges
+          where disclosed before purchase and permitted by applicable law.
+        </li>
+      </ul>
+    </div>
+
+    <!-- 5. Damaged or Incorrect Products -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        5. Damaged, Defective or Incorrect Products
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        If a product arrives damaged, defective or different from the
+        product ordered, please contact Talstore customer support with
+        your order details and relevant photographs, where possible.
+        We will review the issue and provide an appropriate resolution,
+        such as a replacement, exchange or refund, in accordance with
+        our applicable policy and consumer protection laws.
+      </p>
+    </div>
+
+    <!-- 6. Refund Policy -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        6. Refund Policy
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Refund requests will be reviewed according to Talstore's applicable
+        refund and return policy. Approved refunds will generally be
+        processed through the original payment method or another agreed
+        method where appropriate. The time taken for the amount to appear
+        in the customer's account may depend on the payment provider or bank.
+        Any deductions or non-refundable charges will be disclosed where
+        applicable and permitted by law.
+      </p>
+    </div>
+
+    <!-- 7. Pricing and Offers -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        7. Pricing, Discounts and Offers
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Product prices and promotional offers are displayed on the Talstore
+        website and may be subject to specific terms, validity periods
+        and availability. Discount codes and promotional offers may not
+        be combined unless expressly stated. The final payable amount,
+        including applicable taxes and delivery charges, will be shown
+        during checkout before the order is placed.
+      </p>
+    </div>
+
+    <!-- 8. Customer Account -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        8. Customer Account and Responsibilities
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Customers are responsible for maintaining the confidentiality
+        of their account credentials and for activities carried out
+        through their accounts. Please notify Talstore if you suspect
+        unauthorised access. Customers must not misuse the website,
+        submit false information or engage in fraudulent activities.
+      </p>
+    </div>
+
+    <!-- 9. Privacy -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        9. Privacy and Personal Information
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Talstore uses customer information to process orders, arrange
+        deliveries, provide customer support and operate its services.
+        Personal information will be handled in accordance with our
+        Privacy Policy and applicable data protection laws. Please review
+        our Privacy Policy to understand how your information is collected,
+        used and protected.
+      </p>
+    </div>
+
+    <!-- 10. Intellectual Property -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        10. Intellectual Property
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Website content, including text, graphics, logos, photographs
+        and design elements, may be owned by or licensed to Talstore.
+        Such content may not be copied, reproduced, distributed or used
+        commercially without the appropriate authorisation, except where
+        permitted by applicable law.
+      </p>
+    </div>
+
+    <!-- 11. Limitation of Liability -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        11. Limitation of Liability
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Talstore aims to provide a reliable shopping experience but does
+        not guarantee uninterrupted or error-free website access.
+        Nothing in these terms excludes or limits any liability or
+        consumer rights that cannot lawfully be excluded or limited
+        under applicable law.
+      </p>
+    </div>
+
+    <!-- 12. Changes to Terms -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        12. Changes to Terms and Conditions
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        Talstore may update these Terms and Conditions from time to time.
+        The latest version will be published on this page along with
+        its effective date where applicable. Changes will apply in
+        accordance with applicable law.
+      </p>
+    </div>
+
+    <!-- 13. Governing Law -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        13. Governing Law
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        These Terms and Conditions are subject to the applicable laws
+        of India. Any dispute will be handled by the competent authority
+        or court in accordance with applicable law and jurisdictional
+        requirements.
+      </p>
+    </div>
+
+    <!-- 14. Contact Us -->
+    <div class="mb-4">
+      <h3 class="mb-1 text-xs font-bold text-gray-900">
+        14. Contact Us
+      </h3>
+      <p class="text-xs leading-5 text-gray-700">
+        For questions about orders, payments, shipping, returns, exchanges
+        or refunds, please contact Talstore customer support through
+        the contact details provided on our website.
+      </p>
+    </div>
+
+  </section>
+</main>
+
+
+    
+   </footer> -->
+<footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-8 gap-x-8 sm:gap-x-12">
+
+      <!-- Shop Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <!-- Pages Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <!-- Account Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer Policies Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Customer Policies</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="contact.html" class="hover:text-gray-900 transition-colors">Contact Us</a></li>
+          <li><a href="fqa.html" class="hover:text-gray-900 transition-colors">FAQ</a></li>
+          <li><a href="T&C.html" class="hover:text-gray-900 transition-colors">T&C</a></li>
+          <li><a href="terms.html" class="hover:text-gray-900 transition-colors">Terms Of Use</a></li>
+          <li><a href="T&O.html" class="hover:text-gray-900 transition-colors">Track Orders</a></li>
+          <li><a href="shipping" class="hover:text-gray-900 transition-colors">Shipping</a></li>
+          <li><a href="cancellation" class="hover:text-gray-900 transition-colors">Cancellation</a></li>
+          <li><a href="P&P.html" class="hover:text-gray-900 transition-colors">Privacy policy</a></li>
+     
+        </ul>
+      </div>
+
+      <!-- Follow Us Column -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center"></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center"></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center"></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center"></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center gap-2 hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center"></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Us Column -->
+      <div class="col-span-2 sm:col-span-1 lg:col-span-1">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<!--Footer Section End-->
+
+
+
+<!--Bottom Section Start-->
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      
+      <!-- Copyright, Links & Description -->
+      <div class="space-y-3 text-gray-800">
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
+
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
+
+      <!-- Payment Icons -->
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <!-- PayPal -->
+        <!-- <div class="h-6 px-2.5 bg-[#2c2e2f] text-white font-bold italic text-[11px] rounded flex items-center justify-center tracking-tight">
+          <img src="./assets/img/paypal (1).svg" alt="payal"/>
+        </div> -->
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/paypal (1).svg" 
+    alt="PayPal" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+        <!-- Stripe -->
+           <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/stripe.svg" 
+    alt="Stripe" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+        <!-- VISA -->
+         <div class="h-6 px-2.5  rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/visa.svg" 
+    alt="VISA" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Bottom Section End-->
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggles = document.querySelectorAll(".faq-toggle");
+
+            toggles.forEach(toggle => {
+                toggle.addEventListener("click", () => {
+                    const item = toggle.parentElement;
+                    const answer = item.querySelector(".faq-answer");
+                    const icon = toggle.querySelector(".icon");
+
+                    const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
+
+                    // Close all other open accordions
+                    document.querySelectorAll(".faq-answer").forEach(ans => {
+                        ans.style.maxHeight = "0px";
+                        ans.classList.add("opacity-0");
+                    });
+                    document.querySelectorAll(".faq-toggle .icon").forEach(ic => {
+                        ic.textContent = "+";
+                    });
+
+                    // If clicked item was not open, open it
+                    if (!isOpen) {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        answer.classList.remove("opacity-0");
+                        icon.textContent = "−"; // Minus sign
+                    }
+                });
+            });
+        });
+    </script>
+
+<script src="./assets/js/main.js"></script>
+   
+   <script src="./assets/js/product-detail.js"></script>
+    <script src="./assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+</body>
+</html>F

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind CSS Project</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body >
+
+<!--Navbar Section Start-->
+ <header class="w-full bg-[#050B14]" style="position: fixed;top: 0;z-index: 99;">
+  <!-- Container Fluid (Full width with horizontal padding) -->
+  <nav class="w-full px-4 md:px-8 py-4 flex items-center justify-between text-white font-sans relative">
+    
+
+    <div class="flex items-center">
+      <a href="#" class="block">
+        <img src="./assets/img/template-white-logo (1).png" alt="TailStore Logo" class="h-8 md:h-10 w-auto object-contain">
+      </a>
+    </div>
+
+
+    <div class="hidden lg:flex items-center space-x-8 text-base font-semibold">
+      <a href="index.html" class="hover:text-gray-300 transition-colors py-2">Home</a>
+      
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Men
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="t-shirt.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shirts & T-Shirts</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jeans & Trousers</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Jackets & Coats</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Women
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Dresses & Tops</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Ethnic Wear</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Bags & Accessories</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Footwear</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Shop
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop Grid Layout</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Shop List View</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="relative group py-2">
+        <button class="flex items-center hover:text-gray-300 transition-colors focus:outline-none">
+          Product
+          <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </button>
+        <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
+          <div class="py-2">
+            <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
+            <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
+          </div>
+        </div>
+      </div>
+
+     
+      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">shop</a>
+    </div>
+
+
+    <div class="flex items-center space-x-3 sm:space-x-4">
+        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
+        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
+          Register
+        </a>
+        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
+          Login
+        </a>
+      </div>
+ 
+   
+      <div id="auth-user-menu" class="hidden items-center">
+        <a href="logout.html" id="logout-btn" type="button" class="bg-[#FF0043] hover:bg-[#d90039] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 cursor-pointer">
+          Logout
+        </a>
+      </div>
+      <!-- Outlined Register Button (Image Style) -->
+      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Register
+      </a>
+
+
+      <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
+        Login
+      </a> -->
+
+      <!-- <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Cart">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+        </svg>
+      </button> -->
+      <!-- Cart Icon Button (Updated with Link and Dynamic Badge Counter) -->
+<!-- Main Cart Link Wrapper -->
+<a href="cart.html" class="p-1 hover:text-gray-300 transition-colors relative flex items-center" aria-label="Cart">
+  
+  <!-- Cart SVG Icon (JS isko touch nahi karegi) -->
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+  </svg>
+  
+  <!-- Dynamic Badge Counter (Sirf iski text innerText change hogi) -->
+  <span id="cart-badge-count" class="absolute -top-1 -right-2 bg-[#FF0043] text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+    0
+  </span>
+
+</a>
+      <button class="p-1 hover:text-gray-300 transition-colors" aria-label="Search">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </button>
+
+ 
+      <button id="mobile-menu-btn" class="lg:hidden p-1 text-gray-300 hover:text-white focus:outline-none">
+        <svg id="hamburger-icon" class="w-6 h-6 block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+
+  </nav>
+
+
+  <div id="mobile-menu" class="hidden lg:hidden bg-[#0b1728] border-b border-gray-800 px-4 pt-2 pb-6 space-y-3">
+    
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Home</a>
+    
+    <!-- Mobile Accordion Item: Men -->
+    <div>
+      <button onclick="toggleSubMenu('men-submenu', 'men-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Men</span>
+        <svg id="men-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="men-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Shirts & T-Shirts</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Jeans & Trousers</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+  
+    <div>
+      <button onclick="toggleSubMenu('women-submenu', 'women-arrow')" class="flex justify-between items-center w-full py-2 text-base font-semibold text-white hover:text-[#FF0043]">
+        <span>Women</span>
+        <svg id="women-arrow" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="women-submenu" class="hidden pl-4 space-y-2 py-1 bg-[#050B14] rounded-md mt-1">
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Dresses & Tops</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Ethnic Wear</a>
+        <a href="#" class="block text-sm text-gray-300 hover:text-white py-1">Footwear</a>
+      </div>
+    </div>
+
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Shop</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Product</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">404 page</a>
+    <a href="#" class="block py-2 text-base font-semibold text-white hover:text-[#FF0043]">Checkout</a>
+
+
+    <div class="pt-4 flex flex-col space-y-2 sm:hidden">
+      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
+      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
+    </div>
+  </div>
+</header>
+
+<!--Navbar Section End-->
+
+<!-- Banner Section Start -->
+
+<!-- Slider  Section Start -->
+<div class="relative w-full overflow-hidden group">
+
+    <!-- Slides Wrapper -->
+    <div id="sliderWrapper" class="flex transition-transform duration-500 ease-out w-full">
+      <!-- Slide 1 -->
+      <div class="relative w-full flex-shrink-0">
+        <img src="./assets/img/2.png" alt="Slide 1" class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover brightness-75">
+      </div>
+      <!-- Slide 2 -->
+      <div class="relative w-full flex-shrink-0">
+        <img src="./assets/img/5.jpg" alt="Slide 2" class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover brightness-75">
+      </div>
+      <!-- Slide 3 -->
+      <div class="relative w-full flex-shrink-0">
+        <img src="./assets/img/2.png" alt="Slide 3" class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover brightness-75">
+      </div>
+      <!-- Slide 4 -->
+      <div class="relative w-full flex-shrink-0">
+        <img src="./assets/img/5.jpg" alt="Slide 4" class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover brightness-75">
+      </div>
+      <!-- Slide 5 -->
+      <div class="relative w-full flex-shrink-0">
+        <img src="./assets/img/5.jpg" alt="Slide 5" class="w-full h-[400px] sm:h-[550px] lg:h-[700px] object-cover brightness-75">
+      </div>
+    </div>
+
+    <!-- Centered Fashion Content Overlay -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10 pointer-events-none">
+      <div class="pointer-events-auto max-w-2xl">
+        <!-- Sub-heading -->
+        <span class="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-gray-200 uppercase mb-2 block">
+          New Season Collection
+        </span>
+
+        <!-- Main Heading -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 drop-shadow-lg">
+          ELEVATE YOUR STYLE
+        </h1>
+
+        <!-- Short Fashion Tagline -->
+        <p class="text-gray-200 text-sm sm:text-lg mb-8 max-w-lg mx-auto">
+          Discover the latest trends in luxury fashion and handcrafted accessories.
+        </p>
+
+        <!-- Red Shopping Button (Linked to shop.html) -->
+        <a href="shop.html" class="inline-block bg-red-600 border-2 border-red-600 text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg hover:bg-white hover:text-red-600 active:bg-white active:text-red-600 transition-all duration-200 transform active:scale-95">
+          SHOP NOW
+        </a>
+      </div>
+    </div>
+
+    <!-- Previous Button -->
+    <button id="prevBtn" class="absolute top-1/2 left-4 sm:left-6 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-3 rounded-full transition-all focus:outline-none backdrop-blur-sm cursor-pointer z-20">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+    </button>
+
+    <!-- Next Button -->
+    <button id="nextBtn" class="absolute top-1/2 right-4 sm:right-6 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white p-3 rounded-full transition-all focus:outline-none backdrop-blur-sm cursor-pointer z-20">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </button>
+
+</div>
+<!-- Slider Section End -->
+ <!-- Banner Section End-->
+
+<main class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+  <section aria-labelledby="collection-title">
+    <div class="mb-8 text-center">
+      <h1 id="collection-title" class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Shop All Products</h1>
+      <p id="collection-description" class="mt-2 text-gray-600">Explore the latest styles from TailStore.</p>
+    </div>
+    <div id="catalog-products" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <p class="col-span-full py-10 text-center text-gray-500">Loading products...</p>
+    </div>
+  </section>
+</main>
+ 
+<!-- 
+
+<section class=" chekout_section max-w-7xl mx-auto px-4 py-8 sm:py-12">
+    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 pt-8 pb-8">Checkout Page</h1>
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+     
+      <div class="left_section lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-6 border-b pb-3">Shipping Details</h2>
+
+        <form id="checkout-form" class="space-y-5">
+ 
+          <div>
+            <label for="name" class="block text-xs font-semibold text-gray-600 mb-1">FULL NAME *</label>
+            <input type="text" id="name" required placeholder="John Doe" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+          </div>
+
+        
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="email" class="block text-xs font-semibold text-gray-600 mb-1">EMAIL ADDRESS *</label>
+              <input type="email" id="email" required placeholder="example@mail.com" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="phone" class="block text-xs font-semibold text-gray-600 mb-1">PHONE NUMBER *</label>
+              <input type="tel" id="phone" required placeholder="+91 9876543210" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+          </div>
+
+   
+          <div>
+            <label for="address" class="block text-xs font-semibold text-gray-600 mb-1">STREET ADDRESS *</label>
+            <textarea id="address" rows="3" required placeholder="House No., Building Name, Street" class="w-full border border-gray-300 rounded-lg p-3 text-sm focus:outline-none focus:border-[#ff0055] transition-all resize-none"></textarea>
+          </div>
+
+   
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label for="city" class="block text-xs font-semibold text-gray-600 mb-1">CITY *</label>
+              <input type="text" id="city" required placeholder="Delhi" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="state" class="block text-xs font-semibold text-gray-600 mb-1">STATE *</label>
+              <input type="text" id="state" required placeholder="Delhi" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+            <div>
+              <label for="pincode" class="block text-xs font-semibold text-gray-600 mb-1">PINCODE *</label>
+              <input type="text" id="pincode" required placeholder="110001" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-[#ff0055] transition-all">
+            </div>
+          </div>
+
+      
+          <div class="pt-4">
+            <h3 class="text-sm font-bold text-gray-900 mb-3">Payment Method</h3>
+            <div class="space-y-2">
+              <label class="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:border-[#ff0055] transition-all">
+                <input type="radio" name="payment" value="COD" checked class="accent-[#ff0055]">
+                <span class="text-sm font-medium text-gray-700">Cash on Delivery (COD)</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:border-[#ff0055] transition-all">
+                <input type="radio" name="payment" value="Online" class="accent-[#ff0055]">
+                <span class="text-sm font-medium text-gray-700">Online Payment / UPI / Card</span>
+              </label>
+            </div>
+          </div>
+
+  
+          <div class="pt-4">
+            <button type="submit" class="w-full bg-[#ff0055] hover:bg-[#e0004c] text-white font-bold py-3.5 rounded-xl transition-all shadow-md active:scale-98 cursor-pointer">
+              Place Order
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+    
+      <div class="right_section lg:col-span-5">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 sticky top-6">
+          <h2 class="text-lg font-bold text-gray-900 mb-6 border-b pb-3">Order Summary</h2>
+
+         
+          <div id="checkout-cart-items" class="space-y-4 max-h-[320px] overflow-y-auto pr-1">
+           
+            <div class="flex items-center justify-between border-b pb-3">
+              <div class="flex items-center space-x-3">
+                <img src="./assets/img/latest3.png" alt="Product" class="w-14 h-14 object-cover rounded-lg border">
+                <div>
+                
+                </div>
+              </div>
+              <span class="text-sm font-bold text-gray-900">$29.99</span>
+            </div>
+          </div>
+
+          
+          <div class="space-y-3 pt-6 border-t mt-4 text-sm">
+            <div class="flex justify-between text-gray-600">
+              <span>Subtotal</span>
+              <span id="checkout-subtotal" class="font-semibold text-gray-800">$29.99</span>
+            </div>
+            <div class="flex justify-between text-gray-600">
+              <span>Shipping Charge</span>
+              <span class="font-semibold text-green-600">Free</span>
+            </div>
+            <div class="flex justify-between text-base font-bold text-gray-900 pt-3 border-t">
+              <span>Total Amount</span>
+              <span id="checkout-total" class="text-[#ff0055]">$29.99</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+ -->
+
+  <footer class="footr_section w-full bg-white text-gray-700 pt-12 pb-8 border-t border-gray-100 font-['Manrope']">
+
+  <!-- Container me px-6 sm:px-8 aur max-w-7xl rakha hai -->
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+
+    <!-- Grid Layout: Mobile & Tab pe 2 equal columns (gap-x-12 sm:gap-x-16 gap-y-8) -->
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-y-8 gap-x-12 sm:gap-x-16 lg:gap-8 ">
+      
+      <!-- Column 1: Shop -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Shop</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Women</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Men</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shoes</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Accessories</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Pages -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Pages</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Shop</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Product</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Checkout</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">404</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Account -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Account</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Cart</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Registration</a></li>
+          <li><a href="#" class="hover:text-gray-900 transition-colors">Login</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Follow Us -->
+      <div>
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Follow Us</h3>
+        <ul class="space-y-3 text-base font-semibold text-gray-600">
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-facebook-f text-center "></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-twitter text-center "></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-instagram text-center "></i>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-pinterest-p text-center "></i>
+              <span>Pinterest</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center  hover:text-gray-900 transition-colors">
+              <i class="fa-brands fa-youtube text-center "></i>
+              <span>YouTube</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Column 5: Contact Us & Logo -->
+      <div class="col-span-2 lg:col-span-1 pt-4 lg:pt-0">
+        <h3 class="text-lg font-bold text-gray-900 mb-4">Contact Us</h3>
+        
+        <div class="mb-5 flex flex-col items-start">
+          <div class="text-2xl font-black text-gray-900 tracking-tight leading-none">
+            <img src="./assets/img/template-logobottom.png" alt="logo" class="h-8 w-auto" />
+          </div>
+          <p class="text-[10px] tracking-[0.25em] font-semibold text-gray-800 uppercase mt-2 flex items-center gap-1">
+            TEMPLATE <span class="inline-block w-2 h-2 bg-gray-900"></span>
+          </p>
+        </div>
+
+        <div class="space-y-3 text-base text-gray-700">
+          <p class="font-medium">123 Street Name, Paris, France</p>
+          <p class="text-lg font-bold text-gray-900">
+            Phone: (123) 456-7890
+          </p>
+          <p>
+            <a href="mailto:info@company.com" class="underline font-semibold hover:text-gray-900 transition-colors">
+              Email: info@company.com
+            </a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</footer>
+<!--Footer Section End-->
+<!--Bottom Section Start-->
+<div class="w-full bg-white border-t border-gray-200 py-6 font-['Manrope']">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6">
+      
+      <!-- Copyright, Links & Description -->
+      <div class="space-y-3 text-gray-800">
+  
+  <!-- Copyright Line: Responsive text sizing (Mobile pe small, Tablet/Desktop pe base) -->
+  <p class="text-sm sm:text-base font-bold tracking-tight">
+    © 2024 Your Company. All rights reserved by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">Maksim M</a> • 
+    Distributed by 
+    <a href="#" class="text-[#ff0048] hover:underline font-bold">ThemeWagon</a>
+  </p>
+  
+  <!-- Policy Links: Slight font size reduction (text-sm) for clean hierarchy -->
+  <div class="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold text-gray-700">
+    <a href="#" class="hover:text-gray-900 transition-colors">Privacy Policy</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">Terms of Service</a>
+    <a href="#" class="hover:text-gray-900 transition-colors">FAQ</a>
+  </div>
+
+  <!-- Description Paragraph: Secondary text sizing (text-xs) -->
+  <p class="text-xs sm:text-sm font-medium text-gray-500 pt-1 max-w-xl">
+    Your shop's description goes here. This is a brief introduction to your shop and what you offer.
+  </p>
+
+</div>
+
+      <!-- Payment Icons -->
+      <div class="flex items-center gap-2 shrink-0 pt-1">
+        <!-- PayPal -->
+        <!-- <div class="h-6 px-2.5 bg-[#2c2e2f] text-white font-bold italic text-[11px] rounded flex items-center justify-center tracking-tight">
+          <img src="./assets/img/paypal (1).svg" alt="payal"/>
+        </div> -->
+        <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/paypal (1).svg" 
+    alt="PayPal" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+        <!-- Stripe -->
+           <div class="h-6 px-2.5 rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/stripe.svg" 
+    alt="Stripe" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+        <!-- VISA -->
+         <div class="h-6 px-2.5  rounded flex items-center justify-center">
+  <img 
+    src="./assets/img/visa.svg" 
+    alt="VISA" 
+    class="h-16.5 w-auto object-contain"
+  />
+</div>
+       
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Bottom Section End-->
+<!-- 
+
+<script>
+  async function loadDataFromDB() {
+    try {
+      const response = await fetch('http://localhost:5000/api/products'); // API endpoint ko apne backend ke hisaab se update karein
+      const data = await response.json();
+      
+      console.log("Database Data:", data); // Browser Console (F12) me data check karein
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+
+  // Page load hone par call karein
+  loadDataFromDB();
+</script>
+<!-- ============================================== -->
+      <script src="./assets/js/navbar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="./assets/js/script.js"></script>
+<script src="./assets/js/products.js"></script>
+<script src="./assets/js/wishlist-client.js"></script>
+<script src="./assets/js/share-client.js"></script>
+<script src="./assets/js/cart-client.js"></script>
+<script src="./assets/js/shop-catalog.js"></script>
+</body>
+</html>
