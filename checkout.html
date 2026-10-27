@@ -15,11 +15,6 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body >
-
-<<<<<<< HEAD
-
-=======
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 <!--Navbar Section Start-->
  <header class="w-full bg-[#050B14]" style="position: fixed;top: 0;z-index: 99;">
   <!-- Container Fluid (Full width with horizontal padding) -->
@@ -98,17 +93,13 @@
         </button>
         <div class="absolute left-0 top-full mt-0 w-48 bg-[#0b1728] border border-gray-800 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden">
           <div class="py-2">
-<<<<<<< HEAD
              <a href="category.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Category</a>
-=======
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
             <a href="product-detail.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Details</a>
             <a href="product gallery.html" class="block px-4 py-2 text-sm text-gray-200 hover:bg-[#FF0043] hover:text-white transition-colors">Product Gallery</a>
           </div>
         </div>
       </div>
 
-<<<<<<< HEAD
     
       <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
     </div>
@@ -163,19 +154,6 @@
           Register
         </a>
         <a href="login.html#loginForm" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
-=======
-      
-      <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
-    </div>
-
-
-    <div class="flex items-center space-x-3 sm:space-x-4">
-        <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
-        <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
-          Register
-        </a>
-        <a href="login.html" class="bg-[#FF0043] text-white hover:bg-[#d90039] active:bg-[#b3002f] text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200">
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
           Login
         </a>
       </div>
@@ -186,7 +164,6 @@
           Logout
         </a>
       </div>
-<<<<<<< HEAD
       <!-- Guest Buttons (Not Logged In) -->
       <!-- <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
         
@@ -207,10 +184,6 @@
     <!-- <div class="flex items-center space-x-3 sm:space-x-4">
       
       <a href="register.html" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
-=======
-      <!-- Outlined Register Button (Image Style) -->
-      <!-- <a href="#" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200 hidden sm:inline-block">
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         Register
       </a>
 
@@ -300,18 +273,14 @@
 
 
     <div class="pt-4 flex flex-col space-y-2 sm:hidden">
-<<<<<<< HEAD
       <a href="login.html#registerForm" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
       <a href="login.html#loginForm" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
-=======
-      <a href="#" class="w-full text-center border border-[#FF0043] text-[#FF0043] active:bg-[#FF0043] active:text-white font-semibold py-2 rounded-full transition-colors">Register</a>
-      <a href="#" class="w-full text-center bg-[#FF0043] text-white active:bg-[#b3002f] font-semibold py-2 rounded-full transition-colors">Login</a>
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
     </div>
   </div>
 </header>
 
 <!--Navbar Section End-->
+
 
 
 
@@ -715,316 +684,6 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-
-
-
-<!--Bottom Section End-->
-<script>
-  // Order place hone par yeh data backend ko bhejein
-const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-const userId = localStorage.getItem('userId');
-
-const purchasedItems = cartItems.map(item => ({
-    productId: item._id || item.id,
-    title: item.name || item.title,
-    price: item.price,
-    image: item.image,
-    quantity: item.quantity || 1
-}));
-
-const orderData = {
-    userId: userId,
-    items: purchasedItems, // Sirf cart ke items jayenge
-    totalAmount: purchasedItems.reduce((sum, i) => sum + (i.price * i.quantity), 0),
-    paymentMethod: 'COD'
-};
-
-// Backend API ko POST request bhejein
-fetch('http://localhost:5000/api/orders', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(orderData)
-}).then(res => res.json()).then(data => {
-    localStorage.removeItem('cart'); // Cart clear karein
-    window.location.href = 'dashboard.html'; // Dashboard par bhej dein
-});
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Apne checkout form ya order button ki ID yahan dalein (jaise 'checkout-form')
-    const checkoutForm = document.getElementById('checkoutForm'); 
-    if (!checkoutForm) return;
-
-    checkoutForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const userId = localStorage.getItem('userId');
-
-        if (!userId) {
-            alert('Pehle login karein!');
-            window.location.href = 'login.html';
-            return;
-        }
-
-        if (cartItems.length === 0) {
-            alert('Aapka cart khali hai!');
-            return;
-        }
-
-        // Cart items ko clean format mein map karein
-        const purchasedItems = cartItems.map(item => ({
-            productId: item._id || item.id,
-            title: item.name || item.title,
-            price: item.price,
-            image: item.image,
-            quantity: item.quantity || 1
-        }));
-
-        // Total amount calculate karein
-        const totalAmount = purchasedItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-        const orderData = {
-            userId: userId,
-            items: purchasedItems,
-            totalAmount: totalAmount,
-            paymentMethod: 'COD',
-            orderDate: new Date()
-        };
-
-        try {
-            const response = await fetch('http://localhost:5000/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(orderData)
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                // Order save hone ke baad cart clear karein aur dashboard par bhej dein
-                localStorage.removeItem('cart');
-                window.location.href = 'dashboard.html';
-            } else {
-                alert(result.message || 'Order place karne mein error aayi.');
-            }
-        } catch (error) {
-            console.error('Checkout error:', error);
-            alert('Server se connection nahi ho pa raha.');
-        }
-    });
-});
-</script>
-<script>
-  function loadProducts() {
-    let products = JSON.parse(localStorage.getItem('products')) || [];
-
-    const latestContainer = document.getElementById('latestProductsContainer');
-    const popularContainer = document.getElementById('popularProductsContainer');
-
-    // Container khali karein pehle
-    if(latestContainer) latestContainer.innerHTML = '';
-    if(popularContainer) popularContainer.innerHTML = '';
-
-    products.forEach(product => {
-        const productHTML = `
-            <div class="product-card">
-                <img src="${product.image}" alt="${product.name}">
-                <h3>${product.name}</h3>
-                <p>₹${product.price}</p>
-            </div>
-        `;
-
-        // Type ke hisaab se alag-alag section mein dikhayein
-        if (product.type === 'latest' && latestContainer) {
-            latestContainer.innerHTML += productHTML;
-        } else if (product.type === 'popular' && popularContainer) {
-            popularContainer.innerHTML += productHTML;
-        }
-    });
-}
-
-// Page load hone par call karein
-window.onload = loadProducts;
-</script>
-<script>
-async function loadPopularProducts() {
-  const slidesContainer = document.getElementById('popular');
-  if (!slidesContainer) return;
-  const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-  const apiHost = window.location.hostname || '127.0.0.1';
-  const apiBaseUrl = isLocalHost ? `http://${apiHost}:5000` : window.location.origin;
-
-  try {
-    const response = await fetch(`${apiBaseUrl}/api/products/popular`);
-    if (!response.ok) throw new Error(`Popular products request failed (HTTP ${response.status})`);
-    const products = await response.json();
-    if (!Array.isArray(products)) throw new Error('Popular products response was not a product list');
-    slidesContainer.replaceChildren();
-
-    products.forEach(product => {
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide flex h-auto flex-col gap-2';
-      const productId = product._id || product.id;
-      slide.innerHTML = `
-        <div class="relative flex-1">
-        <a class="block h-full rounded-2xl border border-gray-100 bg-white p-3 shadow-md transition hover:shadow-xl" href="product-detail.html?id=${encodeURIComponent(productId || '')}">
-          <div class="mb-4 h-[300px] overflow-hidden rounded-xl bg-gray-100">
-            <img class="h-full w-full object-cover transition-transform duration-500 hover:scale-105">
-          </div>
-          <h3 class="mb-1 text-base font-bold text-gray-900"></h3>
-          <p class="mb-3 text-xs text-gray-500"></p>
-          <span class="text-lg font-extrabold text-[#ff0055]"></span>
-      
-        <button type="button" class="popular-wishlist-btn absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-red-500" aria-label="Add to Wishlist" aria-pressed="false" title="Add to Wishlist">
-          <i class="fa-regular fa-heart text-base"></i>
-        </button>
-        <button type="button" class="popular-share-btn absolute right-5 top-[4.25rem] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-[#ff0055]" aria-label="Share product" title="Share product">
-          <i class="fa-solid fa-share-nodes text-sm"></i>
-        </button>
-        <button type="button" class="popular-add-to-cart w-full rounded-full bg-[#ff0055] px-4 py-2.5 font-semibold text-white transition hover:bg-[#d90048]">Add to Cart</button> 
-        </a>
-        </div>
-
-      `;
-      const title = product.name || product.title || 'Product';
-      const image = slide.querySelector('img');
-      image.src = product.image || (Array.isArray(product.images) ? product.images[0] : '');
-      image.alt = title;
-      slide.querySelector('h3').textContent = title;
-      slide.querySelector('p').textContent = product.category || 'Clothing';
-      slide.querySelector('span').textContent = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR'
-      }).format(Number(product.price) || 0);
-      const wishlistButton = slide.querySelector('.popular-wishlist-btn');
-      wishlistButton.classList.add('wishlist-btn');
-      wishlistButton.dataset.productId = String(productId || '');
-      wishlistButton.addEventListener('click', event => window.Wishlist(productId, event));
-      slide.querySelector('.popular-share-btn').addEventListener('click', event => {
-        window.shareProduct(productId, title, event);
-      });
-      slide.querySelector('.popular-add-to-cart').addEventListener('click', event => {
-        window.TailStoreCart.add(product, event);
-      });
-      slidesContainer.appendChild(slide);
-    });
-    document.dispatchEvent(new CustomEvent('wishlistProductsRendered'));
-    if (typeof popularSwiper !== 'undefined') popularSwiper.update();
-  } catch (error) {
-    console.error('Error loading popular products:', error);
-    slidesContainer.replaceChildren();
-    if (typeof popularSwiper !== 'undefined') popularSwiper.update();
-  }
-}
-
-document.addEventListener('DOMContentLoaded', loadPopularProducts);
-
-async function loadProducts() {
-  const container = document.getElementById('product-container');
-  if (!container) return;
-
-  const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-  const apiHost = window.location.hostname || '127.0.0.1';
-  const apiBaseUrl = isLocalHost ? `http://${apiHost}:5000` : window.location.origin;
-
-  async function addLatestProductToCart(product, event) {
-    return window.TailStoreCart.add(product, event);
-  }
-
-  try {
-    const response = await fetch(`${apiBaseUrl}/api/products`);
-    if (!response.ok) {
-      throw new Error(`Latest products request failed (HTTP ${response.status})`);
-    }
-
-    const products = await response.json();
-    if (!Array.isArray(products)) {
-      throw new Error('Latest products response was not a product list');
-    }
-
-    container.replaceChildren();
-    products.forEach((product) => {
-      const productId = product._id || product.id;
-      const title = product.name || product.title || 'Product';
-      const card = document.createElement('div');
-      card.className = 'relative overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-300 hover:shadow-xl';
-      const detailLink = document.createElement('a');
-      detailLink.href = `product-detail.html?id=${encodeURIComponent(productId)}`;
-      detailLink.className = 'block';
-
-      const image = document.createElement('img');
-      image.src = product.image || product.imageUrl || './assets/img/1.jpg';
-      image.alt = title;
-      image.className = 'w-full h-48 object-cover';
-
-      const details = document.createElement('div');
-      details.className = 'p-4';
-      const name = document.createElement('h3');
-      name.className = 'text-lg font-semibold text-gray-800 truncate';
-      name.textContent = title;
-      const price = document.createElement('p');
-      price.className = 'text-emerald-600 font-bold mt-2';
-      price.textContent = new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR'
-      }).format(Number(product.price) || 0);
-      const addButton = document.createElement('button');
-      addButton.type = 'button';
-      addButton.className = 'mx-4 mb-4 mt-3 w-[calc(100%-2rem)] rounded-full bg-[#ff0055] px-4 py-2.5 font-semibold text-white transition hover:bg-[#d90048]';
-      addButton.textContent = 'Add to Cart';
-      addButton.addEventListener('click', (event) => addLatestProductToCart(product, event));
-
-      details.append(name, price);
-      detailLink.append(image, details);
-      const wishlistButton = document.createElement('button');
-      wishlistButton.type = 'button';
-      wishlistButton.className = 'wishlist-btn absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-red-500';
-      wishlistButton.dataset.productId = String(productId || '');
-      wishlistButton.setAttribute('aria-label', 'Add to Wishlist');
-      wishlistButton.setAttribute('aria-pressed', 'false');
-      wishlistButton.title = 'Add to Wishlist';
-      wishlistButton.innerHTML = '<i class="fa-regular fa-heart text-base"></i>';
-      wishlistButton.addEventListener('click', event => window.Wishlist(productId, event));
-      const shareButton = document.createElement('button');
-      shareButton.type = 'button';
-      shareButton.className = 'absolute right-3 top-16 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-[#ff0055]';
-      shareButton.setAttribute('aria-label', 'Share product');
-      shareButton.title = 'Share product';
-      shareButton.innerHTML = '<i class="fa-solid fa-share-nodes text-sm"></i>';
-      shareButton.addEventListener('click', event => window.shareProduct(productId, title, event));
-
-      card.append(detailLink, wishlistButton, shareButton, addButton);
-      container.appendChild(card);
-    });
-    document.dispatchEvent(new CustomEvent('wishlistProductsRendered'));
-  } catch (error) {
-    console.error('Error loading latest products:', error);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', loadProducts);
-</script>
-
-
-
-
-<script src="./assets/js/navbar.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="./assets/js/script.js"></script>
-<script src="./assets/js/products.js"></script>
-<script src="./assets/js/product-detail.js"></script>
-<script src="./assets/js/home-banners.js"></script>
-<script src="./assets/js/promo-banner.js"></script>
-<script src="./assets/js/category-banners.js"></script>
-<script src="./assets/js/wishlist-client.js"></script>
-<script src="./assets/js/share-client.js"></script>
-<script src="./assets/js/cart-client.js"></script>
-<script src="./assets/js/newsletter.js"></script>
-<script src="./assets/js/homepage-settings.js"></script>
-<script src="./assets/js/dashboard.js"></script>
-=======
 <!--Bottom Section End-->
 <script src="./assets/js/main.js"></script>
   <script src="./assets/js/products.js"></script>
@@ -1033,6 +692,5 @@ document.addEventListener('DOMContentLoaded', loadProducts);
 <script src="./assets/js/script.js"></script>
 
 <script src="./assets/js/cart-client.js"></script>
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 </body>
 </html>

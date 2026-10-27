@@ -105,7 +105,6 @@
     
       <a href="shop.html" class="hover:text-gray-300 transition-colors py-2">Shop</a>
     </div>
-<<<<<<< HEAD
 <div class="relative group py-2">
   <!-- Login / User Button -->
   <button id="login-menu-btn" class="flex items-center text-white hover:text-gray-300 transition-colors focus:outline-none py-1">
@@ -151,9 +150,6 @@
 
   </div>
 </div>
-=======
-
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 <div class="flex items-center space-x-3 sm:space-x-4">
      <div id="auth-guest-buttons" class="hidden sm:flex items-center space-x-3">
         <a href="login.html#registerForm" class="border border-[#FF0043] text-[#FF0043] hover:bg-[#FF0043] hover:text-white active:bg-[#b3002f] active:border-[#b3002f] active:text-white text-sm font-semibold px-5 py-2 rounded-full transition-all duration-200">
@@ -1215,12 +1211,9 @@
 </div>
 <!--Bottom Section End-->
 <script>
-<<<<<<< HEAD
   
 </script>
 <script>
-=======
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
   function loadProducts() {
     let products = JSON.parse(localStorage.getItem('products')) || [];
 
@@ -1258,11 +1251,7 @@ async function loadPopularProducts() {
   if (!slidesContainer) return;
   const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   const apiHost = window.location.hostname || '127.0.0.1';
-<<<<<<< HEAD
   const apiBaseUrl = isLocalHost ? `http://${apiHost}:5000` : window.location.origin;
-=======
-  const apiBaseUrl = isLocalHost ? `http://${apiHost}:5501` : window.location.origin;
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
   try {
     const response = await fetch(`${apiBaseUrl}/api/products/popular`);
@@ -1284,26 +1273,17 @@ async function loadPopularProducts() {
           <h3 class="mb-1 text-base font-bold text-gray-900"></h3>
           <p class="mb-3 text-xs text-gray-500"></p>
           <span class="text-lg font-extrabold text-[#ff0055]"></span>
-<<<<<<< HEAD
       
-=======
-        </a>
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
         <button type="button" class="popular-wishlist-btn absolute right-5 top-5 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-red-500" aria-label="Add to Wishlist" aria-pressed="false" title="Add to Wishlist">
           <i class="fa-regular fa-heart text-base"></i>
         </button>
         <button type="button" class="popular-share-btn absolute right-5 top-[4.25rem] z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-gray-700 shadow transition hover:scale-105 hover:text-[#ff0055]" aria-label="Share product" title="Share product">
           <i class="fa-solid fa-share-nodes text-sm"></i>
         </button>
-<<<<<<< HEAD
         <button type="button" class="popular-add-to-cart w-full rounded-full bg-[#ff0055] px-4 py-2.5 font-semibold text-white transition hover:bg-[#d90048]">Add to Cart</button> 
         </a>
         </div>
 
-=======
-        </div>
-        <button type="button" class="popular-add-to-cart w-full rounded-full bg-[#ff0055] px-4 py-2.5 font-semibold text-white transition hover:bg-[#d90048]">Add to Cart</button>
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
       `;
       const title = product.name || product.title || 'Product';
       const image = slide.querySelector('img');
@@ -1344,11 +1324,7 @@ async function loadProducts() {
 
   const isLocalHost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
   const apiHost = window.location.hostname || '127.0.0.1';
-<<<<<<< HEAD
   const apiBaseUrl = isLocalHost ? `http://${apiHost}:5000` : window.location.origin;
-=======
-  const apiBaseUrl = isLocalHost ? `http://${apiHost}:5501` : window.location.origin;
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
   async function addLatestProductToCart(product, event) {
     return window.TailStoreCart.add(product, event);

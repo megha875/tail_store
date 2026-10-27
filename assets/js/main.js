@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const MAIN_API_BASE_URL = `http://${window.location.hostname}:5000/api`;
-=======
-const MAIN_API_BASE_URL = `http://${window.location.hostname}:5501/api`;
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const checkoutForm = document.getElementById('checkoutForm');
@@ -86,43 +82,7 @@ document.addEventListener('DOMContentLoaded', fetchProducts);
 
 
 
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', () => {
-    // Check karein ki user logged in hai ya nahi (localStorage mein userId ya token check karein)
-    const userId = localStorage.getItem('userId') || localStorage.getItem('token');
-    
-    // Cart badge update karein
-    updateCartBadge();
 
-    if (userId) {
-        // Agar user login hai, toh Register/Login buttons ko Profile link se replace karein
-        const loginBtn = document.querySelector('a[href*="login.html"]');
-        const registerBtn = document.querySelector('a[href*="register.html"]');
-        
-        if (loginBtn) loginBtn.style.display = 'none';
-        
-        if (registerBtn) {
-            registerBtn.href = 'user-dashboard.html';
-            registerBtn.innerText = 'Profile';
-            registerBtn.classList.add('bg-red-600', 'text-white', 'px-4', 'py-2', 'rounded-full');
-        }
-    }
-});
-
-// Navbar ke cart icon par item count update karne ka function
-function updateCartBadge() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-    
-    // Navbar cart icon ka badge element
-    const badge = document.querySelector('header a[href*="cart.html"] span, .fa-shopping-cart + span');
-    if (badge) {
-        badge.innerText = totalItems;
-    }
-}
-=======
-
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
 
 
 

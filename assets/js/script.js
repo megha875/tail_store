@@ -2224,11 +2224,7 @@ function shareAction(platform) {
     const shareBody = `Check out this product: ${productTitle}\n\nClick here to view: ${shareUrl}`;
 
     // Backend MongoDB Tracking API Call
-<<<<<<< HEAD
-    fetch(`http://localhost:5000/api/products/share/${productId}`, {
-=======
-    fetch(`http://localhost:5500/api/products/share/${productId}`, {
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ platform })
@@ -2455,11 +2451,7 @@ fetch('/api/products') // Aapka backend API URL
 
     async function fetchLatestProducts() {
         try {
-<<<<<<< HEAD
-            const response = await fetch('http://localhost:5000/api/products'); 
-=======
-            const response = await fetch('http://localhost:5500/api/products'); 
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
+
             const products = await response.json();
 
             const container = document.getElementById('product-container');
@@ -2617,11 +2609,7 @@ async function loadProducts(key, name) {
         });
    
 //   const response = await fetch(
-<<<<<<< HEAD
-//     'http://localhost:5000/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
-=======
-//     'http://localhost:5500/api/products/add', // Yahan '/add' hona chahiye (jaise server.js mein hai)
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
+
 //     {
 //         method: 'POST',
 //         headers: {
@@ -2629,69 +2617,5 @@ async function loadProducts(key, name) {
 //         },
 //         body: JSON.stringify(productData)
 //     }
-<<<<<<< HEAD
-// );
 
 
-const Coupon = require('./models/Coupon'); // Agar model banaya hai
-
-app.post('/api/apply-coupon', async (req, res) => {
-  try {
-    const { code } = req.body;
-    const coupon = await Coupon.findOne({ code: code.toUpperCase() });
-
-    if (!coupon) {
-      return res.status(400).json({ success: false, message: 'Invalid Coupon Code' });
-    }
-
-    if (new Date() > coupon.expiryDate) {
-      return res.status(400).json({ success: false, message: 'Coupon has expired' });
-    }
-
-    res.json({ 
-      success: true, 
-      discountPercentage: coupon.discountPercentage, 
-      message: 'Coupon applied successfully!' 
-    });
-  } catch (err) {
-    res.status(500).json({ success: false, message: 'Server Error' });
-  }
-});
-
-
-async function addToCart(itemData) {
-  try {
-    const response = await fetch('/api/cart/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(itemData)
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log('Success:', result);
-  } catch (error) {
-    console.error('Cart error:', error);
-  }
-}
-
-
-
-async function loadOrders() {
-  try {
-    const response = await fetch('/api/orders'); // Yeh URL backend route se exact match hona chahiye
-    if (!response.ok) throw new Error('Network response was not ok');
-    const orders = await response.json();
-    // Orders render karne ka logic...
-  } catch (error) {
-    console.error('Error loading orders:', error);
-  }
-}
-=======
-// );
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8

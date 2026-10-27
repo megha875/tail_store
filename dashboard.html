@@ -326,67 +326,44 @@
     }
 
     // ---------- Orders ----------
-   
-async function loadOrders() {
-      const box = $('ordersList') || document.getElementById('my-orders-container');
+    function payPill(status) {
+      var s = String(status || 'Pending');
+      var c = s === 'Paid' ? 'bg-green-100 text-green-800' : s === 'Failed' ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800';
+      return '<span class="px-3 py-1 rounded-full text-xs font-semibold ' + c + '">' + esc(s) + '</span>';
+    }
+
+    async function loadOrders() {
+      var box = $('ordersList');
       if (!box) return;
-      
-      box.innerHTML = '<p class="text-gray-500">Loading orders...</p>';
-      
+      box.innerHTML = loading();
       try {
         var data = await api('/api/orders/user/' + enc(userId));
         var orders = data.orders || data || [];
-
         if (!orders.length) {
-          box.innerHTML = '<p class="text-gray-500">Aapne abhi tak koi order place nahi kiya hai.</p>' +
+          box.innerHTML = msg('Aapne abhi tak koi order place nahi kiya hai.') +
             '<a href="index.html" class="inline-block mt-3 text-[#FF0043] font-semibold hover:underline">Start shopping</a>';
           return;
         }
-
         box.innerHTML = orders.map(function (o) {
-          // Same products ko group/merge karne ke liye map taaki duplicate rows na aayein
-          const itemMap = {};
-          (o.items || []).forEach(function (i) {
-            var p = (i.productId && typeof i.productId === 'object') ? i.productId : i;
-            var name = i.name || p.name || p.title || 'Product';
-            var price = Number(i.price != null ? i.price : p.price) || 0;
-            var image = i.image || p.image || p.imageUrl || './assets/img/1.jpg';
-            var qty = Number(i.quantity || i.qty) || 1;
-            
-            var key = (p._id ? String(p._id) : name);
-            if (itemMap[key]) {
-              itemMap[key].quantity += qty;
-            } else {
-              itemMap[key] = { name: name, price: price, image: image, quantity: qty };
-            }
-          });
-
-          const uniqueItems = Object.values(itemMap);
-          var itemsHtml = uniqueItems.map(function (i) {
-            return '<div class="flex items-center gap-3 py-2 border-b border-gray-100 last:border-none">' +
-              '<img src="' + esc(i.image) + '" alt="" class="w-12 h-12 object-cover rounded-lg border">' +
-              '<div class="text-sm">' +
-              '<p class="font-semibold text-gray-900">' + esc(i.name) + '</p>' +
-              '<p class="text-gray-500">Qty: ' + i.quantity + ' &middot; ₹' + i.price + '</p>' +
-              '</div></div>';
+          var items = (o.items || []).map(function (i) {
+            var variant = [i.color, i.size].filter(Boolean).join(' / ');
+            return '<div class="flex items-center gap-3">' +
+              '<img src="' + esc(i.image || './assets/img/1.jpg') + '" alt="" class="w-12 h-12 object-cover rounded-lg border">' +
+              '<div class="text-sm"><p class="font-semibold text-gray-900">' + esc(i.name || i.title || 'Product') + '</p>' +
+              '<p class="text-gray-500">' + (variant ? esc(variant) + ' &middot; ' : '') + 'Qty ' + esc(i.quantity || 1) + ' &middot; ' + money(i.price) + '</p></div></div>';
           }).join('');
-
-          return '<div class="border border-gray-200 rounded-xl p-4 bg-white shadow-sm space-y-3 mb-4">' +
-            '<div class="flex justify-between items-center text-sm">' +
-            '<span class="font-bold text-gray-900">Order ID: #' + esc(String(o._id || '').slice(-8).toUpperCase()) + '</span>' +
-            '<span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">' + esc(o.paymentStatus || 'Pending') + '</span>' +
+          return '<div class="border border-gray-200 rounded-xl p-4 bg-white space-y-3">' +
+            '<div class="flex flex-wrap justify-between items-center gap-2 text-sm">' +
+              '<span class="font-bold text-gray-900">Order #' + esc(String(o._id).slice(-8).toUpperCase()) + '</span>' + payPill(o.paymentStatus) +
             '</div>' +
-            '<p class="text-xs text-gray-500">Date: ' + new Date(o.createdAt || Date.now()).toLocaleDateString('en-IN') + '</p>' +
-            '<div class="space-y-1">' + itemsHtml + '</div>' +
-            '<div class="flex justify-between items-center pt-2 border-t font-bold text-gray-900">' +
-            '<span>Total Amount:</span>' +
-            '<span class="text-[#FF0043]">₹' + o.totalAmount + '</span>' +
-            '</div></div>';
+            '<p class="text-sm text-gray-600">' + esc(new Date(o.createdAt || Date.now()).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })) +
+              ' &middot; ' + esc(o.paymentMethod || 'COD') + '</p>' +
+            '<div class="space-y-2">' + items + '</div>' +
+            '<p class="text-base font-bold text-[#FF0043] pt-2 border-t">Total: ' + money(o.totalAmount) + '</p>' +
+          '</div>';
         }).join('');
-
-      } catch (error) {
-        console.error('Error loading orders:', error);
-        box.innerHTML = '<p class="text-red-500">Orders load nahi ho sake.</p>';
+      } catch (e) {
+        box.innerHTML = msg('Orders sucessfully: ' + e.message, 'text-red-500');
       }
     }
 

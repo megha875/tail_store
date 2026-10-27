@@ -123,16 +123,7 @@ const productSchema = new mongoose.Schema({
     images: { type: [String], default: [] },       // Gallery images ke array ke liye
     description: { type: String },
     stock: { type: Number },
-<<<<<<< HEAD
-    colors: { type: [String], default: [] },
-    colorImages: [{ color: { type: String, required: true }, image: { type: String, required: true }, images: { type: [String], default: [] } }],       // Available colors (e.g. Black, Navy)
-    sizes: { type: [String], default: [] },        // Available sizes (e.g. S, M, L)
-    description: String,
-    specifications: String,
-    care: String,
-    seller: String,
-=======
->>>>>>> d3835436ce7d7ca13bebb3f97156275b0ae442c8
+
     isLatest: { type: Boolean, default: true },
     isOnSale: { type: Boolean, default: false }
 }, { timestamps: true });
